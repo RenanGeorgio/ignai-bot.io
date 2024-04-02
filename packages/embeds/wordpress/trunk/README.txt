@@ -1,5 +1,5 @@
 === Typebot | Create advanced chat experiences without coding ===
-Contributors: baptisteArno
+Contributors: RenanGeorgio
 Tags: typebot, forms, surveys, quizzes, form builder, survey builder, quiz builder, custom forms, mobile forms, payment forms, order forms, feedback forms, enquiry forms, stripe, dropbox, google sheets, mailchimp, salesforce, hubspot, activecampaign, infusionsoft, asana, hipchat, slack, trello, zendesk
 Requires at least: 5.0
 Tested up to: 6.0
