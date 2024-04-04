@@ -14,19 +14,21 @@ const injectViewerUrlIfVercelPreview = (val) => {
     process.env.VERCEL_ENV !== 'preview' ||
     !process.env.VERCEL_BUILDER_PROJECT_NAME ||
     !process.env.NEXT_PUBLIC_VERCEL_VIEWER_PROJECT_NAME
-  )
+  ) {
     return
-  process.env.NEXT_PUBLIC_VIEWER_URL =
-    `https://${process.env.VERCEL_BRANCH_URL}`.replace(
-      process.env.VERCEL_BUILDER_PROJECT_NAME,
-      process.env.NEXT_PUBLIC_VERCEL_VIEWER_PROJECT_NAME
+  }
+
+  process.env.NEXT_PUBLIC_VIEWER_URL = `https://${process.env.VERCEL_BRANCH_URL}`.replace(
+    process.env.VERCEL_BUILDER_PROJECT_NAME,
+    process.env.NEXT_PUBLIC_VERCEL_VIEWER_PROJECT_NAME
+  )
+
+  if (process.env.NEXT_PUBLIC_CHAT_API_URL.includes('{{pr_id}}')) {
+    process.env.NEXT_PUBLIC_CHAT_API_URL = process.env.NEXT_PUBLIC_CHAT_API_URL.replace(
+      '{{pr_id}}',
+      process.env.VERCEL_GIT_PULL_REQUEST_ID
     )
-  if (process.env.NEXT_PUBLIC_CHAT_API_URL.includes('{{pr_id}}'))
-    process.env.NEXT_PUBLIC_CHAT_API_URL =
-      process.env.NEXT_PUBLIC_CHAT_API_URL.replace(
-        '{{pr_id}}',
-        process.env.VERCEL_GIT_PULL_REQUEST_ID
-      )
+  }
 }
 
 injectViewerUrlIfVercelPreview(process.env.NEXT_PUBLIC_VIEWER_URL)
@@ -51,7 +53,9 @@ const nextConfig = {
     outputFileTracingRoot: join(__dirname, '../../'),
   },
   webpack: (config, { nextRuntime }) => {
-    if (nextRuntime === 'nodejs') return config
+    if (nextRuntime === 'nodejs') {
+      return config
+    }
 
     if (nextRuntime === 'edge') {
       config.resolve.alias['minio'] = false
@@ -82,45 +86,45 @@ const nextConfig = {
   async rewrites() {
     return process.env.NEXT_PUBLIC_POSTHOG_KEY
       ? [
-          {
-            source: '/ingest/:path*',
-            destination:
-              (process.env.NEXT_PUBLIC_POSTHOG_HOST ??
-                'https://app.posthog.com') + '/:path*',
-          },
-        ]
+        {
+          source: '/ingest/:path*',
+          destination:
+            (process.env.NEXT_PUBLIC_POSTHOG_HOST ??
+              'https://app.posthog.com') + '/:path*',
+        },
+      ]
       : []
   },
 }
 
 export default process.env.NEXT_PUBLIC_SENTRY_DSN
   ? withSentryConfig(
-      nextConfig,
-      {
-        // For all available options, see:
-        // https://github.com/getsentry/sentry-webpack-plugin#options
+    nextConfig,
+    {
+      // For all available options, see:
+      // https://github.com/getsentry/sentry-webpack-plugin#options
 
-        // Suppresses source map uploading logs during build
-        silent: true,
-        release: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA + '-builder',
-        org: process.env.SENTRY_ORG,
-        project: process.env.SENTRY_PROJECT,
-      },
-      {
-        // For all available options, see:
-        // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
+      // Suppresses source map uploading logs during build
+      silent: true,
+      release: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA + '-builder',
+      org: process.env.SENTRY_ORG,
+      project: process.env.SENTRY_PROJECT,
+    },
+    {
+      // For all available options, see:
+      // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
 
-        // Upload a larger set of source maps for prettier stack traces (increases build time)
-        widenClientFileUpload: true,
+      // Upload a larger set of source maps for prettier stack traces (increases build time)
+      widenClientFileUpload: true,
 
-        // Routes browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers (increases server load)
-        tunnelRoute: '/monitoring',
+      // Routes browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers (increases server load)
+      tunnelRoute: '/monitoring',
 
-        // Hides source maps from generated client bundles
-        hideSourceMaps: true,
+      // Hides source maps from generated client bundles
+      hideSourceMaps: true,
 
-        // Automatically tree-shake Sentry logger statements to reduce bundle size
-        disableLogger: true,
-      }
-    )
+      // Automatically tree-shake Sentry logger statements to reduce bundle size
+      disableLogger: true,
+    }
+  )
   : nextConfig
