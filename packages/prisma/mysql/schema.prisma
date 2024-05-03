@@ -8,7 +8,7 @@ datasource db {
   relationMode = "prisma"
 }
 
-model BotAccount {
+model Account {
   id                       String  @id @default(cuid())
   userId                   String
   type                     String
@@ -24,23 +24,23 @@ model BotAccount {
   oauth_token_secret       String?
   oauth_token              String?
   refresh_token_expires_in Int?
-  user                     BotUser    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
   @@index([userId])
 }
 
-model BotSession {
+model Session {
   id           String   @id @default(cuid())
   sessionToken String   @unique
   userId       String
   expires      DateTime
-  user         BotUser     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
 }
 
-model BotUser {
+model User {
   id                          String                    @id @default(cuid())
   createdAt                   DateTime                  @default(now())
   updatedAt                   DateTime                  @default(now()) @updatedAt
@@ -54,22 +54,22 @@ model BotUser {
   referral                    String?
   graphNavigation             GraphNavigation?
   preferredAppAppearance      String?
-  accounts                    BotAccount[]
-  apiTokens                   ApiBotToken[]
+  accounts                    Account[]
+  apiTokens                   ApiToken[]
   CollaboratorsOnTypebots     CollaboratorsOnTypebots[]
   workspaces                  MemberInWorkspace[]
-  sessions                    BotSession[]
+  sessions                    Session[]
   bannedIps                   BannedIp[]
   displayedInAppNotifications Json?
 }
 
-model ApiBotToken {
+model ApiToken {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   token     String   @unique
   name      String
   ownerId   String
-  owner     BotUser     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  owner     User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
 
   @@index([ownerId])
 }
@@ -80,9 +80,9 @@ model Workspace {
   updatedAt                     DateTime              @default(now()) @updatedAt
   name                          String                @db.VarChar(255)
   icon                          String?               @db.VarChar(1000)
-  plan                          BotPlan                  @default(FREE)
+  plan                          Plan                  @default(FREE)
   stripeId                      String?               @unique
-  credentials                   BotCredentials[]
+  credentials                   Credentials[]
   customDomains                 CustomDomain[]
   folders                       DashboardFolder[]
   members                       MemberInWorkspace[]
@@ -111,7 +111,7 @@ model MemberInWorkspace {
   userId      String
   workspaceId String
   role        WorkspaceRole
-  user        BotUser          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   workspace   Workspace     @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
 
   @@unique([userId, workspaceId])
@@ -139,7 +139,7 @@ model CustomDomain {
   @@index([workspaceId])
 }
 
-model BotCredentials {
+model Credentials {
   id          String    @id @default(cuid())
   createdAt   DateTime  @default(now())
   workspaceId String
@@ -200,8 +200,8 @@ model Typebot {
   collaborators           CollaboratorsOnTypebots[]
   invitations             Invitation[]
   publishedTypebot        PublicTypebot?
-  results                 BotResult[]
-  webhooks                BotWebhook[]
+  results                 Result[]
+  webhooks                Webhook[]
   isArchived              Boolean                   @default(false)
   isClosed                Boolean                   @default(false)
   whatsAppCredentialsId   String?
@@ -232,7 +232,7 @@ model CollaboratorsOnTypebots {
   typebotId String
   type      CollaborationType
   typebot   Typebot           @relation(fields: [typebotId], references: [id], onDelete: Cascade)
-  user      BotUser              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User              @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, typebotId])
   @@index([typebotId])
@@ -253,7 +253,7 @@ model PublicTypebot {
   typebot   Typebot  @relation(fields: [typebotId], references: [id], onDelete: Cascade)
 }
 
-model BotResult {
+model Result {
   id          String        @id @default(cuid())
   createdAt   DateTime      @default(now())
   typebotId   String
@@ -263,7 +263,7 @@ model BotResult {
   isArchived  Boolean?      @default(false)
   typebot     Typebot       @relation(fields: [typebotId], references: [id], onDelete: Cascade)
   answers     Answer[]
-  logs        BotLog[]
+  logs        Log[]
   edges       VisitedEdge[]
 
   @@index([typebotId, isArchived, hasStarted, createdAt(sort: Desc)])
@@ -271,7 +271,7 @@ model BotResult {
 }
 
 model VisitedEdge {
-  result   BotResult @relation(fields: [resultId], references: [id], onDelete: Cascade)
+  result   Result @relation(fields: [resultId], references: [id], onDelete: Cascade)
   resultId String
   edgeId   String
   index    Int
@@ -279,14 +279,14 @@ model VisitedEdge {
   @@unique([resultId, index])
 }
 
-model BotLog {
+model Log {
   id          String   @id @default(cuid())
   createdAt   DateTime @default(now())
   resultId    String
   status      String
   description String   @db.Text
   details     String?  @db.Text
-  result      BotResult   @relation(fields: [resultId], references: [id], onDelete: Cascade)
+  result      Result   @relation(fields: [resultId], references: [id], onDelete: Cascade)
 
   @@index([resultId])
 }
@@ -300,7 +300,7 @@ model Answer {
   variableId  String?
   content     String   @db.Text
   storageUsed Int?
-  result      BotResult   @relation(fields: [resultId], references: [id], onDelete: Cascade)
+  result      Result   @relation(fields: [resultId], references: [id], onDelete: Cascade)
 
   @@unique([resultId, blockId, groupId])
   @@index([blockId, itemId])
@@ -313,7 +313,7 @@ model Coupon {
   dateRedeemed           DateTime?
 }
 
-model BotWebhook {
+model Webhook {
   id          String   @id @default(cuid())
   createdAt   DateTime @default(now())
   updatedAt   DateTime @default(now()) @updatedAt
@@ -372,7 +372,7 @@ model BannedIp {
   ip                   String   @unique
   responsibleTypebot   Typebot  @relation(fields: [responsibleTypebotId], references: [id], onDelete: Restrict)
   responsibleTypebotId String
-  user                 BotUser     @relation(fields: [userId], references: [id], onDelete: Restrict)
+  user                 User     @relation(fields: [userId], references: [id], onDelete: Restrict)
   userId               String
 
   @@index([responsibleTypebotId])
@@ -390,7 +390,7 @@ enum GraphNavigation {
   TRACKPAD
 }
 
-enum BotPlan {
+enum Plan {
   FREE
   STARTER
   PRO
