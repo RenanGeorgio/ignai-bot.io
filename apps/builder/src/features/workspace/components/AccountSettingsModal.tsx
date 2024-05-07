@@ -9,7 +9,6 @@ import {
   Flex,
 } from '@chakra-ui/react'
 import { SettingsIcon } from '@/components/icons'
-import { User } from '@typebot.io/prisma'
 import { useState } from 'react'
 import packageJson from '../../../../../../package.json'
 import { UserPreferencesForm } from '@/features/account/components/UserPreferencesForm'
@@ -18,7 +17,7 @@ import { useTranslate } from '@tolgee/react'
  
 type Props = {
   isOpen: boolean
-  user: User
+  user: any
   onClose: () => void
 }
 
