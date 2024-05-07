@@ -295,7 +295,7 @@ const RightElements = ({
 
 const LastElements = ({
   isResultsDisplayed,
-  onHelpClick
+  onHelpClick,
   ...props
 }: StackProps & { isResultsDisplayed: boolean, onHelpClick: () => void }) => {
   const { t } = useTranslate()
