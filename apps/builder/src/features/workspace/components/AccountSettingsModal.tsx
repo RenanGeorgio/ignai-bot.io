@@ -17,6 +17,7 @@ import { useTranslate } from '@tolgee/react'
  
 type Props = {
   isOpen: boolean
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   user: any
   onClose: () => void
 }
