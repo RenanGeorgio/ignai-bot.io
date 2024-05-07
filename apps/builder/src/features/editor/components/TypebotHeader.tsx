@@ -71,7 +71,7 @@ export const TypebotHeader = () => {
       flexShrink={0}
     >
       {isOpen && <SupportBubble autoShowDelay={0} />}
-      <LeftElements pos="absolute" left="1rem" onHelpClick={handleHelpClick} />
+      <LeftElements pos="absolute" left="1rem" />
       <TypebotNav
         display={{ base: 'none', xl: 'flex' }}
         pos={{ base: 'absolute' }}
@@ -84,12 +84,18 @@ export const TypebotHeader = () => {
         display={['none', 'flex']}
         isResultsDisplayed={isDefined(publishedTypebot)}
       />
+      <LastElements
+        right="10px"
+        pos="absolute"
+        display={['none', 'flex']}
+        isResultsDisplayed={isDefined(publishedTypebot)}
+        onHelpClick={handleHelpClick}
+      />
     </Flex>
   )
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const LeftElements = ({ onHelpClick, ...props }: StackProps & { onHelpClick: () => void }) => {
+const LeftElements = ({ ...props }: StackProps) => {
   const { t } = useTranslate()
   const router = useRouter()
   const {
@@ -246,7 +252,6 @@ const RightElements = ({
 }: StackProps & { isResultsDisplayed: boolean }) => {
   const router = useRouter()
   const { t } = useTranslate()
-  const { user } = useUser()
   const { typebot, currentUserMode, save } = useTypebot()
   const {
     setRightPanel,
@@ -284,6 +289,26 @@ const RightElements = ({
         </Button>
       )}
       {currentUserMode === 'write' && <PublishButton size="sm" />}
+    </HStack>
+  )
+}
+
+const LastElements = ({
+  isResultsDisplayed,
+  onHelpClick
+  ...props
+}: StackProps & { isResultsDisplayed: boolean, onHelpClick: () => void }) => {
+  const { t } = useTranslate()
+  const { user } = useUser()
+  const { typebot } = useTypebot()
+
+  return (
+    <HStack {...props}>
+      <TypebotNav
+        display={{ base: 'none', md: 'flex', xl: 'none' }}
+        typebotId={typebot?.id}
+        isResultsDisplayed={isResultsDisplayed}
+      />
       <HStack>
         <Avatar
           size="lg"
@@ -301,7 +326,7 @@ const RightElements = ({
             <MenuItem command='⌘T'>
               <Button
                 leftIcon={<BuoyIcon />}
-                onClick={isResultsDisplayed}
+                onClick={onHelpClick}
                 size="sm"
                 iconSpacing={{ base: 0, xl: 2 }}
               >
