@@ -301,7 +301,7 @@ const RightElements = ({
             <MenuItem command='⌘T'>
               <Button
                 leftIcon={<BuoyIcon />}
-                onClick={onHelpClick}
+                onClick={isResultsDisplayed}
                 size="sm"
                 iconSpacing={{ base: 0, xl: 2 }}
               >
