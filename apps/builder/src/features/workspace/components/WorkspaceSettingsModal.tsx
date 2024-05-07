@@ -24,7 +24,8 @@ import { useTranslate } from '@tolgee/react'
  
 type Props = {
   isOpen: boolean
-  user: User
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  user: User | any
   workspace: WorkspaceInApp
   onClose: () => void
 }

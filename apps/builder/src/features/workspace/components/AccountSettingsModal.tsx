@@ -9,6 +9,7 @@ import {
   Flex,
 } from '@chakra-ui/react'
 import { SettingsIcon } from '@/components/icons'
+import { User } from '@typebot.io/prisma'
 import { useState } from 'react'
 import packageJson from '../../../../../../package.json'
 import { UserPreferencesForm } from '@/features/account/components/UserPreferencesForm'
@@ -18,7 +19,7 @@ import { useTranslate } from '@tolgee/react'
 type Props = {
   isOpen: boolean
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  user: any
+  user: User | any
   onClose: () => void
 }
 
