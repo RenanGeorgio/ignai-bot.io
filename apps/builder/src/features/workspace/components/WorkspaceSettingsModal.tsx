@@ -67,7 +67,7 @@ export const WorkspaceSettingsModal = ({ isOpen, user, workspace, onClose }: Pro
                   onClick={() => setSelectedTab('workspace-settings')}
                   leftIcon={
                     <EmojiOrImageIcon
-                      icon={workspace.icon}
+                      icon={workspace?.icon}
                       boxSize="15px"
                       defaultIcon={HardDriveIcon}
                     />
