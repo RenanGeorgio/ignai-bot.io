@@ -34,12 +34,8 @@ type SettingsTab =
   | 'members'
   | 'billing'
 
-export const WorkspaceSettingsModal = ({
-  isOpen,
-  user,
-  workspace,
-  onClose,
-}: Props) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const WorkspaceSettingsModal = ({ isOpen, user, workspace, onClose }: Props) => {
   const { t } = useTranslate()
   const { currentRole } = useWorkspace()
   const [selectedTab, setSelectedTab] = useState<SettingsTab>('my-account')

@@ -4,12 +4,10 @@ import { HardDriveIcon } from '@/components/icons'
 import { useUser } from '@/features/account/hooks/useUser'
 import Link from 'next/link'
 import { EmojiOrImageIcon } from '@/components/EmojiOrImageIcon'
-import { useTranslate } from '@tolgee/react'
 import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
 import { WorkspaceDropdown } from '@/features/workspace/components/WorkspaceDropdown'
  
 export const DashboardHeader = () => {
-  const { t } = useTranslate()
   const { user, logOut } = useUser()
   const { workspace, switchWorkspace, createWorkspace } = useWorkspace()
 

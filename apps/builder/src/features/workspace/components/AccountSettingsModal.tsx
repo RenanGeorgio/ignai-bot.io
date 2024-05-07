@@ -100,10 +100,8 @@ export const AccountSettingsModal = ({
   )
 }
 
-const SettingsContent = ({
-  tab,
-  onClose,
-}: {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const SettingsContent = ({ tab, onClose }: {
   tab: SettingsTab
   onClose: () => void
 }) => {

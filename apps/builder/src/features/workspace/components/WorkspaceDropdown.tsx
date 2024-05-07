@@ -4,6 +4,8 @@ import {
   ChevronLeftIcon,
   PlusIcon,
   LogOutIcon,
+  UserIcon,
+  SettingsIcon
 } from '@/components/icons'
 import { PlanTag } from '@/features/billing/components/PlanTag'
 import { useUser } from '@/features/account/hooks/useUser'
@@ -45,6 +47,7 @@ export const WorkspaceDropdown = ({
  
   const workspaces = data?.workspaces ?? []
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const renderAccountModal = () => {

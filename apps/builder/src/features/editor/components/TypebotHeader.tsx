@@ -22,6 +22,7 @@ import {
   PlayIcon,
   RedoIcon,
   UndoIcon,
+  MoreVerticalIcon
 } from '@/components/icons'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
@@ -87,10 +88,8 @@ export const TypebotHeader = () => {
   )
 }
 
-const LeftElements = ({
-  onHelpClick,
-  ...props
-}: StackProps & { onHelpClick: () => void }) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const LeftElements = ({ onHelpClick, ...props }: StackProps & { onHelpClick: () => void }) => {
   const { t } = useTranslate()
   const router = useRouter()
   const {
@@ -295,7 +294,7 @@ const RightElements = ({
           <MenuButton
             as={IconButton}
             aria-label='Options'
-            icon={<HamburgerIcon />}
+            icon={<MoreVerticalIcon />}
             variant='outline'
           />
           <MenuList>
