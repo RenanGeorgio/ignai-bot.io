@@ -39,7 +39,7 @@ type SettingsTab =
 export const WorkspaceSettingsModal = ({ isOpen, user, workspace, onClose }: Props) => {
   const { t } = useTranslate()
   const { currentRole } = useWorkspace()
-  const [selectedTab, setSelectedTab] = useState<SettingsTab>('my-account')
+  const [selectedTab, setSelectedTab] = useState<SettingsTab>('workspace-settings')
 
   const canEditWorkspace = currentRole === WorkspaceRole.ADMIN
 
