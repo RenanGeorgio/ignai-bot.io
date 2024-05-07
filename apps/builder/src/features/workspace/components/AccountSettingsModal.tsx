@@ -11,7 +11,6 @@ import {
 import { SettingsIcon } from '@/components/icons'
 import { User } from '@typebot.io/prisma'
 import { useState } from 'react'
-import { WorkspaceInApp } from '../WorkspaceProvider'
 import packageJson from '../../../../../../package.json'
 import { UserPreferencesForm } from '@/features/account/components/UserPreferencesForm'
 import { MyAccountForm } from '@/features/account/components/MyAccountForm'
@@ -20,7 +19,6 @@ import { useTranslate } from '@tolgee/react'
 type Props = {
   isOpen: boolean
   user: User
-  workspace?: WorkspaceInApp
   onClose: () => void
 }
 
