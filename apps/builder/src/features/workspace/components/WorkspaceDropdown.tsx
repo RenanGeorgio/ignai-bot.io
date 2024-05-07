@@ -105,7 +105,7 @@ export const WorkspaceDropdown = ({
               </HStack>
             </MenuItem>
           ))}
-        {env.ADMIN_EMAIL?.includes(user?.email) && (
+        {user?.email && env?.ADMIN_EMAIL?.includes(user?.email) && (
           <MenuItem onClick={onCreateNewWorkspaceClick} icon={<PlusIcon />}>
             {t('workspace.dropdown.newButton.label')}
           </MenuItem>
