@@ -26,7 +26,7 @@ type Props = {
   isOpen: boolean
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   user: User | any
-  workspace: WorkspaceInApp
+  workspace: WorkspaceInApp | undefined
   onClose: () => void
 }
 
