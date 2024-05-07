@@ -6,6 +6,8 @@ import {
   LogOutIcon,
 } from '@/components/icons'
 import { PlanTag } from '@/features/billing/components/PlanTag'
+import { useUser } from '@/features/account/hooks/useUser'
+import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
 import { trpc } from '@/lib/trpc'
 import { useTranslate } from '@tolgee/react'
 import {
@@ -16,8 +18,12 @@ import {
   MenuList,
   MenuItem,
   Text,
+  useDisclosure
 } from '@chakra-ui/react'
 import { WorkspaceInApp } from '../WorkspaceProvider'
+import { AccountSettingsModal } from './AccountSettingsModal'
+import { WorkspaceSettingsModal } from './WorkspaceSettingsModal'
+import { env } from '@typebot.io/env'
 
 type Props = {
   currentWorkspace?: WorkspaceInApp
@@ -33,9 +39,34 @@ export const WorkspaceDropdown = ({
   onCreateNewWorkspaceClick,
 }: Props) => {
   const { t } = useTranslate()
+  const { user } = useUser()
+  const { workspace } = useWorkspace()
   const { data } = trpc.workspace.listWorkspaces.useQuery()
-
+ 
   const workspaces = data?.workspaces ?? []
+
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const renderAccountModal = () => {
+    return(
+      <AccountSettingsModal
+        isOpen={isOpen}
+        onClose={onClose}
+        user={user}
+      />
+    );
+  }
+
+  const renderWorkspaceModal = () => {
+    return(
+      <WorkspaceSettingsModal
+        isOpen={isOpen}
+        onClose={onClose}
+        user={user}
+        workspace={workspace}
+      />
+    );
+  }
 
   return (
     <Menu placement="bottom-end">
@@ -71,8 +102,16 @@ export const WorkspaceDropdown = ({
               </HStack>
             </MenuItem>
           ))}
-        <MenuItem onClick={onCreateNewWorkspaceClick} icon={<PlusIcon />}>
-          {t('workspace.dropdown.newButton.label')}
+        {env.ADMIN_EMAIL?.includes(user.email) && (
+          <MenuItem onClick={onCreateNewWorkspaceClick} icon={<PlusIcon />}>
+            {t('workspace.dropdown.newButton.label')}
+          </MenuItem>
+        )}
+        <MenuItem onClick={renderAccountModal} icon={<UserIcon />}>
+          {t('editor.header.settingsButton.label')}
+        </MenuItem>
+        <MenuItem onClick={renderWorkspaceModal} icon={<SettingsIcon />}>
+          {t('workspace.settings.modal.menu.workspace.label')}
         </MenuItem>
         <MenuItem
           onClick={onLogoutClick}

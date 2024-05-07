@@ -25,7 +25,7 @@ export const MyAccountForm = () => {
   const handleEmailChange = (newEmail: string) => {
     setEmail(newEmail)
     updateUser({ email: newEmail })
-  }
+  } 
 
   return (
     <Stack spacing="6" w="full" overflowY="auto">

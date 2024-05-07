@@ -5,13 +5,11 @@ import {
   Stack,
   Text,
   Button,
-  Avatar,
   Flex,
 } from '@chakra-ui/react'
 import {
   CreditCardIcon,
   HardDriveIcon,
-  SettingsIcon,
   UsersIcon,
 } from '@/components/icons'
 import { EmojiOrImageIcon } from '@/components/EmojiOrImageIcon'
@@ -21,11 +19,9 @@ import { MembersList } from './MembersList'
 import { WorkspaceSettingsForm } from './WorkspaceSettingsForm'
 import { WorkspaceInApp, useWorkspace } from '../WorkspaceProvider'
 import packageJson from '../../../../../../package.json'
-import { UserPreferencesForm } from '@/features/account/components/UserPreferencesForm'
-import { MyAccountForm } from '@/features/account/components/MyAccountForm'
 import { BillingSettingsLayout } from '@/features/billing/components/BillingSettingsLayout'
 import { useTranslate } from '@tolgee/react'
-
+ 
 type Props = {
   isOpen: boolean
   user: User
@@ -34,8 +30,6 @@ type Props = {
 }
 
 type SettingsTab =
-  | 'my-account'
-  | 'user-settings'
   | 'workspace-settings'
   | 'members'
   | 'billing'
@@ -64,37 +58,6 @@ export const WorkspaceSettingsModal = ({
           justifyContent="space-between"
         >
           <Stack spacing={8}>
-            <Stack>
-              <Text pl="4" color="gray.500">
-                {user.email}
-              </Text>
-              <Button
-                variant={selectedTab === 'my-account' ? 'solid' : 'ghost'}
-                onClick={() => setSelectedTab('my-account')}
-                leftIcon={
-                  <Avatar
-                    name={user.name ?? undefined}
-                    src={user.image ?? undefined}
-                    boxSize="15px"
-                  />
-                }
-                size="sm"
-                justifyContent="flex-start"
-                pl="4"
-              >
-                {t('workspace.settings.modal.menu.myAccount.label')}
-              </Button>
-              <Button
-                variant={selectedTab === 'user-settings' ? 'solid' : 'ghost'}
-                onClick={() => setSelectedTab('user-settings')}
-                leftIcon={<SettingsIcon />}
-                size="sm"
-                justifyContent="flex-start"
-                pl="4"
-              >
-                {t('workspace.settings.modal.menu.preferences.label')}
-              </Button>
-            </Stack>
             <Stack>
               <Text pl="4" color="gray.500">
                 {t('workspace.settings.modal.menu.workspace.label')}
@@ -174,10 +137,6 @@ const SettingsContent = ({
   onClose: () => void
 }) => {
   switch (tab) {
-    case 'my-account':
-      return <MyAccountForm />
-    case 'user-settings':
-      return <UserPreferencesForm />
     case 'workspace-settings':
       return <WorkspaceSettingsForm onClose={onClose} />
     case 'members':
