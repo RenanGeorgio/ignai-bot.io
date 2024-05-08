@@ -7,7 +7,8 @@ import { createSession } from './queries/createSession'
 import { deleteSession } from './queries/deleteSession'
 import * as Sentry from '@sentry/nextjs'
 import { saveVisitedEdges } from './queries/saveVisitedEdges'
-import { VisitedEdge } from '@typebot.io/prisma'
+import { Prisma, VisitedEdge } from '@typebot.io/prisma'
+import prisma from '@typebot.io/lib/prisma'
 
 type Props = {
   session: Pick<ChatSession, 'state'> & { id?: string }
@@ -15,7 +16,6 @@ type Props = {
   logs: ContinueChatResponse['logs']
   clientSideActions: ContinueChatResponse['clientSideActions']
   visitedEdges: VisitedEdge[]
-  forceCreateSession?: boolean
   hasCustomEmbedBubble?: boolean
 }
 
@@ -24,7 +24,6 @@ export const saveStateToDatabase = async ({
   input,
   logs,
   clientSideActions,
-  forceCreateSession,
   visitedEdges,
   hasCustomEmbedBubble,
 }: Props) => {
@@ -36,30 +35,36 @@ export const saveStateToDatabase = async ({
     !input && !containsSetVariableClientSideAction && !hasCustomEmbedBubble
   )
 
+  const queries: Prisma.PrismaPromise<any>[] = []
+
   const resultId = state.typebotsQueue[0].resultId
 
   if (id) {
-    if (isCompleted && resultId) await deleteSession(id)
-    else await updateSession({ id, state })
+    if (isCompleted && resultId) queries.push(deleteSession(id))
+    else queries.push(updateSession({ id, state, isReplying: false }))
   }
 
-  const session =
-    id && !forceCreateSession
-      ? { state, id }
-      : await createSession({ id, state })
+  const session = id
+    ? { state, id }
+    : await createSession({ id, state, isReplying: false })
 
-  if (!resultId) return session
+  if (!resultId) {
+    if (queries.length > 0) await prisma.$transaction(queries)
+    return session
+  }
 
   const answers = state.typebotsQueue[0].answers
 
-  await upsertResult({
-    resultId,
-    typebot: state.typebotsQueue[0].typebot,
-    isCompleted: Boolean(
-      !input && !containsSetVariableClientSideAction && answers.length > 0
-    ),
-    hasStarted: answers.length > 0,
-  })
+  queries.push(
+    upsertResult({
+      resultId,
+      typebot: state.typebotsQueue[0].typebot,
+      isCompleted: Boolean(
+        !input && !containsSetVariableClientSideAction && answers.length > 0
+      ),
+      hasStarted: answers.length > 0,
+    })
+  )
 
   if (logs && logs.length > 0)
     try {
@@ -75,7 +80,9 @@ export const saveStateToDatabase = async ({
       Sentry.captureException(e)
     }
 
-  if (visitedEdges.length > 0) await saveVisitedEdges(visitedEdges)
+  if (visitedEdges.length > 0) queries.push(saveVisitedEdges(visitedEdges))
+
+  await prisma.$transaction(queries)
 
   return session
 }
