@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { EmojiOrImageIcon } from '@/components/EmojiOrImageIcon'
 import {
   HardDriveIcon,
@@ -25,7 +26,7 @@ import {
 import { WorkspaceInApp } from '../WorkspaceProvider'
 import { AccountSettingsModal } from './AccountSettingsModal'
 import { WorkspaceSettingsModal } from './WorkspaceSettingsModal'
-import { env } from '@typebot.io/env'
+import { checkUser } from '../api/checkUser'
 
 type Props = {
   currentWorkspace?: WorkspaceInApp
@@ -44,6 +45,8 @@ export const WorkspaceDropdown = ({
   const { user } = useUser()
   const { workspace } = useWorkspace()
   const { data } = trpc.workspace.listWorkspaces.useQuery()
+
+  const [isAdmin, setAdmin] = useState<Boolean>(false);
  
   const workspaces = data?.workspaces ?? []
 
@@ -70,6 +73,20 @@ export const WorkspaceDropdown = ({
       />
     );
   }
+
+  const validAdmin = async (email) => {
+    const response = await checkUser(email);
+
+    setAdmin(response?.body?.value);
+  }
+
+  useEffect(() => {
+    if (user?.email) {
+      validAdmin(user?.email);
+    } else {
+      setAdmin(false);
+    }
+  },[user?.email]);
 
   return (
     <Menu placement="bottom-end">
@@ -105,7 +122,7 @@ export const WorkspaceDropdown = ({
               </HStack>
             </MenuItem>
           ))}
-        {user?.email && env?.ADMIN_EMAIL?.includes(user?.email) && (
+        {user?.email && isAdmin && (
           <MenuItem onClick={onCreateNewWorkspaceClick} icon={<PlusIcon />}>
             {t('workspace.dropdown.newButton.label')}
           </MenuItem>
