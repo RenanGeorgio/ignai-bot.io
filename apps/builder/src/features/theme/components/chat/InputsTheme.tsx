@@ -1,12 +1,12 @@
 import { Stack, Flex, Text } from '@chakra-ui/react'
-import { InputColors, Theme } from '@typebot.io/schemas'
+import { Theme } from '@typebot.io/schemas'
 import React from 'react'
 import { ColorPicker } from '../../../../components/ColorPicker'
 import { useTranslate } from '@tolgee/react'
 
 type Props = {
   inputs: NonNullable<Theme['chat']>['inputs']
-  onInputsChange: (buttons: InputColors) => void
+  onInputsChange: (buttons: any) => void
 }
 
 export const InputsTheme = ({ inputs, onInputsChange }: Props) => {
