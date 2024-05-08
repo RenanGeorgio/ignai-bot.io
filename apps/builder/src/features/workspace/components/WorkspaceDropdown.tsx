@@ -46,7 +46,7 @@ export const WorkspaceDropdown = ({
   const { workspace } = useWorkspace()
   const { data } = trpc.workspace.listWorkspaces.useQuery()
 
-  const [isAdmin, setAdmin] = useState<Boolean>(false);
+  const [isAdmin, setAdmin] = useState<boolean>(false);
  
   const workspaces = data?.workspaces ?? []
 
