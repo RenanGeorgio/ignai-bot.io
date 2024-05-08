@@ -6,6 +6,7 @@ import { useTranslate } from '@tolgee/react'
 
 type Props = {
   inputs: NonNullable<Theme['chat']>['inputs']
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onInputsChange: (buttons: any) => void
 }
 
