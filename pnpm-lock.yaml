@@ -1414,6 +1414,27 @@ importers:
         specifier: 5.4.5
         version: 5.4.5
 
+  packages/forge/blocks/ignaiChatbot:
+    devDependencies:
+      '@typebot.io/forge':
+        specifier: workspace:*
+        version: link:../../core
+      '@typebot.io/lib':
+        specifier: workspace:*
+        version: link:../../../lib
+      '@typebot.io/tsconfig':
+        specifier: workspace:*
+        version: link:../../../tsconfig
+      '@types/react':
+        specifier: 18.2.15
+        version: 18.2.15
+      ky:
+        specifier: 1.2.3
+        version: 1.2.3
+      typescript:
+        specifier: 5.4.5
+        version: 5.4.5
+
   packages/forge/blocks/mistral:
     dependencies:
       ai:
@@ -1612,6 +1633,9 @@ importers:
       '@typebot.io/forge':
         specifier: workspace:*
         version: link:../core
+      '@typebot.io/ignai-chatbot-block':
+        specifier: workspace:*
+        version: link:../blocks/ignaiChatbot
       '@typebot.io/mistral-block':
         specifier: workspace:*
         version: link:../blocks/mistral
