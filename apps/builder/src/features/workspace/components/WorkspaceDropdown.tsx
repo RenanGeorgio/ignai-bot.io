@@ -79,7 +79,7 @@ export const WorkspaceDropdown = ({
 
     const body = data.response;
     if (body) {
-      const { value } = await body.json();
+      const { value } = body;
       setAdmin(value);
     } else {
       setAdmin(false);
