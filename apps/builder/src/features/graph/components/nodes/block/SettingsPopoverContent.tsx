@@ -45,6 +45,7 @@ import { IntegrationBlockType } from '@typebot.io/schemas/features/blocks/integr
 import { LogicBlockType } from '@typebot.io/schemas/features/blocks/logic/constants'
 import { ForgedBlockSettings } from '../../../../forge/components/ForgedBlockSettings'
 import { OpenAISettings } from '@/features/blocks/integrations/openai/components/OpenAISettings'
+import { IgnaiChatbotSettings } from '@/features/blocks/integrations/ignaiChatbot/IgnaiChatbotSettings'
 
 type Props = {
   block: BlockWithOptions
@@ -322,6 +323,14 @@ export const BlockSettings = ({
     case IntegrationBlockType.ZEMANTIC_AI: {
       return (
         <ZemanticAiSettings block={block} onOptionsChange={updateOptions} />
+      )
+    }
+    case IntegrationBlockType.IGNAI_CHATBOT: {
+      return (
+        <IgnaiChatbotSettings
+          options={block.options}
+          onOptionsChange={updateOptions}
+        />
       )
     }
     case LogicBlockType.CONDITION:

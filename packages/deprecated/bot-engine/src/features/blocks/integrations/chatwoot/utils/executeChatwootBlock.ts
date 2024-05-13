@@ -63,6 +63,7 @@ export const executeChatwootBlock = (
     sendEventToParent({
       closeChatBubble: true,
     })
+    console.log(block.options)
     sendEventToParent({
       codeToExecute: parseVariables(variables)(
         parseChatwootOpenCode(block.options)
