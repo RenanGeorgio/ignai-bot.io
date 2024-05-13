@@ -80,7 +80,7 @@ export const WorkspaceDropdown = ({
     const body = data?.response?.body;
     if (body) {
       console.log(body);
-      setAdmin(body);
+      setAdmin(true);
     } else {
       setAdmin(false);
     }
