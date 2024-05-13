@@ -77,7 +77,7 @@ export const WorkspaceDropdown = ({
   const validAdmin = async (email: string) => {
     const data = await checkUser(email);
 
-    const body = data.response.body;
+    const body = data?.response?.body;
     if (body) {
       console.log(body);
       setAdmin(body);
