@@ -3,6 +3,7 @@ import { forgedBlocks } from '@typebot.io/forge-repository/definitions'
 import { ForgedBlock } from '@typebot.io/forge-repository/types'
 import { decrypt } from '@typebot.io/lib/api/encryption/decrypt'
 import { isPlaneteScale } from '@typebot.io/lib/isPlanetScale'
+import prisma from '@typebot.io/lib/prisma'
 import {
   SessionState,
   ContinueChatResponse,
@@ -18,6 +19,7 @@ import { updateVariablesInSession } from '@typebot.io/variables/updateVariablesI
 import { ExecuteIntegrationResponse } from '../types'
 import { byId } from '@typebot.io/lib'
 import { BubbleBlockType } from '@typebot.io/schemas/features/blocks/bubbles/constants'
+import { env } from '@typebot.io/env'
 import { getCredentials } from '../queries/getCredentials'
 
 export const executeForgedBlock = async (
@@ -59,6 +61,8 @@ export const executeForgedBlock = async (
     ) &&
     state.isStreamEnabled &&
     !state.whatsApp
+    // TODO: Enable once chat api is rolling
+    // !process.env.VERCEL_ENV
   ) {
     return {
       outgoingEdgeId: block.outgoingEdgeId,
@@ -115,8 +119,7 @@ export const executeForgedBlock = async (
     : undefined
 
   const parsedOptions = deepParseVariables(
-    state.typebotsQueue[0].typebot.variables,
-    { removeEmptyStrings: true }
+    state.typebotsQueue[0].typebot.variables
   )(block.options)
   await action?.run?.server?.({
     credentials: credentialsData ?? {},
@@ -145,9 +148,6 @@ export const executeForgedBlock = async (
       ? {
           type: 'custom-embed',
           content: {
-            url: action.run.web.displayEmbedBubble.parseUrl({
-              options: parsedOptions,
-            }),
             maxBubbleWidth: action.run.web.displayEmbedBubble.maxBubbleWidth,
             initFunction: action.run.web.displayEmbedBubble.parseInitFunction({
               options: parsedOptions,

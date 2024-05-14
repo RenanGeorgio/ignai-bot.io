@@ -30,6 +30,8 @@ export type FunctionToExecute = {
   content: string
 }
 
+export type ReadOnlyVariableStore = Omit<VariableStore, 'set'>
+
 export type TurnableIntoParam<T = {}> = {
   blockId: string
   /**
@@ -63,17 +65,11 @@ export type ActionDefinition<
       run: (params: {
         credentials: CredentialsFromAuthDef<A>
         options: z.infer<BaseOptions> & z.infer<Options>
-        variables: VariableStore
+        variables: ReadOnlyVariableStore
       }) => Promise<ReadableStream<any> | undefined>
     }
     web?: {
       displayEmbedBubble?: {
-        /**
-         * Used to determine the URL to be displayed as a text bubble in runtimes where the code can't be executed. (i.e. WhatsApp)
-         */
-        parseUrl: (params: {
-          options: z.infer<BaseOptions> & z.infer<Options>
-        }) => string | undefined
         waitForEvent?: {
           getSaveVariableId?: (
             options: z.infer<BaseOptions> & z.infer<Options>

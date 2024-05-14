@@ -7,11 +7,8 @@ import { TypebotPageProps, TypebotPageV2 } from '@/components/TypebotPageV2'
 import { TypebotPageV3, TypebotV3PageProps } from '@/components/TypebotPageV3'
 import { env } from '@typebot.io/env'
 import prisma from '@typebot.io/lib/prisma'
+import { defaultTheme } from '@typebot.io/schemas/features/typebot/theme/constants'
 import { defaultSettings } from '@typebot.io/schemas/features/typebot/settings/constants'
-import {
-  defaultBackgroundColor,
-  defaultBackgroundType,
-} from '@typebot.io/schemas/features/typebot/theme/constants'
 
 // Browsers that doesn't support ES modules and/or web components
 const incompatibleBrowsers = [
@@ -112,10 +109,9 @@ const getTypebotFromPublicId = async (publicId?: string) => {
     ? ({
         name: publishedTypebot.typebot.name,
         publicId: publishedTypebot.typebot.publicId ?? null,
-        background: publishedTypebot.theme.general?.background ?? {
-          type: defaultBackgroundType,
-          content: defaultBackgroundColor,
-        },
+        background:
+          publishedTypebot.theme.general?.background ??
+          defaultTheme.general.background,
         isHideQueryParamsEnabled:
           publishedTypebot.settings.general?.isHideQueryParamsEnabled ??
           defaultSettings.general.isHideQueryParamsEnabled,
@@ -160,10 +156,9 @@ const getTypebotFromCustomDomain = async (customDomain: string) => {
     ? ({
         name: publishedTypebot.typebot.name,
         publicId: publishedTypebot.typebot.publicId ?? null,
-        background: publishedTypebot.theme.general?.background ?? {
-          type: defaultBackgroundType,
-          content: defaultBackgroundColor,
-        },
+        background:
+          publishedTypebot.theme.general?.background ??
+          defaultTheme.general.background,
         isHideQueryParamsEnabled:
           publishedTypebot.settings.general?.isHideQueryParamsEnabled ??
           defaultSettings.general.isHideQueryParamsEnabled,
@@ -238,10 +233,7 @@ const App = ({
         defaultSettings.general.isHideQueryParamsEnabled
       }
       background={
-        publishedTypebot.background ?? {
-          type: defaultBackgroundType,
-          content: defaultBackgroundColor,
-        }
+        publishedTypebot.background ?? defaultTheme.general.background
       }
       metadata={publishedTypebot.metadata ?? {}}
       font={publishedTypebot.font}

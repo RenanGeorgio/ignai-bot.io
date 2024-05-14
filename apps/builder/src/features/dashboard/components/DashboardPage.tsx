@@ -1,6 +1,9 @@
 import { Seo } from '@/components/Seo'
 import { useUser } from '@/features/account/hooks/useUser'
-import { PreCheckoutModal, PreCheckoutModalProps } from '@/features/billing/components/PreCheckoutModal'
+import {
+  PreCheckoutModal,
+  PreCheckoutModalProps,
+} from '@/features/billing/components/PreCheckoutModal'
 import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
 import { Stack, VStack, Spinner, Text } from '@chakra-ui/react'
 import { Plan } from '@typebot.io/prisma'
@@ -16,20 +19,18 @@ import { useTranslate } from '@tolgee/react'
 
 export const DashboardPage = () => {
   const { t } = useTranslate()
-
   const [isLoading, setIsLoading] = useState(false)
-
   const router = useRouter()
   const { user } = useUser()
   const { workspace } = useWorkspace()
-
-  const [preCheckoutPlan, setPreCheckoutPlan] = useState<PreCheckoutModalProps['selectedSubscription']>()
-
-  const { mutate: createCustomCheckoutSession } = trpc.billing.createCustomCheckoutSession.useMutation({
-    onSuccess: (data) => {
-      router.push(data.checkoutUrl)
-    },
-  })
+  const [preCheckoutPlan, setPreCheckoutPlan] =
+    useState<PreCheckoutModalProps['selectedSubscription']>()
+  const { mutate: createCustomCheckoutSession } =
+    trpc.billing.createCustomCheckoutSession.useMutation({
+      onSuccess: (data) => {
+        router.push(data.checkoutUrl)
+      },
+    })
 
   useEffect(() => {
     const { subscribePlan, claimCustomPlan } = router.query as {
@@ -37,7 +38,6 @@ export const DashboardPage = () => {
       chats: string | undefined
       claimCustomPlan: string | undefined
     }
-
     if (claimCustomPlan && user?.email && workspace) {
       setIsLoading(true)
       createCustomCheckoutSession({
@@ -46,7 +46,6 @@ export const DashboardPage = () => {
         returnUrl: `${window.location.origin}/typebots`,
       })
     }
-
     if (workspace && subscribePlan && user && workspace.plan === 'FREE') {
       setIsLoading(true)
       setPreCheckoutPlan({
