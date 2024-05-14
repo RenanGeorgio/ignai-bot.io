@@ -129,8 +129,8 @@ export const MyAccountForm = () => {
       </Tooltip>
       <HStack>
         <Phone />
-        <WhatsAppIcon />
-        <FaceBookIcon />
+        <WhatsAppLogo />
+        <FacebookLogo />
         <InstagramIcon />
         <TelegramIcon />
         <EmailIcon />
