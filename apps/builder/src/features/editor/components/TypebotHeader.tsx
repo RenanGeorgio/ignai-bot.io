@@ -10,13 +10,20 @@ import {
   useDisclosure,
   StackProps,
   chakra,
+  Avatar,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem
 } from '@chakra-ui/react'
 import {
   BuoyIcon,
   ChevronLeftIcon,
+  CopyIcon,
   PlayIcon,
   RedoIcon,
   UndoIcon,
+  MoreVerticalIcon
 } from '@/components/icons'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
@@ -25,8 +32,8 @@ import { EditableTypebotName } from './EditableTypebotName'
 import Link from 'next/link'
 import { EditableEmojiOrImageIcon } from '@/components/EditableEmojiOrImageIcon'
 import { useDebouncedCallback } from 'use-debounce'
-import { ShareTypebotButton } from '@/features/share/components/ShareTypebotButton'
 import { PublishButton } from '@/features/publish/components/PublishButton'
+import { useUser } from '@/features/account/hooks/useUser'
 import { headerHeight } from '../constants'
 import { RightPanel, useEditor } from '../providers/EditorProvider'
 import { useTypebot } from '../providers/TypebotProvider'
@@ -65,7 +72,7 @@ export const TypebotHeader = () => {
       flexShrink={0}
     >
       {isOpen && <SupportBubble autoShowDelay={0} />}
-      <LeftElements pos="absolute" left="1rem" onHelpClick={handleHelpClick} />
+      <LeftElements pos="absolute" left="1rem" />
       <TypebotNav
         display={{ base: 'none', xl: 'flex' }}
         pos={{ base: 'absolute' }}
@@ -78,14 +85,18 @@ export const TypebotHeader = () => {
         display={['none', 'flex']}
         isResultsDisplayed={isDefined(publishedTypebot)}
       />
+      <LastElements
+        right="10px"
+        pos="absolute"
+        display={['none', 'flex']}
+        isResultsDisplayed={isDefined(publishedTypebot)}
+        onHelpClick={handleHelpClick}
+      />
     </Flex>
   )
 }
 
-const LeftElements = ({
-  onHelpClick,
-  ...props
-}: StackProps & { onHelpClick: () => void }) => {
+const LeftElements = ({ ...props }: StackProps) => {
   const { t } = useTranslate()
   const router = useRouter()
   const {
@@ -223,16 +234,6 @@ const LeftElements = ({
             </Tooltip>
           </HStack>
         )}
-        <Button
-          leftIcon={<BuoyIcon />}
-          onClick={onHelpClick}
-          size="sm"
-          iconSpacing={{ base: 0, xl: 2 }}
-        >
-          <chakra.span display={{ base: 'none', xl: 'inline' }}>
-            {t('editor.header.helpButton.label')}
-          </chakra.span>
-        </Button>
       </HStack>
       {isSavingLoading && (
         <HStack>
@@ -252,7 +253,7 @@ const RightElements = ({
 }: StackProps & { isResultsDisplayed: boolean }) => {
   const router = useRouter()
   const { t } = useTranslate()
-  const { typebot, currentUserMode, save } = useTypebot()
+  const { typebot, currentUserMode, save, isSavingLoading } = useTypebot()
   const {
     setRightPanel,
     rightPanel,
@@ -263,7 +264,7 @@ const RightElements = ({
   const handlePreviewClick = async () => {
     setStartPreviewAtGroup(undefined)
     setStartPreviewAtEvent(undefined)
-    save().then()
+    await save()
     setRightPanel(RightPanel.PREVIEW)
   }
 
@@ -274,14 +275,11 @@ const RightElements = ({
         typebotId={typebot?.id}
         isResultsDisplayed={isResultsDisplayed}
       />
-      <Flex pos="relative">
-        <ShareTypebotButton isLoading={isNotDefined(typebot)} />
-      </Flex>
       {router.pathname.includes('/edit') && isNotDefined(rightPanel) && (
         <Button
           colorScheme="gray"
           onClick={handlePreviewClick}
-          isLoading={isNotDefined(typebot)}
+          isLoading={isNotDefined(typebot) || isSavingLoading}
           leftIcon={<PlayIcon />}
           size="sm"
           iconSpacing={{ base: 0, xl: 2 }}
@@ -291,7 +289,67 @@ const RightElements = ({
           </chakra.span>
         </Button>
       )}
+      {currentUserMode === 'guest' && (
+        <Button
+          as={Link}
+          href={`/typebots/${typebot?.id}/duplicate`}
+          leftIcon={<CopyIcon />}
+          isLoading={isNotDefined(typebot)}
+          size="sm"
+        >
+          Duplicate
+        </Button>
+      )}
       {currentUserMode === 'write' && <PublishButton size="sm" />}
+    </HStack>
+  )
+}
+
+const LastElements = ({
+  isResultsDisplayed,
+  onHelpClick,
+  ...props
+}: StackProps & { isResultsDisplayed: boolean, onHelpClick: () => void }) => {
+  const { t } = useTranslate()
+  const { user } = useUser()
+  const { typebot } = useTypebot()
+
+  return (
+    <HStack {...props}>
+      <TypebotNav
+        display={{ base: 'none', md: 'flex', xl: 'none' }}
+        typebotId={typebot?.id}
+        isResultsDisplayed={isResultsDisplayed}
+      />
+      <HStack>
+        <Avatar
+          size="lg"
+          src={user?.image ?? undefined}
+          name={user?.name ?? undefined}
+        />
+        <Menu>
+          <MenuButton
+            as={IconButton}
+            aria-label='Options'
+            icon={<MoreVerticalIcon />}
+            variant='outline'
+          />
+          <MenuList>
+            <MenuItem command='⌘T'>
+              <Button
+                leftIcon={<BuoyIcon />}
+                onClick={onHelpClick}
+                size="sm"
+                iconSpacing={{ base: 0, xl: 2 }}
+              >
+                <chakra.span display={{ base: 'none', xl: 'inline' }}>
+                  {t('editor.header.helpButton.label')}
+                </chakra.span>
+              </Button>
+            </MenuItem>
+          </MenuList>
+        </Menu>
+      </HStack>
     </HStack>
   )
 }

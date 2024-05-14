@@ -1,3 +1,5 @@
+'use client'
+
 import React, { ReactNode } from 'react'
 
 import {
@@ -12,7 +14,7 @@ import {
 import { Logo } from 'assets/icons/Logo'
 import { TextLink } from './TextLink'
 
-const discordServerUrl = 'https://www.ignai.com.br/discord'
+const discordServerUrl = 'https://typebot.io/discord'
 const typebotLinkedInUrl = 'https://www.linkedin.com/company/typebot'
 const typebotTwitterUrl = 'https://twitter.com/Typebot_io'
 const baptisteTwitterUrl = 'https://twitter.com/baptisteArno'
@@ -20,7 +22,7 @@ const statusPageUrl = 'https://status.typebot.io'
 export const contactUrl = 'https://bot.typebot.io/landing-page-bubble-en'
 export const roadmapLink = 'https://app.typebot.io/feedback'
 export const documentationLink = 'https://docs.typebot.io'
-export const githubRepoLink = 'https://github.com/supplyfy/ignai-bot.io'
+export const githubRepoLink = 'https://github.com/baptisteArno/typebot.io'
 
 export const Footer = () => {
   return (
@@ -31,13 +33,9 @@ export const Footer = () => {
             <HStack>
               <Logo boxSize="30px" />
               <Heading as="p" fontSize="lg">
-                Typebot
+                Ignai-bot.io
               </Heading>
             </HStack>
-            <Text>
-              Made with ❤️ by{' '}
-              <TextLink href={baptisteTwitterUrl}>@baptisteArno</TextLink>
-            </Text>
           </Stack>
           <Stack align={'flex-start'}>
             <ListHeader>Product</ListHeader>
