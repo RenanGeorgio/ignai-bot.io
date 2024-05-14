@@ -1,0 +1,91 @@
+.wrapperHistory{
+  position: absolute;
+  background-color: #ffffff;
+  right: 5px;
+  width: 400px;
+  padding: 15px;
+  height: 100%;
+}
+
+.formHistory {
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+  display: inline-flex;
+}
+
+.containerHistory {
+  align-self: stretch;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 2px;
+  display: inline-flex;
+  height: 75px;
+  flex-direction: column;
+  font-family: sans-serif;
+  text-transform: capitalize;
+}
+
+.inputHistory {
+  align-self: stretch;
+  background: rgb(242, 242, 242);
+  border-radius: 6px;
+  border: 1px #DBDADE solid;
+  justify-content: flex-start;
+  align-items: center;
+  display: inline-flex;
+  height: 60px;
+  border-radius: 6px;
+  text-align: justify;
+  text-transform: uppercase;
+}
+
+input {
+  height: inherit;
+}
+
+.spanTitle {
+  flex: 1 1 0;
+  color: #000;
+  font-Size: 13;
+  font-Family: Public Sans;
+  font-Weight: 400;
+  word-Wrap: break-word;
+  font-family: sans-serif;
+}
+
+.buttonContainerHistory {
+  gap: 16px;
+  margin-top: 5px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.add {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-family: sans-serif;
+}
+
+.textTitle {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.btnClose button {
+  width: 30;
+  height: 30;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.075);
+  border-width: 2px;
+  border-radius: 4px;
+  background-color: #4B465C29;
+}

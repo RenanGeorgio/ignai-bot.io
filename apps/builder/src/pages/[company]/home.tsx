@@ -34,9 +34,9 @@ export const getServerSideProps: GetServerSideProps = async (
   }
 }
 
-const Home = ({ incompatibleBrowser }: {
+export default function Home({ incompatibleBrowser }: {
   incompatibleBrowser: string | null
-}) => {
+}){
   if (incompatibleBrowser)
     return (
       <ErrorPage
@@ -52,5 +52,3 @@ const Home = ({ incompatibleBrowser }: {
     <></>
   )
 }
-
-export default Home
