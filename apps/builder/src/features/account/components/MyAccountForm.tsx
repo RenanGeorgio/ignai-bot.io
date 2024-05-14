@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { Stack, HStack, Avatar, Text, Tooltip } from '@chakra-ui/react'
-import { UploadIcon, WhatsAppIcon, FaceBookIcon, Phone, InstagramIcon, TelegramIcon, EmailIcon } from '@/components/icons'
+import { UploadIcon, Phone, InstagramIcon, TelegramIcon, EmailIcon } from '@/components/icons'
 import { ApiTokensList } from './ApiTokensList'
 import { UploadButton } from '@/components/ImageUploadContent/UploadButton'
 import { useUser } from '../hooks/useUser'
 import { TextInput } from '@/components/inputs/TextInput'
 import { useTranslate } from '@tolgee/react'
+import { WhatsAppLogo } from '@/components/logos/WhatsAppLogo'
+import { FacebookLogo } from '@/components/logos/FacebookLogo'
 
 export const MyAccountForm = () => {
   const { t } = useTranslate();
