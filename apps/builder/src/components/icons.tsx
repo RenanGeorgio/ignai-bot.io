@@ -750,7 +750,7 @@ export const DotsVertical = () => (
 )
 
 
-export const Upload = (props: IconProps) => (
+export const Upload = () => (
   <svg
     className={"upload "}
     width="28"

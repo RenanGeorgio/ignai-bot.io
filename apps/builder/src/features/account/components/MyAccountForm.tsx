@@ -14,7 +14,7 @@ export const MyAccountForm = () => {
 
   const [name, setName] = useState(user?.name ?? '');
   const [email, setEmail] = useState(user?.email ?? '');
-  const [tel, setTel] = useState('+55 (27');
+  const [tel, setTel] = useState('+55 (27) 99297-4993');
   const [company, setCompany] = useState(user?.company ?? '');
   const [role, setRole] = useState('contribuinte');
 
@@ -30,6 +30,11 @@ export const MyAccountForm = () => {
   const handleEmailChange = (newEmail: string) => {
     setEmail(newEmail);
     updateUser({ email: newEmail });
+  }
+
+  const handleTelChange = (newTel: string) => {
+    setTel(newTel);
+    //updateUser({ tel: newTel });
   }
   
   const handleCompanyChange = (newCompany: string) => {
@@ -82,7 +87,7 @@ export const MyAccountForm = () => {
         <TextInput
           defaultValue={company}
           onChange={handleCompanyChange}
-          label={t('account.myAccount.emailInput.label')}
+          label={'Empresa:'}
           withVariableButton={false}
           debounceTimeout={0}
           isDisabled
@@ -90,7 +95,7 @@ export const MyAccountForm = () => {
         <TextInput
           defaultValue={role}
           onChange={handleRoleChange}
-          label={t('account.myAccount.emailInput.label')}
+          label={'Cargo:'}
           withVariableButton={false}
           debounceTimeout={0}
           isDisabled
@@ -109,13 +114,13 @@ export const MyAccountForm = () => {
           />
         </span>
       </Tooltip>
-      <Tooltip label={t('account.myAccount.emailInput.disabledTooltip')}>
+      <Tooltip label={'Fazer a atualização para o seu numero não esta disponivel no momento'}>
         <span>
           <TextInput
             type="tel"
-            defaultValue={email}
-            onChange={handleEmailChange}
-            label={t('account.myAccount.emailInput.label')}
+            defaultValue={tel}
+            onChange={handleTelChange}
+            label={'N° registrado:'}
             withVariableButton={false}
             debounceTimeout={0}
             isDisabled
