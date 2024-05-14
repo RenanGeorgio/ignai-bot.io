@@ -1,6 +1,6 @@
-import { Stack, HStack, Avatar, Text, Tooltip } from '@chakra-ui/react'
-import { UploadIcon } from '@/components/icons'
 import React, { useState } from 'react'
+import { Stack, HStack, Avatar, Text, Tooltip } from '@chakra-ui/react'
+import { UploadIcon, WhatsAppIcon, FaceBookIcon, Phone, InstagramIcon, TelegramIcon, EmailIcon } from '@/components/icons'
 import { ApiTokensList } from './ApiTokensList'
 import { UploadButton } from '@/components/ImageUploadContent/UploadButton'
 import { useUser } from '../hooks/useUser'
@@ -8,24 +8,39 @@ import { TextInput } from '@/components/inputs/TextInput'
 import { useTranslate } from '@tolgee/react'
 
 export const MyAccountForm = () => {
-  const { t } = useTranslate()
-  const { user, updateUser } = useUser()
-  const [name, setName] = useState(user?.name ?? '')
-  const [email, setEmail] = useState(user?.email ?? '')
+  const { t } = useTranslate();
+
+  const { user, updateUser } = useUser();
+
+  const [name, setName] = useState(user?.name ?? '');
+  const [email, setEmail] = useState(user?.email ?? '');
+  const [tel, setTel] = useState('+55 (27');
+  const [company, setCompany] = useState(user?.company ?? '');
+  const [role, setRole] = useState('contribuinte');
 
   const handleFileUploaded = async (url: string) => {
-    updateUser({ image: url })
+    updateUser({ image: url });
   }
 
   const handleNameChange = (newName: string) => {
-    setName(newName)
-    updateUser({ name: newName })
+    setName(newName);
+    updateUser({ name: newName });
   }
 
   const handleEmailChange = (newEmail: string) => {
-    setEmail(newEmail)
-    updateUser({ email: newEmail })
-  } 
+    setEmail(newEmail);
+    updateUser({ email: newEmail });
+  }
+  
+  const handleCompanyChange = (newCompany: string) => {
+    setCompany(newCompany);
+    updateUser({ company: newCompany });
+  }
+  
+  const handleRoleChange = (newRole: string) => {
+    setRole(newRole);
+    //updateUser({ role: newRole });
+  }
 
   return (
     <Stack spacing="6" w="full" overflowY="auto">
@@ -63,6 +78,24 @@ export const MyAccountForm = () => {
         withVariableButton={false}
         debounceTimeout={0}
       />
+      <HStack spacing={6}>
+        <TextInput
+          defaultValue={company}
+          onChange={handleCompanyChange}
+          label={t('account.myAccount.emailInput.label')}
+          withVariableButton={false}
+          debounceTimeout={0}
+          isDisabled
+        />
+        <TextInput
+          defaultValue={role}
+          onChange={handleRoleChange}
+          label={t('account.myAccount.emailInput.label')}
+          withVariableButton={false}
+          debounceTimeout={0}
+          isDisabled
+        />
+      </HStack> 
       <Tooltip label={t('account.myAccount.emailInput.disabledTooltip')}>
         <span>
           <TextInput
@@ -76,8 +109,29 @@ export const MyAccountForm = () => {
           />
         </span>
       </Tooltip>
+      <Tooltip label={t('account.myAccount.emailInput.disabledTooltip')}>
+        <span>
+          <TextInput
+            type="tel"
+            defaultValue={email}
+            onChange={handleEmailChange}
+            label={t('account.myAccount.emailInput.label')}
+            withVariableButton={false}
+            debounceTimeout={0}
+            isDisabled
+          />
+        </span>
+      </Tooltip>
+      <HStack>
+        <Phone />
+        <WhatsAppIcon />
+        <FaceBookIcon />
+        <InstagramIcon />
+        <TelegramIcon />
+        <EmailIcon />
+      </HStack>
 
       {user && <ApiTokensList user={user} />}
     </Stack>
-  )
+  );
 }

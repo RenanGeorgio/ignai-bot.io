@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { EmojiOrImageIcon } from '@/components/EmojiOrImageIcon'
 import {
-  HardDriveIcon,
+  IgnaiDefaultIcon,
   ChevronLeftIcon,
   PlusIcon,
   LogOutIcon,
@@ -121,7 +121,7 @@ export const WorkspaceDropdown = ({
                 <EmojiOrImageIcon
                   icon={workspace.icon}
                   boxSize="16px"
-                  defaultIcon={HardDriveIcon}
+                  defaultIcon={IgnaiDefaultIcon}
                 />
                 <Text>{workspace.name}</Text>
                 <PlanTag plan={workspace.plan} />
