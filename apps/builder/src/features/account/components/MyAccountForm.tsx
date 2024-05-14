@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Stack, HStack, Avatar, Text, Tooltip } from '@chakra-ui/react'
-import { UploadIcon, Phone, InstagramIcon, TelegramIcon, EmailIcon } from '@/components/icons'
+import { UploadIcon } from '@/components/icons'
 import { ApiTokensList } from './ApiTokensList'
 import { UploadButton } from '@/components/ImageUploadContent/UploadButton'
 import { useUser } from '../hooks/useUser'
@@ -130,12 +130,8 @@ export const MyAccountForm = () => {
         </span>
       </Tooltip>
       <HStack>
-        <Phone />
         <WhatsAppLogo />
         <FacebookLogo />
-        <InstagramIcon />
-        <TelegramIcon />
-        <EmailIcon />
       </HStack>
 
       {user && <ApiTokensList user={user} />}
