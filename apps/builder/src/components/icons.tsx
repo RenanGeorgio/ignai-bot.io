@@ -681,9 +681,6 @@ export const IgnaiDefaultIcon = (props: SVGProps<SVGSVGElement>) => (
     x="0px"
     y="0px"
     viewBox="0 0 841.89 595.28"
-    style={{
-      enableBackground: "new 0 0 841.89 595.28",
-    }}
     xmlSpace="preserve"
     {...props}
   >
