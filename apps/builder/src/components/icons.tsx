@@ -1,4 +1,3 @@
-import { SVGProps } from 'react';
 import { IconProps, Icon, useColorModeValue } from '@chakra-ui/react'
 
 export const featherIconsBaseProps: IconProps = {
@@ -673,7 +672,7 @@ export const RepeatIcon = (props: IconProps) => (
   </Icon>
 )
 
-export const IgnaiDefaultIcon = (props: SVGProps<SVGSVGElement>) => (
+export const IgnaiDefaultIcon = (props: IconProps) => (
   <svg
     id="Layer_1"
     xmlns="http://www.w3.org/2000/svg"
@@ -685,7 +684,7 @@ export const IgnaiDefaultIcon = (props: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <style type="text/css">
-      {"\n    .st0{display:none;fill:#FFFFFF;}\n\t.st1{fill:#FD625A;}\n  "}
+      {"\n\t.st0{display:none;fill:#FFFFFF;}\n\t.st1{fill:#FD625A;}\n"}
     </style>
     <rect className="st0" width={841.89} height={604.44} />
     <g>
