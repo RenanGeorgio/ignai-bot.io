@@ -3,8 +3,16 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": [
+        "src/*"
+      ]
     }
   },
-  "include": ["next-env.d.ts", "tolgee.d.ts", "**/*.ts", "**/*.tsx"]
+  "include": [
+    "next-env.d.ts",
+    "tolgee.d.ts",
+    "create-theme.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ]
 }
