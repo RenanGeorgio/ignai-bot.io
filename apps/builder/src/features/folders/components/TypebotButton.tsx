@@ -32,10 +32,12 @@ import {
 import { EditableTypebotName } from '@/features/editor/components/EditableTypebotName'
 import { EditableEmojiOrImageIcon } from '@/components/EditableEmojiOrImageIcon'
 import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { WorkspaceInApp } from '@/features/workspace/WorkspaceProvider'
 
 type Props = {
   typebot: TypebotInDashboard
   isReadOnly?: boolean
+  workspace?: WorkspaceInApp
   draggedTypebot: TypebotInDashboard | undefined
   onTypebotUpdated: () => void
   onDrag: (position: NodePosition) => void
@@ -44,6 +46,7 @@ type Props = {
 const TypebotButton = ({
   typebot,
   isReadOnly = false,
+  workspace,
   draggedTypebot,
   onTypebotUpdated,
   onDrag,
@@ -202,7 +205,7 @@ const TypebotButton = ({
                 {typebot && (
                   <EditableEmojiOrImageIcon
                     uploadFileProps={{
-                      workspaceId: typebot.workspaceId,
+                      workspaceId: workspace.id,
                       typebotId: typebot.id,
                       fileName: 'icon',
                     }}

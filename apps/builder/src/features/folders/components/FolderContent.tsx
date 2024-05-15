@@ -207,6 +207,7 @@ export const FolderContent = ({ folder }: Props) => {
                 <TypebotButton
                   key={typebot.id}
                   typebot={typebot}
+                  workspace={workspace}
                   draggedTypebot={draggedTypebot}
                   onTypebotUpdated={refetchTypebots}
                   onDrag={handleTypebotDrag(typebot)}
