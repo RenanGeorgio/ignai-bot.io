@@ -200,31 +200,11 @@ const TypebotButton = ({
             <MenuItem onClick={handleDuplicateClick}>
               {t('folders.typebotButton.duplicate')}
             </MenuItem>
-            <MenuItem>
-              <Stack>
-                {typebot && workspace && (
-                  <EditableEmojiOrImageIcon
-                    uploadFileProps={{
-                      workspaceId: workspace?.id,
-                      typebotId: typebot.id,
-                      fileName: 'icon',
-                    }}
-                    icon={typebot?.icon}
-                    onChangeIcon={handleChangeIcon}
-                  />
-                )}
-              </Stack>
+            <MenuItem onClick={handleChangeIcon}>
+              {'Mudar icone'}
             </MenuItem>
-            <MenuItem>
-              <Stack>
-                {typebot && (
-                  <EditableTypebotName // TODO
-                    key={`typebot-name-${typebot?.name ?? ''}`}
-                    defaultName={typebot?.name ?? ''}
-                    onNewName={handleNameSubmit}
-                  />
-                )}
-              </Stack>
+            <MenuItem onClick={handleNameSubmit}>
+              {'Renomear'}
             </MenuItem>
             <MenuItem color="red.400" onClick={handleDeleteClick}>
               {t('folders.typebotButton.delete')}
