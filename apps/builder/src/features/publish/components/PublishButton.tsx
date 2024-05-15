@@ -36,19 +36,19 @@ import { useTimeSince } from '@/hooks/useTimeSince'
 type Props = ButtonProps & {
   isMoreMenuDisabled?: boolean
 }
-export const PublishButton = ({
-  isMoreMenuDisabled = false,
-  ...props
-}: Props) => {
+
+export const PublishButton = ({ isMoreMenuDisabled = false, ...props }: Props) => {
   const { t } = useTranslate()
   const { workspace } = useWorkspace()
   const { push, query, pathname } = useRouter()
+
   const { isOpen, onOpen, onClose } = useDisclosure()
   const {
     isOpen: isNewEngineWarningOpen,
     onOpen: onNewEngineWarningOpen,
     onClose: onNewEngineWarningClose,
   } = useDisclosure()
+
   const {
     isPublished,
     publishedTypebot,
@@ -59,16 +59,11 @@ export const PublishButton = ({
     save,
     publishedTypebotVersion,
   } = useTypebot()
-  const timeSinceLastPublish = useTimeSince(
-    publishedTypebot?.updatedAt.toString()
-  )
+
+  const timeSinceLastPublish = useTimeSince(publishedTypebot?.updatedAt.toString())
   const { showToast } = useToast()
 
-  const {
-    typebot: {
-      getPublishedTypebot: { refetch: refetchPublishedTypebot },
-    },
-  } = trpc.useContext()
+  const { typebot: { getPublishedTypebot: { refetch: refetchPublishedTypebot } } } = trpc.useContext()
 
   const { mutate: publishTypebotMutate, isLoading: isPublishing } =
     trpc.typebot.publishTypebot.useMutation({
@@ -104,13 +99,17 @@ export const PublishButton = ({
       },
     })
 
-  const hasInputFile = typebot?.groups
-    .flatMap((g) => g.blocks)
-    .some((b) => b.type === InputBlockType.FILE)
+  const hasInputFile = typebot?.groups.flatMap((g) => g.blocks).some((b) => b.type === InputBlockType.FILE)
 
   const handlePublishClick = async () => {
-    if (!typebot?.id) return
-    if (isFreePlan(workspace) && hasInputFile) return onOpen()
+    if (!typebot?.id) {
+      return
+    }
+
+    if (isFreePlan(workspace) && hasInputFile) {
+      return onOpen()
+    }
+
     if (!typebot.publicId) {
       await updateTypebot({
         updates: {
@@ -125,9 +124,14 @@ export const PublishButton = ({
   }
 
   const unpublishTypebot = async () => {
-    if (!typebot?.id) return
-    if (typebot.isClosed)
+    if (!typebot?.id) {
+      return
+    }
+
+    if (typebot.isClosed) {
       await updateTypebot({ updates: { isClosed: false }, save: true })
+    }
+
     unpublishTypebotMutate({
       typebotId: typebot?.id,
     })

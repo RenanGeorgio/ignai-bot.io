@@ -1,6 +1,7 @@
 import {
   Flex,
   HStack,
+  Stack,
   Button,
   IconButton,
   Tooltip,
@@ -58,7 +59,10 @@ export const TypebotHeader = () => {
       : window.open('https://docs.typebot.io/guides/how-to-get-help', '_blank')
   }
 
-  if (currentUserMode === 'guest') return <GuestTypebotHeader />
+  if (currentUserMode === 'guest') {
+    return <GuestTypebotHeader />
+  }
+
   return (
     <Flex
       w="full"
@@ -110,11 +114,8 @@ const LeftElements = ({ ...props }: StackProps) => {
     isSavingLoading,
   } = useTypebot()
 
-  const [isRedoShortcutTooltipOpen, setRedoShortcutTooltipOpen] =
-    useState(false)
-
-  const [isUndoShortcutTooltipOpen, setUndoShortcutTooltipOpen] =
-    useState(false)
+  const [isRedoShortcutTooltipOpen, setRedoShortcutTooltipOpen] = useState(false)
+  const [isUndoShortcutTooltipOpen, setUndoShortcutTooltipOpen] = useState(false)
 
   const hideUndoShortcutTooltipLater = useDebouncedCallback(() => {
     setUndoShortcutTooltipOpen(false)
@@ -124,11 +125,9 @@ const LeftElements = ({ ...props }: StackProps) => {
     setRedoShortcutTooltipOpen(false)
   }, 1000)
 
-  const handleNameSubmit = (name: string) =>
-    updateTypebot({ updates: { name } })
+  const handleNameSubmit = (name: string) => updateTypebot({ updates: { name } })
 
-  const handleChangeIcon = (icon: string) =>
-    updateTypebot({ updates: { icon } })
+  const handleChangeIcon = (icon: string) => updateTypebot({ updates: { icon } })
 
   useKeyboardShortcuts({
     undo: () => {
@@ -247,10 +246,7 @@ const LeftElements = ({ ...props }: StackProps) => {
   )
 }
 
-const RightElements = ({
-  isResultsDisplayed,
-  ...props
-}: StackProps & { isResultsDisplayed: boolean }) => {
+const RightElements = ({ isResultsDisplayed, ...props }: StackProps & { isResultsDisplayed: boolean }) => {
   const router = useRouter()
   const { t } = useTranslate()
   const { typebot, currentUserMode, save, isSavingLoading } = useTypebot()
@@ -321,7 +317,7 @@ const LastElements = ({
         typebotId={typebot?.id}
         isResultsDisplayed={isResultsDisplayed}
       />
-      <HStack>
+      <Stack>
         <Avatar
           size="lg"
           src={user?.image ?? undefined}
@@ -349,7 +345,7 @@ const LastElements = ({
             </MenuItem>
           </MenuList>
         </Menu>
-      </HStack>
+      </Stack>
     </HStack>
   )
 }
