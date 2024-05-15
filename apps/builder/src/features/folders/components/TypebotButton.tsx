@@ -36,7 +36,7 @@ import { TextInput } from '@/components/inputs'
 type Props = {
   typebot: TypebotInDashboard
   isReadOnly?: boolean
-  workspace: WorkspaceInApp
+  workspace?: WorkspaceInApp
   draggedTypebot: TypebotInDashboard | undefined
   onTypebotUpdated: () => void
   onDrag: (position: NodePosition) => void
@@ -45,7 +45,7 @@ type Props = {
 const TypebotButton = ({
   typebot,
   isReadOnly = false,
-  workspace,
+  //workspace,
   draggedTypebot,
   onTypebotUpdated,
   onDrag,
