@@ -11,7 +11,7 @@ export const links = [
       {
         label: 'GitHub repository',
         description: 'Check out the entire source code of the project',
-        href: 'https://github.com/baptisteArno/typebot.io',
+        href: 'https://github.com/supplyfy/ignai-bot.io',
         icon: <GitHubIcon fill="blue.300" />,
       },
       {

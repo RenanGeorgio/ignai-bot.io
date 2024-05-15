@@ -120,7 +120,8 @@ export const updateTypebot = authenticatedProcedure
 
     if (
       typebot.updatedAt &&
-      existingTypebot.updatedAt.getTime() > typebot.updatedAt.getTime()
+      new Date(existingTypebot?.updatedAt).getTime() >
+        typebot.updatedAt.getTime()
     )
       throw new TRPCError({
         code: 'CONFLICT',
@@ -196,6 +197,7 @@ export const updateTypebot = authenticatedProcedure
         }),
         isClosed: typebot.isClosed,
         whatsAppCredentialsId: typebot.whatsAppCredentialsId ?? undefined,
+        updatedAt: typebot.updatedAt,
       },
     })
 

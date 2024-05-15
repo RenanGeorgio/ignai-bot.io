@@ -174,15 +174,7 @@ export const TypebotProvider = ({
 
   const [
     localTypebot,
-    {
-      redo,
-      undo,
-      flush,
-      canRedo,
-      canUndo,
-      set: setLocalTypebot,
-      setUpdateDate,
-    },
+    { redo, undo, flush, canRedo, canUndo, set: setLocalTypebot },
   ] = useUndo<TypebotV6>(undefined, {
     isReadOnly,
     onUndo: (t) => {
@@ -224,33 +216,24 @@ export const TypebotProvider = ({
       const typebotToSave = {
         ...localTypebot,
         ...updates,
+        updatedAt: new Date(),
       }
       if (dequal(omit(typebot, 'updatedAt'), omit(typebotToSave, 'updatedAt')))
         return
       const newParsedTypebot = typebotV6Schema.parse({ ...typebotToSave })
       setLocalTypebot(newParsedTypebot)
       try {
-        const {
-          typebot: { updatedAt },
-        } = await updateTypebot({
+        await updateTypebot({
           typebotId: newParsedTypebot.id,
           typebot: newParsedTypebot,
         })
-        setUpdateDate(updatedAt)
       } catch {
         setLocalTypebot({
           ...localTypebot,
         })
       }
     },
-    [
-      isReadOnly,
-      localTypebot,
-      setLocalTypebot,
-      setUpdateDate,
-      typebot,
-      updateTypebot,
-    ]
+    [isReadOnly, localTypebot, setLocalTypebot, typebot, updateTypebot]
   )
 
   useAutoSave(

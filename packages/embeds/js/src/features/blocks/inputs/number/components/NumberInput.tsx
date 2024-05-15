@@ -23,11 +23,11 @@ export const NumberInput = (props: NumberInputProps) => {
   let inputRef: HTMLInputElement | undefined
 
   const checkIfInputIsValid = () =>
-    inputRef?.value !== '' && inputRef?.reportValidity()
+    inputValue() !== '' && inputRef?.reportValidity()
 
   const submit = () => {
     if (checkIfInputIsValid())
-      props.onSubmit({ value: inputRef?.value ?? inputValue().toString() })
+      props.onSubmit({ value: inputValue().toString() })
     else inputRef?.focus()
   }
 
@@ -36,7 +36,7 @@ export const NumberInput = (props: NumberInputProps) => {
   }
 
   onMount(() => {
-    if (!isMobile() && inputRef) inputRef.focus({ preventScroll: true })
+    if (!isMobile() && inputRef) inputRef.focus()
     window.addEventListener('message', processIncomingEvent)
   })
 
@@ -80,7 +80,8 @@ export const NumberInput = (props: NumberInputProps) => {
         step={props.block.options?.step ?? 'any'}
       />
       <SendButton type="button" class="my-2 ml-2" on:click={submit}>
-        {props.block.options?.labels?.button}
+        {props.block.options?.labels?.button ??
+          defaultNumberInputOptions.labels.button}
       </SendButton>
     </div>
   )

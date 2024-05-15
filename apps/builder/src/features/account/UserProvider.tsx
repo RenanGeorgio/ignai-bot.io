@@ -1,6 +1,6 @@
-import { createContext, ReactNode, useEffect, useState } from 'react'
 import { signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
+import { createContext, ReactNode, useEffect, useState } from 'react'
 import { isDefined, isNotDefined } from '@typebot.io/lib'
 import { User } from '@typebot.io/schemas'
 import { setUser as setSentryUser } from '@sentry/nextjs'

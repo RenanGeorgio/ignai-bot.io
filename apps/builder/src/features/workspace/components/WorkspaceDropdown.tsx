@@ -1,16 +1,11 @@
-import { useEffect, useState } from 'react'
 import { EmojiOrImageIcon } from '@/components/EmojiOrImageIcon'
 import {
+  HardDriveIcon,
   ChevronLeftIcon,
   PlusIcon,
   LogOutIcon,
-  UserIcon,
-  SettingsIcon,
-  LaptopIcon
 } from '@/components/icons'
 import { PlanTag } from '@/features/billing/components/PlanTag'
-import { useUser } from '@/features/account/hooks/useUser'
-import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
 import { trpc } from '@/lib/trpc'
 import { useTranslate } from '@tolgee/react'
 import {
@@ -21,12 +16,8 @@ import {
   MenuList,
   MenuItem,
   Text,
-  useDisclosure
 } from '@chakra-ui/react'
 import { WorkspaceInApp } from '../WorkspaceProvider'
-import { AccountSettingsModal } from './AccountSettingsModal'
-import { WorkspaceSettingsModal } from './WorkspaceSettingsModal'
-import { checkUser } from '../api/checkUser'
 
 type Props = {
   currentWorkspace?: WorkspaceInApp
@@ -42,12 +33,8 @@ export const WorkspaceDropdown = ({
   onCreateNewWorkspaceClick,
 }: Props) => {
   const { t } = useTranslate()
-  const { user } = useUser()
-  const { workspace } = useWorkspace()
   const { data } = trpc.workspace.listWorkspaces.useQuery()
 
-  const [isAdmin, setAdmin] = useState<boolean>(false);
- 
   const workspaces = data?.workspaces ?? []
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -100,7 +87,7 @@ export const WorkspaceDropdown = ({
                 <EmojiOrImageIcon
                   icon={workspace.icon}
                   boxSize="16px"
-                  defaultIcon={LaptopIcon}
+                  defaultIcon={HardDriveIcon}
                 />
                 <Text>{workspace.name}</Text>
                 <PlanTag plan={workspace.plan} />

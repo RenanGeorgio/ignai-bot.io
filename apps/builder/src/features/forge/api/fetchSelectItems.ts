@@ -21,6 +21,8 @@ export const fetchSelectItems = authenticatedProcedure
       input: { workspaceId, integrationId, fetcherId, options },
       ctx: { user },
     }) => {
+      if (!options.credentialsId) return { items: [] }
+
       const workspace = await prisma.workspace.findFirst({
         where: { id: workspaceId },
         select: {
@@ -29,18 +31,16 @@ export const fetchSelectItems = authenticatedProcedure
               userId: true,
             },
           },
-          credentials: options.credentialsId
-            ? {
-                where: {
-                  id: options.credentialsId,
-                },
-                select: {
-                  id: true,
-                  data: true,
-                  iv: true,
-                },
-              }
-            : undefined,
+          credentials: {
+            where: {
+              id: options.credentialsId,
+            },
+            select: {
+              id: true,
+              data: true,
+              iv: true,
+            },
+          },
         },
       })
 
@@ -50,11 +50,11 @@ export const fetchSelectItems = authenticatedProcedure
           message: 'No workspace found',
         })
 
-      const credentials = workspace.credentials?.at(0)
+      const credentials = workspace.credentials.at(0)
 
-      const credentialsData = credentials
-        ? await decrypt(credentials.data, credentials.iv)
-        : undefined
+      if (!credentials) return { items: [] }
+
+      const credentialsData = await decrypt(credentials.data, credentials.iv)
 
       const blockDef = forgedBlocks[integrationId]
 
@@ -67,8 +67,7 @@ export const fetchSelectItems = authenticatedProcedure
 
       return {
         items: await fetcher.fetch({
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          credentials: credentialsData as any,
+          credentials: credentialsData,
           options,
         }),
       }

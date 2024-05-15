@@ -6,11 +6,8 @@ import { HostBubble } from '../bubbles/HostBubble'
 import { InputChatBlock } from '../InputChatBlock'
 import { AvatarSideContainer } from './AvatarSideContainer'
 import { StreamingBubble } from '../bubbles/StreamingBubble'
+import { defaultTheme } from '@typebot.io/schemas/features/typebot/theme/constants'
 import { defaultSettings } from '@typebot.io/schemas/features/typebot/settings/constants'
-import {
-  defaultGuestAvatarIsEnabled,
-  defaultHostAvatarIsEnabled,
-} from '@typebot.io/schemas/features/typebot/theme/constants'
 
 type Props = Pick<ContinueChatResponse, 'messages' | 'input'> & {
   theme: Theme
@@ -22,7 +19,7 @@ type Props = Pick<ContinueChatResponse, 'messages' | 'input'> & {
   streamingMessageId: ChatChunkType['streamingMessageId']
   isTransitionDisabled?: boolean
   onNewBubbleDisplayed: (blockId: string) => Promise<void>
-  onScrollToBottom: (ref?: HTMLDivElement, offset?: number) => void
+  onScrollToBottom: (top?: number) => void
   onSubmit: (input?: string) => void
   onSkip: () => void
   onAllBubblesDisplayed: () => void
@@ -33,17 +30,19 @@ export const ChatChunk = (props: Props) => {
   const [displayedMessageIndex, setDisplayedMessageIndex] = createSignal(
     props.isTransitionDisabled ? props.messages.length : 0
   )
-  const [lastBubble, setLastBubble] = createSignal<HTMLDivElement>()
+  const [lastBubbleOffsetTop, setLastBubbleOffsetTop] = createSignal<number>()
 
   onMount(() => {
     if (props.streamingMessageId) return
     if (props.messages.length === 0) {
       props.onAllBubblesDisplayed()
     }
-    props.onScrollToBottom(inputRef, 50)
+    props.onScrollToBottom(
+      inputRef?.offsetTop ? inputRef?.offsetTop - 50 : undefined
+    )
   })
 
-  const displayNextMessage = async (bubbleRef?: HTMLDivElement) => {
+  const displayNextMessage = async (bubbleOffsetTop?: number) => {
     if (
       (props.settings.typingEmulation?.delayBetweenBubbles ??
         defaultSettings.typingEmulation.delayBetweenBubbles) > 0 &&
@@ -64,9 +63,9 @@ export const ChatChunk = (props: Props) => {
         ? displayedMessageIndex()
         : displayedMessageIndex() + 1
     )
-    props.onScrollToBottom(bubbleRef)
+    props.onScrollToBottom(bubbleOffsetTop)
     if (displayedMessageIndex() === props.messages.length) {
-      setLastBubble(bubbleRef)
+      setLastBubbleOffsetTop(bubbleOffsetTop)
       props.onAllBubblesDisplayed()
     }
   }
@@ -78,7 +77,7 @@ export const ChatChunk = (props: Props) => {
           <Show
             when={
               (props.theme.chat?.hostAvatar?.isEnabled ??
-                defaultHostAvatarIsEnabled) &&
+                defaultTheme.chat.hostAvatar.isEnabled) &&
               props.messages.length > 0
             }
           >
@@ -94,7 +93,7 @@ export const ChatChunk = (props: Props) => {
             style={{
               'max-width':
                 props.theme.chat?.guestAvatar?.isEnabled ??
-                defaultGuestAvatarIsEnabled
+                defaultTheme.chat.guestAvatar.isEnabled
                   ? isMobile()
                     ? 'calc(100% - 32px - 32px)'
                     : 'calc(100% - 48px - 48px)'
@@ -132,7 +131,7 @@ export const ChatChunk = (props: Props) => {
           chunkIndex={props.index}
           hasHostAvatar={
             props.theme.chat?.hostAvatar?.isEnabled ??
-            defaultHostAvatarIsEnabled
+            defaultTheme.chat.hostAvatar.isEnabled
           }
           guestAvatar={props.theme.chat?.guestAvatar}
           context={props.context}
@@ -141,7 +140,7 @@ export const ChatChunk = (props: Props) => {
             defaultSettings.general.isInputPrefillEnabled
           }
           hasError={props.hasError}
-          onTransitionEnd={() => props.onScrollToBottom(lastBubble())}
+          onTransitionEnd={() => props.onScrollToBottom(lastBubbleOffsetTop())}
           onSubmit={props.onSubmit}
           onSkip={props.onSkip}
         />
@@ -152,7 +151,7 @@ export const ChatChunk = (props: Props) => {
             <Show
               when={
                 props.theme.chat?.hostAvatar?.isEnabled ??
-                defaultHostAvatarIsEnabled
+                defaultTheme.chat.hostAvatar.isEnabled
               }
             >
               <AvatarSideContainer
@@ -165,8 +164,8 @@ export const ChatChunk = (props: Props) => {
               class="flex flex-col flex-1 gap-2"
               style={{
                 'max-width':
-                  props.theme.chat?.guestAvatar?.isEnabled ??
-                  defaultGuestAvatarIsEnabled
+                  props.theme.chat?.hostAvatar?.isEnabled ??
+                  defaultTheme.chat.hostAvatar.isEnabled
                     ? isMobile()
                       ? 'calc(100% - 32px - 32px)'
                       : 'calc(100% - 48px - 48px)'

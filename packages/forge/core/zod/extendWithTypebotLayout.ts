@@ -22,7 +22,6 @@ export interface ZodLayoutMetadata<
   moreInfoTooltip?: string
   isHidden?: boolean
   isDebounceDisabled?: boolean
-  hiddenItems?: string[]
 }
 
 declare module 'zod' {

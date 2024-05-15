@@ -1,6 +1,7 @@
 import { Alert, AlertIcon, FormLabel, Stack, Tag, Text } from '@chakra-ui/react'
 import { CodeEditor } from '@/components/inputs/CodeEditor'
 import { SetVariableBlock, Variable } from '@typebot.io/schemas'
+import React from 'react'
 import { VariableSearchInput } from '@/components/inputs/VariableSearchInput'
 import { SwitchWithLabel } from '@/components/inputs/SwitchWithLabel'
 import { Select } from '@/components/inputs/Select'
@@ -12,7 +13,6 @@ import {
 } from '@typebot.io/schemas/features/blocks/logic/setVariable/constants'
 import { TextInput } from '@/components/inputs'
 import { isDefined } from '@typebot.io/lib'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
 
 type Props = {
   options: SetVariableBlock['options']
@@ -24,12 +24,7 @@ const setVarTypes = valueTypes.filter(
 )
 
 export const SetVariableSettings = ({ options, onOptionsChange }: Props) => {
-  const { typebot, updateVariable } = useTypebot()
-  const selectedVariable = typebot?.variables.find(
-    (variable) => variable.id === options?.variableId
-  )
-
-  const updateVariableId = (variable?: Pick<Variable, 'id'>) =>
+  const updateVariableId = (variable?: Variable) =>
     onOptionsChange({
       ...options,
       variableId: variable?.id,
@@ -40,13 +35,6 @@ export const SetVariableSettings = ({ options, onOptionsChange }: Props) => {
       ...options,
       type: type as NonNullable<SetVariableBlock['options']>['type'],
     })
-
-  const updateIsSessionVariable = (isSavingInResults: boolean) => {
-    if (!selectedVariable?.id) return
-    updateVariable(selectedVariable.id, {
-      isSessionVariable: !isSavingInResults,
-    })
-  }
 
   return (
     <Stack spacing={4}>
@@ -61,34 +49,22 @@ export const SetVariableSettings = ({ options, onOptionsChange }: Props) => {
         />
       </Stack>
 
-      <Stack spacing="4">
-        <Stack>
-          <Text mb="0" fontWeight="medium">
-            Value:
-          </Text>
-          <Select
-            selectedItem={options?.type ?? defaultSetVariableOptions.type}
-            items={setVarTypes.map((type) => ({
-              label: type,
-              value: type,
-              icon:
-                type === 'Contact name' || type === 'Phone number' ? (
-                  <WhatsAppLogo />
-                ) : undefined,
-            }))}
-            onSelect={updateValueType}
-          />
-        </Stack>
-
-        {selectedVariable && (
-          <SwitchWithLabel
-            key={selectedVariable.id}
-            label="Save in results?"
-            moreInfoContent="By default, the variable is saved only for the user chat session. Check this option if you want to also store the variable in the typebot Results table."
-            initialValue={!selectedVariable.isSessionVariable}
-            onCheckChange={updateIsSessionVariable}
-          />
-        )}
+      <Stack>
+        <Text mb="0" fontWeight="medium">
+          Value:
+        </Text>
+        <Select
+          selectedItem={options?.type ?? defaultSetVariableOptions.type}
+          items={setVarTypes.map((type) => ({
+            label: type,
+            value: type,
+            icon:
+              type === 'Contact name' || type === 'Phone number' ? (
+                <WhatsAppLogo />
+              ) : undefined,
+          }))}
+          onSelect={updateValueType}
+        />
         <SetVariableValue options={options} onOptionsChange={onOptionsChange} />
       </Stack>
     </Stack>
@@ -115,7 +91,7 @@ const SetVariableValue = ({
       isExecutedOnClient,
     })
 
-  const updateItemVariableId = (variable?: Pick<Variable, 'id'>) => {
+  const updateItemVariableId = (variable?: Variable) => {
     if (!options || options.type !== 'Map item with same index') return
     onOptionsChange({
       ...options,
@@ -126,7 +102,7 @@ const SetVariableValue = ({
     })
   }
 
-  const updateBaseListVariableId = (variable?: Pick<Variable, 'id'>) => {
+  const updateBaseListVariableId = (variable?: Variable) => {
     if (!options || options.type !== 'Map item with same index') return
     onOptionsChange({
       ...options,
@@ -137,7 +113,7 @@ const SetVariableValue = ({
     })
   }
 
-  const updateTargetListVariableId = (variable?: Pick<Variable, 'id'>) => {
+  const updateTargetListVariableId = (variable?: Variable) => {
     if (!options || options.type !== 'Map item with same index') return
     onOptionsChange({
       ...options,

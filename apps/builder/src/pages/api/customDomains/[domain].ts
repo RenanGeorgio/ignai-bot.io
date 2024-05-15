@@ -5,7 +5,7 @@ import {
   methodNotAllowed,
   notAuthenticated,
 } from '@typebot.io/lib/api'
-import ky from 'ky'
+import { got } from 'got'
 import { getAuthenticatedUser } from '@/features/auth/helpers/getAuthenticatedUser'
 import { env } from '@typebot.io/env'
 
@@ -31,11 +31,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 }
 
 const deleteDomainOnVercel = (name: string) =>
-  ky.delete(
-    `https://api.vercel.com/v8/projects/${env.NEXT_PUBLIC_VERCEL_VIEWER_PROJECT_NAME}/domains/${name}?teamId=${env.VERCEL_TEAM_ID}`,
-    {
-      headers: { Authorization: `Bearer ${env.VERCEL_TOKEN}` },
-    }
-  )
+  got.delete({
+    url: `https://api.vercel.com/v8/projects/${env.NEXT_PUBLIC_VERCEL_VIEWER_PROJECT_NAME}/domains/${name}?teamId=${env.VERCEL_TEAM_ID}`,
+    headers: { Authorization: `Bearer ${env.VERCEL_TOKEN}` },
+  })
 
 export default handler

@@ -8,7 +8,6 @@ export const auth = {
       label: 'API key',
       isRequired: true,
       placeholder: 'ze...',
-      inputType: 'password',
       helperText:
         'You can generate an API key [here](https://zemantic.ai/dashboard/settings).',
       isDebounceDisabled: true,

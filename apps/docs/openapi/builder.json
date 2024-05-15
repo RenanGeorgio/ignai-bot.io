@@ -2517,9 +2517,6 @@
                                     "name": {
                                       "type": "string"
                                     },
-                                    "isSessionVariable": {
-                                      "type": "boolean"
-                                    },
                                     "value": {
                                       "nullable": true,
                                       "anyOf": [
@@ -2578,9 +2575,6 @@
                                     },
                                     "name": {
                                       "type": "string"
-                                    },
-                                    "isSessionVariable": {
-                                      "type": "boolean"
                                     },
                                     "value": {
                                       "nullable": true,
@@ -3923,9 +3917,6 @@
                             "name": {
                               "type": "string"
                             },
-                            "isSessionVariable": {
-                              "type": "boolean"
-                            },
                             "value": {
                               "nullable": true,
                               "anyOf": [
@@ -4320,9 +4311,6 @@
                                 },
                                 "name": {
                                   "type": "string"
-                                },
-                                "isSessionVariable": {
-                                  "type": "boolean"
                                 },
                                 "value": {
                                   "nullable": true,
@@ -6961,9 +6949,6 @@
                                 },
                                 "name": {
                                   "type": "string"
-                                },
-                                "isSessionVariable": {
-                                  "type": "boolean"
                                 },
                                 "value": {
                                   "nullable": true,
@@ -7847,9 +7832,6 @@
                                 "name": {
                                   "type": "string"
                                 },
-                                "isSessionVariable": {
-                                  "type": "boolean"
-                                },
                                 "value": {
                                   "nullable": true,
                                   "anyOf": [
@@ -10469,9 +10451,6 @@
                                 "name": {
                                   "type": "string"
                                 },
-                                "isSessionVariable": {
-                                  "type": "boolean"
-                                },
                                 "value": {
                                   "nullable": true,
                                   "anyOf": [
@@ -11167,9 +11146,6 @@
                                 "name": {
                                   "type": "string"
                                 },
-                                "isSessionVariable": {
-                                  "type": "boolean"
-                                },
                                 "value": {
                                   "anyOf": [
                                     {
@@ -11478,9 +11454,6 @@
                               },
                               "name": {
                                 "type": "string"
-                              },
-                              "isSessionVariable": {
-                                "type": "boolean"
                               },
                               "value": {
                                 "anyOf": [
@@ -19176,7 +19149,7 @@
                       "assistantId": {
                         "type": "string"
                       },
-                      "threadVariableId": {
+                      "threadId": {
                         "type": "string"
                       },
                       "message": {
@@ -19213,9 +19186,6 @@
                             }
                           }
                         }
-                      },
-                      "threadId": {
-                        "type": "string"
                       }
                     },
                     "required": [
@@ -19621,7 +19591,7 @@
                       "query": {
                         "type": "string"
                       },
-                      "conversationVariableId": {
+                      "conversation_id": {
                         "type": "string"
                       },
                       "user": {
@@ -19659,10 +19629,6 @@
                             }
                           }
                         }
-                      },
-                      "conversation_id": {
-                        "type": "string",
-                        "description": "Deprecated, use `conversationVariableId` instead"
                       }
                     },
                     "required": [
@@ -19936,8 +19902,6 @@
                         "type": "string",
                         "enum": [
                           "claude-3-opus-20240229",
-                          "claude-3-sonnet-20240229",
-                          "claude-3-haiku-20240307",
                           "claude-2.1",
                           "claude-2.0",
                           "claude-instant-1.2"
@@ -21376,70 +21340,6 @@
           "chat": {
             "type": "object",
             "properties": {
-              "container": {
-                "type": "object",
-                "properties": {
-                  "maxWidth": {
-                    "type": "string"
-                  },
-                  "maxHeight": {
-                    "type": "string"
-                  },
-                  "backgroundColor": {
-                    "type": "string"
-                  },
-                  "color": {
-                    "type": "string"
-                  },
-                  "blur": {
-                    "type": "number"
-                  },
-                  "opacity": {
-                    "type": "number",
-                    "minimum": 0,
-                    "maximum": 1
-                  },
-                  "shadow": {
-                    "type": "string",
-                    "enum": [
-                      "none",
-                      "sm",
-                      "md",
-                      "lg",
-                      "xl",
-                      "2xl"
-                    ]
-                  },
-                  "border": {
-                    "type": "object",
-                    "properties": {
-                      "thickness": {
-                        "type": "number"
-                      },
-                      "color": {
-                        "type": "string"
-                      },
-                      "roundeness": {
-                        "type": "string",
-                        "enum": [
-                          "none",
-                          "medium",
-                          "large",
-                          "custom"
-                        ]
-                      },
-                      "customRoundeness": {
-                        "type": "number"
-                      },
-                      "opacity": {
-                        "type": "number",
-                        "minimum": 0,
-                        "maximum": 1
-                      }
-                    }
-                  }
-                }
-              },
               "hostAvatar": {
                 "type": "object",
                 "properties": {
@@ -21470,53 +21370,6 @@
                   },
                   "color": {
                     "type": "string"
-                  },
-                  "blur": {
-                    "type": "number"
-                  },
-                  "opacity": {
-                    "type": "number",
-                    "minimum": 0,
-                    "maximum": 1
-                  },
-                  "shadow": {
-                    "type": "string",
-                    "enum": [
-                      "none",
-                      "sm",
-                      "md",
-                      "lg",
-                      "xl",
-                      "2xl"
-                    ]
-                  },
-                  "border": {
-                    "type": "object",
-                    "properties": {
-                      "thickness": {
-                        "type": "number"
-                      },
-                      "color": {
-                        "type": "string"
-                      },
-                      "roundeness": {
-                        "type": "string",
-                        "enum": [
-                          "none",
-                          "medium",
-                          "large",
-                          "custom"
-                        ]
-                      },
-                      "customRoundeness": {
-                        "type": "number"
-                      },
-                      "opacity": {
-                        "type": "number",
-                        "minimum": 0,
-                        "maximum": 1
-                      }
-                    }
                   }
                 }
               },
@@ -21528,53 +21381,6 @@
                   },
                   "color": {
                     "type": "string"
-                  },
-                  "blur": {
-                    "type": "number"
-                  },
-                  "opacity": {
-                    "type": "number",
-                    "minimum": 0,
-                    "maximum": 1
-                  },
-                  "shadow": {
-                    "type": "string",
-                    "enum": [
-                      "none",
-                      "sm",
-                      "md",
-                      "lg",
-                      "xl",
-                      "2xl"
-                    ]
-                  },
-                  "border": {
-                    "type": "object",
-                    "properties": {
-                      "thickness": {
-                        "type": "number"
-                      },
-                      "color": {
-                        "type": "string"
-                      },
-                      "roundeness": {
-                        "type": "string",
-                        "enum": [
-                          "none",
-                          "medium",
-                          "large",
-                          "custom"
-                        ]
-                      },
-                      "customRoundeness": {
-                        "type": "number"
-                      },
-                      "opacity": {
-                        "type": "number",
-                        "minimum": 0,
-                        "maximum": 1
-                      }
-                    }
                   }
                 }
               },
@@ -21586,53 +21392,6 @@
                   },
                   "color": {
                     "type": "string"
-                  },
-                  "blur": {
-                    "type": "number"
-                  },
-                  "opacity": {
-                    "type": "number",
-                    "minimum": 0,
-                    "maximum": 1
-                  },
-                  "shadow": {
-                    "type": "string",
-                    "enum": [
-                      "none",
-                      "sm",
-                      "md",
-                      "lg",
-                      "xl",
-                      "2xl"
-                    ]
-                  },
-                  "border": {
-                    "type": "object",
-                    "properties": {
-                      "thickness": {
-                        "type": "number"
-                      },
-                      "color": {
-                        "type": "string"
-                      },
-                      "roundeness": {
-                        "type": "string",
-                        "enum": [
-                          "none",
-                          "medium",
-                          "large",
-                          "custom"
-                        ]
-                      },
-                      "customRoundeness": {
-                        "type": "number"
-                      },
-                      "opacity": {
-                        "type": "number",
-                        "minimum": 0,
-                        "maximum": 1
-                      }
-                    }
                   }
                 }
               },
@@ -21645,53 +21404,6 @@
                   "color": {
                     "type": "string"
                   },
-                  "blur": {
-                    "type": "number"
-                  },
-                  "opacity": {
-                    "type": "number",
-                    "minimum": 0,
-                    "maximum": 1
-                  },
-                  "shadow": {
-                    "type": "string",
-                    "enum": [
-                      "none",
-                      "sm",
-                      "md",
-                      "lg",
-                      "xl",
-                      "2xl"
-                    ]
-                  },
-                  "border": {
-                    "type": "object",
-                    "properties": {
-                      "thickness": {
-                        "type": "number"
-                      },
-                      "color": {
-                        "type": "string"
-                      },
-                      "roundeness": {
-                        "type": "string",
-                        "enum": [
-                          "none",
-                          "medium",
-                          "large",
-                          "custom"
-                        ]
-                      },
-                      "customRoundeness": {
-                        "type": "number"
-                      },
-                      "opacity": {
-                        "type": "number",
-                        "minimum": 0,
-                        "maximum": 1
-                      }
-                    }
-                  },
                   "placeholderColor": {
                     "type": "string"
                   }
@@ -21703,8 +21415,7 @@
                   "none",
                   "medium",
                   "large"
-                ],
-                "description": "Deprecated, use `container.border.roundeness` instead"
+                ]
               }
             }
           },
@@ -21985,9 +21696,6 @@
                 },
                 "name": {
                   "type": "string"
-                },
-                "isSessionVariable": {
-                  "type": "boolean"
                 },
                 "value": {
                   "nullable": true,
@@ -24654,9 +24362,6 @@
                 "name": {
                   "type": "string"
                 },
-                "isSessionVariable": {
-                  "type": "boolean"
-                },
                 "value": {
                   "nullable": true,
                   "anyOf": [
@@ -24892,9 +24597,6 @@
                 },
                 "name": {
                   "type": "string"
-                },
-                "isSessionVariable": {
-                  "type": "boolean"
                 },
                 "value": {
                   "nullable": true,
@@ -27483,9 +27185,6 @@
                 },
                 "name": {
                   "type": "string"
-                },
-                "isSessionVariable": {
-                  "type": "boolean"
                 },
                 "value": {
                   "nullable": true,
