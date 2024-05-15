@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { ChatBox } from '../ChatBox'
 import { LeftMenu } from '../LeftMenu'
 import { UserChat } from '../UserChat'
-import useAuth from '@/hooks/useAuth'
+// import useAuth from '@/hooks/useAuth'
 import useChat from '@/hooks/useChat'
 
 import styles from './ChatLayout.module.css'

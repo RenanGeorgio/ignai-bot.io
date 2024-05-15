@@ -12,8 +12,8 @@ export const LeftMenu: React.FC<LeftMenuProps> = ({
   onAddTicketClick,
   children,
 }) => {
-  const [openPage, setOpenPage] = useState(false)
-  const [openTicket, setOpenTicket] = useState(false)
+  // const [openPage, setOpenPage] = useState(false)
+  // const [openTicket, setOpenTicket] = useState(false)
   const [showAddTicket, setShowAddTicket] = useState(false)
 
   const toggleAddTicket: MouseEventHandler<HTMLButtonElement> = (event) => {

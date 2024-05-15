@@ -12,10 +12,10 @@ import {
 import styles from '@/assets/styles/graph.module.css'
 
 interface GraphThemesProps {
-  month: string
+  // month: string
 }
 
-const GraphThemes: React.FC<GraphThemesProps> = ({ month }) => {
+const GraphThemes: React.FC<GraphThemesProps> = () => {
   return (
     <div className={styles['graph-container-themes']}>
       <h3 className={styles['graph-title']}>Temas de atendimento</h3>

@@ -13,10 +13,10 @@ import {
 import TextEnter from './TextEnter'
 import AddTicket from './AddTicket'
 import useAuth from '@/hooks/useAuth'
-import useChat from '@/hooks/useChat'
-import { useFetchRecipient } from '@/hooks/useFetchRecipient'
+// import useChat from '@/hooks/useChat'
+// import { useFetchRecipient } from '@/hooks/useFetchRecipient'
 import web from '@/assets/images/web.svg'
-import avatar from '@/assets/images/avatar.png'
+// import avatar from '@/assets/images/avatar.png'
 
 import styles from '@/assets/styles/chat.module.css'
 
@@ -34,7 +34,7 @@ interface Props {
 export const ChatBox: React.FC<Props> = ({
   toggleAddTicket,
 }): React.ReactElement => {
-  const [exibirAddTicket, setExibirAddTicket] = useState(false)
+  // const [exibirAddTicket, setExibirAddTicket] = useState(false)
   const [showAddTicket, setShowAddTicket] = useState(false)
   const [textMessage, setTextMessage] = useState<string>('')
 

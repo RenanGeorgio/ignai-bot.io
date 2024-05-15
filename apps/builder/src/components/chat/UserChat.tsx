@@ -1,13 +1,13 @@
 import React from 'react'
 import useChat from '@/hooks/useChat'
-import { useFetchRecipient } from '@/hooks/useFetchRecipient'
+// import { useFetchRecipient } from '@/hooks/useFetchRecipient'
 import {
   FaceBookIcon,
   InstagramIcon,
   TelegramIcon,
   WhatsAppIcon,
 } from '@/components/icons'
-import avatar from '../../assets/images/avatar.png'
+// import avatar from '../../assets/images/avatar.png'
 import web from '@/assets/images/web.svg'
 
 import styles from '@/assets/styles/leftmenu.module.css'
