@@ -144,10 +144,7 @@ const TypebotButton = ({
 
   const handleNameSubmit = (name: string) => updateTypebot({ updates: { name } })
 
-  const handleChangeIcon = (e: React.MouseEvent) => {
-    e.stopPropagation()
-    updateTypebot({ updates: { icon } })
-  }
+  const handleChangeIcon = (icon: string) => updateTypebot({ updates: { icon } })
 
   return (
     <Button
@@ -203,7 +200,7 @@ const TypebotButton = ({
             <MenuItem onClick={handleDuplicateClick}>
               {t('folders.typebotButton.duplicate')}
             </MenuItem>
-            <MenuItem onClick={handleChangeIcon}>
+            <MenuItem>
               <Flex>
                 {workspace && (
                   <EditableEmojiOrImageIcon
