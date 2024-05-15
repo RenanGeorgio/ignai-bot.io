@@ -26,10 +26,11 @@ export const UrlInput = (props: Props) => {
   }
 
   const checkIfInputIsValid = () =>
-    inputValue() !== '' && inputRef?.reportValidity()
+    inputRef?.value !== '' && inputRef?.reportValidity()
 
   const submit = () => {
-    if (checkIfInputIsValid()) props.onSubmit({ value: inputValue() })
+    if (checkIfInputIsValid())
+      props.onSubmit({ value: inputRef?.value ?? inputValue() })
     else inputRef?.focus()
   }
 
@@ -38,7 +39,10 @@ export const UrlInput = (props: Props) => {
   }
 
   onMount(() => {
-    if (!isMobile() && inputRef) inputRef.focus()
+    if (!isMobile() && inputRef)
+      inputRef.focus({
+        preventScroll: true,
+      })
     window.addEventListener('message', processIncomingEvent)
   })
 
@@ -73,8 +77,7 @@ export const UrlInput = (props: Props) => {
         autocomplete="url"
       />
       <SendButton type="button" class="my-2 ml-2" on:click={submit}>
-        {props.block.options?.labels?.button ??
-          defaultUrlInputOptions.labels.button}
+        {props.block.options?.labels?.button}
       </SendButton>
     </div>
   )

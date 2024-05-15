@@ -1,11 +1,16 @@
+import { useEffect, useState } from 'react'
 import { EmojiOrImageIcon } from '@/components/EmojiOrImageIcon'
 import {
-  HardDriveIcon,
   ChevronLeftIcon,
   PlusIcon,
   LogOutIcon,
+  UserIcon,
+  SettingsIcon,
+  LaptopIcon
 } from '@/components/icons'
 import { PlanTag } from '@/features/billing/components/PlanTag'
+import { useUser } from '@/features/account/hooks/useUser'
+import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
 import { trpc } from '@/lib/trpc'
 import { useTranslate } from '@tolgee/react'
 import {
@@ -16,8 +21,12 @@ import {
   MenuList,
   MenuItem,
   Text,
+  useDisclosure
 } from '@chakra-ui/react'
 import { WorkspaceInApp } from '../WorkspaceProvider'
+import { AccountSettingsModal } from './AccountSettingsModal'
+import { WorkspaceSettingsModal } from './WorkspaceSettingsModal'
+import { checkUser } from '../api/checkUser'
 
 type Props = {
   currentWorkspace?: WorkspaceInApp
@@ -33,9 +42,36 @@ export const WorkspaceDropdown = ({
   onCreateNewWorkspaceClick,
 }: Props) => {
   const { t } = useTranslate()
+  const { user } = useUser()
+  const { workspace } = useWorkspace()
   const { data } = trpc.workspace.listWorkspaces.useQuery()
 
+  const [isAdmin, setAdmin] = useState<boolean>(false);
+ 
   const workspaces = data?.workspaces ?? []
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const validAdmin = async (email: string) => {
+    const data = await checkUser(email);
+
+    const body = data?.response?.body;
+    if (body) {
+      console.log(body);
+      setAdmin(true);
+    } else {
+      setAdmin(false);
+    }
+  }
+
+  useEffect(() => {
+    if (user?.email) {
+      validAdmin(user?.email);
+    } else {
+      setAdmin(false);
+    }
+  },[]);
 
   return (
     <Menu placement="bottom-end">
@@ -64,15 +100,40 @@ export const WorkspaceDropdown = ({
                 <EmojiOrImageIcon
                   icon={workspace.icon}
                   boxSize="16px"
-                  defaultIcon={HardDriveIcon}
+                  defaultIcon={LaptopIcon}
                 />
                 <Text>{workspace.name}</Text>
                 <PlanTag plan={workspace.plan} />
               </HStack>
             </MenuItem>
           ))}
-        <MenuItem onClick={onCreateNewWorkspaceClick} icon={<PlusIcon />}>
-          {t('workspace.dropdown.newButton.label')}
+        {user?.email && isAdmin && (
+          <MenuItem onClick={onCreateNewWorkspaceClick} icon={<PlusIcon />}>
+            {t('workspace.dropdown.newButton.label')}
+          </MenuItem>
+        )}
+        <MenuItem 
+          onClick={() => {
+            <AccountSettingsModal
+              isOpen={isOpen}
+              onClose={onClose}
+              user={user}
+            />}} 
+          icon={<UserIcon />}
+        >
+          {t('editor.header.settingsButton.label')}
+        </MenuItem>
+        <MenuItem 
+          onClick={() => {
+            <WorkspaceSettingsModal
+              isOpen={isOpen}
+              onClose={onClose}
+              user={user}
+              workspace={workspace}
+            />}} 
+          icon={<SettingsIcon />}
+        >
+          {t('workspace.settings.modal.menu.workspace.label')}
         </MenuItem>
         <MenuItem
           onClick={onLogoutClick}
@@ -83,5 +144,5 @@ export const WorkspaceDropdown = ({
         </MenuItem>
       </MenuList>
     </Menu>
-  )
+  );
 }

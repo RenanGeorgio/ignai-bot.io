@@ -12,7 +12,6 @@ import {
   VariableWithValue,
 } from '@typebot.io/schemas'
 import { Log } from '@typebot.io/prisma'
-import { LiteBadge } from './LiteBadge'
 import { BackgroundType } from '@typebot.io/schemas/features/typebot/theme/constants'
 import { env } from '@typebot.io/env'
 
@@ -111,7 +110,6 @@ export const TypebotViewer = ({
                 startGroupId={startGroupId}
               />
             </div>
-            {typebot.settings.general?.isBrandingEnabled && <LiteBadge />}
           </div>
         </AnswersProvider>
       </TypebotProvider>

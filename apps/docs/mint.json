@@ -25,7 +25,7 @@
   "topbarLinks": [
     {
       "name": "Github",
-      "url": "https://github.com/supplyfy/ignai-bot.io"
+      "url": "https://github.com/baptisteArno/typebot.io"
     }
   ],
   "topbarCtaButton": {
@@ -125,7 +125,8 @@
                 "editor/blocks/integrations/zemantic-ai",
                 "editor/blocks/integrations/mistral",
                 "editor/blocks/integrations/elevenlabs",
-                "editor/blocks/integrations/anthropic"
+                "editor/blocks/integrations/anthropic",
+                "editor/blocks/integrations/dify-ai"
               ]
             }
           ]
@@ -239,6 +240,7 @@
         "contribute/guides/local-installation",
         "contribute/guides/create-block",
         "contribute/guides/documentation",
+        "contribute/guides/blog",
         "contribute/guides/translation"
       ]
     },
@@ -322,9 +324,9 @@
     }
   ],
   "footerSocials": {
-    "website": "https://www.ignai.com.br",
+    "website": "https://typebot.io",
     "discord": "https://typebot.io/discord",
     "twitter": "https://twitter.com/Typebot_io",
-    "github": "https://github.com/supplyfy/ignai-bot.io"
+    "github": "https://github.com/baptisteArno/typebot.io"
   }
 }

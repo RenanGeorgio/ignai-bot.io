@@ -1,4 +1,3 @@
-import { LiteBadge } from './LiteBadge'
 import { createEffect, createSignal, onCleanup, onMount, Show } from 'solid-js'
 import { isDefined, isNotDefined, isNotEmpty } from '@typebot.io/lib'
 import { startChatQuery } from '@/queries/startChatQuery'
@@ -16,7 +15,6 @@ import {
 import { setCssVariablesValue } from '@/utils/setCssVariablesValue'
 import immutableCss from '../assets/immutable.css'
 import { Font, InputBlock, StartFrom } from '@typebot.io/schemas'
-import { defaultTheme } from '@typebot.io/schemas/features/typebot/theme/constants'
 import { clsx } from 'clsx'
 import { HTTPError } from 'ky'
 import { injectFont } from '@/utils/injectFont'
@@ -25,6 +23,11 @@ import { Portal } from 'solid-js/web'
 import { defaultSettings } from '@typebot.io/schemas/features/typebot/settings/constants'
 import { persist } from '@/utils/persist'
 import { setBotContainerHeight } from '@/utils/botContainerHeightSignal'
+import {
+  defaultFontFamily,
+  defaultFontType,
+  defaultProgressBarPosition,
+} from '@typebot.io/schemas/features/typebot/theme/constants'
 
 export type BotProps = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -142,6 +145,7 @@ export const Bot = (props: BotProps & { class?: string }) => {
       }
       props.onChatStatePersisted?.(true)
     } else {
+      wipeExistingChatStateInStorage(data.typebot.id)
       setInitialChatReply(data)
       if (data.input?.id && props.onNewInputBlock)
         props.onNewInputBlock(data.input)
@@ -262,8 +266,10 @@ const BotContent = (props: BotContentProps) => {
 
   createEffect(() => {
     injectFont(
-      props.initialChatReply.typebot.theme.general?.font ??
-        defaultTheme.general.font
+      props.initialChatReply.typebot.theme.general?.font ?? {
+        type: defaultFontType,
+        family: defaultFontFamily,
+      }
     )
     if (!botContainer) return
     setCssVariablesValue(
@@ -282,7 +288,7 @@ const BotContent = (props: BotContentProps) => {
     <div
       ref={botContainer}
       class={clsx(
-        'relative flex w-full h-full text-base overflow-hidden bg-cover bg-center flex-col items-center typebot-container @container',
+        'relative flex w-full h-full text-base overflow-hidden flex-col justify-center items-center typebot-container',
         props.class
       )}
     >
@@ -296,8 +302,7 @@ const BotContent = (props: BotContentProps) => {
           when={
             props.progressBarRef &&
             (props.initialChatReply.typebot.theme.general?.progressBar
-              ?.position ?? defaultTheme.general.progressBar.position) ===
-              'fixed'
+              ?.position ?? defaultProgressBarPosition) === 'fixed'
           }
           fallback={<ProgressBar value={progressValue() as number} />}
         >
@@ -306,24 +311,15 @@ const BotContent = (props: BotContentProps) => {
           </Portal>
         </Show>
       </Show>
-      <div class="flex w-full h-full justify-center">
-        <ConversationContainer
-          context={props.context}
-          initialChatReply={props.initialChatReply}
-          onNewInputBlock={props.onNewInputBlock}
-          onAnswer={props.onAnswer}
-          onEnd={props.onEnd}
-          onNewLogs={props.onNewLogs}
-          onProgressUpdate={setProgressValue}
-        />
-      </div>
-      <Show
-        when={
-          props.initialChatReply.typebot.settings.general?.isBrandingEnabled
-        }
-      >
-        <LiteBadge botContainer={botContainer} />
-      </Show>
+      <ConversationContainer
+        context={props.context}
+        initialChatReply={props.initialChatReply}
+        onNewInputBlock={props.onNewInputBlock}
+        onAnswer={props.onAnswer}
+        onEnd={props.onEnd}
+        onNewLogs={props.onNewLogs}
+        onProgressUpdate={setProgressValue}
+      />
     </div>
   )
 }
