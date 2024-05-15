@@ -32,11 +32,12 @@ import {
 import { useTypebot } from '@/features/editor/providers/TypebotProvider'
 import { WorkspaceInApp } from '@/features/workspace/WorkspaceProvider'
 import { TextInput } from '@/components/inputs'
+import { EditableEmojiOrImageIcon } from '@/components/EditableEmojiOrImageIcon'
 
 type Props = {
   typebot: TypebotInDashboard
   isReadOnly?: boolean
-  workspace?: WorkspaceInApp
+  workspace: WorkspaceInApp
   draggedTypebot: TypebotInDashboard | undefined
   onTypebotUpdated: () => void
   onDrag: (position: NodePosition) => void
@@ -45,7 +46,7 @@ type Props = {
 const TypebotButton = ({
   typebot,
   isReadOnly = false,
-  //workspace,
+  workspace,
   draggedTypebot,
   onTypebotUpdated,
   onDrag,
@@ -143,7 +144,10 @@ const TypebotButton = ({
 
   const handleNameSubmit = (name: string) => updateTypebot({ updates: { name } })
 
-  const handleChangeIcon = (icon: string) => updateTypebot({ updates: { icon } })
+  const handleChangeIcon = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    updateTypebot({ updates: { icon } })
+  }
 
   return (
     <Button
@@ -200,7 +204,19 @@ const TypebotButton = ({
               {t('folders.typebotButton.duplicate')}
             </MenuItem>
             <MenuItem onClick={handleChangeIcon}>
-              {'Mudar icone'}
+              <Flex>
+                {workspace && (
+                  <EditableEmojiOrImageIcon
+                    uploadFileProps={{
+                      workspaceId: workspace?.id,
+                      typebotId: typebot?.id,
+                      fileName: 'icon',
+                    }}
+                    icon={typebot?.icon}
+                    onChangeIcon={handleChangeIcon}
+                  />
+                )}
+              </Flex>
             </MenuItem>
             <MenuItem>
               <TextInput
