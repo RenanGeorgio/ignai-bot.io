@@ -40,10 +40,11 @@ type Chat = {
 
 interface UserChatProps {
   chat: Chat
-  user: User
+  // user: User
 }
 
-export const UserChat: React.FC<UserChatProps> = ({ chat, user }) => {
+export const UserChat: React.FC<UserChatProps> = ({ chat }) => {
+  // export const UserChat: React.FC<UserChatProps> = ({ chat, user }) => {
   // const { recipientUser, error } = useFetchRecipient(chat, user)
   const recipientUser = {
     _id: '661d1e55582bfd030342607f',
