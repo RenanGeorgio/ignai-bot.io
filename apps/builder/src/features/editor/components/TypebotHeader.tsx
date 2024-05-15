@@ -23,8 +23,7 @@ import {
   CopyIcon,
   PlayIcon,
   RedoIcon,
-  UndoIcon,
-  MoreVerticalIcon
+  UndoIcon
 } from '@/components/icons'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
@@ -97,7 +96,7 @@ export const TypebotHeader = () => {
 const LeftElements = ({ ...props }: StackProps) => {
   const { t } = useTranslate()
   const router = useRouter()
-  
+
   const {
     typebot,
     updateTypebot,
@@ -300,16 +299,11 @@ const RightElements = ({
       )}
       {currentUserMode === 'write' && <PublishButton size="sm" />}
       <Stack>
-        <Avatar
-          size="lg"
-          src={user?.image ?? undefined}
-          name={user?.name ?? undefined}
-        />
         <Menu>
           <MenuButton
             as={IconButton}
             aria-label='Options'
-            icon={<MoreVerticalIcon />}
+            icon={<Avatar size="lg" src={user?.image ?? undefined} name={user?.name ?? undefined} />}
             variant='outline'
           />
           <MenuList>
