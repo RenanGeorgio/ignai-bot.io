@@ -71,7 +71,7 @@ export const WorkspaceDropdown = ({
     } else {
       setAdmin(false);
     }
-  },[user?.email]);
+  },[]);
 
   return (
     <Menu placement="bottom-end">
