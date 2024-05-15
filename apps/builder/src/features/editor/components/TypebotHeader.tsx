@@ -300,7 +300,20 @@ const RightElements = ({
       {currentUserMode === 'write' && <PublishButton size="sm" />}
       <Stack>
         <Menu>
+        {/*<IconButton
+          isRound={true}
+          variant='solid'
+          colorScheme='teal'
+          aria-label='Done'
+          fontSize='20px'
+          icon={<CheckIcon />}
+        />*/}
+
+
+
+
           <MenuButton
+            isRound={true}
             as={IconButton}
             aria-label='Options'
             icon={<Avatar size="lg" src={user?.image ?? undefined} name={user?.name ?? undefined} />}
