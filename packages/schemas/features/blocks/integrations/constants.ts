@@ -10,5 +10,5 @@ export enum IntegrationBlockType {
   CHATWOOT = 'Chatwoot',
   PIXEL = 'Pixel',
   ZEMANTIC_AI = 'Zemantic AI',
-  IGNAI_CHATBOT = 'Ignai Chatbot',
+  IGNAI_CHATBOT_RT = 'Ignai Chatbot RT',
 }

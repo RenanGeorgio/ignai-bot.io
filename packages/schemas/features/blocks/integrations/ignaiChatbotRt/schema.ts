@@ -1,10 +1,10 @@
 import { z } from '../../../../zod'
-import { ignaiChatbotTasks } from './constants'
+import { ignaiChatbotRtTasks } from './constants'
 import { blockBaseSchema } from '../../shared'
 import { IntegrationBlockType } from '../constants'
 
-export const ignaiChatbotOptionsSchema = z.object({
-  task: z.enum(ignaiChatbotTasks).optional(),
+export const ignaiChatbotRtOptionsSchema = z.object({
+  task: z.enum(ignaiChatbotRtTasks).optional(),
   baseUrl: z.string().optional(),
   websiteToken: z.string().optional(),
   user: z
@@ -18,11 +18,11 @@ export const ignaiChatbotOptionsSchema = z.object({
     .optional(),
 })
 
-export const ignaiChatbotBlockSchema = blockBaseSchema.merge(
+export const ignaiChatbotRtBlockSchema = blockBaseSchema.merge(
   z.object({
-    type: z.enum([IntegrationBlockType.IGNAI_CHATBOT]),
-    options: ignaiChatbotOptionsSchema.optional(),
+    type: z.enum([IntegrationBlockType.IGNAI_CHATBOT_RT]),
+    options: ignaiChatbotRtOptionsSchema.optional(),
   })
 )
 
-export type ignaiChatbotBlock = z.infer<typeof ignaiChatbotBlockSchema>
+export type ignaiChatbotRtBlock = z.infer<typeof ignaiChatbotRtBlockSchema>

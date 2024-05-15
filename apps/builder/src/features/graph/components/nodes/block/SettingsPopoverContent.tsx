@@ -325,7 +325,7 @@ export const BlockSettings = ({
         <ZemanticAiSettings block={block} onOptionsChange={updateOptions} />
       )
     }
-    case IntegrationBlockType.IGNAI_CHATBOT: {
+    case IntegrationBlockType.IGNAI_CHATBOT_RT: {
       return (
         <IgnaiChatbotSettings
           options={block.options}

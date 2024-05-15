@@ -8,31 +8,31 @@ import {
   AccordionPanel,
   Stack,
 } from '@chakra-ui/react'
-import { ignaiChatbotBlock } from '@typebot.io/schemas'
 import {
-  defaultIgnaiChatbotOptions,
-  ignaiChatbotTasks,
-} from '@typebot.io/schemas/features/blocks/integrations/ignaiChatbot/constants'
+  defaultIgnaiChatbotRtOptions,
+  ignaiChatbotRtTasks,
+} from '@typebot.io/schemas/features/blocks/integrations/ignaiChatbotRt/constants'
+import { ignaiChatbotRtBlock } from '@typebot.io/schemas/features/blocks/integrations/ignaiChatbotRt/schema'
 import React from 'react'
 
 type Props = {
-  options: ignaiChatbotBlock['options']
-  onOptionsChange: (options: ignaiChatbotBlock['options']) => void
+  options: ignaiChatbotRtBlock['options']
+  onOptionsChange: (options: ignaiChatbotRtBlock['options']) => void
 }
 
 export const IgnaiChatbotSettings = ({ options, onOptionsChange }: Props) => {
-  const updateTask = (task: (typeof ignaiChatbotTasks)[number]) => {
+  const updateTask = (task: (typeof ignaiChatbotRtTasks)[number]) => {
     onOptionsChange({ ...options, task })
   }
-
-  const task = options?.task ?? defaultIgnaiChatbotOptions.task
+  console.log(options)
+  const task = options?.task ?? defaultIgnaiChatbotRtOptions.task
 
   return (
     <Stack spacing={4}>
       <DropdownList
-        currentItem={options?.task ?? defaultIgnaiChatbotOptions.task}
+        currentItem={options?.task ?? defaultIgnaiChatbotRtOptions.task}
         onItemSelect={updateTask}
-        items={ignaiChatbotTasks}
+        items={ignaiChatbotRtTasks}
       />
       {task === 'Show widget' && (
         <>
@@ -40,7 +40,7 @@ export const IgnaiChatbotSettings = ({ options, onOptionsChange }: Props) => {
             isRequired
             label="Base URL"
             defaultValue={
-              options?.baseUrl ?? defaultIgnaiChatbotOptions.baseUrl
+              options?.baseUrl ?? defaultIgnaiChatbotRtOptions.baseUrl
             }
             onChange={(baseUrl: string) => {
               onOptionsChange({ ...options, baseUrl })

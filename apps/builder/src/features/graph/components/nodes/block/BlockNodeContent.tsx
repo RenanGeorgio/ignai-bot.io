@@ -155,7 +155,7 @@ export const BlockNodeContent = ({
     case IntegrationBlockType.ZEMANTIC_AI: {
       return <ZemanticAiNodeBody options={block.options} />
     }
-    case IntegrationBlockType.IGNAI_CHATBOT: {
+    case IntegrationBlockType.IGNAI_CHATBOT_RT: {
       return <IgnaiChatbotNodeBody block={block} />
     }
     default: {
