@@ -205,7 +205,7 @@ const TypebotButton = ({
                 {typebot && (
                   <EditableEmojiOrImageIcon
                     uploadFileProps={{
-                      workspaceId: workspace.id,
+                      workspaceId: workspace?.id,
                       typebotId: typebot.id,
                       fileName: 'icon',
                     }}
