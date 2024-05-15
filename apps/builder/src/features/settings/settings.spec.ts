@@ -35,6 +35,9 @@ test.describe.parallel('Settings page', () => {
         id: typebotId,
       })
       await page.goto(`/typebots/${typebotId}/settings`)
+      await expect(
+        page.locator('a:has-text("Made with Typebot")')
+      ).toHaveAttribute('href', 'https://www.typebot.io/?utm_source=litebadge')
       await page.click('button:has-text("Typing")')
       await page.fill('[data-testid="speed"] input', '350')
       await page.fill('[data-testid="max-delay"] input', '1.5')

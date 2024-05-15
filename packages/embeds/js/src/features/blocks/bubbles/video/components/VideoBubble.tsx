@@ -15,7 +15,7 @@ import {
 
 type Props = {
   content: VideoBubbleBlock['content']
-  onTransitionEnd?: (ref?: HTMLDivElement) => void
+  onTransitionEnd?: (offsetTop?: number) => void
 }
 
 export const showAnimationDuration = 400
@@ -39,7 +39,7 @@ export const VideoBubble = (props: Props) => {
       if (!isTyping()) return
       setIsTyping(false)
       setTimeout(() => {
-        props.onTransitionEnd?.(ref)
+        props.onTransitionEnd?.(ref?.offsetTop)
       }, showAnimationDuration)
     }, typingDuration)
   })

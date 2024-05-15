@@ -2,27 +2,27 @@ import { z } from '../../zod'
 
 export const listVariableValue = z.array(z.string().nullable())
 
-const baseVariableSchema = z.object({
+export const variableSchema = z.object({
   id: z.string(),
   name: z.string(),
-  isSessionVariable: z.boolean().optional(),
-})
-
-export const variableSchema = baseVariableSchema.extend({
   value: z.string().or(listVariableValue).nullish(),
 })
 
 /**
  * Variable when retrieved from the database
  */
-export const variableWithValueSchema = baseVariableSchema.extend({
+export const variableWithValueSchema = z.object({
+  id: z.string(),
+  name: z.string(),
   value: z.string().or(listVariableValue),
 })
 
 /**
  * Variable when computed or retrieved from a block
  */
-const VariableWithUnknowValueSchema = baseVariableSchema.extend({
+const VariableWithUnknowValueSchema = z.object({
+  id: z.string(),
+  name: z.string(),
   value: z.unknown(),
 })
 

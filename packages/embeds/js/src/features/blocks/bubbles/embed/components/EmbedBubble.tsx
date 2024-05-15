@@ -7,7 +7,7 @@ import { defaultEmbedBubbleContent } from '@typebot.io/schemas/features/blocks/b
 
 type Props = {
   content: EmbedBubbleBlock['content']
-  onTransitionEnd?: (ref?: HTMLDivElement) => void
+  onTransitionEnd?: (offsetTop?: number) => void
 }
 
 let typingTimeout: NodeJS.Timeout
@@ -24,7 +24,7 @@ export const EmbedBubble = (props: Props) => {
     typingTimeout = setTimeout(() => {
       setIsTyping(false)
       setTimeout(() => {
-        props.onTransitionEnd?.(ref)
+        props.onTransitionEnd?.(ref?.offsetTop)
       }, showAnimationDuration)
     }, 2000)
   })

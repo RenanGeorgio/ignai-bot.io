@@ -18,7 +18,7 @@ export const Buttons = (props: Props) => {
   const [filteredItems, setFilteredItems] = createSignal(props.defaultItems)
 
   onMount(() => {
-    if (!isMobile() && inputRef) inputRef.focus({ preventScroll: true })
+    if (!isMobile() && inputRef) inputRef.focus()
   })
 
   const handleClick = (itemIndex: number) =>

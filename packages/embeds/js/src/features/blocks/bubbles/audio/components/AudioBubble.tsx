@@ -7,7 +7,7 @@ import clsx from 'clsx'
 
 type Props = {
   content: AudioBubbleBlock['content']
-  onTransitionEnd?: (ref?: HTMLDivElement) => void
+  onTransitionEnd?: (offsetTop?: number) => void
 }
 
 const showAnimationDuration = 400
@@ -28,7 +28,10 @@ export const AudioBubble = (props: Props) => {
       if (isPlayed) return
       isPlayed = true
       setIsTyping(false)
-      setTimeout(() => props.onTransitionEnd?.(ref), showAnimationDuration)
+      setTimeout(
+        () => props.onTransitionEnd?.(ref?.offsetTop),
+        showAnimationDuration
+      )
     }, typingDuration)
   })
 

@@ -1,13 +1,12 @@
 import { Stack, Flex, Text } from '@chakra-ui/react'
-import { Theme } from '@typebot.io/schemas'
+import { InputColors, Theme } from '@typebot.io/schemas'
 import React from 'react'
 import { ColorPicker } from '../../../../components/ColorPicker'
 import { useTranslate } from '@tolgee/react'
 
 type Props = {
   inputs: NonNullable<Theme['chat']>['inputs']
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onInputsChange: (buttons: any) => void
+  onInputsChange: (buttons: InputColors) => void
 }
 
 export const InputsTheme = ({ inputs, onInputsChange }: Props) => {

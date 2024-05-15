@@ -61,9 +61,7 @@ const createStripePaymentIntent =
       amount,
       currency,
       receipt_email: receiptEmail === '' ? undefined : receiptEmail,
-      description: parseVariables(variables)(
-        options.additionalInformation?.description
-      ),
+      description: options.additionalInformation?.description,
       automatic_payment_methods: {
         enabled: true,
       },
@@ -79,7 +77,7 @@ const createStripePaymentIntent =
       options.currency === 'EUR' ? 'fr-FR' : undefined,
       {
         style: 'currency',
-        currency,
+        currency: options.currency,
       }
     )
 

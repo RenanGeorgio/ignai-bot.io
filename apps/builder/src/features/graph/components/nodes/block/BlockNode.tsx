@@ -144,13 +144,10 @@ export const BlockNode = ({
       })
   }
 
-  const handleCloseEditor = () => {
-    setOpenedBlockId(undefined)
-  }
-
-  const handleTextEditorChange = (content: TElement[]) => {
+  const handleCloseEditor = (content: TElement[]) => {
     const updatedBlock = { ...block, content: { richText: content } }
     updateBlock(indices, updatedBlock)
+    setOpenedBlockId(undefined)
   }
 
   const handleClick = (e: React.MouseEvent) => {
@@ -226,7 +223,6 @@ export const BlockNode = ({
     <TextBubbleEditor
       id={block.id}
       initialValue={block.content?.richText ?? []}
-      onChange={handleTextEditorChange}
       onClose={handleCloseEditor}
     />
   ) : (

@@ -6,7 +6,7 @@ import { getChatCompletionStreamVarId } from '@typebot.io/openai-block/shared/ge
 import { runChatCompletion } from '@typebot.io/openai-block/shared/runChatCompletion'
 import { runChatCompletionStream } from '@typebot.io/openai-block/shared/runChatCompletionStream'
 import { defaultOpenRouterOptions } from '../constants'
-import ky from 'ky'
+import { got } from 'got'
 import { ModelsResponse } from '../types'
 
 export const createChatCompletion = createAction({
@@ -24,7 +24,6 @@ export const createChatCompletion = createAction({
       blockId: 'anthropic',
       transform: (options) => ({
         ...options,
-        model: undefined,
         action: 'Create Chat Message',
         responseMapping: options.responseMapping?.map((res: any) =>
           res.item === 'Message content'
@@ -43,7 +42,7 @@ export const createChatCompletion = createAction({
       id: 'fetchModels',
       dependencies: [],
       fetch: async () => {
-        const response = await ky
+        const response = await got
           .get(defaultOpenRouterOptions.baseUrl + '/models')
           .json<ModelsResponse>()
 
