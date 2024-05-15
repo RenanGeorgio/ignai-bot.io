@@ -37,7 +37,7 @@ import { WorkspaceInApp } from '@/features/workspace/WorkspaceProvider'
 type Props = {
   typebot: TypebotInDashboard
   isReadOnly?: boolean
-  workspace?: WorkspaceInApp
+  workspace: WorkspaceInApp
   draggedTypebot: TypebotInDashboard | undefined
   onTypebotUpdated: () => void
   onDrag: (position: NodePosition) => void
