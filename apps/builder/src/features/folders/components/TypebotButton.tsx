@@ -29,6 +29,9 @@ import {
   NodePosition,
   useDragDistance,
 } from '@/features/graph/providers/GraphDndProvider'
+import { EditableTypebotName } from '@/features/editor/components/EditableTypebotName'
+import { EditableEmojiOrImageIcon } from '@/components/EditableEmojiOrImageIcon'
+import { useTypebot } from '@/features/editor/providers/TypebotProvider'
 
 type Props = {
   typebot: TypebotInDashboard
@@ -54,6 +57,8 @@ const TypebotButton = ({
     onClose: onDeleteClose,
   } = useDisclosure()
   const buttonRef = React.useRef<HTMLDivElement>(null)
+
+  const { updateTypebot } = useTypebot()
 
   useDragDistance({
     ref: buttonRef,
@@ -134,6 +139,10 @@ const TypebotButton = ({
     unpublishTypebot({ typebotId: typebot.id })
   }
 
+  const handleNameSubmit = (name: string) => updateTypebot({ updates: { name } })
+
+  const handleChangeIcon = (icon: string) => updateTypebot({ updates: { icon } })
+
   return (
     <Button
       ref={buttonRef}
@@ -187,6 +196,32 @@ const TypebotButton = ({
             )}
             <MenuItem onClick={handleDuplicateClick}>
               {t('folders.typebotButton.duplicate')}
+            </MenuItem>
+            <MenuItem>
+              <Stack>
+                {typebot && (
+                  <EditableEmojiOrImageIcon
+                    uploadFileProps={{
+                      workspaceId: typebot.workspaceId,
+                      typebotId: typebot.id,
+                      fileName: 'icon',
+                    }}
+                    icon={typebot?.icon}
+                    onChangeIcon={handleChangeIcon}
+                  />
+                )}
+              </Stack>
+            </MenuItem>
+            <MenuItem>
+              <Stack>
+                {typebot && (
+                  <EditableTypebotName // TODO
+                    key={`typebot-name-${typebot?.name ?? ''}`}
+                    defaultName={typebot?.name ?? ''}
+                    onNewName={handleNameSubmit}
+                  />
+                )}
+              </Stack>
             </MenuItem>
             <MenuItem color="red.400" onClick={handleDeleteClick}>
               {t('folders.typebotButton.delete')}

@@ -178,7 +178,7 @@ const LeftElements = ({ ...props }: StackProps) => {
             />
           )}
           (
-          <EditableTypebotName
+          <EditableTypebotName // TODO
             key={`typebot-name-${typebot?.name ?? ''}`}
             defaultName={typebot?.name ?? ''}
             onNewName={handleNameSubmit}
