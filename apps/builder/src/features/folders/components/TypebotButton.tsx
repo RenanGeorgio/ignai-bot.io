@@ -29,10 +29,9 @@ import {
   NodePosition,
   useDragDistance,
 } from '@/features/graph/providers/GraphDndProvider'
-import { EditableTypebotName } from '@/features/editor/components/EditableTypebotName'
-import { EditableEmojiOrImageIcon } from '@/components/EditableEmojiOrImageIcon'
 import { useTypebot } from '@/features/editor/providers/TypebotProvider'
 import { WorkspaceInApp } from '@/features/workspace/WorkspaceProvider'
+import { TextInput } from '@/components/inputs'
 
 type Props = {
   typebot: TypebotInDashboard
@@ -203,8 +202,13 @@ const TypebotButton = ({
             <MenuItem onClick={handleChangeIcon}>
               {'Mudar icone'}
             </MenuItem>
-            <MenuItem onClick={handleNameSubmit}>
-              {'Renomear'}
+            <MenuItem>
+              <TextInput
+                label={t('workspace.settings.name.label')}
+                withVariableButton={false}
+                defaultValue={typebot?.name}
+                onChange={handleNameSubmit}
+              />
             </MenuItem>
             <MenuItem color="red.400" onClick={handleDeleteClick}>
               {t('folders.typebotButton.delete')}
