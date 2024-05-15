@@ -88,12 +88,6 @@ export const TypebotHeader = () => {
         pos="absolute"
         display={['none', 'flex']}
         isResultsDisplayed={isDefined(publishedTypebot)}
-      />
-      <LastElements
-        right="10px"
-        pos="absolute"
-        display={['none', 'flex']}
-        isResultsDisplayed={isDefined(publishedTypebot)}
         onHelpClick={handleHelpClick}
       />
     </Flex>
@@ -103,6 +97,7 @@ export const TypebotHeader = () => {
 const LeftElements = ({ ...props }: StackProps) => {
   const { t } = useTranslate()
   const router = useRouter()
+  
   const {
     typebot,
     updateTypebot,
@@ -246,10 +241,17 @@ const LeftElements = ({ ...props }: StackProps) => {
   )
 }
 
-const RightElements = ({ isResultsDisplayed, ...props }: StackProps & { isResultsDisplayed: boolean }) => {
-  const router = useRouter()
+const RightElements = ({ 
+  isResultsDisplayed,
+  onHelpClick,
+  ...props 
+}: StackProps & { isResultsDisplayed: boolean, onHelpClick: () => void }) => {
   const { t } = useTranslate()
+
+  const router = useRouter()
+  const { user } = useUser()
   const { typebot, currentUserMode, save, isSavingLoading } = useTypebot()
+
   const {
     setRightPanel,
     rightPanel,
@@ -297,26 +299,6 @@ const RightElements = ({ isResultsDisplayed, ...props }: StackProps & { isResult
         </Button>
       )}
       {currentUserMode === 'write' && <PublishButton size="sm" />}
-    </HStack>
-  )
-}
-
-const LastElements = ({
-  isResultsDisplayed,
-  onHelpClick,
-  ...props
-}: StackProps & { isResultsDisplayed: boolean, onHelpClick: () => void }) => {
-  const { t } = useTranslate()
-  const { user } = useUser()
-  const { typebot } = useTypebot()
-
-  return (
-    <HStack {...props}>
-      <TypebotNav
-        display={{ base: 'none', md: 'flex', xl: 'none' }}
-        typebotId={typebot?.id}
-        isResultsDisplayed={isResultsDisplayed}
-      />
       <Stack>
         <Avatar
           size="lg"
