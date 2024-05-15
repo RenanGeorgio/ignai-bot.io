@@ -53,27 +53,6 @@ export const WorkspaceDropdown = ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const renderAccountModal = () => {
-    return(
-      <AccountSettingsModal
-        isOpen={isOpen}
-        onClose={onClose}
-        user={user}
-      />
-    );
-  }
-
-  const renderWorkspaceModal = () => {
-    return(
-      <WorkspaceSettingsModal
-        isOpen={isOpen}
-        onClose={onClose}
-        user={user}
-        workspace={workspace}
-      />
-    );
-  }
-
   const validAdmin = async (email: string) => {
     const data = await checkUser(email);
 
@@ -133,10 +112,27 @@ export const WorkspaceDropdown = ({
             {t('workspace.dropdown.newButton.label')}
           </MenuItem>
         )}
-        <MenuItem onClick={renderAccountModal} icon={<UserIcon />}>
+        <MenuItem 
+          onClick={() => {
+            <AccountSettingsModal
+              isOpen={isOpen}
+              onClose={onClose}
+              user={user}
+            />}} 
+          icon={<UserIcon />}
+        >
           {t('editor.header.settingsButton.label')}
         </MenuItem>
-        <MenuItem onClick={renderWorkspaceModal} icon={<SettingsIcon />}>
+        <MenuItem 
+          onClick={() => {
+            <WorkspaceSettingsModal
+              isOpen={isOpen}
+              onClose={onClose}
+              user={user}
+              workspace={workspace}
+            />}} 
+          icon={<SettingsIcon />}
+        >
           {t('workspace.settings.modal.menu.workspace.label')}
         </MenuItem>
         <MenuItem
@@ -148,5 +144,5 @@ export const WorkspaceDropdown = ({
         </MenuItem>
       </MenuList>
     </Menu>
-  )
+  );
 }
