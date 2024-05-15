@@ -202,7 +202,7 @@ const TypebotButton = ({
             </MenuItem>
             <MenuItem>
               <Stack>
-                {typebot && (
+                {typebot && workspace && (
                   <EditableEmojiOrImageIcon
                     uploadFileProps={{
                       workspaceId: workspace?.id,

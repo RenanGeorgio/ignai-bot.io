@@ -202,7 +202,7 @@ export const FolderContent = ({ folder }: Props) => {
                 />
               ))}
             {isTypebotLoading && <ButtonSkeleton />}
-            {typebots &&
+            {typebots && workspace &&
               typebots.map((typebot) => (
                 <TypebotButton
                   key={typebot.id}
