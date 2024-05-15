@@ -1,54 +1,56 @@
-import React, { useState } from 'react';
-import { ChatBox } from '../ChatBox';
-import { LeftMenu } from '../LeftMenu';
-import { UserChat } from '../UserChat';
-import useAuth from '@/hooks/useAuth';
-import useChat from '@/hooks/useChat';
+import React, { useState } from 'react'
+import { ChatBox } from '../ChatBox'
+import { LeftMenu } from '../LeftMenu'
+import { UserChat } from '../UserChat'
+import useAuth from '@/hooks/useAuth'
+import useChat from '@/hooks/useChat'
 
-import './ChatLayout.module.css';
+import styles from './ChatLayout.module.css'
 
 export default function LayoutChat() {
-  const [showAddTicket, setShowAddTicket] = useState(false);
+  const [showAddTicket, setShowAddTicket] = useState(false)
   const toggleAddTicket = () => {
-    setShowAddTicket(!showAddTicket);
-  };
+    setShowAddTicket(!showAddTicket)
+  }
 
-  const { user } = useAuth();
+  // const { user } = useAuth();
 
-  const {
-    userChats,
-    updateCurrentChat,
-  } = useChat();
+  const user = {
+    _id: '65bbe0359f84da3af601f373',
+    name: 'Samuel',
+    company: 'Sam`s Company',
+    companyId: '1',
+    email: 'samuelmarques96@live.com',
+  }
+
+  const { userChats, updateCurrentChat } = useChat()
 
   return (
-    <div className="wrapper-box">
-      <div className="wrapp">
-        <div className="side">
+    <div className={styles['wrapper-box']}>
+      <div className={styles['wrapp']}>
+        <div className={styles['side']}>
           <LeftMenu onAddTicketClick={toggleAddTicket}>
-            <div className="heading-2">
-              <div className="text-wrapper-3">Clientes</div>
+            <div className={styles['heading-2']}>
+              <div className={styles['text-wrapper-3']}>Clientes</div>
             </div>
-            <div className="div-content">
-              {userChats?.map((chat: any, index: number) => ( 
+            <div className={styles['div-content']}>
+              {userChats?.map((chat: any, index: number) => (
                 <div
                   key={index}
                   onClick={() => {
-                    updateCurrentChat(chat);
+                    updateCurrentChat(chat)
                   }}
                 >
-                  <UserChat
-                    chat={chat}
-                    user={user}
-                  />
+                  <UserChat chat={chat} user={user} />
                 </div>
               ))}
             </div>
           </LeftMenu>
         </div>
-        <div className="content">
+        <div className={styles['content']}>
           <ChatBox toggleAddTicket={showAddTicket} />
         </div>
       </div>
     </div>
-  );
+  )
 }

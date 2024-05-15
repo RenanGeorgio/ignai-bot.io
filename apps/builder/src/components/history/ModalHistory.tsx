@@ -1,55 +1,57 @@
-import * as React from 'react';
-import { Button } from '@chakra-ui/react';
-import './History.module.css';
+import * as React from 'react'
+import { Button } from '@chakra-ui/react'
+import styles from './history.module.css'
 
 interface ModalHistoryProps {
-    close: () => void; 
+  close: () => void
 }
 
 export default function ModalHistory({ close }: ModalHistoryProps) {
-    const [open, setOpen] = React.useState(true);
-    return (
-        <div>
-            {open ? (
-                <div className='wrapperHistory'>
-                    <div className='add'>
-                        <span className='textTitle'>Adicionar</span>
-                        <div className='btnClose'>
-                            <button onClick={close}>X</button>
-                        </div>
-                    </div>
-                    <div 
-                    className='formHistory'>
-                        <div className='containerHistory'>
-                            <span className='spanTitle'>Contato</span>
-                            <input className='inputHistory' type="text" />
-                        </div>
-                  
-                        <div className='containerHistory'>
-                            <span className='spanTitle'>Assunto</span>
-                            <input className='inputHistory' type="text" />
-                        </div>
-                        <div className='containerHistory'>
-                            <span className='spanTitle'>Data</span>
-                            <input className='inputHistory' type="date" />
-                        </div>
-                
-                        <div className='containerHistory'>
-                            <span className='spanTitle'>Ticket</span>
-                            <input className='inputHistory' type="text" />
-                        </div>
-                        <div className='containerHistory'>
-                            <span className='spanTitle'>Status</span>
-                            <input className='inputHistory' type="text" />
-                        </div>
-                        <div className='buttonContainerHistory'>
-                            <Button variant='contained'>Confirmar</Button>
-                            <Button variant='contained' disabled>Cancelar</Button>
-                        </div>
-                    </div>
+  const [open, setOpen] = React.useState(true)
+  return (
+    <div>
+      {open ? (
+        <div className={styles.wrapperHistory}>
+          <div className={styles.add}>
+            <span className={styles.textTitle}>Adicionar</span>
+            <div className={styles.btnClose}>
+              <button onClick={close}>X</button>
+            </div>
+          </div>
+          <div className={styles.formHistory}>
+            <div className={styles.containerHistory}>
+              <span className={styles.spanTitle}>Contato</span>
+              <input className={styles.inputHistory} type="text" />
+            </div>
 
-                </div>
-            ) : ''}
+            <div className={styles.containerHistory}>
+              <span className={styles.spanTitle}>Assunto</span>
+              <input className={styles.inputHistory} type="text" />
+            </div>
+            <div className={styles.containerHistory}>
+              <span className={styles.spanTitle}>Data</span>
+              <input className={styles.inputHistory} type="date" />
+            </div>
+
+            <div className={styles.containerHistory}>
+              <span className={styles.spanTitle}>Ticket</span>
+              <input className={styles.inputHistory} type="text" />
+            </div>
+            <div className={styles.containerHistory}>
+              <span className={styles.spanTitle}>Status</span>
+              <input className={styles.inputHistory} type="text" />
+            </div>
+            <div className={styles.buttonContainerHistory}>
+              <Button variant={styles.contained}>Confirmar</Button>
+              <Button variant={styles.contained} disabled>
+                Cancelar
+              </Button>
+            </div>
+          </div>
         </div>
-    );
+      ) : (
+        ''
+      )}
+    </div>
+  )
 }

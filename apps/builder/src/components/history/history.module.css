@@ -1,4 +1,4 @@
-.wrapperHistory{
+.wrapperHistory {
   position: absolute;
   background-color: #ffffff;
   right: 5px;
@@ -33,7 +33,7 @@
   align-self: stretch;
   background: rgb(242, 242, 242);
   border-radius: 6px;
-  border: 1px #DBDADE solid;
+  border: 1px #dbdade solid;
   justify-content: flex-start;
   align-items: center;
   display: inline-flex;
@@ -43,17 +43,19 @@
   text-transform: uppercase;
 }
 
-input {
+/* Observação: Syntax error: Selector "input" is not pure (pure selectors must contain at least one local class or id)
+ */
+/* input {
   height: inherit;
-}
+} */
 
 .spanTitle {
   flex: 1 1 0;
   color: #000;
-  font-Size: 13;
-  font-Family: Public Sans;
-  font-Weight: 400;
-  word-Wrap: break-word;
+  font-size: 13;
+  font-family: Public Sans;
+  font-weight: 400;
+  word-wrap: break-word;
   font-family: sans-serif;
 }
 
@@ -87,5 +89,5 @@ input {
   border: 1px solid rgba(0, 0, 0, 0.075);
   border-width: 2px;
   border-radius: 4px;
-  background-color: #4B465C29;
+  background-color: #4b465c29;
 }

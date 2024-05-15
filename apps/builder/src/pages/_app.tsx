@@ -1,7 +1,11 @@
 import { useEffect } from 'react'
 import { AppProps } from 'next/app'
 import { SessionProvider } from 'next-auth/react'
-import { ChakraProvider, createStandaloneToast } from '@chakra-ui/react'
+import {
+  ChakraProvider,
+  createStandaloneToast,
+  extendTheme,
+} from '@chakra-ui/react'
 import { customTheme } from '@/lib/theme'
 import { useRouterProgressBar } from '@/lib/routerProgressBar'
 import '@/assets/styles/routerProgressBar.css'
@@ -22,6 +26,12 @@ import { isCloudProdInstance } from '@/helpers/isCloudProdInstance'
 import { TolgeeProvider, useTolgeeSSR } from '@tolgee/react'
 import { tolgee } from '@/lib/tolgee'
 import { Toaster } from '@/components/Toaster'
+
+import {
+  ThemeProvider as MaterialThemeProvider,
+  createTheme as muiCreateTheme,
+  THEME_ID,
+} from '@mui/material/styles'
 
 const { ToastContainer, toast } = createStandaloneToast(customTheme)
 
@@ -57,24 +67,29 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   const typebotId = router.query.typebotId?.toString()
 
+  const chakraTheme = extendTheme()
+  const materialTheme = muiCreateTheme()
+
   return (
     <TolgeeProvider tolgee={ssrTolgee}>
       <ToastContainer />
-      <ChakraProvider theme={customTheme}>
-        <Toaster />
-        <SessionProvider session={pageProps.session}>
-          <UserProvider>
-            <TypebotProvider typebotId={typebotId}>
-              <WorkspaceProvider typebotId={typebotId}>
-                <Component {...pageProps} />
-                {!router.pathname.endsWith('edit') && isCloudProdInstance() && (
-                  <SupportBubble />
-                )}
-                <NewVersionPopup />
-              </WorkspaceProvider>
-            </TypebotProvider>
-          </UserProvider>
-        </SessionProvider>
+      {/* <ChakraProvider theme={customTheme}> */}
+      <ChakraProvider theme={chakraTheme} resetCSS>
+        <MaterialThemeProvider theme={{ [THEME_ID]: materialTheme }}>
+          <Toaster />
+          <SessionProvider session={pageProps.session}>
+            <UserProvider>
+              <TypebotProvider typebotId={typebotId}>
+                <WorkspaceProvider typebotId={typebotId}>
+                  <Component {...pageProps} />
+                  {!router.pathname.endsWith('edit') &&
+                    isCloudProdInstance() && <SupportBubble />}
+                  <NewVersionPopup />
+                </WorkspaceProvider>
+              </TypebotProvider>
+            </UserProvider>
+          </SessionProvider>
+        </MaterialThemeProvider>
       </ChakraProvider>
     </TolgeeProvider>
   )
