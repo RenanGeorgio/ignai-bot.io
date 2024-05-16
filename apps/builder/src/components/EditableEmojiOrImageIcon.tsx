@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, RefObject, MutableRefObject } from 'react'
 import {
   Popover,
   Tooltip,
