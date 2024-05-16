@@ -172,7 +172,10 @@ const TypebotButton = ({
     onIconEditOpen()
   }
 
-  const handleNameSubmit = (name: string) => updateTypebot({ updates: { name } })
+  const handleNameSubmit = (name: string) => {
+    
+  }
+    //updateTypebot({ updates: { name } })
 
   return (
     <Button
