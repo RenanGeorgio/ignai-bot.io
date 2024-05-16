@@ -32,12 +32,11 @@ import {
 import { useTypebot } from '@/features/editor/providers/TypebotProvider'
 import { WorkspaceInApp } from '@/features/workspace/WorkspaceProvider'
 import { TextInput } from '@/components/inputs'
-import { EditableEmojiOrImageIcon } from '@/components/EditableEmojiOrImageIcon'
 
 type Props = {
   typebot: TypebotInDashboard
   isReadOnly?: boolean
-  workspace: WorkspaceInApp
+  workspace?: WorkspaceInApp
   draggedTypebot: TypebotInDashboard | undefined
   onTypebotUpdated: () => void
   onDrag: (position: NodePosition) => void
@@ -46,19 +45,28 @@ type Props = {
 const TypebotButton = ({
   typebot,
   isReadOnly = false,
-  workspace,
+  //workspace,
   draggedTypebot,
   onTypebotUpdated,
   onDrag,
 }: Props) => {
   const { t } = useTranslate()
   const router = useRouter()
+
   const [draggedTypebotDebounced] = useDebounce(draggedTypebot, 200)
+
   const {
     isOpen: isDeleteOpen,
     onOpen: onDeleteOpen,
     onClose: onDeleteClose,
   } = useDisclosure()
+
+  const {
+    isOpen: isIconEditOpen,
+    onOpen: onIconEditOpen,
+    onClose: onIconEditClose,
+  } = useDisclosure()
+
   const buttonRef = React.useRef<HTMLDivElement>(null)
 
   const { updateTypebot } = useTypebot()
@@ -131,6 +139,14 @@ const TypebotButton = ({
     })
   }
 
+  const handleChangeIconClick = async (icon: string) => {
+    if (isReadOnly) {
+      return
+    }
+
+    updateTypebot({ updates: { icon } })
+  }
+
   const handleDeleteClick = (e: React.MouseEvent) => {
     e.stopPropagation()
     onDeleteOpen()
@@ -142,9 +158,12 @@ const TypebotButton = ({
     unpublishTypebot({ typebotId: typebot.id })
   }
 
-  const handleNameSubmit = (name: string) => updateTypebot({ updates: { name } })
+  const handleChangeIcon = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    onIconEditOpen()
+  }
 
-  const handleChangeIcon = (icon: string) => updateTypebot({ updates: { icon } })
+  const handleNameSubmit = (name: string) => updateTypebot({ updates: { name } })
 
   return (
     <Button
@@ -200,20 +219,8 @@ const TypebotButton = ({
             <MenuItem onClick={handleDuplicateClick}>
               {t('folders.typebotButton.duplicate')}
             </MenuItem>
-            <MenuItem>
-              <Flex>
-                {workspace && (
-                  <EditableEmojiOrImageIcon
-                    uploadFileProps={{
-                      workspaceId: workspace?.id,
-                      typebotId: typebot?.id,
-                      fileName: 'icon',
-                    }}
-                    icon={typebot?.icon}
-                    onChangeIcon={handleChangeIcon}
-                  />
-                )}
-              </Flex>
+            <MenuItem onClick={handleChangeIcon}>
+              {'Mudar de icone'}
             </MenuItem>
             <MenuItem>
               <TextInput
@@ -264,6 +271,14 @@ const TypebotButton = ({
           onConfirm={handleDeleteTypebotClick}
           isOpen={isDeleteOpen}
           onClose={onDeleteClose}
+        />
+      )}
+      {!isReadOnly && (
+        <EditDialogEmojiOrImageIcon
+          typebot={typebot}
+          onConfirm={handleChangeIconClick}
+          isOpen={isIconEditOpen}
+          onClose={onIconEditClose}
         />
       )}
     </Button>

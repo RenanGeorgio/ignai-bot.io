@@ -6,18 +6,33 @@ import {
   PopoverContent,
   Flex,
   useColorModeValue,
+  Button,
+  AlertDialog,
+  AlertDialogOverlay,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogBody,
+  AlertDialogFooter
 } from '@chakra-ui/react'
 import React from 'react'
 import { EmojiOrImageIcon } from './EmojiOrImageIcon'
 import { ImageUploadContent } from './ImageUploadContent'
 import { FilePathUploadProps } from '@/features/upload/api/generateUploadUrl'
 import { useTranslate } from '@tolgee/react'
+import { TypebotInDashboard } from '@/features/dashboard/types'
 
 type Props = {
   uploadFileProps: FilePathUploadProps
   icon?: string | null
   onChangeIcon: (icon: string) => void
   boxSize?: string
+}
+
+type DialogProps = {
+  typebot: TypebotInDashboard
+  isOpen: boolean
+  onClose: () => void
+  onConfirm: (icon: string) => Promise<unknown> | unknown
 }
 
 export const EditableEmojiOrImageIcon = ({
@@ -45,7 +60,7 @@ export const EditableEmojiOrImageIcon = ({
               data-testid="editable-icon"
             >
               <PopoverTrigger>
-                <chakra.span>
+                <chakra.span> 
                   <EmojiOrImageIcon
                     icon={icon}
                     emojiFontSize="2xl"
@@ -68,5 +83,59 @@ export const EditableEmojiOrImageIcon = ({
         </>
       )}
     </Popover>
+  )
+}
+
+export const EditDialogEmojiOrImageIcon = ({
+  typebot,
+  isOpen,
+  onClose,
+  onConfirm
+}: DialogProps) => {
+  const { t } = useTranslate()
+  const cancelRef = React.useRef()
+
+  const onChangeClick = async (icon: string) => {
+    try {
+      await onConfirm(icon)
+    } catch (e) {
+      return null
+    }
+    onClose()
+  }
+
+  return (
+    <AlertDialog
+      isOpen={isOpen}
+      leastDestructiveRef={cancelRef}
+      onClose={onClose}
+    >
+      <AlertDialogOverlay>
+        <AlertDialogContent>
+          <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+           {t('editor.header.tooltip.changeIcon.label')}
+          </AlertDialogHeader>
+
+          <AlertDialogBody>
+            Are you sure? You can't undo this action afterwards.
+          </AlertDialogBody>
+
+          <AlertDialogFooter>
+            <Button ref={cancelRef} onClick={onClose}>
+              {t('cancel')}
+            </Button>
+            <EditableEmojiOrImageIcon
+              uploadFileProps={{
+                workspaceId: typebot.workspaceId,
+                typebotId: typebot.id,
+                fileName: 'icon',
+              }}
+              icon={typebot?.icon}
+              onChangeIcon={onChangeClick}
+            />
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialogOverlay>
+    </AlertDialog>
   )
 }
