@@ -32,6 +32,7 @@ import {
 import { useTypebot } from '@/features/editor/providers/TypebotProvider'
 import { WorkspaceInApp } from '@/features/workspace/WorkspaceProvider'
 import { TextInput } from '@/components/inputs'
+import { EditDialogEmojiOrImageIcon } from '@/components/EditableEmojiOrImageIcon'
 
 type Props = {
   typebot: TypebotInDashboard

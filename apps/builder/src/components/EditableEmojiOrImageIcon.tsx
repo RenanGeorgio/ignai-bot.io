@@ -117,7 +117,7 @@ export const EditDialogEmojiOrImageIcon = ({
           </AlertDialogHeader>
 
           <AlertDialogBody>
-            Are you sure? You can't undo this action afterwards.
+            {t('editor.header.tooltip.changeIcon.label')}
           </AlertDialogBody>
 
           <AlertDialogFooter>

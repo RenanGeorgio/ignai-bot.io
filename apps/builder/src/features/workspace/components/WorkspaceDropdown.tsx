@@ -69,8 +69,9 @@ export const WorkspaceDropdown = ({
     if (user?.email) {
       validAdmin(user?.email);
     } else {
-      setAdmin(false);
+      setAdmin(false); 
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
 
   return (
