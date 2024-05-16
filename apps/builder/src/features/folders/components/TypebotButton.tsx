@@ -27,8 +27,8 @@ import { trpc, trpcVanilla } from '@/lib/trpc'
 import { duplicateName } from '@/features/typebot/helpers/duplicateName'
 import { NodePosition, useDragDistance } from '@/features/graph/providers/GraphDndProvider'
 import { WorkspaceInApp } from '@/features/workspace/WorkspaceProvider'
-import { TextInput } from '@/components/inputs'
 import { EditDialogEmojiOrImageIcon } from '@/components/EditableEmojiOrImageIcon'
+import { RenameModal } from '@/components/RenameModal'
 
 type Props = {
   typebot: TypebotInDashboard
@@ -62,6 +62,12 @@ const TypebotButton = ({
     isOpen: isIconEditOpen,
     onOpen: onIconEditOpen,
     onClose: onIconEditClose,
+  } = useDisclosure()
+
+  const {
+    isOpen: isRenameOpen,
+    onOpen: onRenameOpen,
+    onClose: onRenameClose,
   } = useDisclosure()
 
   const buttonRef = React.useRef<HTMLDivElement>(null)
@@ -147,11 +153,23 @@ const TypebotButton = ({
       return
     }
 
-    //typebot.icon = icon;
     updateTypebot({
       typebotId: typebot.id,
       typebot: {
         icon: icon
+      }
+    })
+  }
+
+  const handleRenameClick = async (name: string) => {
+    if (isReadOnly) {
+      return
+    }
+
+    updateTypebot({
+      typebotId: typebot.id,
+      typebot: {
+        name: name
       }
     })
   }
@@ -172,15 +190,10 @@ const TypebotButton = ({
     onIconEditOpen()
   }
 
-  const handleNameSubmit = (name: string) => {
-    updateTypebot({
-      typebotId: typebot.id,
-      typebot: {
-        name: name
-      }
-    })
+  const handleNameSubmit = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    onRenameOpen()
   }
-    //updateTypebot({ updates: { name } })
 
   return (
     <Button
@@ -239,13 +252,8 @@ const TypebotButton = ({
             <MenuItem onClick={handleChangeIcon}>
               {'Mudar de icone'}
             </MenuItem>
-            <MenuItem>
-              <TextInput
-                label={t('workspace.settings.name.label')}
-                withVariableButton={false}
-                defaultValue={typebot?.name}
-                onChange={handleNameSubmit}
-              />
+            <MenuItem onClick={handleNameSubmit}>
+              {t('rename')}
             </MenuItem>
             <MenuItem color="red.400" onClick={handleDeleteClick}>
               {t('folders.typebotButton.delete')}
@@ -297,6 +305,14 @@ const TypebotButton = ({
           onConfirm={handleChangeIconClick}
           isOpen={isIconEditOpen}
           onClose={onIconEditClose}
+        />
+      )}
+      {!isReadOnly && (
+        <RenameModal
+          typebot={typebot}
+          onConfirm={handleRenameClick}
+          isOpen={isRenameOpen}
+          onClose={onRenameClose}
         />
       )}
     </Button>
