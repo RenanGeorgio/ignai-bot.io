@@ -173,7 +173,12 @@ const TypebotButton = ({
   }
 
   const handleNameSubmit = (name: string) => {
-    
+    updateTypebot({
+      typebotId: typebot.id,
+      typebot: {
+        name: name
+      }
+    })
   }
     //updateTypebot({ updates: { name } })
 
