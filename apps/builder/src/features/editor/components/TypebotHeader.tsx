@@ -313,55 +313,8 @@ const LatestElements = ({
   ...props
 }: StackProps & { onHelpClick: () => void }) => {
   const { t } = useTranslate()
-  const router = useRouter()
 
-  const {
-    typebot,
-    updateTypebot,
-    canUndo,
-    canRedo,
-    undo,
-    redo,
-    currentUserMode,
-    isSavingLoading,
-  } = useTypebot()
-
-  const [isRedoShortcutTooltipOpen, setRedoShortcutTooltipOpen] =
-    useState(false)
-
-  const [isUndoShortcutTooltipOpen, setUndoShortcutTooltipOpen] =
-    useState(false)
-
-  const hideUndoShortcutTooltipLater = useDebouncedCallback(() => {
-    setUndoShortcutTooltipOpen(false)
-  }, 1000)
-
-  const hideRedoShortcutTooltipLater = useDebouncedCallback(() => {
-    setRedoShortcutTooltipOpen(false)
-  }, 1000)
-
-  const handleNameSubmit = (name: string) =>
-    updateTypebot({ updates: { name } })
-
-  const handleChangeIcon = (icon: string) =>
-    updateTypebot({ updates: { icon } })
-
-  useKeyboardShortcuts({
-    undo: () => {
-      if (!canUndo) return
-      hideUndoShortcutTooltipLater.flush()
-      setUndoShortcutTooltipOpen(true)
-      hideUndoShortcutTooltipLater()
-      undo()
-    },
-    redo: () => {
-      if (!canRedo) return
-      hideUndoShortcutTooltipLater.flush()
-      setRedoShortcutTooltipOpen(true)
-      hideRedoShortcutTooltipLater()
-      redo()
-    },
-  })
+  const { user } = useUser()
 
   return (
     <HStack {...props}>
@@ -376,7 +329,7 @@ const LatestElements = ({
             variant='solid'
           />
           <MenuList>
-            <MenuItem command='⌘T'>
+            <MenuItem>
               <Button
                 leftIcon={<BuoyIcon />}
                 onClick={onHelpClick}
