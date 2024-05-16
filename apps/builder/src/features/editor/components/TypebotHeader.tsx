@@ -313,6 +313,7 @@ const LatestElements = ({
   ...props
 }: StackProps & { onHelpClick: () => void }) => {
   const { t } = useTranslate()
+  const { user } = useUser()
 
   return (
     <HStack {...props}>
