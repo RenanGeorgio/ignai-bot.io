@@ -1,5 +1,11 @@
-import { createContext, useCallback, useEffect, useState } from 'react'
-import { io } from 'socket.io-client'
+import {
+  createContext,
+  useCallback,
+  useEffect,
+  useState,
+  ReactNode,
+} from 'react'
+import { io, Socket } from 'socket.io-client'
 import Cookies from 'js-cookie'
 import { baseUrl, postRequest, getRequest } from '@/services/api'
 import useAuth from '@/hooks/useAuth'
@@ -10,33 +16,65 @@ type OnlineUser = {
   socketId: string
 }
 
-export const ChatContext = createContext<any>(null)
+type Chat = {
+  origin: {
+    platform: string
+    chatId: string
+  }
+  _id: string
+  members: string[]
+  timestamps: string
+  __v: number
+}
 
-export const ChatProvider = ({ children }: any) => {
-  const [userChats, setUserChats] = useState<any>([
-    {
-      origin: {
-        platform: 'telegram',
-        chatId: '1053301824',
-      },
-      _id: '662683ef2a815f652638d615',
-      members: ['661d1e55582bfd030342607f', '1'],
-      timestamps: '2024-04-22T15:36:15.885Z',
-      __v: 0,
-    },
-  ])
+type Message = {
+  _id: string
+  senderId: string
+  chatId: string
+  text: string
+  createdAt: string
+  updatedAt: string
+}
+
+type ChatContextType = {
+  userChats: Chat[]
+  isUserChatsLoading: boolean
+  userChatsError: string | null
+  potentialChats: Chat[] | null
+  updateCurrentChat: (chat: Chat) => void
+  currentChat: Chat | null
+  messages: Message[] | null
+  isMessagesLoading: boolean
+  messageError: string | null
+  sendTextMessage: (
+    textMessage: string,
+    sender: { companyId: string },
+    currentChatId: string,
+    setTextMessage: (text: string) => void
+  ) => Promise<void>
+  onlineUsers: OnlineUser[]
+}
+
+export const ChatContext = createContext<ChatContextType | null>(null)
+
+type ChatProviderProps = {
+  children: ReactNode
+}
+
+export const ChatProvider = ({ children }: ChatProviderProps) => {
+  const [userChats, setUserChats] = useState<Chat[]>([])
   const [isUserChatsLoading, setIsUserChatsLoading] = useState<boolean>(false)
   const [userChatsError, setUserChatsError] = useState<string | null>(null)
-  const [potentialChats, setPotentialChats] = useState<any>(null)
-  const [currentChat, setCurrentChat] = useState<any>(null)
+  const [potentialChats, setPotentialChats] = useState<Chat[] | null>(null)
+  const [currentChat, setCurrentChat] = useState<Chat | null>(null)
   const [isMessagesLoading, setIsMessagesLoading] = useState<boolean>(false)
   const [messageError, setMessageError] = useState<string | null>(null)
-  const [messages, setMessages] = useState<any>(null)
+  const [messages, setMessages] = useState<Message[] | null>(null)
   const [textMessageError, setTextMessageError] = useState<string | null>(null)
-  const [newMessage, setNewMessage] = useState<{}>({} as any)
+  const [newMessage, setNewMessage] = useState<Message | null>(null)
   const [onlineUsers, setOnlineUsers] = useState<OnlineUser[]>([])
 
-  const [socket, setSocket] = useState<any>(null)
+  const [socket, setSocket] = useState<Socket | null>(null)
 
   const { user } = useAuth()
 
@@ -59,7 +97,7 @@ export const ChatProvider = ({ children }: any) => {
   useEffect(() => {
     if (socket === null) return
     socket.emit('addNewUser', user?.companyId)
-    socket.on('onlineUsers', (users: any) => {
+    socket.on('onlineUsers', (users: OnlineUser[]) => {
       setOnlineUsers(users)
     })
 
@@ -79,9 +117,9 @@ export const ChatProvider = ({ children }: any) => {
 
   useEffect(() => {
     if (!socket) return
-    socket.on('getMessage', (res: any) => {
+    socket.on('getMessage', (res: Message) => {
       if (currentChat?._id !== res.chatId) return
-      setMessages((prev: any) => [...prev, res])
+      setMessages((prev) => [...(prev || []), res])
     })
 
     return () => {
@@ -91,14 +129,14 @@ export const ChatProvider = ({ children }: any) => {
 
   useEffect(() => {
     if (socket === null) return
-    socket.on('newUserChat', (client: any) => {
-      const isChatCreated = userChats?.some((chat: any) =>
+    socket.on('newUserChat', (client: Chat) => {
+      const isChatCreated = userChats?.some((chat) =>
         compareArrays(chat.members, client.members)
       )
 
       if (isChatCreated) return
 
-      setUserChats((prev: any) => [...prev, client])
+      setUserChats((prev) => [...(prev || []), client])
     })
 
     return () => {
@@ -114,13 +152,13 @@ export const ChatProvider = ({ children }: any) => {
       if (response.error) {
         return setUserChatsError(response.error)
       }
-      const pChats = response?.filter((client: any) => {
+      const pChats = response?.filter((client: Chat) => {
         let isChatCreated = false
 
-        if (!user?._id === client?._id) return false
+        if (user?._id === client?._id) return false
 
         if (userChats) {
-          isChatCreated = userChats?.some((chat: any) =>
+          isChatCreated = userChats?.some((chat) =>
             chat.members.includes(client._id)
           )
         }
@@ -145,6 +183,7 @@ export const ChatProvider = ({ children }: any) => {
         } else {
           setUserChats(response)
         }
+        setIsUserChatsLoading(false)
       }
     }
 
@@ -172,16 +211,16 @@ export const ChatProvider = ({ children }: any) => {
     getMessages()
   }, [currentChat])
 
-  const updateCurrentChat = useCallback((chat: any) => {
+  const updateCurrentChat = useCallback((chat: Chat) => {
     setCurrentChat(chat)
   }, [])
 
   const sendTextMessage = useCallback(
     async (
       textMessage: string,
-      sender: any,
+      sender: { companyId: string },
       currentChatId: string,
-      setTextMessage: any
+      setTextMessage: (text: string) => void
     ) => {
       if (textMessage === '') return
       const response = await postRequest(`${baseUrl}/api/chat/message`, {
@@ -193,7 +232,7 @@ export const ChatProvider = ({ children }: any) => {
         return setTextMessageError(response.error)
       }
       setNewMessage(response)
-      setMessages((prev: any) => [...prev, response])
+      setMessages((prev) => [...(prev || []), response])
       setTextMessage('')
     },
     []
