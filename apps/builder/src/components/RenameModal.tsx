@@ -9,8 +9,8 @@ import {
   Button,
 } from '@chakra-ui/react'
 import { useTranslate } from '@tolgee/react'
-import { TextInput } from '@/components/inputs'
 import { TypebotInDashboard } from '@/features/dashboard/types'
+import { EditableTypebotName } from '@/features/editor/components/EditableTypebotName'
 
 type ConfirmRenameModalProps = {
   typebot: TypebotInDashboard
@@ -58,10 +58,10 @@ export const RenameModal = ({
             <Button ref={cancelRef} onClick={onClose}>
               {t('cancel')}
             </Button>
-            <TextInput
-              withVariableButton={false}
-              defaultValue={typebot?.name}
-              onChange={onChangeClick}
+            <EditableTypebotName
+              key={`typebot-name-${typebot?.name ?? ''}`}
+              defaultName={typebot?.name ?? ''}
+              onNewName={onChangeClick}
             />
           </AlertDialogFooter>
         </AlertDialogContent>

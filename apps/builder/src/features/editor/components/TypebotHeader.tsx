@@ -28,9 +28,7 @@ import {
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { isDefined, isNotDefined } from '@typebot.io/lib'
-import { EditableTypebotName } from './EditableTypebotName'
 import Link from 'next/link'
-import { EditableEmojiOrImageIcon } from '@/components/EditableEmojiOrImageIcon'
 import { useDebouncedCallback } from 'use-debounce'
 import { PublishButton } from '@/features/publish/components/PublishButton'
 import { useUser } from '@/features/account/hooks/useUser'
@@ -90,7 +88,7 @@ export const TypebotHeader = () => {
         onHelpClick={handleHelpClick}
       />
     </Flex>
-  )
+  );
 }
 
 const LeftElements = ({ ...props }: StackProps) => {
@@ -99,7 +97,6 @@ const LeftElements = ({ ...props }: StackProps) => {
 
   const {
     typebot,
-    updateTypebot,
     canUndo,
     canRedo,
     undo,
@@ -119,20 +116,22 @@ const LeftElements = ({ ...props }: StackProps) => {
     setRedoShortcutTooltipOpen(false)
   }, 1000)
 
-  const handleNameSubmit = (name: string) => updateTypebot({ updates: { name } })
-
-  const handleChangeIcon = (icon: string) => updateTypebot({ updates: { icon } })
-
   useKeyboardShortcuts({
     undo: () => {
-      if (!canUndo) return
+      if (!canUndo) {
+        return
+      }
+
       hideUndoShortcutTooltipLater.flush()
       setUndoShortcutTooltipOpen(true)
       hideUndoShortcutTooltipLater()
       undo()
     },
     redo: () => {
-      if (!canRedo) return
+      if (!canRedo) {
+        return
+      }
+
       hideUndoShortcutTooltipLater.flush()
       setRedoShortcutTooltipOpen(true)
       hideRedoShortcutTooltipLater()
@@ -165,27 +164,6 @@ const LeftElements = ({ ...props }: StackProps) => {
           }}
           size="sm"
         />
-        <HStack spacing={1}>
-          {typebot && (
-            <EditableEmojiOrImageIcon
-              uploadFileProps={{
-                workspaceId: typebot.workspaceId,
-                typebotId: typebot.id,
-                fileName: 'icon',
-              }}
-              icon={typebot?.icon}
-              onChangeIcon={handleChangeIcon}
-            />
-          )}
-          (
-          <EditableTypebotName // TODO
-            key={`typebot-name-${typebot?.name ?? ''}`}
-            defaultName={typebot?.name ?? ''}
-            onNewName={handleNameSubmit}
-          />
-          )
-        </HStack>
-
         {currentUserMode === 'write' && (
           <HStack>
             <Tooltip
@@ -206,7 +184,6 @@ const LeftElements = ({ ...props }: StackProps) => {
                 isDisabled={!canUndo}
               />
             </Tooltip>
-
             <Tooltip
               label={
                 isRedoShortcutTooltipOpen
@@ -237,7 +214,7 @@ const LeftElements = ({ ...props }: StackProps) => {
         </HStack>
       )}
     </HStack>
-  )
+  );
 }
 
 const RightElements = ({ 
@@ -261,7 +238,9 @@ const RightElements = ({
   const handlePreviewClick = async () => {
     setStartPreviewAtGroup(undefined)
     setStartPreviewAtEvent(undefined)
+
     await save()
+    
     setRightPanel(RightPanel.PREVIEW)
   }
 
@@ -325,7 +304,7 @@ const RightElements = ({
         </Menu>
       </Stack>
     </HStack>
-  )
+  );
 }
 
 const TypebotNav = ({
@@ -389,5 +368,5 @@ const TypebotNav = ({
         </Button>
       )}
     </HStack>
-  )
+  );
 }
