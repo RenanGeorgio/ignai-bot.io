@@ -859,7 +859,7 @@ export const DotsVertical = () => {
   )
 }
 
-export const Upload = ({ ...props }) => {
+export const Upload = () => {
   return (
     <svg
       className={'upload '}

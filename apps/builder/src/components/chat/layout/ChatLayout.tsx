@@ -7,6 +7,27 @@ import useChat from '@/hooks/useChat'
 
 import styles from './ChatLayout.module.css'
 
+interface Message {
+  id: string
+  senderId: string
+  text: string
+  timestamp: number
+}
+
+interface User {
+  name: string
+  email: string
+}
+
+interface Chat {
+  id: string
+  members: User[]
+  messages: Message[]
+  origin: {
+    platform: 'facebook' | 'instagram' | 'telegram' | 'web' | 'whatsapp'
+  }
+}
+
 export default function LayoutChat() {
   const [showAddTicket, setShowAddTicket] = useState(false)
   const toggleAddTicket = () => {
@@ -34,14 +55,14 @@ export default function LayoutChat() {
               <div className={styles['text-wrapper-3']}>Clientes</div>
             </div>
             <div className={styles['div-content']}>
-              {userChats?.map((chat: any, index: number) => (
+              {userChats?.map((chat: Chat, index: number) => (
                 <div
                   key={index}
                   onClick={() => {
                     updateCurrentChat(chat)
                   }}
                 >
-                  <UserChat chat={chat} user={user} />
+                  <UserChat chat={chat} />
                 </div>
               ))}
             </div>
