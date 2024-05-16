@@ -93,7 +93,8 @@ export const EditDialogEmojiOrImageIcon = ({
   onConfirm
 }: DialogProps) => {
   const { t } = useTranslate()
-  const cancelRef: RefObject<unknown> | MutableRefObject<undefined> = useRef(null)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const cancelRef: RefObject<any> | MutableRefObject<undefined> = useRef(null)
 
   const onChangeClick = async (icon: string) => {
     try {
