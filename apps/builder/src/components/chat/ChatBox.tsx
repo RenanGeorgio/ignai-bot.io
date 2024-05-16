@@ -15,6 +15,7 @@ import AddTicket from './AddTicket'
 import useAuth from '@/hooks/useAuth'
 // import useChat from '@/hooks/useChat'
 // import { useFetchRecipient } from '@/hooks/useFetchRecipient'
+import Image from 'next/image'
 import web from '@/assets/images/web.svg'
 // import avatar from '@/assets/images/avatar.png'
 
@@ -28,14 +29,12 @@ dayjs.extend(relativeTime)
 dayjs.locale('pt-br')
 
 interface Props {
-  toggleAddTicket: any
+  toggleAddTicket: boolean
 }
 
 export const ChatBox: React.FC<Props> = ({
   toggleAddTicket,
 }): React.ReactElement => {
-  // const [exibirAddTicket, setExibirAddTicket] = useState(false)
-  const [showAddTicket, setShowAddTicket] = useState(false)
   const [textMessage, setTextMessage] = useState<string>('')
 
   const { user } = useAuth()
@@ -142,11 +141,11 @@ export const ChatBox: React.FC<Props> = ({
     sendTextMessage(textMessage, user, currentChat._id, setTextMessage)
   }
 
-  const handleFileUpload = (file: any) => {
+  const handleFileUpload = (file: File) => {
     console.log('Arquivo recebido em Treatment:', file)
   }
 
-  const handleFileUploadPhoto = (file: any) => {
+  const handleFileUploadPhoto = (file: File) => {
     console.log('Arquivo recebido em Treatment:', file)
   }
 
@@ -163,7 +162,7 @@ export const ChatBox: React.FC<Props> = ({
       case 'telegram':
         return <TelegramIcon />
       case 'web':
-        return <img src={web} style={{ width: '30px', height: '30px' }} />
+        return <Image src={web} alt="Web Icon" width={30} height={30} />
       case 'whatsapp':
         return <WhatsAppIcon />
       default:
@@ -172,18 +171,22 @@ export const ChatBox: React.FC<Props> = ({
   }
 
   const getTextMessageAvatar = () => (
-    <img
+    <Image
       className={styles['img-avatar-message']}
       alt="Text Avatar"
       src="https://i.pravatar.cc/150?img=3"
+      width={150}
+      height={150}
     />
   )
 
   const getMessageAvatar = () => (
-    <img
+    <Image
       className={styles['img-avatar-text']}
       alt="Message Avatar"
-      src={'https://i.pravatar.cc/150?img=3'}
+      src="https://i.pravatar.cc/150?img=3"
+      width={150}
+      height={150}
     />
   )
 
@@ -191,15 +194,17 @@ export const ChatBox: React.FC<Props> = ({
     <div className={styles.containerchat}>
       <div className={styles.headerBoxChat}>
         <div className={styles['initial-info']}>
-          <img
+          <Image
             className={styles['img-avatar']}
             alt="Avatar"
-            src={'https://i.pravatar.cc/150?img=3'}
+            src="https://i.pravatar.cc/150?img=3"
+            width={150}
+            height={150}
           />
           <div className={styles['name-time']}>
-            <div
-              className={styles['text-wrapper-4']}
-            >{`${recipientUser?.name} ${recipientUser?.lastName}`}</div>
+            <div className={styles['text-wrapper-4']}>
+              {`${recipientUser?.name} ${recipientUser?.lastName}`}
+            </div>
             <div className={styles['text-wrapper-box-header']}>1 Minute</div>
           </div>
           {getChatIcon()}
@@ -226,7 +231,7 @@ export const ChatBox: React.FC<Props> = ({
       </div>
 
       <div className={styles.chat}>
-        {messages?.map((message: any, index: number) => (
+        {messages?.map((message, index: number) => (
           <div key={index} className={styles['message-wrapper']}>
             {message?.senderId === user?.companyId
               ? getTextMessageAvatar()
