@@ -37,7 +37,7 @@ import { EditDialogEmojiOrImageIcon } from '@/components/EditableEmojiOrImageIco
 type Props = {
   typebot: TypebotInDashboard
   isReadOnly?: boolean
-  workspace?: WorkspaceInApp
+  workspace: WorkspaceInApp
   draggedTypebot: TypebotInDashboard | undefined
   onTypebotUpdated: () => void
   onDrag: (position: NodePosition) => void
@@ -46,7 +46,7 @@ type Props = {
 const TypebotButton = ({
   typebot,
   isReadOnly = false,
-  //workspace,
+  workspace,
   draggedTypebot,
   onTypebotUpdated,
   onDrag,
@@ -277,6 +277,7 @@ const TypebotButton = ({
       {!isReadOnly && (
         <EditDialogEmojiOrImageIcon
           typebot={typebot}
+          workspace={workspace}
           onConfirm={handleChangeIconClick}
           isOpen={isIconEditOpen}
           onClose={onIconEditClose}

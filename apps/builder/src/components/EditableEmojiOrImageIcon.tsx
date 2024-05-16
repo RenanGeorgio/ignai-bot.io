@@ -20,6 +20,7 @@ import { ImageUploadContent } from './ImageUploadContent'
 import { FilePathUploadProps } from '@/features/upload/api/generateUploadUrl'
 import { useTranslate } from '@tolgee/react'
 import { TypebotInDashboard } from '@/features/dashboard/types'
+import { WorkspaceInApp } from '@/features/workspace/WorkspaceProvider'
 
 type Props = {
   uploadFileProps: FilePathUploadProps
@@ -30,6 +31,7 @@ type Props = {
 
 type DialogProps = {
   typebot: TypebotInDashboard
+  workspace: WorkspaceInApp
   isOpen: boolean
   onClose: () => void
   onConfirm: (icon: string) => Promise<unknown> | unknown
@@ -88,6 +90,7 @@ export const EditableEmojiOrImageIcon = ({
 
 export const EditDialogEmojiOrImageIcon = ({
   typebot,
+  workspace,
   isOpen,
   onClose,
   onConfirm
@@ -127,7 +130,7 @@ export const EditDialogEmojiOrImageIcon = ({
             </Button>
             <EditableEmojiOrImageIcon
               uploadFileProps={{
-                workspaceId: typebot.workspaceId,
+                workspaceId: workspace.id,
                 typebotId: typebot.id,
                 fileName: 'icon',
               }}
