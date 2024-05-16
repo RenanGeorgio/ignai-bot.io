@@ -2,7 +2,16 @@ import Cookies from 'js-cookie'
 
 export const baseUrl = 'http:/localhost:7000'
 
-export const postRequest = async (url: string, body: any) => {
+interface ApiResponse<T> {
+  error?: boolean
+  message?: string
+  data?: T
+}
+
+export const postRequest = async <T>(
+  url: string,
+  body: unknown
+): Promise<ApiResponse<T>> => {
   const response = await fetch(url, {
     method: 'POST',
     headers: {
@@ -24,10 +33,10 @@ export const postRequest = async (url: string, body: any) => {
     return { error: true, message }
   }
 
-  return data
+  return { data }
 }
 
-export const getRequest = async (url: string) => {
+export const getRequest = async <T>(url: string): Promise<ApiResponse<T>> => {
   const response = await fetch(url, {
     method: 'GET',
     headers: {
@@ -48,10 +57,13 @@ export const getRequest = async (url: string) => {
     return { error: true, message }
   }
 
-  return data
+  return { data }
 }
 
-export const putRequest = async (url: string, body: any) => {
+export const putRequest = async <T>(
+  url: string,
+  body: unknown
+): Promise<ApiResponse<T>> => {
   const response = await fetch(url, {
     method: 'PUT',
     headers: {
@@ -73,10 +85,12 @@ export const putRequest = async (url: string, body: any) => {
     return { error: true, message }
   }
 
-  return data
+  return { data }
 }
 
-export const deleteRequest = async (url: string) => {
+export const deleteRequest = async <T>(
+  url: string
+): Promise<ApiResponse<T>> => {
   const response = await fetch(url, {
     method: 'DELETE',
     headers: {
@@ -97,5 +111,5 @@ export const deleteRequest = async (url: string) => {
     return { error: true, message }
   }
 
-  return data
+  return { data }
 }
