@@ -25,11 +25,7 @@ import { TypebotInDashboard } from '@/features/dashboard/types'
 import { isMobile } from '@/helpers/isMobile'
 import { trpc, trpcVanilla } from '@/lib/trpc'
 import { duplicateName } from '@/features/typebot/helpers/duplicateName'
-import {
-  NodePosition,
-  useDragDistance,
-} from '@/features/graph/providers/GraphDndProvider'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { NodePosition, useDragDistance } from '@/features/graph/providers/GraphDndProvider'
 import { WorkspaceInApp } from '@/features/workspace/WorkspaceProvider'
 import { TextInput } from '@/components/inputs'
 import { EditDialogEmojiOrImageIcon } from '@/components/EditableEmojiOrImageIcon'
@@ -70,8 +66,6 @@ const TypebotButton = ({
 
   const buttonRef = React.useRef<HTMLDivElement>(null)
 
-  const { updateTypebot } = useTypebot()
-
   useDragDistance({
     ref: buttonRef,
     onDrag,
@@ -98,15 +92,23 @@ const TypebotButton = ({
     },
   })
 
-  const { mutate: unpublishTypebot } =
-    trpc.typebot.unpublishTypebot.useMutation({
-      onError: (error) => {
-        showToast({ description: error.message })
-      },
-      onSuccess: () => {
-        onTypebotUpdated()
-      },
-    })
+  const { mutate: unpublishTypebot } = trpc.typebot.unpublishTypebot.useMutation({
+    onError: (error) => {
+      showToast({ description: error.message })
+    },
+    onSuccess: () => {
+      onTypebotUpdated()
+    },
+  })
+
+  const { mutate: updateTypebot } = trpc.typebot.updateTypebot.useMutation({
+    onError: (error) => {
+      showToast({ description: error.message })
+    },
+    onSuccess: () => {
+      onTypebotUpdated()
+    },
+  })
 
   const handleTypebotClick = () => {
     if (draggedTypebotDebounced) return
@@ -145,7 +147,8 @@ const TypebotButton = ({
       return
     }
 
-    updateTypebot({ updates: { icon } })
+    typebot.icon = icon;
+    updateTypebot({ typebotId: typebot.id })
   }
 
   const handleDeleteClick = (e: React.MouseEvent) => {
