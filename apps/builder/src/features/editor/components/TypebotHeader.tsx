@@ -80,7 +80,7 @@ export const TypebotHeader = () => {
         isResultsDisplayed={isDefined(publishedTypebot)}
       />
       <RightElements
-        right="60px"
+        right="70%"
         pos="relative"
         display={['none', 'flex']}
         isResultsDisplayed={isDefined(publishedTypebot)}
