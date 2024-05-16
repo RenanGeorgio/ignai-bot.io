@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import {
   Popover,
   Tooltip,
@@ -14,7 +15,6 @@ import {
   AlertDialogBody,
   AlertDialogFooter
 } from '@chakra-ui/react'
-import React from 'react'
 import { EmojiOrImageIcon } from './EmojiOrImageIcon'
 import { ImageUploadContent } from './ImageUploadContent'
 import { FilePathUploadProps } from '@/features/upload/api/generateUploadUrl'
@@ -93,7 +93,7 @@ export const EditDialogEmojiOrImageIcon = ({
   onConfirm
 }: DialogProps) => {
   const { t } = useTranslate()
-  const cancelRef = React.useRef()
+  const cancelRef: RefObject<FocusableElement> | MutableRefObject<undefined> = useRef(null)
 
   const onChangeClick = async (icon: string) => {
     try {
