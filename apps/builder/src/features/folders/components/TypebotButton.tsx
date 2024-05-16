@@ -148,7 +148,12 @@ const TypebotButton = ({
     }
 
     //typebot.icon = icon;
-    updateTypebot({ updates: { icon } })
+    updateTypebot({
+      typebotId: typebot.id,
+      typebot: {
+        icon: icon
+      }
+    })
   }
 
   const handleDeleteClick = (e: React.MouseEvent) => {
