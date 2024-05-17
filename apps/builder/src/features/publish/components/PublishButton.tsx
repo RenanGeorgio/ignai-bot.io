@@ -78,7 +78,9 @@ export const PublishButton = ({ isMoreMenuDisabled = false, ...props }: Props) =
           typebotId: typebot?.id as string,
         })
 
-        registerCompanyBots(typebot?.id, { user })
+        if (typebot?.id != undefined) {
+          registerCompanyBots(typebot?.id, { user })
+        }
 
         if (!publishedTypebot && !pathname.endsWith('share')) {
           push(`/typebots/${query.typebotId}/share`)
