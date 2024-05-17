@@ -263,7 +263,7 @@ const RightElements = ({
           size="sm"
           iconSpacing={{ base: 0, xl: 2 }}
         >
-          <chakra.span display={{ base: 'none', xl: 'inline' }}>
+          <chakra.span display={{ base: 'none', xl: 'flex' }}>
             {t('editor.header.previewButton.label')}
           </chakra.span>
         </Button>
@@ -298,7 +298,7 @@ const RightElements = ({
                 size="sm"
                 iconSpacing={{ base: 0, xl: 2 }}
               >
-                <chakra.span display={{ base: 'none', xl: 'inline' }}>
+                <chakra.span display={{ base: 'none', xl: 'flex' }}>
                   {t('editor.header.helpButton.label')}
                 </chakra.span>
               </Button>
