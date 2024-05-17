@@ -182,7 +182,7 @@ export default function AddTicket({ onUploadFile }: AddTicketProps) {
               <div className={styles['form']}>
                 <div className={styles['container-image-upload']}>
                   <div className={styles['image-upload']}>
-                    <Upload className={undefined} />
+                    <Upload />
                   </div>
                 </div>
 
