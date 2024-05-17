@@ -304,17 +304,10 @@ const LatestElements = ({
             variant='solid'
           />
           <MenuList>
-            <MenuItem>
-              <Button
-                leftIcon={<BuoyIcon />}
-                onClick={onHelpClick}
-                size="sm"
-                iconSpacing={{ base: 0, xl: 2 }}
-              >
-                <chakra.span display={{ base: 'none', xl: 'inline' }}>
-                  {t('editor.header.helpButton.label')}
-                </chakra.span>
-              </Button>
+            <MenuItem icon={<BuoyIcon />} onClick={onHelpClick}>
+              <chakra.span display={{ base: 'none', xl: 'inline' }}>
+                {t('editor.header.helpButton.label')}
+              </chakra.span>
             </MenuItem>
           </MenuList>
         </Menu>
