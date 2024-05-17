@@ -79,17 +79,19 @@ export const TypebotHeader = () => {
         typebotId={typebot?.id}
         isResultsDisplayed={isDefined(publishedTypebot)}
       />
-      <RightElements
-        pos="absolute"
-        margin="5px"
-        justifyContent="center"
-        alignContent="center"
-        display={['none', 'flex']}
-        isResultsDisplayed={isDefined(publishedTypebot)}
-        onHelpClick={handleHelpClick}
-      />
-      {isOpen && <SupportBubble autoShowDelay={0} />}
-      <LatestElements pos="fixed" right="1rem" onHelpClick={handleHelpClick}/>
+      <HStack spacing={3}>
+        <RightElements
+          pos="absolute"
+          margin="5px"
+          justifyContent="center"
+          alignContent="center"
+          display={['none', 'flex']}
+          isResultsDisplayed={isDefined(publishedTypebot)}
+          onHelpClick={handleHelpClick}
+        />
+        {isOpen && <SupportBubble autoShowDelay={0} />}
+        <LatestElements pos="fixed" right="1rem" onHelpClick={handleHelpClick}/>
+      </HStack>
     </Flex>
   );
 }
