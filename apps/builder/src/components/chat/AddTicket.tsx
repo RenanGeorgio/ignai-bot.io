@@ -6,11 +6,11 @@ import styles from './AddTicket.module.css'
 
 interface AddTicketProps {
   onUploadFile: (file: File) => void
-  // onSetShow: () => void
+  onSetShow: () => void
 }
 
-//export default function AddTicket({ onUploadFile, onSetShow }: AddTicketProps) {
-export default function AddTicket({ onUploadFile }: AddTicketProps) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export default function AddTicket({ onUploadFile, onSetShow }: AddTicketProps) {
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files
     if (files && files.length > 0) {

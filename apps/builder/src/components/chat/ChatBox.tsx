@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { Dispatch, SetStateAction, useState } from 'react'
 import { IconButton } from '@chakra-ui/react'
 import {
   Phone,
@@ -32,10 +32,12 @@ dayjs.locale('pt-br')
 
 interface Props {
   toggleAddTicket: boolean
+  setShowAddTicket: Dispatch<SetStateAction<boolean>>
 }
 
 export const ChatBox: React.FC<Props> = ({
   toggleAddTicket,
+  setShowAddTicket,
 }): React.ReactElement => {
   const [textMessage, setTextMessage] = useState<string>('')
 

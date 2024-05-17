@@ -71,7 +71,10 @@ export default function LayoutChat() {
           </LeftMenu>
         </div>
         <div className={styles['content']}>
-          <ChatBox toggleAddTicket={showAddTicket} />
+          <ChatBox
+            toggleAddTicket={showAddTicket}
+            setShowAddTicket={setShowAddTicket}
+          />
         </div>
       </div>
     </div>
