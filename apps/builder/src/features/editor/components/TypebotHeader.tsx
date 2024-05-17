@@ -88,7 +88,6 @@ export const TypebotHeader = () => {
           alignContent="center"
           display={['none', 'flex']}
           isResultsDisplayed={isDefined(publishedTypebot)}
-          onHelpClick={handleHelpClick}
         />
         {isOpen && <SupportBubble autoShowDelay={0} />}
         <LatestElements pos="fixed" right="1rem" onHelpClick={handleHelpClick}/>
@@ -225,13 +224,11 @@ const LeftElements = ({ ...props }: StackProps) => {
 
 const RightElements = ({ 
   isResultsDisplayed,
-  onHelpClick,
   ...props 
-}: StackProps & { isResultsDisplayed: boolean, onHelpClick: () => void }) => {
+}: StackProps & { isResultsDisplayed: boolean }) => {
   const { t } = useTranslate()
 
   const router = useRouter()
-  const { user } = useUser()
   const { typebot, currentUserMode, save, isSavingLoading } = useTypebot()
 
   const {
@@ -283,32 +280,6 @@ const RightElements = ({
         </Button>
       )}
       {currentUserMode === 'write' && <PublishButton size="sm" />}
-      <Stack>
-        <Menu>
-          <MenuButton
-            isRound={true}
-            as={IconButton}
-            aria-label='Options'
-            size='sm'
-            icon={<Avatar size="lg" src={user?.image ?? undefined} name={user?.name ?? undefined} />}
-            variant='solid'
-          />
-          <MenuList>
-            <MenuItem command='⌘T'>
-              <Button
-                leftIcon={<BuoyIcon />}
-                onClick={onHelpClick}
-                size="sm"
-                iconSpacing={{ base: 0, xl: 2 }}
-              >
-                <chakra.span display={{ base: 'none', xl: 'inline' }}>
-                  {t('editor.header.helpButton.label')}
-                </chakra.span>
-              </Button>
-            </MenuItem>
-          </MenuList>
-        </Menu>
-      </Stack>
     </HStack>
   );
 }
