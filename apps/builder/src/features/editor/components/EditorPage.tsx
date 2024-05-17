@@ -30,8 +30,7 @@ export const EditorPage = () => {
     canUndo,
     canRedo,
     undo,
-    redo,
-    isSavingLoading
+    redo
    } = useTypebot()
 
   const { workspace } = useWorkspace()
