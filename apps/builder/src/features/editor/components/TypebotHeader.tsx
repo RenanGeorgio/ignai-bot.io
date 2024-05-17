@@ -79,11 +79,11 @@ export const TypebotHeader = () => {
         typebotId={typebot?.id}
         isResultsDisplayed={isDefined(publishedTypebot)}
       />
-      <HStack spacing={3}>
+      <HStack spacing='24px'>
         <RightElements
           pos="absolute"
-          margin="5px"
-          right="2rem"
+          margin="10"
+          right="6rem"
           justifyContent="center"
           alignContent="center"
           display={['none', 'flex']}
