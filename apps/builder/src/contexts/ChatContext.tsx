@@ -70,7 +70,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
   const [isMessagesLoading, setIsMessagesLoading] = useState<boolean>(false)
   const [messageError, setMessageError] = useState<string | null>(null)
   const [messages, setMessages] = useState<Message[] | null>(null)
-  const [textMessageError, setTextMessageError] = useState<string | null>(null)
+  // const [textMessageError, setTextMessageError] = useState<string | null>(null)
   const [newMessage, setNewMessage] = useState<Message | null>(null)
   const [onlineUsers, setOnlineUsers] = useState<OnlineUser[]>([])
 
@@ -229,7 +229,8 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
         chatId: currentChatId,
       })
       if (response.error) {
-        return setTextMessageError(response.error)
+        // return setTextMessageError(response.error)
+        return console.log(response.error)
       }
       setNewMessage(response)
       setMessages((prev) => [...(prev || []), response])

@@ -34,7 +34,8 @@ export default function LayoutChat() {
     setShowAddTicket(!showAddTicket)
   }
 
-  // const { user } = useAuth();
+  /*
+  const { user } = useAuth();
 
   const user = {
     _id: '65bbe0359f84da3af601f373',
@@ -43,6 +44,7 @@ export default function LayoutChat() {
     companyId: '1',
     email: 'samuelmarques96@live.com',
   }
+  */
 
   const { userChats, updateCurrentChat } = useChat()
 
