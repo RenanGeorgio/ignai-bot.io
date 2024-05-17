@@ -79,7 +79,7 @@ export const PublishButton = ({ isMoreMenuDisabled = false, ...props }: Props) =
         })
 
         if (typebot?.id != undefined) {
-          registerCompanyBots(typebot?.id, { user })
+          registerCompanyBots(typebot?.id)
         }
 
         if (!publishedTypebot && !pathname.endsWith('share')) {

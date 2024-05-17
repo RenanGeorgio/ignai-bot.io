@@ -1,11 +1,10 @@
 import { sendRequest } from '@typebot.io/lib'
-import { User } from '@typebot.io/schemas'
 
-export const registerCompanyBots = (typebotId: string, { user }: { user:  Partial<User> }) => {
+export const registerCompanyBots = (typebotId: string) => {
   sendRequest({
     url: '/api/typebots/register',
     method: 'POST',
-    body: { typebotId, user }
+    body: { typebotId }
   });
 }
 
