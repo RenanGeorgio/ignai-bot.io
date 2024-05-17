@@ -145,7 +145,7 @@ export const ChatBox: React.FC<Props> = ({
     if (user) {
       sendTextMessage(
         textMessage,
-        { companyId: user?.name }, // TO DO: trocar user.name por user.companyId
+        { companyId: user?.companyId },
         currentChat._id,
         setTextMessage
       )
