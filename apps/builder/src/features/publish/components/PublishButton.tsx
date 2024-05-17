@@ -96,7 +96,9 @@ export const PublishButton = ({ isMoreMenuDisabled = false, ...props }: Props) =
       onSuccess: () => {
         refetchPublishedTypebot()
 
-        unregisterCompanyBots(typebot?.id)
+        if (typebot?.id) {
+          unregisterCompanyBots(typebot?.id)
+        }
       },
     })
 
