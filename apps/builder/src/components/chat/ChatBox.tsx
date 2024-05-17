@@ -38,6 +38,7 @@ export const ChatBox: React.FC<Props> = ({
   const [textMessage, setTextMessage] = useState<string>('')
 
   const { user } = useAuth()
+  const user = auth?.user
 
   // const { currentChat, isMessagesLoading, messages, sendTextMessage } =
   //   useChat()
@@ -120,16 +121,16 @@ export const ChatBox: React.FC<Props> = ({
         </div>
         <div className={styles.rightContainer}>
           <div className={styles.rightContent}>
-            <IconButton className={styles['img-4']}>
+            <IconButton className={styles['img-4']} aria-label="Phone">
               <Phone />
             </IconButton>
-            <IconButton className={styles['img-4']}>
+            <IconButton className={styles['img-4']} aria-label="Video">
               <Video />
             </IconButton>
-            <IconButton className={styles['img-4']}>
+            <IconButton className={styles['img-4']} aria-label="Pesquisa">
               <Search />
             </IconButton>
-            <IconButton className={styles['img-4']}>
+            <IconButton className={styles['img-4']} aria-label="Dots">
               <DotsVertical />
             </IconButton>
           </div>
@@ -138,7 +139,9 @@ export const ChatBox: React.FC<Props> = ({
     )
 
   const handleSendMessage = () => {
-    sendTextMessage(textMessage, user, currentChat._id, setTextMessage)
+    if (user) {
+      sendTextMessage(textMessage, user, currentChat._id, setTextMessage)
+    }
   }
 
   const handleFileUpload = (file: File) => {
@@ -214,16 +217,16 @@ export const ChatBox: React.FC<Props> = ({
         </div>
         <div className={styles.rightContainer}>
           <div className={styles.rightContent}>
-            <IconButton className={styles['img-4']}>
+            <IconButton className={styles['img-4']} aria-label="Phone">
               <Phone />
             </IconButton>
-            <IconButton className={styles['img-4']}>
+            <IconButton className={styles['img-4']} aria-label="Video">
               <Video />
             </IconButton>
-            <IconButton className={styles['img-4']}>
+            <IconButton className={styles['img-4']} aria-label="Pesquisa">
               <Search />
             </IconButton>
-            <IconButton className={styles['img-4']}>
+            <IconButton className={styles['img-4']} aria-label="Dots">
               <DotsVertical />
             </IconButton>
           </div>
