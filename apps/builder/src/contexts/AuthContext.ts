@@ -1,6 +1,6 @@
 import { Context, createContext } from 'react'
 
-type User = {
+export type User = {
   name: string
   email: string
 }
@@ -17,10 +17,11 @@ type ErrorResponse = {
 
 export interface AuthContextInterface {
   isAuthenticated: boolean
-  user: User | null
+  user: User
   signIn: (data: SignInData) => Promise<void> | ErrorResponse
   signOut: () => void
 }
 
-export const AuthContext: Context<AuthContextInterface | undefined> =
-  createContext<AuthContextInterface | undefined>(undefined)
+export const AuthContext: Context<AuthContextInterface> =
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  createContext<AuthContextInterface>({} as any)

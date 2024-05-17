@@ -15,6 +15,7 @@ import AddTicket from './AddTicket'
 import useAuth from '@/hooks/useAuth'
 // import useChat from '@/hooks/useChat'
 // import { useFetchRecipient } from '@/hooks/useFetchRecipient'
+import { AuthContextInterface } from '@/contexts/AuthContext'
 import Image from 'next/image'
 import web from '@/assets/images/web.svg'
 // import avatar from '@/assets/images/avatar.png'
@@ -37,8 +38,7 @@ export const ChatBox: React.FC<Props> = ({
 }): React.ReactElement => {
   const [textMessage, setTextMessage] = useState<string>('')
 
-  const { user } = useAuth()
-  const user = auth?.user
+  const { user }: AuthContextInterface = useAuth()
 
   // const { currentChat, isMessagesLoading, messages, sendTextMessage } =
   //   useChat()
