@@ -80,14 +80,16 @@ export const TypebotHeader = () => {
         isResultsDisplayed={isDefined(publishedTypebot)}
       />
       <RightElements
-        right="70%"
-        pos="relative"
+        pos="absolute"
+        margin="5px"
+        justifyContent="center"
+        alignContent="center"
         display={['none', 'flex']}
         isResultsDisplayed={isDefined(publishedTypebot)}
         onHelpClick={handleHelpClick}
       />
       {isOpen && <SupportBubble autoShowDelay={0} />}
-      <LatestElements pos="absolute" right="1rem" onHelpClick={handleHelpClick}/>
+      <LatestElements pos="fixed" right="1rem" onHelpClick={handleHelpClick}/>
     </Flex>
   );
 }
