@@ -12,12 +12,7 @@ import {
   useDisclosure,
   ButtonProps,
 } from '@chakra-ui/react'
-import {
-  ChevronLeftIcon,
-  CloudOffIcon,
-  LockedIcon,
-  UnlockedIcon,
-} from '@/components/icons'
+import { ChevronLeftIcon, CloudOffIcon, LockedIcon, UnlockedIcon } from '@/components/icons'
 import { useTypebot } from '@/features/editor/providers/TypebotProvider'
 import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
 import { useRouter } from 'next/router'
@@ -32,6 +27,8 @@ import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/const
 import { ConfirmModal } from '@/components/ConfirmModal'
 import { TextLink } from '@/components/TextLink'
 import { useTimeSince } from '@/hooks/useTimeSince'
+import { useUser } from '@/features/account/hooks/useUser'
+import { registerCompanyBots, unregisterCompanyBots } from '../api/updateCompanyBots'
 
 type Props = ButtonProps & {
   isMoreMenuDisabled?: boolean
@@ -39,15 +36,13 @@ type Props = ButtonProps & {
 
 export const PublishButton = ({ isMoreMenuDisabled = false, ...props }: Props) => {
   const { t } = useTranslate()
+
   const { workspace } = useWorkspace()
   const { push, query, pathname } = useRouter()
+  const { user } = useUser()
 
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const {
-    isOpen: isNewEngineWarningOpen,
-    onOpen: onNewEngineWarningOpen,
-    onClose: onNewEngineWarningClose,
-  } = useDisclosure()
+  const { isOpen: isNewEngineWarningOpen, onOpen: onNewEngineWarningOpen, onClose: onNewEngineWarningClose } = useDisclosure()
 
   const {
     isPublished,
@@ -82,8 +77,12 @@ export const PublishButton = ({ isMoreMenuDisabled = false, ...props }: Props) =
         refetchPublishedTypebot({
           typebotId: typebot?.id as string,
         })
-        if (!publishedTypebot && !pathname.endsWith('share'))
+
+        registerCompanyBots(typebot?.id, { user })
+
+        if (!publishedTypebot && !pathname.endsWith('share')) {
           push(`/typebots/${query.typebotId}/share`)
+        }
       },
     })
 
@@ -96,6 +95,8 @@ export const PublishButton = ({ isMoreMenuDisabled = false, ...props }: Props) =
         }),
       onSuccess: () => {
         refetchPublishedTypebot()
+
+        unregisterCompanyBots(typebot?.id)
       },
     })
 
