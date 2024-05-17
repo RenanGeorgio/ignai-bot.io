@@ -27,7 +27,6 @@ import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/const
 import { ConfirmModal } from '@/components/ConfirmModal'
 import { TextLink } from '@/components/TextLink'
 import { useTimeSince } from '@/hooks/useTimeSince'
-import { useUser } from '@/features/account/hooks/useUser'
 import { registerCompanyBots, unregisterCompanyBots } from '../api/updateCompanyBots'
 
 type Props = ButtonProps & {
@@ -39,7 +38,6 @@ export const PublishButton = ({ isMoreMenuDisabled = false, ...props }: Props) =
 
   const { workspace } = useWorkspace()
   const { push, query, pathname } = useRouter()
-  const { user } = useUser()
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { isOpen: isNewEngineWarningOpen, onOpen: onNewEngineWarningOpen, onClose: onNewEngineWarningClose } = useDisclosure()
