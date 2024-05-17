@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { IconButton } from '@chakra-ui/react'
 import {
   Phone,
@@ -13,7 +13,7 @@ import {
 import TextEnter from './TextEnter'
 import AddTicket from './AddTicket'
 import useAuth from '@/hooks/useAuth'
-// import useChat from '@/hooks/useChat'
+import useChat from '@/hooks/useChat'
 // import { useFetchRecipient } from '@/hooks/useFetchRecipient'
 import { AuthContextInterface } from '@/contexts/AuthContext'
 import Image from 'next/image'
@@ -39,6 +39,8 @@ export const ChatBox: React.FC<Props> = ({
   const [textMessage, setTextMessage] = useState<string>('')
 
   const { user }: AuthContextInterface = useAuth()
+
+  const { sendTextMessage } = useChat()
 
   // const { currentChat, isMessagesLoading, messages, sendTextMessage } =
   //   useChat()
