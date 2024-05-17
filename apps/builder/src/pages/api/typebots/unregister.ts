@@ -23,6 +23,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       where: canWriteTypebots(typebotId, user)
     });
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     if (!typebot?.workspace || (await isReadTypebotForbidden(typebot, user))) {
       return notFound(res, 'Workspace not found')
