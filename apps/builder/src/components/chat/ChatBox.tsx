@@ -25,6 +25,7 @@ import styles from '@/assets/styles/chat.module.css'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import 'dayjs/locale/pt-br'
+import { ChatContextType } from '@/contexts/ChatContext'
 
 dayjs.extend(relativeTime)
 dayjs.locale('pt-br')
@@ -40,7 +41,7 @@ export const ChatBox: React.FC<Props> = ({
 
   const { user }: AuthContextInterface = useAuth()
 
-  const { sendTextMessage } = useChat()
+  const { sendTextMessage }: ChatContextType = useChat()
 
   // const { currentChat, isMessagesLoading, messages, sendTextMessage } =
   //   useChat()

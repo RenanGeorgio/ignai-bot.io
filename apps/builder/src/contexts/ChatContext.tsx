@@ -36,7 +36,7 @@ type Message = {
   updatedAt: string
 }
 
-type ChatContextType = {
+export type ChatContextType = {
   userChats: Chat[]
   isUserChatsLoading: boolean
   userChatsError: string | null
@@ -55,7 +55,8 @@ type ChatContextType = {
   onlineUsers: OnlineUser[]
 }
 
-export const ChatContext = createContext<ChatContextType | null>(null)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const ChatContext = createContext<ChatContextType>({} as any)
 
 type ChatProviderProps = {
   children: ReactNode
