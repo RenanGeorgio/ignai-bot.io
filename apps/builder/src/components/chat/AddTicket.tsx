@@ -40,7 +40,7 @@ export default function AddTicket({ onUploadFile }: AddTicketProps) {
           </div>
         </div>
 
-        <div className={styles['section']}>
+        <div className={styles.section}>
           <div className={styles['section-3']}>
             <span className={styles['text-2add']}>Responsável:</span>
           </div>
@@ -107,21 +107,24 @@ export default function AddTicket({ onUploadFile }: AddTicketProps) {
           <div className={styles['wrapper-8']}>
             <div className={styles['wrapper-9']}>
               <div className={styles['section-7']}>
-                <IconButton className={styles['pic-2']}>
+                <IconButton className={styles['pic-2']} aria-label="Edit">
                   <Pencil />
                 </IconButton>
               </div>
             </div>
             <div className={styles['group-7']}>
               <div className={styles['section-8']}>
-                <IconButton className={styles['img-4']}>
+                <IconButton className={styles['img-4']} aria-label="Delete">
                   <Trash />
                 </IconButton>
               </div>
             </div>
             <div className={styles['wrapper-a']}>
               <div className={styles['group-8']}>
-                <IconButton className={styles['img-5']}>
+                <IconButton
+                  className={styles['img-5']}
+                  aria-label="More options"
+                >
                   <DotsVertical />
                 </IconButton>
               </div>
@@ -143,21 +146,24 @@ export default function AddTicket({ onUploadFile }: AddTicketProps) {
             <div className={styles['section-9']}>
               <div className={styles['wrapper-9']}>
                 <div className={styles['section-7']}>
-                  <IconButton className={styles['pic-2']}>
+                  <IconButton className={styles['pic-2']} aria-label="Edit">
                     <Pencil />
                   </IconButton>
                 </div>
               </div>
               <div className={styles['group-7']}>
                 <div className={styles['section-8']}>
-                  <IconButton className={styles['img-4']}>
+                  <IconButton className={styles['img-4']} aria-label="Delete">
                     <Trash />
                   </IconButton>
                 </div>
               </div>
               <div className={styles['wrapper-a']}>
                 <div className={styles['group-8']}>
-                  <IconButton className={styles['img-5']}>
+                  <IconButton
+                    className={styles['img-5']}
+                    aria-label="More options"
+                  >
                     <DotsVertical />
                   </IconButton>
                 </div>
