@@ -83,6 +83,7 @@ export const TypebotHeader = () => {
         <RightElements
           pos="absolute"
           margin="5px"
+          right="2rem"
           justifyContent="center"
           alignContent="center"
           display={['none', 'flex']}
@@ -265,7 +266,7 @@ const RightElements = ({
           size="sm"
           iconSpacing={{ base: 0, xl: 2 }}
         >
-          <chakra.span display={{ base: 'none', xl: 'flex' }}>
+          <chakra.span display={{ base: 'none', xl: 'inline' }}>
             {t('editor.header.previewButton.label')}
           </chakra.span>
         </Button>
@@ -300,7 +301,7 @@ const RightElements = ({
                 size="sm"
                 iconSpacing={{ base: 0, xl: 2 }}
               >
-                <chakra.span display={{ base: 'none', xl: 'flex' }}>
+                <chakra.span display={{ base: 'none', xl: 'inline' }}>
                   {t('editor.header.helpButton.label')}
                 </chakra.span>
               </Button>
