@@ -203,7 +203,6 @@ export const BlocksSideBar = () => {
           </Portal>
         )}
       </Stack>
-      // VERIFICAR
       <Fade in={!isLocked} unmountOnExit>
         <Flex
           pos="absolute"
