@@ -100,7 +100,7 @@ export const BlocksSideBar = () => {
       pl="4"
       py="4"
       onMouseLeave={handleMouseLeave}
-      transform={isExtended ? 'translateY(0)' : `translateY(- calc(100vh - ${headerHeight}px))`}
+      transform={isExtended ? 'translateX(0)' : 'translateX(-350px)'}
       transition="transform 350ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s"
     >
       <Stack
@@ -203,6 +203,7 @@ export const BlocksSideBar = () => {
           </Portal>
         )}
       </Stack>
+    
       <Fade in={!isLocked} unmountOnExit>
         <Flex
           pos="absolute"
