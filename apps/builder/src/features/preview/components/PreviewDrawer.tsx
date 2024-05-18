@@ -1,16 +1,8 @@
-import {
-  Button,
-  CloseButton,
-  Fade,
-  Flex,
-  HStack,
-  useColorModeValue,
-  VStack,
-} from '@chakra-ui/react'
+import React, { useState } from 'react'
+import { Button, CloseButton, Fade, Flex, HStack, useColorModeValue, VStack } from '@chakra-ui/react'
 import { useEditor } from '../../editor/providers/EditorProvider'
 import { useGraph } from '@/features/graph/providers/GraphProvider'
 import { useTypebot } from '../../editor/providers/TypebotProvider'
-import React, { useState } from 'react'
 import { headerHeight } from '../../editor/constants'
 import { RuntimeMenu } from './RuntimeMenu'
 import { runtimes } from '../data'
@@ -22,11 +14,15 @@ import { useTranslate } from '@tolgee/react'
 const preferredRuntimeKey = 'preferredRuntime'
 
 const getDefaultRuntime = (typebotId?: string) => {
-  if (!typebotId) return runtimes[0]
-  const preferredRuntime = localStorage.getItem(preferredRuntimeKey)
+  if (!typebotId) {
+    return runtimes[0]
+  }
+
+  const preferredRuntime = localStorage.getItem(preferredRuntimeKey);
+
   return (
-    runtimes.find((runtime) => runtime.name === preferredRuntime) ?? runtimes[0]
-  )
+    runtimes?.find((runtime) => runtime?.name === preferredRuntime) ?? runtimes[0]
+  );
 }
 
 export const PreviewDrawer = () => {
@@ -34,21 +30,20 @@ export const PreviewDrawer = () => {
   const { t } = useTranslate()
   const { setRightPanel } = useEditor()
   const { setPreviewingBlock } = useGraph()
-  const [width, setWidth] = useState(500)
-  const [isResizeHandleVisible, setIsResizeHandleVisible] = useState(false)
-  const [restartKey, setRestartKey] = useState(0)
-  const [selectedRuntime, setSelectedRuntime] = useState<
-    (typeof runtimes)[number]
-  >(getDefaultRuntime(typebot?.id))
+
+  const [width, setWidth] = useState(500);
+  const [isResizeHandleVisible, setIsResizeHandleVisible] = useState(false);
+  const [restartKey, setRestartKey] = useState(0);
+  const [selectedRuntime, setSelectedRuntime] = useState<(typeof runtimes)[number]>(getDefaultRuntime(typebot?.id));
 
   const handleRestartClick = async () => {
-    await save()
-    setRestartKey((key) => key + 1)
+    await save();
+    setRestartKey((key) => key + 1);
   }
 
   const handleCloseClick = () => {
-    setPreviewingBlock(undefined)
-    setRightPanel(undefined)
+    setPreviewingBlock(undefined);
+    setRightPanel(undefined);
   }
 
   const useResizeHandleDrag = useDrag(
@@ -56,15 +51,13 @@ export const PreviewDrawer = () => {
       setWidth(-state.offset[0])
     },
     {
-      from: () => [-width, 0],
+      from: () => [-width, 0]
     }
-  )
+  );
 
-  const setPreviewRuntimeAndSaveIntoLocalStorage = (
-    runtime: (typeof runtimes)[number]
-  ) => {
-    setSelectedRuntime(runtime)
-    localStorage.setItem(preferredRuntimeKey, runtime.name)
+  const setPreviewRuntimeAndSaveIntoLocalStorage = (runtime: (typeof runtimes)[number]) => {
+    setSelectedRuntime(runtime);
+    localStorage.setItem(preferredRuntimeKey, runtime?.name);
   }
 
   return (
@@ -91,7 +84,6 @@ export const PreviewDrawer = () => {
           top={`calc(50% - ${headerHeight}px)`}
         />
       </Fade>
-
       <VStack w="full" spacing={4}>
         <HStack justifyContent={'space-between'} w="full">
           <HStack>
@@ -109,11 +101,10 @@ export const PreviewDrawer = () => {
               </Button>
             ) : null}
           </HStack>
-
           <CloseButton onClick={handleCloseClick} />
         </HStack>
         <PreviewDrawerBody key={restartKey} runtime={selectedRuntime.name} />
       </VStack>
     </Flex>
-  )
+  );
 }

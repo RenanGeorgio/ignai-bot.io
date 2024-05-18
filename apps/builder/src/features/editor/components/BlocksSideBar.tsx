@@ -1,18 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  Stack,
-  Text,
-  SimpleGrid,
-  useEventListener,
-  Portal,
-  Flex,
-  IconButton,
-  Tooltip,
-  Fade,
-  useColorModeValue,
-} from '@chakra-ui/react'
-import { useBlockDnd } from '@/features/graph/providers/GraphDndProvider'
 import React, { useState } from 'react'
+import { useDebouncedCallback } from 'use-debounce'
+import { Stack, Text, SimpleGrid, useEventListener, Portal, Flex, IconButton, Tooltip, Fade, useColorModeValue } from '@chakra-ui/react'
+import { useBlockDnd } from '@/features/graph/providers/GraphDndProvider'
 import { BlockCard } from './BlockCard'
 import { LockedIcon, UnlockedIcon } from '@/components/icons'
 import { BlockCardOverlay } from './BlockCardOverlay'
@@ -23,7 +13,6 @@ import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/const
 import { IntegrationBlockType } from '@typebot.io/schemas/features/blocks/integrations/constants'
 import { LogicBlockType } from '@typebot.io/schemas/features/blocks/logic/constants'
 import { BlockV6 } from '@typebot.io/schemas'
-import { useDebouncedCallback } from 'use-debounce'
 import { forgedBlockIds } from '@typebot.io/forge-repository/constants'
 
 // Integration blocks migrated to forged blocks
@@ -33,59 +22,72 @@ const legacyIntegrationBlocks = [
 ]
 
 export const BlocksSideBar = () => {
-  const { t } = useTranslate()
-  const { setDraggedBlockType, draggedBlockType } = useBlockDnd()
-  const [position, setPosition] = useState({
-    x: 0,
-    y: 0,
-  })
-  const [relativeCoordinates, setRelativeCoordinates] = useState({ x: 0, y: 0 })
-  const [isLocked, setIsLocked] = useState(true)
-  const [isExtended, setIsExtended] = useState(true)
+  const { t } = useTranslate();
+  const { setDraggedBlockType, draggedBlockType } = useBlockDnd();
+
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [relativeCoordinates, setRelativeCoordinates] = useState({ x: 0, y: 0 });
+  const [isLocked, setIsLocked] = useState(true);
+  const [isExtended, setIsExtended] = useState(true);
 
   const closeSideBar = useDebouncedCallback(() => setIsExtended(false), 200)
 
   const handleMouseMove = (event: MouseEvent) => {
-    if (!draggedBlockType) return
-    const { clientX, clientY } = event
+    if (!draggedBlockType) {
+      return
+    }
+
+    const { clientX, clientY } = event;
+
     setPosition({
       ...position,
       x: clientX - relativeCoordinates.x,
       y: clientY - relativeCoordinates.y,
-    })
+    });
   }
-  useEventListener('mousemove', handleMouseMove)
 
-  const handleMouseDown = (e: React.MouseEvent, type: BlockV6['type']) => {
-    const element = e.currentTarget as HTMLDivElement
-    const rect = element.getBoundingClientRect()
-    setPosition({ x: rect.left, y: rect.top })
-    const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
-    setRelativeCoordinates({ x, y })
-    setDraggedBlockType(type)
+  useEventListener('mousemove', handleMouseMove);
+
+  const handleMouseDown = (e: React.MouseEvent, type: BlockV6['type']) => {  // NAO INTERFERE NO MEU OBJETIVO
+    const element = e.currentTarget as HTMLDivElement;
+    const rect = element.getBoundingClientRect();
+
+    setPosition({ x: rect.left, y: rect.top });
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    setRelativeCoordinates({ x, y });
+    setDraggedBlockType(type);
   }
 
   const handleMouseUp = () => {
-    if (!draggedBlockType) return
-    setDraggedBlockType(undefined)
+    if (!draggedBlockType) {
+      return
+    }
+
+    setDraggedBlockType(undefined);
+
     setPosition({
       x: 0,
       y: 0,
-    })
+    });
   }
-  useEventListener('mouseup', handleMouseUp)
 
-  const handleLockClick = () => setIsLocked(!isLocked)
+  useEventListener('mouseup', handleMouseUp);
+
+  const handleLockClick = () => setIsLocked(!isLocked);
 
   const handleDockBarEnter = () => {
-    closeSideBar.flush()
-    setIsExtended(true)
+    closeSideBar.flush();
+    setIsExtended(true);
   }
 
   const handleMouseLeave = () => {
-    if (isLocked) return
-    closeSideBar()
+    if (isLocked) {
+      return
+    }
+
+    closeSideBar();
   }
 
   return (
@@ -98,7 +100,7 @@ export const BlocksSideBar = () => {
       pl="4"
       py="4"
       onMouseLeave={handleMouseLeave}
-      transform={isExtended ? 'translateX(0)' : 'translateX(-350px)'}
+      transform={isExtended ? 'translateY(0)' : `translateY(- calc(100vh - ${headerHeight}px))`}
       transition="transform 350ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s"
     >
       <Stack
@@ -201,6 +203,7 @@ export const BlocksSideBar = () => {
           </Portal>
         )}
       </Stack>
+      // VERIFICAR
       <Fade in={!isLocked} unmountOnExit>
         <Flex
           pos="absolute"
@@ -218,5 +221,5 @@ export const BlocksSideBar = () => {
         </Flex>
       </Fade>
     </Flex>
-  )
+  );
 }

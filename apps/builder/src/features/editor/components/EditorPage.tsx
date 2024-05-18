@@ -104,7 +104,7 @@ export const EditorPage = () => {
                 isReadOnly={
                   currentUserMode === 'read' || currentUserMode === 'guest'
                 }
-              >
+              > 
                 <EventsCoordinatesProvider events={typebot.events}>
                   <Graph flex="1" typebot={typebot} key={typebot.id} /> 
                   <BoardMenuButton
