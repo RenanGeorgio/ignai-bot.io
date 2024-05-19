@@ -51,7 +51,8 @@ export const BlocksSideBar = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [relativeCoordinates, setRelativeCoordinates] = useState({ x: 0, y: 0 });
   const [isLocked, setIsLocked] = useState(true);
-  const [_isExtended, setIsExtended] = useState(true);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [isExtended, setIsExtended] = useState(true);
 
   const closeSideBar = useDebouncedCallback(() => setIsExtended(false), 200)
 
