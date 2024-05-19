@@ -38,11 +38,11 @@ const legacyIntegrationBlocks = [
   IntegrationBlockType.OPEN_AI,
   IntegrationBlockType.ZEMANTIC_AI,
 ]
-
+/*
 const variants = {
   open: { opacity: 1, x: 0 },
   closed: { opacity: 0, x: "-100%" },
-}
+}*/
 
 export const BlocksSideBar = () => {
   const { t } = useTranslate();
@@ -51,7 +51,6 @@ export const BlocksSideBar = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [relativeCoordinates, setRelativeCoordinates] = useState({ x: 0, y: 0 });
   const [isLocked, setIsLocked] = useState(true);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isExtended, setIsExtended] = useState(true);
 
   const closeSideBar = useDebouncedCallback(() => setIsExtended(false), 200)
@@ -124,7 +123,8 @@ export const BlocksSideBar = () => {
       pl="4"
       py="4"
       onMouseLeave={handleMouseLeave}
-      variants={variants}
+      transform={isExtended ? 'y: 0' : 'y: -50%'}
+      transition="transform 350ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s"
     >
       <Stack
         w="full"
