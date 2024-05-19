@@ -130,29 +130,27 @@ export const BlocksSideBar = () => {
         transition="transform 350ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s"
       >
         <Accordion allowToggle>
-          <AccordionItem>
-            <h2>
-              <AccordionButton>
-                <Box as='span' flex='1' textAlign='center'>
-                  Componentes
-                </Box>
-                <AccordionIcon />
-              </AccordionButton>
-            </h2>
-            <AccordionPanel>
-              <Stack
-                w="full"
-                rounded="lg"
-                shadow="xl"
-                borderWidth="1px"
-                pt="2"
-                pb="10"
-                px="4"
-                bgColor={useColorModeValue('white', 'gray.900')}
-                spacing={6}
-                userSelect="none"
-                overflowY="auto"
-              >
+          <Stack
+            w="full"
+            rounded="lg"
+            shadow="xl"
+            borderWidth="1px"
+            pt="2"
+            pb="10"
+            px="4"
+            bgColor={useColorModeValue('white', 'gray.900')}
+            spacing={6}
+            userSelect="none"
+            overflowY="auto"
+          >
+            <AccordionItem>
+              <h2>
+                <AccordionButton>
+                  <Box as='span' flex='1' textAlign='center'>
+                    Componentes
+                  </Box>
+                  <AccordionIcon />
+                </AccordionButton>
                 <Flex justifyContent="flex-end">
                   <Tooltip
                     label={
@@ -173,7 +171,8 @@ export const BlocksSideBar = () => {
                     />
                   </Tooltip>
                 </Flex>
-
+              </h2>
+              <AccordionPanel>
                 <Stack>
                   <Text fontSize="sm" fontWeight="semibold">
                     {t('editor.sidebarBlocks.blockType.bubbles.heading')}
@@ -239,8 +238,7 @@ export const BlocksSideBar = () => {
                     />
                   </Portal>
                 )}
-              </Stack>
-            
+              </AccordionPanel>
               <Fade in={!isLocked} unmountOnExit>
                 <Flex
                   pos="absolute"
@@ -257,8 +255,8 @@ export const BlocksSideBar = () => {
                   <Flex w="5px" h="20px" bgColor="gray.400" rounded="md" />
                 </Flex>
               </Fade>
-            </AccordionPanel>
-          </AccordionItem>
+            </AccordionItem>
+          </Stack>
         </Accordion> 
       </Flex>
     </Box> 
