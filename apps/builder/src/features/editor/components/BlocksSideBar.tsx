@@ -173,18 +173,18 @@ export const BlocksSideBar = () => {
               </HStack>
             </Flex>
 
-            <Stack>
-              <Text fontSize="sm" fontWeight="semibold">
-                {t('editor.sidebarBlocks.blockType.bubbles.heading')}
-              </Text>
-              <SimpleGrid columns={2} spacing="3">
-                {Object.values(BubbleBlockType).map((type) => (
-                  <BlockCard key={type} type={type} onMouseDown={handleMouseDown} />
-                ))}
-              </SimpleGrid>
-            </Stack>
-
             <AccordionPanel>
+              <Stack>
+                <Text fontSize="sm" fontWeight="semibold">
+                  {t('editor.sidebarBlocks.blockType.bubbles.heading')}
+                </Text>
+                <SimpleGrid columns={2} spacing="3">
+                  {Object.values(BubbleBlockType).map((type) => (
+                    <BlockCard key={type} type={type} onMouseDown={handleMouseDown} />
+                  ))}
+                </SimpleGrid>
+              </Stack>
+
               <Stack>
                 <Text fontSize="sm" fontWeight="semibold">
                   {t('editor.sidebarBlocks.blockType.inputs.heading')}
