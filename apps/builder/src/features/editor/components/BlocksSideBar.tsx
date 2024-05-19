@@ -56,7 +56,7 @@ export const BlocksSideBar = () => {
   const [isExtended, setIsExtended] = useState(true);
   const [itemSize, setItemSize] = useState(headerHeight);
   const [isExpanded, setIsExpanded] = useState(true);
-  const [index, setIndex] = useState<number | null>(0);
+  const [index, setIndex] = useState(0);
 
   /*const {
     isOpen: isDeleteOpen,
@@ -141,7 +141,7 @@ export const BlocksSideBar = () => {
     if (isExtended) {
       setIndex(0);
     } else {
-      setIndex(null);
+      setIndex(-1);
     }
   },[isExtended]);
 
