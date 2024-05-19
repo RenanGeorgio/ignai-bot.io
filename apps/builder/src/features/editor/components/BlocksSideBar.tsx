@@ -140,7 +140,7 @@ export const BlocksSideBar = () => {
         userSelect="none"
         overflowY="auto"
       >
-        <Accordion allowToggle>
+        <Accordion defaultIndex={[0]} allowToggle>
           <AccordionItem>
             <Flex justifyContent="flex-end">
               <HStack>
