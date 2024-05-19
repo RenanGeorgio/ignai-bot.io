@@ -32,6 +32,7 @@ import { IntegrationBlockType } from '@typebot.io/schemas/features/blocks/integr
 import { LogicBlockType } from '@typebot.io/schemas/features/blocks/logic/constants'
 import { BlockV6 } from '@typebot.io/schemas'
 import { forgedBlockIds } from '@typebot.io/forge-repository/constants'
+import { useDimensions } from '../hooks/useDimensions'
 
 // Integration blocks migrated to forged blocks
 const legacyIntegrationBlocks = [
@@ -53,6 +54,16 @@ export const BlocksSideBar = () => {
   const [relativeCoordinates, setRelativeCoordinates] = useState({ x: 0, y: 0 });
   const [isLocked, setIsLocked] = useState(true);
   const [isExtended, setIsExtended] = useState(true);
+  const [itemSize, setItemSize] = useState(headerHeight);
+  const [isExpanded, setIsExpanded] = useState(true);
+
+  /*const {
+    isOpen: isDeleteOpen,
+    onOpen: onDeleteOpen,
+    onClose: onDeleteClose,
+  } = useDisclosure()*/
+
+  const height = useDimensions();
 
   const closeSideBar = useDebouncedCallback(() => setIsExtended(false), 200)
 
@@ -114,12 +125,23 @@ export const BlocksSideBar = () => {
     closeSideBar();
   }
 
+  const handleExpandItem = () => {
+    if (isExpanded) {
+      const newHeight = height * 0.8;
+      setItemSize(newHeight);
+    } else {
+      setItemSize(headerHeight);
+    }
+
+    setIsExpanded(!isExpanded);
+  }
+
   return (
     <Flex
       w="360px"
       pos="absolute"
       left="0"
-      h={`calc(100vh - ${headerHeight}px)`}
+      h={`calc(100vh - ${itemSize}px)`}
       zIndex="2"
       pl="4"
       py="4"
@@ -140,7 +162,11 @@ export const BlocksSideBar = () => {
         userSelect="none"
         overflowY="auto"
       >
-        <Accordion defaultIndex={[0]} allowToggle>
+        <Accordion 
+          defaultIndex={[0]} 
+          allowToggle
+          onChange={handleExpandItem}
+        >
           <AccordionItem>
             <Flex justifyContent="flex-end">
               <HStack>
