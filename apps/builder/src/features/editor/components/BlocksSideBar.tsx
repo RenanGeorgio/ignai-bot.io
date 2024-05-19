@@ -146,7 +146,7 @@ export const BlocksSideBar = () => {
       pl="4"
       py="4"
       onMouseLeave={handleMouseLeave}
-      transform={isExtended ? 'translateX(0)' : 'translateX(-350px)'}
+      //transform={isExtended ? 'translateX(0)' : 'translateX(-350px)'}
       transition="transform 350ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s"
     >
       <Stack
@@ -170,6 +170,14 @@ export const BlocksSideBar = () => {
           <AccordionItem>
             <Flex justifyContent="flex-end">
               <HStack>
+                <h2>
+                  <AccordionButton>
+                    <Box as='span' flex='1' textAlign='center'>
+                      Componentes
+                    </Box>
+                    <AccordionIcon />
+                  </AccordionButton>
+                </h2>
                 <Tooltip
                   label={
                     isLocked
@@ -188,14 +196,6 @@ export const BlocksSideBar = () => {
                     onClick={handleLockClick}
                   />
                 </Tooltip>
-                <h2>
-                  <AccordionButton>
-                    <Box as='span' flex='1' textAlign='center'>
-                      Componentes
-                    </Box>
-                    <AccordionIcon />
-                  </AccordionButton>
-                </h2>
               </HStack>
             </Flex>
 
