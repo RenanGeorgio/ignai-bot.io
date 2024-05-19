@@ -116,30 +116,30 @@ export const BlocksSideBar = () => {
       left="0"
       zIndex="2"
     >
-      <Accordion allowToggle>
-        <AccordionItem>
-          <h2>
-            <AccordionButton>
-              <Box as='span' flex='1' textAlign='center'>
-                Componentes
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-          </h2>
-          <AccordionPanel>
-            <Flex
-              w="360px"
-              pos="absolute"
-              left="0"
-              h={`calc(100vh - ${headerHeight}px)`}
-              zIndex="3"
-              pl="4"
-              py="4"
-              margin="5px"
-              onMouseLeave={handleMouseLeave}
-              transform={isExtended ? 'translateY(0)' : 'translateY(-50%)'}
-              transition="transform 350ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s"
-            >
+      <Flex
+        w="360px"
+        pos="absolute"
+        left="0"
+        h={`calc(100vh - ${headerHeight}px)`}
+        zIndex="3"
+        pl="4"
+        py="4"
+        margin="5px"
+        onMouseLeave={handleMouseLeave}
+        transform={isExtended ? 'translateY(0)' : 'translateY(-50%)'}
+        transition="transform 350ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s"
+      >
+        <Accordion allowToggle>
+          <AccordionItem>
+            <h2>
+              <AccordionButton>
+                <Box as='span' flex='1' textAlign='center'>
+                  Componentes
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel>
               <Stack
                 w="full"
                 rounded="lg"
@@ -257,10 +257,10 @@ export const BlocksSideBar = () => {
                   <Flex w="5px" h="20px" bgColor="gray.400" rounded="md" />
                 </Flex>
               </Fade>
-            </Flex>
-          </AccordionPanel>
-        </AccordionItem>
-      </Accordion> 
+            </AccordionPanel>
+          </AccordionItem>
+        </Accordion> 
+      </Flex>
     </Box> 
   );
 }
