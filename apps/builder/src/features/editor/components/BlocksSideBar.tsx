@@ -224,10 +224,7 @@ export const BlocksSideBar = () => {
       <Collapse in={!isLocked} unmountOnExit>
         <Flex
           pos="absolute"
-          h="100%"
-          right="-70px"
-          w="450px"
-          top="0"
+          h="20%"
           justify="flex-end"
           pr="10"
           align="center"
