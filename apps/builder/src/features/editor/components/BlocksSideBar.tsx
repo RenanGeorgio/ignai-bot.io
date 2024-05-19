@@ -118,12 +118,11 @@ export const BlocksSideBar = () => {
       w="360px"
       pos="absolute"
       left="0"
-      h={`calc(100vh - ${headerHeight}px)`}
+      h={isExtended ? `calc(100vh - ${headerHeight}px)` : "-50%"}
       zIndex="2"
       pl="4"
       py="4"
       onMouseLeave={handleMouseLeave}
-      transform={isExtended ? 'y: 0' : 'y: -50%'}
       transition="transform 350ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s"
     >
       <Stack
