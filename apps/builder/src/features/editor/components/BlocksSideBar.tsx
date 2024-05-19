@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 import { 
   Stack, 
-  //HStack,
+  HStack,
   Text, 
   SimpleGrid, 
   useEventListener, 
@@ -13,12 +13,12 @@ import {
   Tooltip, 
   Collapse, 
   useColorModeValue, 
-  //Accordion, 
-  //AccordionItem, 
-  //AccordionButton,
-  //AccordionIcon,
-  //AccordionPanel,
-  //Box
+  Accordion, 
+  AccordionItem, 
+  AccordionButton,
+  AccordionIcon,
+  AccordionPanel,
+  Box
 } from '@chakra-ui/react'
 import { useBlockDnd } from '@/features/graph/providers/GraphDndProvider'
 import { BlockCard } from './BlockCard'
@@ -38,6 +38,7 @@ const legacyIntegrationBlocks = [
   IntegrationBlockType.OPEN_AI,
   IntegrationBlockType.ZEMANTIC_AI,
 ]
+
 /*
 const variants = {
   open: { opacity: 1, x: 0 },
@@ -118,129 +119,146 @@ export const BlocksSideBar = () => {
       w="360px"
       pos="absolute"
       left="0"
-      h={isExtended ? `calc(100vh - ${headerHeight}px)` : "-50%"}
+      h={`calc(100vh - ${headerHeight}px)`}
       zIndex="2"
       pl="4"
       py="4"
       onMouseLeave={handleMouseLeave}
+      transform={isExtended ? 'translateX(0)' : 'translateX(-350px)'}
       transition="transform 350ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s"
     >
-      <Stack
-        w="full"
-        rounded="lg"
-        shadow="xl"
-        borderWidth="1px"
-        pt="2"
-        pb="10"
-        px="4"
-        bgColor={useColorModeValue('white', 'gray.900')}
-        spacing={6}
-        userSelect="none"
-        overflowY="auto"
-      >
-        <Flex justifyContent="flex-end">
-          <Tooltip
-            label={
-              isLocked
-                ? t('editor.sidebarBlocks.sidebar.unlock.label')
-                : t('editor.sidebarBlocks.sidebar.lock.label')
-            }
+      <Accordion allowToggle>
+        <AccordionItem>
+          <Stack
+            w="full"
+            rounded="lg"
+            shadow="xl"
+            borderWidth="1px"
+            pt="2"
+            pb="10"
+            px="4"
+            bgColor={useColorModeValue('white', 'gray.900')}
+            spacing={6}
+            userSelect="none"
+            overflowY="auto"
           >
-            <IconButton
-              icon={isLocked ? <LockedIcon /> : <UnlockedIcon />}
-              aria-label={
-                isLocked
-                  ? t('editor.sidebarBlocks.sidebar.icon.unlock.label')
-                  : t('editor.sidebarBlocks.sidebar.icon.lock.label')
-              }
-              size="sm"
-              onClick={handleLockClick}
-            />
-          </Tooltip>
-        </Flex>
+            <Flex justifyContent="flex-end">
+              <HStack>
+                <Tooltip
+                  label={
+                    isLocked
+                      ? t('editor.sidebarBlocks.sidebar.unlock.label')
+                      : t('editor.sidebarBlocks.sidebar.lock.label')
+                  }
+                >
+                  <IconButton
+                    icon={isLocked ? <LockedIcon /> : <UnlockedIcon />}
+                    aria-label={
+                      isLocked
+                        ? t('editor.sidebarBlocks.sidebar.icon.unlock.label')
+                        : t('editor.sidebarBlocks.sidebar.icon.lock.label')
+                    }
+                    size="sm"
+                    onClick={handleLockClick}
+                  />
+                </Tooltip>
+                <h2>
+                  <AccordionButton>
+                    <Box as='span' flex='1' textAlign='center'>
+                      Componentes
+                    </Box>
+                    <AccordionIcon />
+                  </AccordionButton>
+                </h2>
+              </HStack>
+            </Flex>
 
-        <Stack>
-          <Text fontSize="sm" fontWeight="semibold">
-            {t('editor.sidebarBlocks.blockType.bubbles.heading')}
-          </Text>
-          <SimpleGrid columns={2} spacing="3">
-            {Object.values(BubbleBlockType).map((type) => (
-              <BlockCard key={type} type={type} onMouseDown={handleMouseDown} />
-            ))}
-          </SimpleGrid>
-        </Stack>
+            <Stack>
+              <Text fontSize="sm" fontWeight="semibold">
+                {t('editor.sidebarBlocks.blockType.bubbles.heading')}
+              </Text>
+              <SimpleGrid columns={2} spacing="3">
+                {Object.values(BubbleBlockType).map((type) => (
+                  <BlockCard key={type} type={type} onMouseDown={handleMouseDown} />
+                ))}
+              </SimpleGrid>
+            </Stack>
 
-        <Stack>
-          <Text fontSize="sm" fontWeight="semibold">
-            {t('editor.sidebarBlocks.blockType.inputs.heading')}
-          </Text>
-          <SimpleGrid columns={2} spacing="3">
-            {Object.values(InputBlockType).map((type) => (
-              <BlockCard key={type} type={type} onMouseDown={handleMouseDown} />
-            ))}
-          </SimpleGrid>
-        </Stack>
+            <AccordionPanel>
+              <Stack>
+                <Text fontSize="sm" fontWeight="semibold">
+                  {t('editor.sidebarBlocks.blockType.inputs.heading')}
+                </Text>
+                <SimpleGrid columns={2} spacing="3">
+                  {Object.values(InputBlockType).map((type) => (
+                    <BlockCard key={type} type={type} onMouseDown={handleMouseDown} />
+                  ))}
+                </SimpleGrid>
+              </Stack>
 
-        <Stack>
-          <Text fontSize="sm" fontWeight="semibold">
-            {t('editor.sidebarBlocks.blockType.logic.heading')}
-          </Text>
-          <SimpleGrid columns={2} spacing="3">
-            {Object.values(LogicBlockType).map((type) => (
-              <BlockCard key={type} type={type} onMouseDown={handleMouseDown} />
-            ))}
-          </SimpleGrid>
-        </Stack>
+              <Stack>
+                <Text fontSize="sm" fontWeight="semibold">
+                  {t('editor.sidebarBlocks.blockType.logic.heading')}
+                </Text>
+                <SimpleGrid columns={2} spacing="3">
+                  {Object.values(LogicBlockType).map((type) => (
+                    <BlockCard key={type} type={type} onMouseDown={handleMouseDown} />
+                  ))}
+                </SimpleGrid>
+              </Stack>
 
-        <Stack>
-          <Text fontSize="sm" fontWeight="semibold">
-            {t('editor.sidebarBlocks.blockType.integrations.heading')}
-          </Text>
-          <SimpleGrid columns={2} spacing="3">
-            {Object.values(IntegrationBlockType)
-              .concat(forgedBlockIds as any)
-              .filter((type) => !legacyIntegrationBlocks.includes(type))
-              .map((type) => (
-                <BlockCard
-                  key={type}
-                  type={type}
-                  onMouseDown={handleMouseDown}
-                />
-              ))}
-          </SimpleGrid>
-        </Stack>
+              <Stack>
+                <Text fontSize="sm" fontWeight="semibold">
+                  {t('editor.sidebarBlocks.blockType.integrations.heading')}
+                </Text>
+                <SimpleGrid columns={2} spacing="3">
+                  {Object.values(IntegrationBlockType)
+                    .concat(forgedBlockIds as any)
+                    .filter((type) => !legacyIntegrationBlocks.includes(type))
+                    .map((type) => (
+                      <BlockCard
+                        key={type}
+                        type={type}
+                        onMouseDown={handleMouseDown}
+                      />
+                    ))}
+                </SimpleGrid>
+              </Stack>
 
-        {draggedBlockType && (
-          <Portal>
-            <BlockCardOverlay
-              type={draggedBlockType}
-              onMouseUp={handleMouseUp}
-              pos="fixed"
+              {draggedBlockType && (
+                <Portal>
+                  <BlockCardOverlay
+                    type={draggedBlockType}
+                    onMouseUp={handleMouseUp}
+                    pos="fixed"
+                    top="0"
+                    left="0"
+                    style={{
+                      transform: `translate(${position.x}px, ${position.y}px) rotate(-2deg)`,
+                    }}
+                  />
+                </Portal>
+              )}
+            </AccordionPanel>
+          </Stack>
+          <Collapse in={!isLocked} unmountOnExit>
+            <Flex
+              pos="absolute"
+              h="100%"
+              right="-70px"
+              w="450px"
               top="0"
-              left="0"
-              style={{
-                transform: `translate(${position.x}px, ${position.y}px) rotate(-2deg)`,
-              }}
-            />
-          </Portal>
-        )}
-      </Stack>
-      <Collapse in={!isLocked} unmountOnExit>
-        <Flex
-          pos="absolute"
-          h="100%"
-          right="-70px"
-          w="450px"
-          top="0"
-          justify="flex-end"
-          pr="10"
-          align="center"
-          onMouseEnter={handleDockBarEnter}
-          zIndex={-1}
-        >
-          <Flex w="5px" h="20px" bgColor="gray.400" rounded="md" />
-        </Flex>
-      </Collapse>
+              justify="flex-end"
+              pr="10"
+              align="center"
+              onMouseEnter={handleDockBarEnter}
+              zIndex={-1}
+            >
+              <Flex w="5px" h="20px" bgColor="gray.400" rounded="md" />
+            </Flex>
+          </Collapse>
+        </AccordionItem>
+      </Accordion>
     </Flex>
   );
 }
