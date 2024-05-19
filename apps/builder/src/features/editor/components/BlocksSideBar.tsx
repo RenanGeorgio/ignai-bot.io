@@ -21,7 +21,7 @@ import {
 } from '@chakra-ui/react'
 import { useBlockDnd } from '@/features/graph/providers/GraphDndProvider'
 import { BlockCard } from './BlockCard'
-import { LockedIcon, UnlockedIcon } from '@/components/icons'
+import { LockedIcon, MinusIcon, UnlockedIcon } from '@/components/icons'
 import { BlockCardOverlay } from './BlockCardOverlay'
 import { headerHeight } from '../constants'
 import { useTranslate } from '@tolgee/react'
@@ -123,7 +123,11 @@ export const BlocksSideBar = () => {
                   <Box as='span' flex='1' textAlign='center'>
                     Componentes
                   </Box>
-                  <AccordionIcon />
+                  {isExpanded ? (
+                    <MinusIcon fontSize='12px' />
+                  ) : (
+                    <AccordionIcon />
+                  )}
                 </AccordionButton>
               </h2>
               <AccordionPanel>
