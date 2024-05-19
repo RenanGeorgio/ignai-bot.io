@@ -111,6 +111,8 @@ export const BlocksSideBar = () => {
     <Box
       w="380px"
       pos="absolute"
+      minH="10%"
+      maxH={`calc(100vh - ${headerHeight}px)`}
       left="0"
       zIndex="2"
     >
