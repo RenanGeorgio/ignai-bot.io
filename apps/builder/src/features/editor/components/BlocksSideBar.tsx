@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 import { 
   Stack, 
+  HStack,
   Text, 
   SimpleGrid, 
   useEventListener, 
@@ -145,31 +146,33 @@ export const BlocksSideBar = () => {
           >
             <AccordionItem>
               <h2>
-                <AccordionButton>
-                  <Box as='span' flex='1' textAlign='center'>
-                    Componentes
-                  </Box>
-                  <AccordionIcon />
-                </AccordionButton>
                 <Flex justifyContent="flex-end">
-                  <Tooltip
-                    label={
-                      isLocked
-                        ? t('editor.sidebarBlocks.sidebar.unlock.label')
-                        : t('editor.sidebarBlocks.sidebar.lock.label')
-                    }
-                  >
-                    <IconButton
-                      icon={isLocked ? <LockedIcon /> : <UnlockedIcon />}
-                      aria-label={
+                  <HStack>
+                    <Tooltip
+                      label={
                         isLocked
-                          ? t('editor.sidebarBlocks.sidebar.icon.unlock.label')
-                          : t('editor.sidebarBlocks.sidebar.icon.lock.label')
+                          ? t('editor.sidebarBlocks.sidebar.unlock.label')
+                          : t('editor.sidebarBlocks.sidebar.lock.label')
                       }
-                      size="sm"
-                      onClick={handleLockClick}
-                    />
-                  </Tooltip>
+                    >
+                      <IconButton
+                        icon={isLocked ? <LockedIcon /> : <UnlockedIcon />}
+                        aria-label={
+                          isLocked
+                            ? t('editor.sidebarBlocks.sidebar.icon.unlock.label')
+                            : t('editor.sidebarBlocks.sidebar.icon.lock.label')
+                        }
+                        size="sm"
+                        onClick={handleLockClick}
+                      />
+                    </Tooltip>
+                    <AccordionButton>
+                      <Box as='span' flex='1' textAlign='center'>
+                        Componentes
+                      </Box>
+                      <AccordionIcon />
+                    </AccordionButton>
+                  </HStack>
                 </Flex>
               </h2>
               <AccordionPanel>
