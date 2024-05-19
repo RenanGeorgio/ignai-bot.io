@@ -39,6 +39,11 @@ const legacyIntegrationBlocks = [
   IntegrationBlockType.ZEMANTIC_AI,
 ]
 
+const variants = {
+  open: { opacity: 1, x: 0 },
+  closed: { opacity: 0, x: "-100%" },
+}
+
 export const BlocksSideBar = () => {
   const { t } = useTranslate();
   const { setDraggedBlockType, draggedBlockType } = useBlockDnd();
@@ -118,7 +123,8 @@ export const BlocksSideBar = () => {
       pl="4"
       py="4"
       onMouseLeave={handleMouseLeave}
-      transform={isExtended ? 'translateX(0)' : 'translateX(-350px)'}
+      variants={variants}
+      transform={isExtended ? 'open' : 'closed'}
       transition="transform 350ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s"
     >
       <Stack
@@ -225,6 +231,7 @@ export const BlocksSideBar = () => {
         <Flex
           pos="absolute"
           h="100%"
+          right="-70px"
           w="450px"
           top="0"
           justify="flex-end"
