@@ -124,8 +124,6 @@ export const BlocksSideBar = () => {
       py="4"
       onMouseLeave={handleMouseLeave}
       variants={variants}
-      transform={isExtended ? 'open' : 'closed'}
-      transition="transform 350ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s"
     >
       <Stack
         w="full"
