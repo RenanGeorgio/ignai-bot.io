@@ -127,21 +127,21 @@ export const BlocksSideBar = () => {
       transform={isExtended ? 'translateX(0)' : 'translateX(-350px)'}
       transition="transform 350ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s"
     >
-      <Accordion allowToggle>
-        <AccordionItem>
-          <Stack
-            w="full"
-            rounded="lg"
-            shadow="xl"
-            borderWidth="1px"
-            pt="2"
-            pb="10"
-            px="4"
-            bgColor={useColorModeValue('white', 'gray.900')}
-            spacing={6}
-            userSelect="none"
-            overflowY="auto"
-          >
+      <Stack
+        w="full"
+        rounded="lg"
+        shadow="xl"
+        borderWidth="1px"
+        pt="2"
+        pb="10"
+        px="4"
+        bgColor={useColorModeValue('white', 'gray.900')}
+        spacing={6}
+        userSelect="none"
+        overflowY="auto"
+      >
+        <Accordion allowToggle>
+          <AccordionItem>
             <Flex justifyContent="flex-end">
               <HStack>
                 <Tooltip
@@ -240,25 +240,25 @@ export const BlocksSideBar = () => {
                 </Portal>
               )}
             </AccordionPanel>
-          </Stack>
-          <Collapse in={!isLocked} unmountOnExit>
-            <Flex
-              pos="absolute"
-              h="100%"
-              right="-70px"
-              w="450px"
-              top="0"
-              justify="flex-end"
-              pr="10"
-              align="center"
-              onMouseEnter={handleDockBarEnter}
-              zIndex={-1}
-            >
-              <Flex w="5px" h="20px" bgColor="gray.400" rounded="md" />
-            </Flex>
-          </Collapse>
-        </AccordionItem>
-      </Accordion>
+          </AccordionItem>
+        </Accordion>
+      </Stack>
+      <Collapse in={!isLocked} unmountOnExit>
+        <Flex
+          pos="absolute"
+          h="100%"
+          right="-70px"
+          w="450px"
+          top="0"
+          justify="flex-end"
+          pr="10"
+          align="center"
+          onMouseEnter={handleDockBarEnter}
+          zIndex={-1}
+        >
+          <Flex w="5px" h="20px" bgColor="gray.400" rounded="md" />
+        </Flex>
+      </Collapse>
     </Flex>
   );
 }
