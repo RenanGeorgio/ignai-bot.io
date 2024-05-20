@@ -21,7 +21,7 @@ export type Message = {
   updatedAt?: string
 }
 
-interface User {
+export interface User {
   name: string
   email: string
 }
@@ -29,7 +29,7 @@ interface User {
 export interface Chat {
   id: string
   members: User[]
-  messages?: Message[]
+  messages: Message[]
   origin: {
     platform: 'facebook' | 'instagram' | 'telegram' | 'web' | 'whatsapp'
     chatId?: string
@@ -38,13 +38,12 @@ export interface Chat {
   __v?: number
 }
 
-
 type OnlineUser = {
   userId: string
   socketId: string
 }
 
-export type ChatContextType = { 
+export type ChatContextType = {
   userChats: Chat[]
   isUserChatsLoading: boolean
   userChatsError: string | null
