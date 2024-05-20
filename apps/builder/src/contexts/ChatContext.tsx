@@ -11,32 +11,40 @@ import { baseUrl, postRequest, getRequest } from '@/services/api'
 import useAuth from '@/hooks/useAuth'
 import compareArrays from '@/helpers/compareArrays'
 
+export type Message = {
+  _id: string
+  senderId: string
+  chatId?: string
+  text: string
+  timestamp?: number
+  createdAt?: string
+  updatedAt?: string
+}
+
+interface User {
+  name: string
+  email: string
+}
+
+export interface Chat {
+  id: string
+  members: User[]
+  messages?: Message[]
+  origin: {
+    platform: 'facebook' | 'instagram' | 'telegram' | 'web' | 'whatsapp'
+    chatId?: string
+  }
+  timestamps?: string
+  __v?: number
+}
+
+
 type OnlineUser = {
   userId: string
   socketId: string
 }
 
-type Chat = {
-  origin: {
-    platform: string
-    chatId: string
-  }
-  _id: string
-  members: string[]
-  timestamps: string
-  __v: number
-}
-
-type Message = {
-  _id: string
-  senderId: string
-  chatId: string
-  text: string
-  createdAt: string
-  updatedAt: string
-}
-
-export type ChatContextType = {
+export type ChatContextType = { 
   userChats: Chat[]
   isUserChatsLoading: boolean
   userChatsError: string | null

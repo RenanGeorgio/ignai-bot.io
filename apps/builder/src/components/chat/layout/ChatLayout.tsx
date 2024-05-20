@@ -6,27 +6,7 @@ import { UserChat } from '../UserChat'
 import useChat from '@/hooks/useChat'
 
 import styles from './ChatLayout.module.css'
-
-interface Message {
-  id: string
-  senderId: string
-  text: string
-  timestamp: number
-}
-
-interface User {
-  name: string
-  email: string
-}
-
-interface Chat {
-  id: string
-  members: User[]
-  messages: Message[]
-  origin: {
-    platform: 'facebook' | 'instagram' | 'telegram' | 'web' | 'whatsapp'
-  }
-}
+import { Chat } from '@/contexts/ChatContext'
 
 export default function LayoutChat() {
   const [showAddTicket, setShowAddTicket] = useState(false)
