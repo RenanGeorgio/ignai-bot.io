@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 import { 
   Stack, 
@@ -126,6 +126,18 @@ export const BlocksSideBar = () => {
     closeSideBar();
   }
 
+  const handleTransform = () => {
+    if (isLocked) {
+      return
+    }
+
+    if (isExtended) {
+      setIndex(0);
+    } else {
+      setIndex(-1);
+    }
+  }
+
   const handleExpandItem = () => {
     if (isExpanded) {
       const newHeight = height * 0.8;
@@ -137,13 +149,13 @@ export const BlocksSideBar = () => {
     setIsExpanded(!isExpanded);
   }
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (isExtended) {
       setIndex(0);
     } else {
       setIndex(-1);
     }
-  },[isExtended]);
+  },[isExtended]);*/
 
   return (
     <Flex
@@ -155,7 +167,7 @@ export const BlocksSideBar = () => {
       pl="4"
       py="4"
       onMouseLeave={handleMouseLeave}
-      //transform={isExtended ? 'translateX(0)' : 'translateX(-350px)'}
+      transform={handleTransform}
       transition="transform 350ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s"
     >
       <Stack
