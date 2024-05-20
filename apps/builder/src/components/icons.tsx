@@ -1329,8 +1329,8 @@ export const TelegramIcon = () => {
     <Icon
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 48 48"
-      width="30"
-      heigth="30"
+      width="22"
+      height="22"
     >
       <path fill="#29b6f6" d="M24 4A20 20 0 1 0 24 44A20 20 0 1 0 24 4Z" />
       <path
