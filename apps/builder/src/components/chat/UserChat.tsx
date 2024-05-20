@@ -9,34 +9,9 @@ import {
 } from '@/components/icons'
 // import avatar from '../../assets/images/avatar.png'
 import web from '@/assets/images/web.svg'
-
 import styles from '@/assets/styles/leftmenu.module.css'
+import { Chat, OnlineUser } from '@/contexts/ChatContext'
 
-type Message = {
-  id: string
-  senderId: string
-  text: string
-  timestamp: number
-}
-
-type User = {
-  name: string
-  email: string
-}
-
-type OnlineUser = {
-  userId: string
-  socketId: string
-}
-
-type Chat = {
-  id: string
-  members: User[]
-  messages: Message[]
-  origin: {
-    platform: 'facebook' | 'instagram' | 'telegram' | 'web' | 'whatsapp'
-  }
-}
 
 interface UserChatProps {
   chat: Chat

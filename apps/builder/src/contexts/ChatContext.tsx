@@ -38,7 +38,7 @@ export interface Chat {
   __v?: number
 }
 
-type OnlineUser = {
+export type OnlineUser = {
   userId: string
   socketId: string
 }
