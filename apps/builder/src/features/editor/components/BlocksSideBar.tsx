@@ -167,7 +167,7 @@ export const BlocksSideBar = () => {
       pl="4"
       py="4"
       onMouseLeave={handleMouseLeave}
-      transform={isExtended ? 'initial' : 'inherit'}
+      transform={isExtended ? 'scale3d(1, 1, 1)' : 'scale3d(0, 0, 1)'}
       transition="transform 350ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s"
     >
       <Stack
