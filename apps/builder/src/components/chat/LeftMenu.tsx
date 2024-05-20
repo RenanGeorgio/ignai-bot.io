@@ -92,7 +92,7 @@ export const LeftMenu: React.FC<LeftMenuProps> = ({
                 width={'50px'}
               />
               <div className={styles['text-2']}>
-                <TelegramIcon height={'30px'} width={'30px'} />
+                <TelegramIcon />
                 <div className={styles['text-wrapper-10']}>Lead 04433</div>
                 <div className={styles['text-wrapper-9']}>Orçamento</div>
               </div>
