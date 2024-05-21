@@ -82,11 +82,10 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
   const [messages, setMessages] = useState<Message[] | null>(null);
   // const [textMessageError, setTextMessageError] = useState<string | null>(null);
   const [newMessage, setNewMessage] = useState<Message | null>(null);
-  const [onlineUsers, setOnlineUsers] = useState<OnlineUser[]>([]);
+  const [onlineUsers, setOnlineUsers] = useState<OnlineUser[] | undefined>(undefined);
+  const [socket, setSocket] = useState<Socket | null>(null);
 
-  const [socket, setSocket] = useState<Socket | null>(null)
-
-  const { user } = useAuth()
+  const { user } = useAuth();
 
   useEffect(() => {
     const newSocket = io(process.env.REACT_APP_SERVER_API as string, {
@@ -97,6 +96,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
         'ngrok-skip-browser-warning': '69420',
       },
     })
+    
     setSocket(newSocket)
 
     return () => {
