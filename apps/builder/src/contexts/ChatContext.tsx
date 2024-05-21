@@ -180,6 +180,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
       const response = await getRequest(`${baseUrl}/api/chat/clients`);
 
       if (response.error) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         const value = JSON.stringify(response?.body);
         return setUserChatsError(value);
