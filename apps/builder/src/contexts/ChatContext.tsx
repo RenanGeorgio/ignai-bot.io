@@ -248,10 +248,12 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
         setIsMessagesLoading(false)
 
         if (response.error) {
-          setMessageError(response.error)
+          setMessageError(response.error.toString())
+        } else if (Array.isArray(response)) {
+          setMessages(response)
+        } else {
+          setMessageError('Unexpected response format')
         }
-
-        setMessages(response)
       }
     }
 
