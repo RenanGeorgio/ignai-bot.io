@@ -125,7 +125,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
     }
     
     if (currentChat != null) {
-      const recipientId = currentChat?.members?.find((id) => id !== user?.companyId);
+      const recipientId = currentChat?.members?.find((member: User) => member?.id !== user?.companyId);
 
       socket.emit('sendMessage', { ...newMessage, recipientId });
     }
