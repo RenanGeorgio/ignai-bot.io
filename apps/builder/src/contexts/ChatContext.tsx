@@ -155,8 +155,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
     }
 
     socket.on('newUserChat', (client: Chat) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      let isChatCreated: any = [];
+      let isChatCreated: User[] | undefined = undefined;
 
       if (userChats != undefined) {
         isChatCreated = userChats?.some((chat: Chat) => compareArrays(chat?.members, client?.members));
