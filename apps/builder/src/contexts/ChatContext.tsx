@@ -190,7 +190,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
       const pChats = response?.filter((client: Chat) => {
         let isChatCreated = false
 
-        if (user?.id === client?.id) {
+        if (user?.id == client?.id) {
           return false
         }
 
