@@ -155,15 +155,15 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
     }
 
     socket.on('newUserChat', (client: Chat) => {
-      const isChatCreated = userChats?.some((chat) =>
-        compareArrays(chat?.members, client?.members)
+      const isChatCreated = userChats?.some((chat: Chat) =>
+        compareArrays(chat?.members, client?.members);
       )
 
       if (isChatCreated) {
         return
       }
 
-      setUserChats((prev) => [...(prev || []), client])
+      setUserChats((prev) => [...(prev || []), client]);
     })
 
     return () => {
