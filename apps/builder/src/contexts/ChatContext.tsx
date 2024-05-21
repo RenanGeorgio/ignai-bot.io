@@ -96,7 +96,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
         'ngrok-skip-browser-warning': '69420',
       },
     })
-    
+
     setSocket(newSocket)
 
     return () => {
@@ -177,10 +177,11 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
     }
 
     const getClients = async () => {
-      const response = await getRequest(`${baseUrl}/api/chat/clients`)
+      const response = await getRequest(`${baseUrl}/api/chat/clients`);
 
       if (response.error) {
-        return setUserChatsError(response?.error)
+        const value = awai response?.text();
+        return setUserChatsError(value);
       }
 
       const pChats = response?.filter((client: Chat) => {
