@@ -25,8 +25,6 @@ interface ApiResponseError {
   error: string
 }
 
-type ApiResponse = ApiResponseSuccess | ApiResponseError
-
 export const useFetchRecipient = (chat: Chat, user: User) => {
   const [recipientUser, setRecipientUser] = useState<RecipientUser | null>(null)
   const [error, setError] = useState<string | null>(null)
