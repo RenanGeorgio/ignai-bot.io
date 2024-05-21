@@ -137,14 +137,17 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
     }
 
     socket.on('getMessage', (res: Message) => {
-      if (currentChat?._id !== res.chatId) return
-      setMessages((prev) => [...(prev || []), res])
+      if (currentChat?.id !== res.chatId) {
+        return
+      }
+
+      setMessages((prev) => [...(prev || []), res]);
     })
 
     return () => {
       socket.off('getMessage')
     }
-  }, [socket, currentChat])
+  }, [socket, currentChat]);
 
   useEffect(() => {
     if (socket === null) {
@@ -166,7 +169,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
     return () => {
       socket.off('newUserChat')
     }
-  }, [socket, userChats])
+  }, [socket, userChats]);
 
   useEffect(() => {
     if (!userChats) {
@@ -183,13 +186,13 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
       const pChats = response?.filter((client: Chat) => {
         let isChatCreated = false
 
-        if (user?._id === client?._id) {
+        if (user?._id === client?.id) {
           return false
         }
 
         if (userChats) {
           isChatCreated = userChats?.some((chat) =>
-            chat?.members?.includes(client?._id)
+            chat?.members?.includes(client?.id)
           )
         }
 
@@ -199,7 +202,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
     }
 
     getClients()
-  }, [user, userChats])
+  }, [user, userChats]);
 
   useEffect(() => {
     const getUserChats = async () => {
