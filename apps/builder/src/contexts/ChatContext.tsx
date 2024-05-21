@@ -155,6 +155,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
     }
 
     socket.on('newUserChat', (client: Chat) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       let isChatCreated: any = [];
 
       if (userChats != undefined) {
