@@ -177,7 +177,8 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
     }
 
     const getClients = async () => {
-      const response = await getRequest(`${baseUrl}/api/chat/clients`);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const response: any = await getRequest(`${baseUrl}/api/chat/clients`);
 
       if (response.error) {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -194,9 +195,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
         }
 
         if (userChats) {
-          isChatCreated = userChats?.some((chat) =>
-            chat?.members?.includes(client?.id)
-          )
+          isChatCreated = userChats?.some((chat) => chat?.members?.includes(client?.id))
         }
 
         return !isChatCreated
