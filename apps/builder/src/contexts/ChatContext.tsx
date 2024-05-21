@@ -190,20 +190,21 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
       const pChats = response?.filter((client: Chat) => {
         let isChatCreated = false
 
-        if (user?._id === client?.id) {
+        if (user?.id === client?.id) {
           return false
         }
 
         if (userChats) {
-          isChatCreated = userChats?.some((chat) => chat?.members?.includes(client?.id))
+          isChatCreated = userChats?.some((chat) => chat?.members?.includes(client?.id));
         }
 
         return !isChatCreated
-      })
-      setPotentialChats(pChats)
+      });
+
+      setPotentialChats(pChats);
     }
 
-    getClients()
+    getClients();
   }, [user, userChats]);
 
   useEffect(() => {
@@ -235,7 +236,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
 
       if (currentChat) {
         const response = await getRequest(
-          `${baseUrl}/api/chat/message/${currentChat._id}`
+          `${baseUrl}/api/chat/message/${currentChat?.id}`
         );
 
         setIsMessagesLoading(false);
