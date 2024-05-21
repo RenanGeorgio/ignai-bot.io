@@ -221,9 +221,11 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
         )
 
         if (response.error) {
-          return setUserChatsError(response.error)
-        } else {
+          setUserChatsError(response.error.toString())
+        } else if (Array.isArray(response)) {
           setUserChats(response)
+        } else {
+          setUserChatsError('Unexpected response format')
         }
 
         setIsUserChatsLoading(false)
