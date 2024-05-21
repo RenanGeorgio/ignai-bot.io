@@ -72,17 +72,17 @@ type ChatProviderProps = {
 }
 
 export const ChatProvider = ({ children }: ChatProviderProps) => {
-  const [userChats, setUserChats] = useState<Chat[]>([])
-  const [isUserChatsLoading, setIsUserChatsLoading] = useState<boolean>(false)
-  const [userChatsError, setUserChatsError] = useState<string | null>(null)
-  const [potentialChats, setPotentialChats] = useState<Chat[] | null>(null)
-  const [currentChat, setCurrentChat] = useState<Chat | null>(null)
-  const [isMessagesLoading, setIsMessagesLoading] = useState<boolean>(false)
-  const [messageError, setMessageError] = useState<string | null>(null)
-  const [messages, setMessages] = useState<Message[] | null>(null)
-  // const [textMessageError, setTextMessageError] = useState<string | null>(null)
-  const [newMessage, setNewMessage] = useState<Message | null>(null)
-  const [onlineUsers, setOnlineUsers] = useState<OnlineUser[]>([])
+  const [userChats, setUserChats] = useState<Chat[] | undefined>(undefined);
+  const [isUserChatsLoading, setIsUserChatsLoading] = useState<boolean>(false);
+  const [userChatsError, setUserChatsError] = useState<string | null>(null);
+  const [potentialChats, setPotentialChats] = useState<Chat[] | null>(null);
+  const [currentChat, setCurrentChat] = useState<Chat | null>(null);
+  const [isMessagesLoading, setIsMessagesLoading] = useState<boolean>(false);
+  const [messageError, setMessageError] = useState<string | null>(null);
+  const [messages, setMessages] = useState<Message[] | null>(null);
+  // const [textMessageError, setTextMessageError] = useState<string | null>(null);
+  const [newMessage, setNewMessage] = useState<Message | null>(null);
+  const [onlineUsers, setOnlineUsers] = useState<OnlineUser[]>([]);
 
   const [socket, setSocket] = useState<Socket | null>(null)
 
@@ -155,7 +155,11 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
     }
 
     socket.on('newUserChat', (client: Chat) => {
-      const isChatCreated = userChats?.some((chat: Chat) => compareArrays(chat?.members, client?.members));
+      let isChatCreated: any = [];
+
+      if (userChats != undefined) {
+        isChatCreated = userChats?.some((chat: Chat) => compareArrays(chat?.members, client?.members));
+      }
 
       if (isChatCreated) {
         return
