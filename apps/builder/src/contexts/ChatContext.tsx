@@ -180,7 +180,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
       const response = await getRequest(`${baseUrl}/api/chat/clients`);
 
       if (response.error) {
-        const value = awai response?.text();
+        const value = await response?.text();
         return setUserChatsError(value);
       }
 
