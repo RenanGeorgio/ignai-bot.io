@@ -180,6 +180,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
       const response = await getRequest(`${baseUrl}/api/chat/clients`);
 
       if (response.error) {
+        // @ts-ignore
         const value = JSON.stringify(response?.body);
         return setUserChatsError(value);
       }
