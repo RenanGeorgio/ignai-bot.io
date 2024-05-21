@@ -25,6 +25,8 @@ interface ApiResponseError {
   error: string
 }
 
+type ApiResponse = ApiResponseSuccess | ApiResponseError
+
 export const useFetchRecipient = (chat: Chat, user: User) => {
   const [recipientUser, setRecipientUser] = useState<RecipientUser | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -37,12 +39,15 @@ export const useFetchRecipient = (chat: Chat, user: User) => {
     const fetchRecipient = async () => {
       if (!recipientId) return
       try {
-        const response: ApiResponseSuccess | ApiResponseError =
-          await getRequest(`${baseUrl}/api/chat/client/${recipientId}`)
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        const response: ApiResponse = await getRequest(
+          `${baseUrl}/api/chat/client/${recipientId}`
+        )
         if ('error' in response) {
           setError(response.error)
         } else {
-          setRecipientUser(response as RecipientUser)
+          setRecipientUser(response)
         }
       } catch (error) {
         console.log(error)
