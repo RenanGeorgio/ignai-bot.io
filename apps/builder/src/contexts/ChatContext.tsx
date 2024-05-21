@@ -72,7 +72,7 @@ type ChatProviderProps = {
 }
 
 export const ChatProvider = ({ children }: ChatProviderProps) => {
-  const [userChats, setUserChats] = useState<Chat[] | undefined>(undefined)
+  const [userChats, setUserChats] = useState<Chat[]>([])
   const [isUserChatsLoading, setIsUserChatsLoading] = useState<boolean>(false)
   const [userChatsError, setUserChatsError] = useState<string | null>(null)
   const [potentialChats, setPotentialChats] = useState<Chat[] | null>(null)
@@ -82,9 +82,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
   const [messages, setMessages] = useState<Message[] | null>(null)
   // const [textMessageError, setTextMessageError] = useState<string | null>(null);
   const [newMessage, setNewMessage] = useState<Message | null>(null)
-  const [onlineUsers, setOnlineUsers] = useState<OnlineUser[] | undefined>(
-    undefined
-  )
+  const [onlineUsers, setOnlineUsers] = useState<OnlineUser[]>([])
   const [socket, setSocket] = useState<Socket | null>(null)
 
   const { user } = useAuth()
@@ -286,8 +284,9 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
         return console.log(response.error)
       }
 
-      setNewMessage(response)
-      setMessages((prev) => [...(prev || []), response])
+      const messageData = response.data as Message
+      setNewMessage(messageData)
+      setMessages((prev) => [...(prev || []), messageData])
       setTextMessage('')
     },
     []
