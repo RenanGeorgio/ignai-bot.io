@@ -39,8 +39,8 @@ export const useFetchRecipient = (chat: Chat, user: User) => {
     const fetchRecipient = async () => {
       if (!recipientId) return
       try {
-        const response: ApiResponse<unknown> = await getRequest(
-          `${baseUrl}/api/chat/client/${recipientId}`
+        const response: ApiResponse = <unknown>(
+          await getRequest(`${baseUrl}/api/chat/client/${recipientId}`)
         )
         if ('error' in response) {
           setError(response.error)
