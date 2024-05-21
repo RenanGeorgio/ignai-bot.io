@@ -22,8 +22,10 @@ export type Message = {
 }
 
 export interface User {
+  id?: string
   name: string
   email: string
+  companyId?: string
 }
 
 export interface Chat {
@@ -103,7 +105,10 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
   }, [user])
 
   useEffect(() => {
-    if (socket === null) return
+    if (socket === null) {
+      return
+    }
+
     socket.emit('addNewUser', user?.companyId)
     socket.on('onlineUsers', (users: OnlineUser[]) => {
       setOnlineUsers(users)
@@ -115,16 +120,20 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
   }, [socket, user?.companyId])
 
   useEffect(() => {
-    if (!socket) return
-    const recipientId = currentChat?.members?.find(
-      (id: string) => id !== user?.companyId
-    )
+    if (!socket) {
+      return
+    }
+    
+    const recipientId = currentChat?.members?.find((id: string) => id !== user?.companyId);
 
     socket.emit('sendMessage', { ...newMessage, recipientId })
   }, [socket, newMessage, currentChat, user?.companyId])
 
   useEffect(() => {
-    if (!socket) return
+    if (!socket) {
+      return
+    }
+
     socket.on('getMessage', (res: Message) => {
       if (currentChat?._id !== res.chatId) return
       setMessages((prev) => [...(prev || []), res])
@@ -136,13 +145,18 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
   }, [socket, currentChat])
 
   useEffect(() => {
-    if (socket === null) return
+    if (socket === null) {
+      return
+    }
+
     socket.on('newUserChat', (client: Chat) => {
       const isChatCreated = userChats?.some((chat) =>
-        compareArrays(chat.members, client.members)
+        compareArrays(chat?.members, client?.members)
       )
 
-      if (isChatCreated) return
+      if (isChatCreated) {
+        return
+      }
 
       setUserChats((prev) => [...(prev || []), client])
     })
@@ -153,21 +167,27 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
   }, [socket, userChats])
 
   useEffect(() => {
-    if (!userChats) return
+    if (!userChats) {
+      return
+    }
+
     const getClients = async () => {
       const response = await getRequest(`${baseUrl}/api/chat/clients`)
 
       if (response.error) {
-        return setUserChatsError(response.error)
+        return setUserChatsError(response?.error)
       }
+
       const pChats = response?.filter((client: Chat) => {
         let isChatCreated = false
 
-        if (user?._id === client?._id) return false
+        if (user?._id === client?._id) {
+          return false
+        }
 
         if (userChats) {
           isChatCreated = userChats?.some((chat) =>
-            chat.members.includes(client._id)
+            chat?.members?.includes(client?._id)
           )
         }
 
@@ -182,46 +202,51 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
   useEffect(() => {
     const getUserChats = async () => {
       if (user?.companyId) {
-        setIsUserChatsLoading(true)
+        setIsUserChatsLoading(true);
+
         const response = await getRequest(
           `${baseUrl}/api/chat/${user.companyId}`
-        )
+        );
+
         if (response.error) {
           return setUserChatsError(response.error)
         } else {
           setUserChats(response)
         }
+
         setIsUserChatsLoading(false)
       }
     }
 
-    getUserChats()
-  }, [user])
+    getUserChats();
+  }, [user]);
 
   useEffect(() => {
     const getMessages = async () => {
-      setIsMessagesLoading(true)
-      setMessageError(null)
+      setIsMessagesLoading(true);
+      setMessageError(null);
+
       if (currentChat) {
         const response = await getRequest(
           `${baseUrl}/api/chat/message/${currentChat._id}`
-        )
-        setIsMessagesLoading(false)
+        );
+
+        setIsMessagesLoading(false);
 
         if (response.error) {
-          setMessageError(response.error)
+          setMessageError(response.error);
         }
 
-        setMessages(response)
+        setMessages(response);
       }
     }
 
-    getMessages()
-  }, [currentChat])
+    getMessages();
+  }, [currentChat]);
 
   const updateCurrentChat = useCallback((chat: Chat) => {
-    setCurrentChat(chat)
-  }, [])
+    setCurrentChat(chat);
+  }, []);
 
   const sendTextMessage = useCallback(
     async (
@@ -230,22 +255,25 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
       currentChatId: string,
       setTextMessage: (text: string) => void
     ) => {
-      if (textMessage === '') return
+      if (textMessage === '') {
+        return
+      }
+
       const response = await postRequest(`${baseUrl}/api/chat/message`, {
         text: textMessage,
         senderId: sender.companyId,
         chatId: currentChatId,
       })
+
       if (response.error) {
         // return setTextMessageError(response.error)
         return console.log(response.error)
       }
+
       setNewMessage(response)
       setMessages((prev) => [...(prev || []), response])
       setTextMessage('')
-    },
-    []
-  )
+  },[]);
 
   return (
     <ChatContext.Provider
@@ -265,5 +293,5 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
     >
       {children}
     </ChatContext.Provider>
-  )
+  );
 }
