@@ -1,6 +1,19 @@
 import { ErrorPage } from '@/components/ErrorPage'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 
+type Obj = {
+  [key: string]: any;
+};
+
+type BrowserProps = {
+  name: string;
+  regex: Obj;
+};
+
+interface Props {
+  incompatibleBrowser: string | null
+}
+
 // Browsers that doesn't support ES modules and/or web components
 const incompatibleBrowsers = [
   {
@@ -17,27 +30,8 @@ const incompatibleBrowsers = [
   },
 ]
 
-
-export const getServerSideProps: GetServerSideProps = async (
-  context: GetServerSidePropsContext
-) => {
-  const incompatibleBrowser = incompatibleBrowsers.find((browser) => browser.regex.test(context.req.headers['user-agent'] ?? ''))?.name ?? null
-  
-  try {
-    return {
-      props: {
-        incompatibleBrowser
-      },
-    }
-  } catch (err) {
-    console.error(err)
-  }
-}
-
-export default function Home({ incompatibleBrowser }: {
-  incompatibleBrowser: string | null
-}){
-  if (incompatibleBrowser)
+export default function Home({ incompatibleBrowser }: Props){
+  if (incompatibleBrowser) {
     return (
       <ErrorPage
         error={
@@ -46,9 +40,24 @@ export default function Home({ incompatibleBrowser }: {
           )
         }
       />
-    )
+    );
+  }
   
   return (
     <></>
-  )
+  );
+}
+
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
+  const incompatibleBrowser = incompatibleBrowsers?.find((browser: BrowserProps) => browser?.regex?.test(context?.req?.headers['user-agent'] ?? ''))?.name ?? null;
+  
+  try {
+    return {
+      props: {
+        incompatibleBrowser
+      }
+    }
+  } catch (err) {
+    console.error(err);
+  }
 }
