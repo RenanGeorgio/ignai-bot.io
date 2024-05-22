@@ -88,7 +88,7 @@ const Chat: React.FC = () => {
           )}
           {activePage === 'Histórico' && (
             <>
-              <ThemeProvider theme={{ [MuiTheme]: MuiTheme }}>
+              <ThemeProvider theme={{ ['MuiTheme']: MuiTheme }}>
                 <History />
               </ThemeProvider>
             </>
