@@ -1,6 +1,7 @@
 import { ErrorPage } from '@/components/ErrorPage'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Obj = {
   [key: string]: any;
 };
