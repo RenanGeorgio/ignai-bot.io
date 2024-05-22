@@ -8,17 +8,33 @@ declare module '@mui/material/styles' {
   }
 
   interface Palette {
-    neutral: Palette["primary"];
+    neutral?: Palette["primary"]
+    gradient?: PaletteColor
+    transparent?: PaletteColor
+    secondary?: {
+      transparent?: string
+    }
+    mode?: string
   }
   interface PaletteOptions {
-    neutral: PaletteOptions["primary"];
+    neutral?: PaletteOptions["primary"]
   }
 
   interface PaletteColor {
-    darker?: string;
+    darker?: string
+    transparent?: string
+    gradient?: PaletteColor
   }
   interface SimplePaletteColorOptions {
-    darker?: string;
+    darker?: string
+  }
+  interface PaletteColorOptions {
+    main?: string
+    dark?: string
+    light?: string
+    transparent?: string
+    gradient?: string
+    test?: string
   }
   // allow configuration using `createTheme`
   interface ThemeOptions {
