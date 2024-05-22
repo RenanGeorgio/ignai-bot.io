@@ -12,7 +12,7 @@ import {
 import styles from '@/assets/styles/graph.module.css'
 
 interface GraphThemesProps {
-  // month: string
+  month?: string;
 }
 
 const GraphThemes: React.FC<GraphThemesProps> = () => {
