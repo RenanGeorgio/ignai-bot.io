@@ -22,6 +22,7 @@ const MuiTheme = createTheme({
   components: {
     MuiDataGrid: {
       styleOverrides: {
+        // @ts-ignore
         root: {
           border: 1,
           borderColor: colors.gray,
