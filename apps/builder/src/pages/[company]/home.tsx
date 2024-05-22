@@ -49,7 +49,8 @@ export default function Home({ incompatibleBrowser }: Props){
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext): any => {
   const incompatibleBrowser = incompatibleBrowsers?.find((browser: BrowserProps) => browser?.regex?.test(context?.req?.headers['user-agent'] ?? ''))?.name ?? null;
   
   try {
