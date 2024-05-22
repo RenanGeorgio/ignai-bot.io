@@ -3,7 +3,7 @@ import '@mui/material/styles'
 declare module '@mui/material/styles' {
   interface Theme {
     status: {
-      danger: string
+      danger: React.CSSProperties["color"] | string
     }
   }
 
@@ -39,7 +39,7 @@ declare module '@mui/material/styles' {
   // allow configuration using `createTheme`
   interface ThemeOptions {
     status?: {
-      danger?: string
+      danger?: React.CSSProperties["color"] | string
     }
   }
 }
