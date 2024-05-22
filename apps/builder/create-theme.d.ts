@@ -42,4 +42,8 @@ declare module '@mui/material/styles' {
       danger?: React.CSSProperties["color"] | string
     }
   }
+
+  interface Components {
+    [key: string]: any
+  }
 }

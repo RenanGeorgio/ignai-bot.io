@@ -13,6 +13,8 @@ import styles from '@/assets/styles/forms.module.css'
 import { colors } from '@/lib/theme'
 import { ThemeProvider } from '@mui/material'
 
+import type {} from '@mui/x-data-grid/themeAugmentation';
+
 const MuiTheme = createTheme({
   palette: {
     mode: 'light',
