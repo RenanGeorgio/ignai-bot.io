@@ -1,33 +1,29 @@
-:root {
+/* :root {
   --default-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Ubuntu, "Helvetica Neue", Helvetica, Arial, "PingFang SC",
     "Hiragino Sans GB", "Microsoft Yahei UI", "Microsoft Yahei",
     "Source Han Sans CN", sans-serif;
 }
-  
+   */
 .main-container,
 .main-container * {
   box-sizing: border-box;
-} 
-  
-input,
+}
+
+/* input,
 select,
-textarea,
-button {
-  /* outline: 2px; */
-}
-  
-.attachFileSpan:hover{
-  cursor: pointer; 
-}
-    
+textarea, */
+/* .attachFileSpan:hover {
+  cursor: pointer;
+} */
+
 .attachFileSpan {
-  background-color:#7367F029;
-  color: #7367F0;
-  border:1px solid blueviolet;
+  background-color: #7367f029;
+  color: #7367f0;
+  border: 1px solid blueviolet;
   border-radius: 5px;
   left: 0%;
-  cursor: pointer; 
+  cursor: pointer;
   align-items: center;
   width: 100%;
   display: flex;
@@ -35,17 +31,17 @@ button {
 }
 
 .inputs {
-  position:absolute;
+  position: absolute;
   height: 100%;
   width: 100%;
   opacity: 0;
-  cursor: pointer; 
+  cursor: pointer;
 }
-  
+
 .buttonContainerInput {
   position: relative;
   display: flex;
-  cursor: pointer; 
+  cursor: pointer;
   width: 150px;
   height: 45px;
 }
@@ -105,7 +101,7 @@ button {
   border-radius: 6px;
   justify-content: flex-start;
 }
-  
+
 .text-2add {
   flex-shrink: 0;
   flex-basis: auto;
@@ -142,7 +138,7 @@ button {
   padding: 10px 20px 10px 20px;
   z-index: 8;
 }
-  
+
 /* aqui são os accordions os 3  */
 .group-2 {
   display: flex;
@@ -171,7 +167,7 @@ button {
   overflow: hidden;
   border-radius: 6px;
 }
-  
+
 .section-5 {
   display: flex;
   align-items: center;
@@ -186,7 +182,7 @@ button {
   overflow: hidden;
   border-radius: 6px;
 }
-  
+
 .img {
   flex-shrink: 0;
   position: relative;
@@ -207,7 +203,7 @@ button {
   z-index: 16;
   border-radius: 6px;
 }
-  
+
 /* aqui são os dados do accordion 2 */
 .wrapper-3 {
   display: flex;
@@ -237,7 +233,7 @@ button {
   overflow: hidden;
   border-radius: 6px;
 }
-  
+
 .img-2 {
   flex-shrink: 0;
   position: relative;
@@ -257,7 +253,7 @@ button {
   z-index: 21;
   border-radius: 6px;
 }
-  
+
 /* aqui são os dados do accordion 3 */
 .wrapper-4 {
   display: flex;
@@ -287,7 +283,7 @@ button {
   overflow: hidden;
   border-radius: 6px;
 }
-   
+
 .pic {
   flex-shrink: 0;
   position: relative;
@@ -362,7 +358,7 @@ button {
   white-space: nowrap;
   z-index: 31;
 }
-  
+
 .section-6 {
   display: flex;
   align-items: center;
@@ -422,7 +418,7 @@ button {
   position: relative;
   width: 38px;
   z-index: 36;
-  border-radius: 6px;  
+  border-radius: 6px;
 }
 .section-7 {
   display: flex;
@@ -738,9 +734,9 @@ button {
   flex-wrap: nowrap;
   flex-shrink: 0;
   position: relative;
-  padding: 4px ;
+  padding: 4px;
   z-index: 65;
-  justify-content: center;  
+  justify-content: center;
 }
 .form {
   display: flex;
@@ -767,12 +763,12 @@ button {
   gap: 10px;
   position: relative;
   width: 38px;
-  padding: 2px ;
+  padding: 2px;
   background: rgba(98, 95, 108, 0.153);
   z-index: 67;
   border-radius: 6px;
 }
-.image-upload{
+.image-upload {
   flex-shrink: 0;
   position: relative;
   width: 28px;
@@ -781,7 +777,7 @@ button {
   background-size: 100% 100%;
   z-index: 68;
 }
-  
+
 .section-b {
   display: flex;
   align-items: center;
@@ -804,7 +800,7 @@ button {
   padding: 10px 20px 10px 20px;
   z-index: 72;
 }
-  
+
 .img-8 {
   align-self: stretch;
   flex-shrink: 0;
@@ -839,7 +835,7 @@ button {
   border-radius: 6px;
   box-shadow: 0 2px 4px 0 rgba(165, 163, 174, 0.3);
 }
-  
+
 .section-d {
   display: flex;
   align-items: center;

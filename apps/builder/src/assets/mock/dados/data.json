@@ -1,0 +1,118 @@
+[
+  {
+    "id": 1,
+    "contato": {
+      "name": "Café Dois Irmãos",
+      "description": "Marge.Jacobson@gmail.com    27 99882-7820"
+    },
+    "assunto": "Preço de produto",
+    "date": "2023-01-15",
+    "ticket": 1235455848,
+    "status": "resolvido",
+    "acao": 1
+  },
+  {
+    "id": 2,
+    "contato": {
+      "name": "Não informado",
+      "description": "Marge.Jacobson@gmail.com    27 99882-7820"
+    },
+    "assunto": "Atraso de pedido",
+    "age": 42,
+    "date": "2023-02-22",
+    "ticket": 9876543210,
+    "status": "pendente",
+    "acao": 2
+  },
+  {
+    "id": 3,
+    "contato": {
+      "name": "Café Dois Irmãos",
+      "description": "Marge.Jacobson@gmail.com    27 99882-7820"
+    },
+    "assunto": "Preço de produto",
+    "age": 45,
+    "date": "2023-03-10",
+    "ticket": 4567890123,
+    "status": "resolvido",
+    "acao": 3
+  },
+  {
+    "id": 4,
+    "contato": {
+      "name": "Não informado",
+      "description": "Marge.Jacobson@gmail.com    27 99882-7820"
+    },
+    "assunto": "Atraso de pedido",
+    "age": 16,
+    "date": "2023-04-05",
+    "ticket": 1357924680,
+    "status": "pendente",
+    "acao": 4
+  },
+  {
+    "id": 5,
+    "contato": {
+      "name": "Planta e Raiz",
+      "description": "Marge.Jacobson@gmail.com    27 99882-7820"
+    },
+    "assunto": "Preço de produto",
+    "age": null,
+    "date": "2023-05-20",
+    "ticket": 2468013579,
+    "status": "resolvido",
+    "acao": 5
+  },
+  {
+    "id": 6,
+    "contato": {
+      "name": "Fazenda Soja SA",
+      "description": "Marge.Jacobson@gmail.com    27 99882-7820"
+    },
+    "assunto": "Atraso de pedido",
+    "age": 150,
+    "date": "2023-06-08",
+    "ticket": 987654321,
+    "status": "pendente",
+    "acao": 6
+  },
+  {
+    "id": 7,
+    "contato": {
+      "name": "Garlic e Ginseng SA",
+      "description": "Marge.Jacobson@gmail.com    27 99882-7820"
+    },
+    "assunto": "Preço de produto",
+    "age": 44,
+    "date": "2023-07-14",
+    "ticket": 1234567890,
+    "status": "resolvido",
+    "acao": 7
+  },
+  {
+    "id": 8,
+    "contato": {
+      "name": "Mandrake Root LTDA",
+      "description": "Marge.Jacobson@gmail.com    27 99882-7820"
+    },
+    "assunto": "Atraso de pedido",
+    "age": 36,
+    "date": "2023-08-30",
+    "ticket": 9870123456,
+    "status": "pendente",
+    "acao": 8
+  },
+  {
+    "id": 9,
+    "contato": {
+      "name": "Spider Silk LTDA",
+      "description": "Marge.Jacobson@gmail.com    27 99882-7820"
+    },
+    "assunto": "Preço de produto",
+    "age": 65,
+    "date": "2023-09-17",
+    "ticket": 1230123012,
+    "status": "resolvido",
+    "acao": 9
+  }
+]

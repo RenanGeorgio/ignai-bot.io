@@ -129,7 +129,7 @@
   height: 22px !important;
   position: relative !important;
   width: 22px !important;
-  color: #FFF !important;
+  color: #fff !important;
 }
 
 .left-menu .chevron-down {
@@ -181,7 +181,7 @@
   margin-top: -1px;
   position: relative;
   width: fit-content;
-  color: #7367F0;
+  color: #7367f0;
 }
 
 .left-menu .listLeftClient {
@@ -191,7 +191,7 @@
   background-color: #8f83fb;
   border: 0px none;
   margin: 5px;
-  color: #FFF;
+  color: #fff;
   border-radius: 6px;
   gap: 12px;
   padding: 8px 10px;
@@ -205,6 +205,7 @@
   border: 0.5px solid rgba(72, 72, 72, 0.081);
   flex: 0 0 auto;
   gap: 12px;
+  margin-bottom: 10px;
   padding: 8px 10px;
   width: 95%;
   cursor: pointer;
@@ -217,14 +218,14 @@
   margin-bottom: -25px;
 }
 
-.left-menu .avatar-client {
+/* .left-menu .avatar-client {
   width: 30px;
   height: 30px;
   margin: auto;
   background-color: #c4c2c2;
   border-radius: 50%;
   border: 1px solid #fff;
-}
+} */
 
 .left-menu .status-indicator-2 {
   border-radius: 100px !important;
@@ -420,7 +421,8 @@
   padding: 10px 16px;
   position: relative;
   font-weight: bold;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   border-bottom: #33333328 1px solid;
   border-top: #33333328 1px solid;
   width: 100%;
@@ -472,43 +474,42 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  margin-left: -10px;
 }
 
 .avatar-client {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  margin-right: 1px;
+  margin-right: 10px;
 }
 
 .name {
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 15px;
 }
 
 .companyName {
   font-size: 0.7em;
-  color: #686EFE;
+  color: #686efe;
   position: relative;
-  background-color: #DEDDDD;
+  background-color: #dedddd;
   padding: 3px 8px;
   border-radius: 10px;
   position: absolute;
   right: 10px;
-  top:  3px;
+  top: 3px;
 }
 
 .time {
   font-size: 0.6em;
-  color: #FFFFFF;
+  color: #ffffff;
   position: relative;
-  right:  40px;
+  right: 40px;
   bottom: -10px;
 }
 
 .messageContent {
-  color: #FFFFFF;
+  color: #ffffff;
   position: absolute;
   right: 5px;
 }
@@ -516,17 +517,17 @@
 .messageLogo {
   position: absolute;
   top: -0px;
-  left:50px;
+  left: 50px;
   width: 22px;
 }
 
-.imageName{
-  display:flex;
-  align-items:center;
-  gap:10px
+.imageName {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.online{
+.online {
   background-color: rgb(0, 255, 0);
   width: 10px;
   height: 10px;
@@ -537,7 +538,7 @@
   left: 30px;
 }
 
-.offline{
+.offline {
   background-color: grey;
   width: 10px;
   height: 10px;
