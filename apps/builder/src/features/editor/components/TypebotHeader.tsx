@@ -1,6 +1,7 @@
 import {
   Flex,
   HStack,
+  Stack,
   Button,
   IconButton,
   Tooltip,
@@ -22,15 +23,12 @@ import {
   CopyIcon,
   PlayIcon,
   RedoIcon,
-  UndoIcon,
-  MoreVerticalIcon
+  UndoIcon
 } from '@/components/icons'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { isDefined, isNotDefined } from '@typebot.io/lib'
-import { EditableTypebotName } from './EditableTypebotName'
 import Link from 'next/link'
-import { EditableEmojiOrImageIcon } from '@/components/EditableEmojiOrImageIcon'
 import { useDebouncedCallback } from 'use-debounce'
 import { PublishButton } from '@/features/publish/components/PublishButton'
 import { useUser } from '@/features/account/hooks/useUser'
@@ -58,7 +56,10 @@ export const TypebotHeader = () => {
       : window.open('https://docs.typebot.io/guides/how-to-get-help', '_blank')
   }
 
-  if (currentUserMode === 'guest') return <GuestTypebotHeader />
+  if (currentUserMode === 'guest') {
+    return <GuestTypebotHeader />
+  }
+
   return (
     <Flex
       w="full"
@@ -71,7 +72,6 @@ export const TypebotHeader = () => {
       bgColor={headerBgColor}
       flexShrink={0}
     >
-      {isOpen && <SupportBubble autoShowDelay={0} />}
       <LeftElements pos="absolute" left="1rem" />
       <TypebotNav
         display={{ base: 'none', xl: 'flex' }}
@@ -79,29 +79,29 @@ export const TypebotHeader = () => {
         typebotId={typebot?.id}
         isResultsDisplayed={isDefined(publishedTypebot)}
       />
-      <RightElements
-        right="40px"
-        pos="absolute"
-        display={['none', 'flex']}
-        isResultsDisplayed={isDefined(publishedTypebot)}
-      />
-      <LastElements
-        right="10px"
-        pos="absolute"
-        display={['none', 'flex']}
-        isResultsDisplayed={isDefined(publishedTypebot)}
-        onHelpClick={handleHelpClick}
-      />
+      <HStack spacing='24px'>
+        <RightElements
+          pos="absolute"
+          margin="10"
+          right="6rem"
+          justifyContent="center"
+          alignContent="center"
+          display={['none', 'flex']}
+          isResultsDisplayed={isDefined(publishedTypebot)}
+        />
+        {isOpen && <SupportBubble autoShowDelay={0} />}
+        <LatestElements pos="fixed" right="1rem" onHelpClick={handleHelpClick}/>
+      </HStack>
     </Flex>
-  )
+  );
 }
 
 const LeftElements = ({ ...props }: StackProps) => {
   const { t } = useTranslate()
   const router = useRouter()
+
   const {
     typebot,
-    updateTypebot,
     canUndo,
     canRedo,
     undo,
@@ -110,11 +110,8 @@ const LeftElements = ({ ...props }: StackProps) => {
     isSavingLoading,
   } = useTypebot()
 
-  const [isRedoShortcutTooltipOpen, setRedoShortcutTooltipOpen] =
-    useState(false)
-
-  const [isUndoShortcutTooltipOpen, setUndoShortcutTooltipOpen] =
-    useState(false)
+  const [isRedoShortcutTooltipOpen, setRedoShortcutTooltipOpen] = useState(false)
+  const [isUndoShortcutTooltipOpen, setUndoShortcutTooltipOpen] = useState(false)
 
   const hideUndoShortcutTooltipLater = useDebouncedCallback(() => {
     setUndoShortcutTooltipOpen(false)
@@ -124,22 +121,22 @@ const LeftElements = ({ ...props }: StackProps) => {
     setRedoShortcutTooltipOpen(false)
   }, 1000)
 
-  const handleNameSubmit = (name: string) =>
-    updateTypebot({ updates: { name } })
-
-  const handleChangeIcon = (icon: string) =>
-    updateTypebot({ updates: { icon } })
-
   useKeyboardShortcuts({
     undo: () => {
-      if (!canUndo) return
+      if (!canUndo) {
+        return
+      }
+
       hideUndoShortcutTooltipLater.flush()
       setUndoShortcutTooltipOpen(true)
       hideUndoShortcutTooltipLater()
       undo()
     },
     redo: () => {
-      if (!canRedo) return
+      if (!canRedo) {
+        return
+      }
+
       hideUndoShortcutTooltipLater.flush()
       setRedoShortcutTooltipOpen(true)
       hideRedoShortcutTooltipLater()
@@ -172,27 +169,6 @@ const LeftElements = ({ ...props }: StackProps) => {
           }}
           size="sm"
         />
-        <HStack spacing={1}>
-          {typebot && (
-            <EditableEmojiOrImageIcon
-              uploadFileProps={{
-                workspaceId: typebot.workspaceId,
-                typebotId: typebot.id,
-                fileName: 'icon',
-              }}
-              icon={typebot?.icon}
-              onChangeIcon={handleChangeIcon}
-            />
-          )}
-          (
-          <EditableTypebotName
-            key={`typebot-name-${typebot?.name ?? ''}`}
-            defaultName={typebot?.name ?? ''}
-            onNewName={handleNameSubmit}
-          />
-          )
-        </HStack>
-
         {currentUserMode === 'write' && (
           <HStack>
             <Tooltip
@@ -213,7 +189,6 @@ const LeftElements = ({ ...props }: StackProps) => {
                 isDisabled={!canUndo}
               />
             </Tooltip>
-
             <Tooltip
               label={
                 isRedoShortcutTooltipOpen
@@ -244,16 +219,18 @@ const LeftElements = ({ ...props }: StackProps) => {
         </HStack>
       )}
     </HStack>
-  )
+  );
 }
 
-const RightElements = ({
+const RightElements = ({ 
   isResultsDisplayed,
-  ...props
+  ...props 
 }: StackProps & { isResultsDisplayed: boolean }) => {
-  const router = useRouter()
   const { t } = useTranslate()
+
+  const router = useRouter()
   const { typebot, currentUserMode, save, isSavingLoading } = useTypebot()
+
   const {
     setRightPanel,
     rightPanel,
@@ -264,7 +241,9 @@ const RightElements = ({
   const handlePreviewClick = async () => {
     setStartPreviewAtGroup(undefined)
     setStartPreviewAtEvent(undefined)
+
     await save()
+
     setRightPanel(RightPanel.PREVIEW)
   }
 
@@ -302,56 +281,39 @@ const RightElements = ({
       )}
       {currentUserMode === 'write' && <PublishButton size="sm" />}
     </HStack>
-  )
+  );
 }
 
-const LastElements = ({
-  isResultsDisplayed,
+const LatestElements = ({
   onHelpClick,
   ...props
-}: StackProps & { isResultsDisplayed: boolean, onHelpClick: () => void }) => {
+}: StackProps & { onHelpClick: () => void }) => {
   const { t } = useTranslate()
   const { user } = useUser()
-  const { typebot } = useTypebot()
 
   return (
     <HStack {...props}>
-      <TypebotNav
-        display={{ base: 'none', md: 'flex', xl: 'none' }}
-        typebotId={typebot?.id}
-        isResultsDisplayed={isResultsDisplayed}
-      />
-      <HStack>
-        <Avatar
-          size="lg"
-          src={user?.image ?? undefined}
-          name={user?.name ?? undefined}
-        />
+      <Stack alignItems="center" spacing={3}>
         <Menu>
           <MenuButton
+            isRound={true}
             as={IconButton}
             aria-label='Options'
-            icon={<MoreVerticalIcon />}
-            variant='outline'
+            size='sm'
+            icon={<Avatar size="lg" src={user?.image ?? undefined} name={user?.name ?? undefined} />}
+            variant='solid'
           />
           <MenuList>
-            <MenuItem command='⌘T'>
-              <Button
-                leftIcon={<BuoyIcon />}
-                onClick={onHelpClick}
-                size="sm"
-                iconSpacing={{ base: 0, xl: 2 }}
-              >
-                <chakra.span display={{ base: 'none', xl: 'inline' }}>
-                  {t('editor.header.helpButton.label')}
-                </chakra.span>
-              </Button>
+            <MenuItem icon={<BuoyIcon />} onClick={onHelpClick}>
+              <chakra.span display={{ base: 'none', xl: 'inline' }}>
+                {t('editor.header.helpButton.label')}
+              </chakra.span>
             </MenuItem>
           </MenuList>
         </Menu>
-      </HStack>
+      </Stack>
     </HStack>
-  )
+  );
 }
 
 const TypebotNav = ({
@@ -415,5 +377,5 @@ const TypebotNav = ({
         </Button>
       )}
     </HStack>
-  )
+  );
 }

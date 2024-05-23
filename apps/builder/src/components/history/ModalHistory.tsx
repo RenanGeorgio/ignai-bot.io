@@ -8,14 +8,20 @@ interface ModalHistoryProps {
 
 export default function ModalHistory({ close }: ModalHistoryProps) {
   const [open, setOpen] = React.useState(true)
+
+  const handleClose = () => {
+    setOpen(false)
+    close()
+  }
+
   return (
     <div>
-      {open ? (
+      {open && (
         <div className={styles.wrapperHistory}>
           <div className={styles.add}>
             <span className={styles.textTitle}>Adicionar</span>
             <div className={styles.btnClose}>
-              <button onClick={close}>X</button>
+              <button onClick={handleClose}>X</button>
             </div>
           </div>
           <div className={styles.formHistory}>
@@ -49,8 +55,6 @@ export default function ModalHistory({ close }: ModalHistoryProps) {
             </div>
           </div>
         </div>
-      ) : (
-        ''
       )}
     </div>
   )

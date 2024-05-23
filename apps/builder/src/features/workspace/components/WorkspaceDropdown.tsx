@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import { EmojiOrImageIcon } from '@/components/EmojiOrImageIcon'
 import {
-  HardDriveIcon,
   ChevronLeftIcon,
   PlusIcon,
   LogOutIcon,
   UserIcon,
-  SettingsIcon
+  SettingsIcon,
+  LaptopIcon
 } from '@/components/icons'
 import { PlanTag } from '@/features/billing/components/PlanTag'
 import { useUser } from '@/features/account/hooks/useUser'
@@ -53,27 +53,6 @@ export const WorkspaceDropdown = ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const renderAccountModal = () => {
-    return(
-      <AccountSettingsModal
-        isOpen={isOpen}
-        onClose={onClose}
-        user={user}
-      />
-    );
-  }
-
-  const renderWorkspaceModal = () => {
-    return(
-      <WorkspaceSettingsModal
-        isOpen={isOpen}
-        onClose={onClose}
-        user={user}
-        workspace={workspace}
-      />
-    );
-  }
-
   const validAdmin = async (email: string) => {
     const data = await checkUser(email);
 
@@ -90,9 +69,10 @@ export const WorkspaceDropdown = ({
     if (user?.email) {
       validAdmin(user?.email);
     } else {
-      setAdmin(false);
+      setAdmin(false); 
     }
-  },[user?.email]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
 
   return (
     <Menu placement="bottom-end">
@@ -121,7 +101,7 @@ export const WorkspaceDropdown = ({
                 <EmojiOrImageIcon
                   icon={workspace.icon}
                   boxSize="16px"
-                  defaultIcon={HardDriveIcon}
+                  defaultIcon={LaptopIcon}
                 />
                 <Text>{workspace.name}</Text>
                 <PlanTag plan={workspace.plan} />
@@ -133,10 +113,27 @@ export const WorkspaceDropdown = ({
             {t('workspace.dropdown.newButton.label')}
           </MenuItem>
         )}
-        <MenuItem onClick={renderAccountModal} icon={<UserIcon />}>
+        <MenuItem 
+          onClick={() => {
+            <AccountSettingsModal
+              isOpen={isOpen}
+              onClose={onClose}
+              user={user}
+            />}} 
+          icon={<UserIcon />}
+        >
           {t('editor.header.settingsButton.label')}
         </MenuItem>
-        <MenuItem onClick={renderWorkspaceModal} icon={<SettingsIcon />}>
+        <MenuItem 
+          onClick={() => {
+            <WorkspaceSettingsModal
+              isOpen={isOpen}
+              onClose={onClose}
+              user={user}
+              workspace={workspace}
+            />}} 
+          icon={<SettingsIcon />}
+        >
           {t('workspace.settings.modal.menu.workspace.label')}
         </MenuItem>
         <MenuItem
@@ -148,5 +145,5 @@ export const WorkspaceDropdown = ({
         </MenuItem>
       </MenuList>
     </Menu>
-  )
+  );
 }

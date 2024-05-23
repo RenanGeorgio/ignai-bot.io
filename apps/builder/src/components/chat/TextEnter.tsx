@@ -58,7 +58,7 @@ export default function TextEnter({
             />
           </div>
           <div className={styles['btncontainer']}>
-            <IconButton className={styles['icon']}>
+            <IconButton className={styles['icon']} aria-label="Mic">
               <Mic />
             </IconButton>
             <div className={styles['file-input-container']}>
@@ -68,7 +68,7 @@ export default function TextEnter({
                 onChange={handleFileUploadPhoto}
                 className={styles['file-input']}
               />
-              <IconButton className={styles['icon']}>
+              <IconButton className={styles['icon']} aria-label="Photo">
                 <Photo />
               </IconButton>
             </div>

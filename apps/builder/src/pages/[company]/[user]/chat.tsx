@@ -13,6 +13,8 @@ import styles from '@/assets/styles/forms.module.css'
 import { colors } from '@/lib/theme'
 import { ThemeProvider } from '@mui/material'
 
+import type {} from '@mui/x-data-grid/themeAugmentation';
+
 const MuiTheme = createTheme({
   palette: {
     mode: 'light',
@@ -20,6 +22,8 @@ const MuiTheme = createTheme({
   components: {
     MuiDataGrid: {
       styleOverrides: {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         root: {
           border: 1,
           borderColor: colors.gray,
@@ -84,7 +88,7 @@ const Chat: React.FC = () => {
           )}
           {activePage === 'Histórico' && (
             <>
-              <ThemeProvider theme={{ [MuiTheme]: MuiTheme }}>
+              <ThemeProvider theme={{ ['MuiTheme']: MuiTheme }}>
                 <History />
               </ThemeProvider>
             </>
