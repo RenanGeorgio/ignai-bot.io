@@ -12,8 +12,8 @@ export const LeftMenu: React.FC<LeftMenuProps> = ({
   onAddTicketClick,
   children,
 }) => {
-  const [openPage, setOpenPage] = useState(false)
-  const [openTicket, setOpenTicket] = useState(false)
+  // const [openPage, setOpenPage] = useState(false)
+  // const [openTicket, setOpenTicket] = useState(false)
   const [showAddTicket, setShowAddTicket] = useState(false)
 
   const toggleAddTicket: MouseEventHandler<HTMLButtonElement> = (event) => {
@@ -92,7 +92,7 @@ export const LeftMenu: React.FC<LeftMenuProps> = ({
                 width={'50px'}
               />
               <div className={styles['text-2']}>
-                <TelegramIcon height={'30px'} width={'30px'} />
+                <TelegramIcon />
                 <div className={styles['text-wrapper-10']}>Lead 04433</div>
                 <div className={styles['text-wrapper-9']}>Orçamento</div>
               </div>
