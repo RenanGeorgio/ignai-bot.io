@@ -12,7 +12,12 @@ import {
   useDisclosure,
   ButtonProps,
 } from '@chakra-ui/react'
-import { ChevronLeftIcon, CloudOffIcon, LockedIcon, UnlockedIcon } from '@/components/icons'
+import {
+  ChevronLeftIcon,
+  CloudOffIcon,
+  LockedIcon,
+  UnlockedIcon,
+} from '@/components/icons'
 import { useTypebot } from '@/features/editor/providers/TypebotProvider'
 import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
 import { useRouter } from 'next/router'
@@ -27,21 +32,23 @@ import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/const
 import { ConfirmModal } from '@/components/ConfirmModal'
 import { TextLink } from '@/components/TextLink'
 import { useTimeSince } from '@/hooks/useTimeSince'
-import { registerCompanyBots, unregisterCompanyBots } from '../api/updateCompanyBots'
 
 type Props = ButtonProps & {
   isMoreMenuDisabled?: boolean
 }
-
-export const PublishButton = ({ isMoreMenuDisabled = false, ...props }: Props) => {
+export const PublishButton = ({
+  isMoreMenuDisabled = false,
+  ...props
+}: Props) => {
   const { t } = useTranslate()
-
   const { workspace } = useWorkspace()
   const { push, query, pathname } = useRouter()
-
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const { isOpen: isNewEngineWarningOpen, onOpen: onNewEngineWarningOpen, onClose: onNewEngineWarningClose } = useDisclosure()
-
+  const {
+    isOpen: isNewEngineWarningOpen,
+    onOpen: onNewEngineWarningOpen,
+    onClose: onNewEngineWarningClose,
+  } = useDisclosure()
   const {
     isPublished,
     publishedTypebot,
@@ -52,11 +59,16 @@ export const PublishButton = ({ isMoreMenuDisabled = false, ...props }: Props) =
     save,
     publishedTypebotVersion,
   } = useTypebot()
-
-  const timeSinceLastPublish = useTimeSince(publishedTypebot?.updatedAt.toString())
+  const timeSinceLastPublish = useTimeSince(
+    publishedTypebot?.updatedAt.toString()
+  )
   const { showToast } = useToast()
 
-  const { typebot: { getPublishedTypebot: { refetch: refetchPublishedTypebot } } } = trpc.useContext()
+  const {
+    typebot: {
+      getPublishedTypebot: { refetch: refetchPublishedTypebot },
+    },
+  } = trpc.useContext()
 
   const { mutate: publishTypebotMutate, isLoading: isPublishing } =
     trpc.typebot.publishTypebot.useMutation({
@@ -75,14 +87,8 @@ export const PublishButton = ({ isMoreMenuDisabled = false, ...props }: Props) =
         refetchPublishedTypebot({
           typebotId: typebot?.id as string,
         })
-
-        if (typebot?.id != undefined) {
-          registerCompanyBots(typebot?.id)
-        }
-
-        if (!publishedTypebot && !pathname.endsWith('share')) {
+        if (!publishedTypebot && !pathname.endsWith('share'))
           push(`/typebots/${query.typebotId}/share`)
-        }
       },
     })
 
@@ -95,24 +101,16 @@ export const PublishButton = ({ isMoreMenuDisabled = false, ...props }: Props) =
         }),
       onSuccess: () => {
         refetchPublishedTypebot()
-
-        if (typebot?.id) {
-          unregisterCompanyBots(typebot?.id)
-        }
       },
     })
 
-  const hasInputFile = typebot?.groups.flatMap((g) => g.blocks).some((b) => b.type === InputBlockType.FILE)
+  const hasInputFile = typebot?.groups
+    .flatMap((g) => g.blocks)
+    .some((b) => b.type === InputBlockType.FILE)
 
   const handlePublishClick = async () => {
-    if (!typebot?.id) {
-      return
-    }
-
-    if (isFreePlan(workspace) && hasInputFile) {
-      return onOpen()
-    }
-
+    if (!typebot?.id) return
+    if (isFreePlan(workspace) && hasInputFile) return onOpen()
     if (!typebot.publicId) {
       await updateTypebot({
         updates: {
@@ -127,14 +125,9 @@ export const PublishButton = ({ isMoreMenuDisabled = false, ...props }: Props) =
   }
 
   const unpublishTypebot = async () => {
-    if (!typebot?.id) {
-      return
-    }
-
-    if (typebot.isClosed) {
+    if (!typebot?.id) return
+    if (typebot.isClosed)
       await updateTypebot({ updates: { isClosed: false }, save: true })
-    }
-
     unpublishTypebotMutate({
       typebotId: typebot?.id,
     })

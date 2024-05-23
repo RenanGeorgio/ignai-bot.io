@@ -1,4 +1,10 @@
 import {
+  AbTestBlock,
+  BlockV6,
+  BlockWithItems,
+  ItemV6,
+} from '@typebot.io/schemas'
+import {
   createContext,
   Dispatch,
   ReactNode,
@@ -9,7 +15,6 @@ import {
   useRef,
   useState,
 } from 'react'
-import { AbTestBlock, BlockV6, BlockWithItems, ItemV6 } from '@typebot.io/schemas'
 import { Coordinates } from '../types'
 import { LogicBlockType } from '@typebot.io/schemas/features/blocks/logic/constants'
 import { useEventListener } from '@/hooks/useEventListener'
@@ -49,25 +54,31 @@ const graphDndContext = createContext<{
 export type NodePosition = { absolute: Coordinates; relative: Coordinates }
 
 export const GraphDndProvider = ({ children }: { children: ReactNode }) => {
-  const [draggedBlock, setDraggedBlock] = useState<BlockV6 & { groupId: string }>();
-  const [draggedBlockType, setDraggedBlockType] = useState<BlockV6['type'] | undefined>();
-  const [draggedItem, setDraggedItem] = useState<DraggableItem | undefined>();
-  const [mouseOverGroup, _setMouseOverGroup] = useState<NodeElement>();
-  const [mouseOverBlock, _setMouseOverBlock] = useState<NodeElement>();
+  const [draggedBlock, setDraggedBlock] = useState<
+    BlockV6 & { groupId: string }
+  >()
+  const [draggedBlockType, setDraggedBlockType] = useState<
+    BlockV6['type'] | undefined
+  >()
+  const [draggedItem, setDraggedItem] = useState<DraggableItem | undefined>()
+  const [mouseOverGroup, _setMouseOverGroup] = useState<NodeElement>()
+  const [mouseOverBlock, _setMouseOverBlock] = useState<NodeElement>()
 
-  const setMouseOverGroup = useCallback((node: NodeElement | undefined) => {
-    if (node && !draggedBlock && !draggedBlockType) {
-      return
-    }
-    _setMouseOverGroup(node);
-  },[draggedBlock, draggedBlockType]);
+  const setMouseOverGroup = useCallback(
+    (node: NodeElement | undefined) => {
+      if (node && !draggedBlock && !draggedBlockType) return
+      _setMouseOverGroup(node)
+    },
+    [draggedBlock, draggedBlockType]
+  )
 
-  const setMouseOverBlock = useCallback((node: NodeElement | undefined) => {
-    if (node && !draggedItem) {
-      return
-    }
-    _setMouseOverBlock(node);
-  },[draggedItem]);
+  const setMouseOverBlock = useCallback(
+    (node: NodeElement | undefined) => {
+      if (node && !draggedItem) return
+      _setMouseOverBlock(node)
+    },
+    [draggedItem]
+  )
 
   return (
     <graphDndContext.Provider
@@ -86,7 +97,7 @@ export const GraphDndProvider = ({ children }: { children: ReactNode }) => {
     >
       {children}
     </graphDndContext.Provider>
-  );
+  )
 }
 
 export const useDragDistance = ({
@@ -105,24 +116,17 @@ export const useDragDistance = ({
   const mouseDownPosition = useRef<{
     absolute: Coordinates
     relative: Coordinates
-  }>();
+  }>()
 
   const handleMouseUp = () => {
-    if (mouseDownPosition) {
-      mouseDownPosition.current = undefined
-    }
+    if (mouseDownPosition) mouseDownPosition.current = undefined
   }
-
   useEventListener('mouseup', handleMouseUp, undefined, undefined, deps)
 
   const handleMouseDown = (e: MouseEvent) => {
-    if (isDisabled || !ref.current) {
-      return
-    }
-
+    if (isDisabled || !ref.current) return
     e.stopPropagation()
     const { top, left } = ref.current.getBoundingClientRect()
-
     mouseDownPosition.current = {
       absolute: { x: e.clientX, y: e.clientY },
       relative: {
@@ -131,18 +135,13 @@ export const useDragDistance = ({
       },
     }
   }
-
   useEventListener('mousedown', handleMouseDown, ref, undefined, deps)
 
   useEffect(() => {
     let triggered = false
     const triggerDragCallbackIfMouseMovedEnough = (e: MouseEvent) => {
-      if (!mouseDownPosition.current || triggered) {
-        return
-      }
-
-      const { clientX, clientY } = e;
-
+      if (!mouseDownPosition.current || triggered) return
+      const { clientX, clientY } = e
       if (
         Math.abs(mouseDownPosition.current.absolute.x - clientX) >
           distanceTolerance ||
@@ -154,7 +153,10 @@ export const useDragDistance = ({
       }
     }
 
-    document.addEventListener('mousemove', triggerDragCallbackIfMouseMovedEnough);
+    document.addEventListener(
+      'mousemove',
+      triggerDragCallbackIfMouseMovedEnough
+    )
 
     return () => {
       document.removeEventListener(
@@ -171,16 +173,14 @@ export const computeNearestPlaceholderIndex = (
 ) => {
   const { closestIndex } = placeholderRefs.current.reduce(
     (prev, elem, index) => {
-      const elementTop = elem.getBoundingClientRect().top;
-      const mouseDistanceFromPlaceholder = Math.abs(offsetY - elementTop);
-
+      const elementTop = elem.getBoundingClientRect().top
+      const mouseDistanceFromPlaceholder = Math.abs(offsetY - elementTop)
       return mouseDistanceFromPlaceholder < prev.value
         ? { closestIndex: index, value: mouseDistanceFromPlaceholder }
         : prev
     },
     { closestIndex: 0, value: 999999999999 }
   )
-  
   return closestIndex
 }
 

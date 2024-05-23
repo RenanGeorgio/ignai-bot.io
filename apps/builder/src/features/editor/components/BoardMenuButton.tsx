@@ -24,7 +24,7 @@ import { useTranslate } from '@tolgee/react'
 import { useUser } from '@/features/account/hooks/useUser'
 import { useRouter } from 'next/router'
 
-export const BoardMenuButton = (props: FlexProps) => { 
+export const BoardMenuButton = (props: FlexProps) => {
   const { query } = useRouter()
   const { typebot, currentUserMode } = useTypebot()
   const { user } = useUser()

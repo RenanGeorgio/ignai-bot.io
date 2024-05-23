@@ -1,9 +1,10 @@
-import { useState } from 'react'
 import { Seo } from '@/components/Seo'
-import { Flex, Spinner, useColorModeValue, HStack, Tooltip, IconButton } from '@chakra-ui/react'
-import { useDebouncedCallback } from 'use-debounce'
-import { EditorProvider, useEditor, RightPanel as RightPanelEnum } from '../providers/EditorProvider'
-import { RedoIcon, UndoIcon } from '@/components/icons'
+import { Flex, Spinner, useColorModeValue } from '@chakra-ui/react'
+import {
+  EditorProvider,
+  useEditor,
+  RightPanel as RightPanelEnum,
+} from '../providers/EditorProvider'
 import { useTypebot } from '../providers/TypebotProvider'
 import { BlocksSideBar } from './BlocksSideBar'
 import { BoardMenuButton } from './BoardMenuButton'
@@ -17,70 +18,19 @@ import { EventsCoordinatesProvider } from '@/features/graph/providers/EventsCoor
 import { TypebotNotFoundPage } from './TypebotNotFoundPage'
 import { SuspectedTypebotBanner } from './SuspectedTypebotBanner'
 import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
-import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts'
-import { useTranslate } from '@tolgee/react'
 
 export const EditorPage = () => {
-  const { t } = useTranslate()
-
-  const { 
-    typebot, 
-    currentUserMode, 
-    is404,
-    canUndo,
-    canRedo,
-    undo,
-    redo
-   } = useTypebot()
-
+  const { typebot, currentUserMode, is404 } = useTypebot()
   const { workspace } = useWorkspace()
   const backgroundImage = useColorModeValue(
     'radial-gradient(#c6d0e1 1px, transparent 0)',
     'radial-gradient(#2f2f39 1px, transparent 0)'
   )
-
   const bgColor = useColorModeValue('#f4f5f8', 'gray.850')
-
-  const [isRedoShortcutTooltipOpen, setRedoShortcutTooltipOpen] = useState(false)
-  const [isUndoShortcutTooltipOpen, setUndoShortcutTooltipOpen] = useState(false)
-
-  const hideUndoShortcutTooltipLater = useDebouncedCallback(() => {
-    setUndoShortcutTooltipOpen(false)
-  }, 1000)
-
-  const hideRedoShortcutTooltipLater = useDebouncedCallback(() => {
-    setRedoShortcutTooltipOpen(false)
-  }, 1000)
 
   const isSuspicious = typebot?.riskLevel === 100 && !workspace?.isVerified
 
-  useKeyboardShortcuts({
-    undo: () => {
-      if (!canUndo) {
-        return
-      }
-
-      hideUndoShortcutTooltipLater.flush()
-      setUndoShortcutTooltipOpen(true)
-      hideUndoShortcutTooltipLater()
-      undo()
-    },
-    redo: () => {
-      if (!canRedo) {
-        return
-      }
-
-      hideUndoShortcutTooltipLater.flush()
-      setRedoShortcutTooltipOpen(true)
-      hideRedoShortcutTooltipLater()
-      redo()
-    },
-  })
-
-  if (is404) {
-    return <TypebotNotFoundPage />
-  }
-
+  if (is404) return <TypebotNotFoundPage />
   return (
     <EditorProvider>
       <Seo title={typebot?.name ? `${typebot.name} | Editor` : 'Editor'} />
@@ -104,54 +54,14 @@ export const EditorPage = () => {
                 isReadOnly={
                   currentUserMode === 'read' || currentUserMode === 'guest'
                 }
-              > 
+              >
                 <EventsCoordinatesProvider events={typebot.events}>
-                  <Graph flex="1" typebot={typebot} key={typebot.id} /> 
+                  <Graph flex="1" typebot={typebot} key={typebot.id} />
                   <BoardMenuButton
                     pos="absolute"
                     right="40px"
                     top={`calc(20px + ${isSuspicious ? '70px' : '0px'})`}
                   />
-                  {currentUserMode === 'write' && (
-                    <HStack>
-                      <Tooltip
-                        label={
-                          isUndoShortcutTooltipOpen
-                            ? t('editor.header.undo.tooltip.label')
-                            : t('editor.header.undoButton.label')
-                        }
-                        isOpen={isUndoShortcutTooltipOpen ? true : undefined}
-                        hasArrow={isUndoShortcutTooltipOpen}
-                      >
-                        <IconButton
-                          display={['none', 'flex']}
-                          icon={<UndoIcon />}
-                          size="sm"
-                          aria-label={t('editor.header.undoButton.label')}
-                          onClick={undo}
-                          isDisabled={!canUndo}
-                        />
-                      </Tooltip>
-                      <Tooltip
-                        label={
-                          isRedoShortcutTooltipOpen
-                            ? t('editor.header.undo.tooltip.label')
-                            : t('editor.header.redoButton.label')
-                        }
-                        isOpen={isRedoShortcutTooltipOpen ? true : undefined}
-                        hasArrow={isRedoShortcutTooltipOpen}
-                      >
-                        <IconButton
-                          display={['none', 'flex']}
-                          icon={<RedoIcon />}
-                          size="sm"
-                          aria-label={t('editor.header.redoButton.label')}
-                          onClick={redo}
-                          isDisabled={!canRedo}
-                        />
-                      </Tooltip>
-                    </HStack>
-                  )}
                   <RightPanel />
                 </EventsCoordinatesProvider>
               </GraphProvider>

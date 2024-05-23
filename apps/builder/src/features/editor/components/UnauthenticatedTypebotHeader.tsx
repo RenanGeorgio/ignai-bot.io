@@ -1,4 +1,11 @@
-import { Flex, HStack, Button, useColorModeValue, Divider, Text } from '@chakra-ui/react'
+import {
+  Flex,
+  HStack,
+  Button,
+  useColorModeValue,
+  Divider,
+  Text,
+} from '@chakra-ui/react'
 import { CopyIcon, PlayIcon } from '@/components/icons'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -14,11 +21,9 @@ import { useUser } from '@/features/account/hooks/useUser'
 
 export const GuestTypebotHeader = () => {
   const { t } = useTranslate()
-
   const router = useRouter()
   const { user } = useUser()
   const { typebot, save } = useTypebot()
-
   const {
     setRightPanel,
     rightPanel,
@@ -29,9 +34,7 @@ export const GuestTypebotHeader = () => {
   const handlePreviewClick = async () => {
     setStartPreviewAtGroup(undefined)
     setStartPreviewAtEvent(undefined)
-
     save().then()
-
     setRightPanel(RightPanel.PREVIEW)
   }
 
@@ -103,6 +106,7 @@ export const GuestTypebotHeader = () => {
           </Text>
         </HStack>
       </HStack>
+
       <HStack
         right="1rem"
         pos="absolute"
@@ -127,7 +131,7 @@ export const GuestTypebotHeader = () => {
               isLoading={isNotDefined(typebot)}
               size="sm"
             >
-              Duplicar
+              Duplicate
             </Button>
           )}
           {router.pathname.includes('/edit') && isNotDefined(rightPanel) && (
@@ -138,10 +142,11 @@ export const GuestTypebotHeader = () => {
               leftIcon={<PlayIcon />}
               size="sm"
             >
-              Executar bot
+              Play bot
             </Button>
           )}
         </HStack>
+
         {!user && (
           <>
             <Divider orientation="vertical" h="25px" borderColor="gray.400" />
@@ -152,7 +157,7 @@ export const GuestTypebotHeader = () => {
               variant="outline"
               size="sm"
             >
-              Experimente Ignai-bot
+              Try Typebot
             </Button>
           </>
         )}

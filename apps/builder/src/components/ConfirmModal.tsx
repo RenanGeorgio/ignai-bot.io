@@ -28,7 +28,7 @@ export const ConfirmModal = ({
   confirmButtonLabel,
   onConfirm,
   confirmButtonColor = 'red',
-}: ConfirmDeleteModalProps) => { 
+}: ConfirmDeleteModalProps) => {
   const { t } = useTranslate()
   const [confirmLoading, setConfirmLoading] = useState(false)
   const cancelRef = useRef(null)

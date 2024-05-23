@@ -17,7 +17,7 @@ import { computeRiskLevel } from '@typebot.io/radar'
 import { env } from '@typebot.io/env'
 import { trackEvents } from '@typebot.io/telemetry/trackEvents'
 import { parseTypebotPublishEvents } from '@/features/telemetry/helpers/parseTypebotPublishEvents'
- 
+
 export const publishTypebot = authenticatedProcedure
   .meta({
     openapi: {

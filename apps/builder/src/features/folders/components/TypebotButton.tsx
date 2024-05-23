@@ -25,15 +25,14 @@ import { TypebotInDashboard } from '@/features/dashboard/types'
 import { isMobile } from '@/helpers/isMobile'
 import { trpc, trpcVanilla } from '@/lib/trpc'
 import { duplicateName } from '@/features/typebot/helpers/duplicateName'
-import { NodePosition, useDragDistance } from '@/features/graph/providers/GraphDndProvider'
-import { WorkspaceInApp } from '@/features/workspace/WorkspaceProvider'
-import { EditDialogEmojiOrImageIcon } from '@/components/EditableEmojiOrImageIcon'
-import { RenameModal } from '@/components/RenameModal'
+import {
+  NodePosition,
+  useDragDistance,
+} from '@/features/graph/providers/GraphDndProvider'
 
 type Props = {
   typebot: TypebotInDashboard
   isReadOnly?: boolean
-  workspace: WorkspaceInApp
   draggedTypebot: TypebotInDashboard | undefined
   onTypebotUpdated: () => void
   onDrag: (position: NodePosition) => void
@@ -42,34 +41,18 @@ type Props = {
 const TypebotButton = ({
   typebot,
   isReadOnly = false,
-  workspace,
   draggedTypebot,
   onTypebotUpdated,
   onDrag,
 }: Props) => {
   const { t } = useTranslate()
   const router = useRouter()
-
   const [draggedTypebotDebounced] = useDebounce(draggedTypebot, 200)
-
   const {
     isOpen: isDeleteOpen,
     onOpen: onDeleteOpen,
     onClose: onDeleteClose,
   } = useDisclosure()
-
-  const {
-    isOpen: isIconEditOpen,
-    onOpen: onIconEditOpen,
-    onClose: onIconEditClose,
-  } = useDisclosure()
-
-  const {
-    isOpen: isRenameOpen,
-    onOpen: onRenameOpen,
-    onClose: onRenameClose,
-  } = useDisclosure()
-
   const buttonRef = React.useRef<HTMLDivElement>(null)
 
   useDragDistance({
@@ -98,23 +81,15 @@ const TypebotButton = ({
     },
   })
 
-  const { mutate: unpublishTypebot } = trpc.typebot.unpublishTypebot.useMutation({
-    onError: (error) => {
-      showToast({ description: error.message })
-    },
-    onSuccess: () => {
-      onTypebotUpdated()
-    },
-  })
-
-  const { mutate: updateTypebot } = trpc.typebot.updateTypebot.useMutation({
-    onError: (error) => {
-      showToast({ description: error.message })
-    },
-    onSuccess: () => {
-      onTypebotUpdated()
-    },
-  })
+  const { mutate: unpublishTypebot } =
+    trpc.typebot.unpublishTypebot.useMutation({
+      onError: (error) => {
+        showToast({ description: error.message })
+      },
+      onSuccess: () => {
+        onTypebotUpdated()
+      },
+    })
 
   const handleTypebotClick = () => {
     if (draggedTypebotDebounced) return
@@ -148,32 +123,6 @@ const TypebotButton = ({
     })
   }
 
-  const handleChangeIconClick = async (icon: string) => {
-    if (isReadOnly) {
-      return
-    }
-
-    updateTypebot({
-      typebotId: typebot.id,
-      typebot: {
-        icon: icon
-      }
-    })
-  }
-
-  const handleRenameClick = async (name: string) => {
-    if (isReadOnly) {
-      return
-    }
-
-    updateTypebot({
-      typebotId: typebot.id,
-      typebot: {
-        name: name
-      }
-    })
-  }
-
   const handleDeleteClick = (e: React.MouseEvent) => {
     e.stopPropagation()
     onDeleteOpen()
@@ -183,16 +132,6 @@ const TypebotButton = ({
     e.stopPropagation()
     if (!typebot.publishedTypebotId) return
     unpublishTypebot({ typebotId: typebot.id })
-  }
-
-  const handleChangeIcon = (e: React.MouseEvent) => {
-    e.stopPropagation()
-    onIconEditOpen()
-  }
-
-  const handleNameSubmit = (e: React.MouseEvent) => {
-    e.stopPropagation()
-    onRenameOpen()
   }
 
   return (
@@ -249,12 +188,6 @@ const TypebotButton = ({
             <MenuItem onClick={handleDuplicateClick}>
               {t('folders.typebotButton.duplicate')}
             </MenuItem>
-            <MenuItem onClick={handleChangeIcon}>
-              {'Mudar de icone'}
-            </MenuItem>
-            <MenuItem onClick={handleNameSubmit}>
-              {t('rename')}
-            </MenuItem>
             <MenuItem color="red.400" onClick={handleDeleteClick}>
               {t('folders.typebotButton.delete')}
             </MenuItem>
@@ -296,23 +229,6 @@ const TypebotButton = ({
           onConfirm={handleDeleteTypebotClick}
           isOpen={isDeleteOpen}
           onClose={onDeleteClose}
-        />
-      )}
-      {!isReadOnly && (
-        <EditDialogEmojiOrImageIcon
-          typebot={typebot}
-          workspace={workspace}
-          onConfirm={handleChangeIconClick}
-          isOpen={isIconEditOpen}
-          onClose={onIconEditClose}
-        />
-      )}
-      {!isReadOnly && (
-        <RenameModal
-          typebot={typebot}
-          onConfirm={handleRenameClick}
-          isOpen={isRenameOpen}
-          onClose={onRenameClose}
         />
       )}
     </Button>

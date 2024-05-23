@@ -1,3 +1,4 @@
+import { LiteBadge } from './LiteBadge'
 import { createEffect, createSignal, onCleanup, onMount, Show } from 'solid-js'
 import { isDefined, isNotDefined, isNotEmpty } from '@typebot.io/lib'
 import { startChatQuery } from '@/queries/startChatQuery'
@@ -320,6 +321,13 @@ const BotContent = (props: BotContentProps) => {
         onNewLogs={props.onNewLogs}
         onProgressUpdate={setProgressValue}
       />
+      <Show
+        when={
+          props.initialChatReply.typebot.settings.general?.isBrandingEnabled
+        }
+      >
+        <LiteBadge botContainer={botContainer} />
+      </Show>
     </div>
   )
 }
