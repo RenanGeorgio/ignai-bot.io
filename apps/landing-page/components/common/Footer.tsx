@@ -33,13 +33,9 @@ export const Footer = () => {
             <HStack>
               <Logo boxSize="30px" />
               <Heading as="p" fontSize="lg">
-                Typebot
+                Ignai-bot.io
               </Heading>
             </HStack>
-            <Text>
-              Made with ❤️ by{' '}
-              <TextLink href={baptisteTwitterUrl}>@baptisteArno</TextLink>
-            </Text>
           </Stack>
           <Stack align={'flex-start'}>
             <ListHeader>Product</ListHeader>

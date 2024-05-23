@@ -1,13 +1,6 @@
 import { Coordinates } from '@dnd-kit/utilities'
 import { Edge } from '@typebot.io/schemas'
-import {
-  createContext,
-  Dispatch,
-  ReactNode,
-  SetStateAction,
-  useContext,
-  useState,
-} from 'react'
+import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useState } from 'react'
 import { graphPositionDefaultValue } from '../constants'
 import { ConnectingIds } from '../types'
 
@@ -40,7 +33,7 @@ const graphContext = createContext<{
 }>({
   graphPosition: graphPositionDefaultValue({ x: 0, y: 0 }),
   connectingIds: null,
-})
+});
 
 export const GraphProvider = ({
   children,
@@ -51,15 +44,13 @@ export const GraphProvider = ({
   isReadOnly?: boolean
   isAnalytics?: boolean
 }) => {
-  const [graphPosition, setGraphPosition] = useState(
-    graphPositionDefaultValue({ x: 0, y: 0 })
-  )
-  const [connectingIds, setConnectingIds] = useState<ConnectingIds | null>(null)
-  const [previewingEdge, setPreviewingEdge] = useState<Edge>()
-  const [previewingBlock, setPreviewingBlock] = useState<PreviewingBlock>()
-  const [openedBlockId, setOpenedBlockId] = useState<string>()
-  const [openedItemId, setOpenedItemId] = useState<string>()
-  const [focusedGroupId, setFocusedGroupId] = useState<string>()
+  const [graphPosition, setGraphPosition] = useState(graphPositionDefaultValue({ x: 0, y: 0 }));
+  const [connectingIds, setConnectingIds] = useState<ConnectingIds | null>(null);
+  const [previewingEdge, setPreviewingEdge] = useState<Edge>();
+  const [previewingBlock, setPreviewingBlock] = useState<PreviewingBlock>();
+  const [openedBlockId, setOpenedBlockId] = useState<string>();
+  const [openedItemId, setOpenedItemId] = useState<string>();
+  const [focusedGroupId, setFocusedGroupId] = useState<string>();
 
   return (
     <graphContext.Provider
@@ -84,7 +75,7 @@ export const GraphProvider = ({
     >
       {children}
     </graphContext.Provider>
-  )
+  );
 }
 
 export const useGraph = () => useContext(graphContext)
