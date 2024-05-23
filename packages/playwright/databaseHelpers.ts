@@ -19,7 +19,7 @@ export const parseTestTypebot = (partialTypebot: Partial<Typebot>): Typebot => {
     version,
     workspaceId: proWorkspaceId,
     folderId: null,
-    name: 'My typebot',
+    name: 'My bot',
     theme: {},
     settings: {},
     publicId: null,
