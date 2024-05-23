@@ -47,7 +47,7 @@ export const LiteBadge = (props: Props) => {
       id="lite-badge"
     >
       <TypebotLogo />
-      <span>Made with Ignai</span>
+      <span>Made with Ignai-bot</span>
     </a>
   )
 }
