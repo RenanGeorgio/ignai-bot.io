@@ -26,6 +26,7 @@
         console.log(response);                   // The current login status of the person.
 
         if (response.status === 'connected') {   // Logged into your webpage and Facebook.
+          sendToken(response.authResponse);
           login();  
         } else {                                 // Not logged into your webpage or we are unable to tell.
           document.getElementById('status').innerHTML = 'Please log ' + 'into this webpage.';
@@ -93,16 +94,16 @@
       function loginUsingJSSDKLoginDialog() {
         FB.login(function(response) {
           if (response.status === "connected") {
-            FB.api("/me", function(response) {
-              console.log("Successful login for: " + response.name);
-
-              var element = document.getElementById("status");
-              document.getElementById("status").innerHTML = "Thanks for logging in, " + response.name + "!";
-            });
+            sendToken(response.authResponse);
+            login();
           } else {
             document.getElementById("status").innerHTML = "You are not logged in!";
           }
         });
+      }
+
+      function sendToken(auth) {
+        var accessToken = auth.accessToken;
       }
     </script>
     <!-- The JS SDK Login Button -->
