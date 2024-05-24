@@ -1,0 +1,24 @@
+{
+  "name": "Ignai-bot.io - By: DiamondBigger",
+  "lang": "pt-BR",
+  "short_name": "Ignai-bot",
+  "description": "Construtor de bots multicanal da Ignai - Powered by: DiamondBigger",
+  "display": "fullscreen",
+  "start_url": "/",
+  "theme_color": "#fff",
+  "background_color": "#000000",
+  "orientation": "landscape-primary",
+  "dir": "auto",
+  "icons": [
+    {
+      "src": "/assets/icon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/assets/icon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/style.css">
+    <title>Facebook Login JavaScript Example</title>
+  </head>
+  <body>
+    <div id="fb-root"></div>
+    <!-- Load the JS SDK asynchronously -->
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v20.0&appId=909625074182796" nonce="3K12pRfY"></script>
+
+    <script>
+      function finished_rendering() {
+        console.log("finished rendering plugins");
+
+        var spinner = document.getElementById("spinner");
+        spinner.removeAttribute("style");
+        spinner.removeChild(spinner.childNodes[0]);
+      }
+
+      function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
+        console.log('statusChangeCallback');
+        console.log(response);                   // The current login status of the person.
+
+        if (response.status === 'connected') {   // Logged into your webpage and Facebook.
+          login();  
+        } else {                                 // Not logged into your webpage or we are unable to tell.
+          document.getElementById('status').innerHTML = 'Please log ' + 'into this webpage.';
+          loginUsingJSSDKLoginDialog();
+        }
+      }
+
+      function checkLoginState() {               // Called when a person is finished with the Login Button.
+        FB.getLoginStatus(function(response) {   // See the onlogin handler
+          statusChangeCallback(response);
+        });
+      }
+
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId            : '{app-id}',
+          autoLogAppEvents : true,
+          cookie           : true,                     // Enable cookies to allow the server to access the session.
+          xfbml            : true,                     // Parse social plugins on this webpage.
+          version          : '{api-version}',           // Use this Graph API version for this call.
+          status           : true
+        });
+
+        // FB.AppEvents.logPageView();
+        FB.getLoginStatus(function(response) {   // Called after the JS SDK has been initialized.
+          statusChangeCallback(response);        // Returns the login status.
+          /*
+          {
+            status: 'connected',
+            authResponse: {
+                accessToken: '{access-token}',
+                expiresIn:'{unix-timestamp}',
+                reauthorize_required_in:'{seconds-until-token-expires}',
+                signedRequest:'{signed-parameter}',
+                userID:'{user-id}'
+            }
+          }
+          */
+        });
+      };
+
+      FB.Event.subscribe('xfbml.render', finished_rendering);
+ 
+      function login() { // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+        console.log('Welcome!  Fetching your information.... ');
+
+        FB.api('/me', function(response) {
+          console.log('Successful login for: ' + response.name);
+
+          document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
+          document.getElementById("logoutbutton").style.display = "block";
+        });
+      }
+
+      function logout(){
+        console.log('Called logout!');
+
+        FB.logout(function(response) {
+          document.getElementById("status").innerHTML = "Logged out successfully";
+          document.getElementById("logoutbutton").style.display = "none";
+          document.getElementById("loginbutton").style.display = "block";
+        });
+      }
+
+      function loginUsingJSSDKLoginDialog() {
+        FB.login(function(response) {
+          if (response.status === "connected") {
+            FB.api("/me", function(response) {
+              console.log("Successful login for: " + response.name);
+
+              var element = document.getElementById("status");
+              document.getElementById("status").innerHTML = "Thanks for logging in, " + response.name + "!";
+            });
+          } else {
+            document.getElementById("status").innerHTML = "You are not logged in!";
+          }
+        });
+      }
+    </script>
+    <!-- The JS SDK Login Button -->
+    <div 
+      id="spinner"
+      style="
+        background: #4267b2;
+        border-radius: 5px;
+        color: white;
+        height: 40px;
+        text-align: center;
+        width: 250px;"
+    >
+      Carregando...
+      <fb:login-button  
+        config_id="{config_id}" 
+        width="240px" 
+        size="large"
+        auto-logout-link="true" 
+        onlogin="checkLoginState();">
+      </fb:login-button>
+    </div>
+    <div id="status"></div>
+
+    <div class="fb-login-button" data-width="" data-size="" data-button-type="" data-layout="" data-auto-logout-link="false" data-use-continue-as="false"></div>
+    <!--<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>-->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  </body>
+</html>
