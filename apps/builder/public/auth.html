@@ -10,7 +10,7 @@
   <body>
     <div id="fb-root"></div>
     <!-- Load the JS SDK asynchronously -->
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v20.0&appId=909625074182796" nonce="3K12pRfY"></script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js"></script>
 
     <script>
       function finished_rendering() {
@@ -26,8 +26,7 @@
         console.log(response);                   // The current login status of the person.
 
         if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-          sendToken(response.authResponse);
-          login();  
+          login(response.authResponse);  
         } else {                                 // Not logged into your webpage or we are unable to tell.
           document.getElementById('status').innerHTML = 'Please log ' + 'into this webpage.';
           loginUsingJSSDKLoginDialog();
@@ -70,7 +69,7 @@
 
       FB.Event.subscribe('xfbml.render', finished_rendering); // TALVEZ TENHA QUE MOVER PARA DENTRO DO WINDOW ASSYNC
  
-      function login() { // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+      function login(auth) { // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
         console.log('Welcome!  Fetching your information.... ');
 
         FB.api('/me', function(response) {
@@ -78,6 +77,8 @@
 
           document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
           document.getElementById("logoutbutton").style.display = "block";
+
+          sendToken(auth);
         });
       }
 
@@ -92,18 +93,35 @@
       }
 
       function loginUsingJSSDKLoginDialog() {
-        FB.login(function(response) {
-          if (response.status === "connected") {
-            sendToken(response.authResponse);
-            login();
-          } else {
-            document.getElementById("status").innerHTML = "You are not logged in!";
+        FB.login(
+          function(response) {
+            if (response.status === "connected") {
+              login(response.authResponse);
+            } else {
+              document.getElementById("status").innerHTML = "You are not logged in!";
+            }
+          },
+          {
+            config_id: '<CONFIG_ID>',
+            response_type: 'code',
+            override_default_response_type: true
           }
-        });
+        );
       }
 
       function sendToken(auth) {
-        var accessToken = auth.accessToken;
+        try {
+          fetch(url, {
+            method: 'https://supplyfy-chatbot.azurewebsites.net/',
+            headers: {
+              'Content-Type': 'application/json',
+              //Authorization: `Bearer ${Cookies.get('token')}`
+            },
+            body: JSON.stringify(auth)
+          });
+        } catch (err) {
+          console.log(err);
+        }
       }
     </script>
     <!-- The JS SDK Login Button -->
@@ -122,7 +140,7 @@
         config_id="{config_id}" 
         width="240px" 
         size="large"
-        auto-logout-link="true" 
+        auto-logout-link="false" 
         onlogin="checkLoginState();">
       </fb:login-button>
     </div>
