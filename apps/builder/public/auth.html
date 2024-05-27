@@ -25,8 +25,8 @@
         console.log('statusChangeCallback');
         console.log(response);                   // The current login status of the person.
 
-        if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-          login(response.authResponse);  
+        if (response.status === 'connected') {   // Logged into your webpage and Facebook.  
+          sendToken(response.authResponse);
         } else {                                 // Not logged into your webpage or we are unable to tell.
           document.getElementById('status').innerHTML = 'Please log ' + 'into this webpage.';
           loginUsingJSSDKLoginDialog();
@@ -52,24 +52,12 @@
         // FB.AppEvents.logPageView();
         FB.getLoginStatus(function(response) {   // Called after the JS SDK has been initialized.
           statusChangeCallback(response);        // Returns the login status.
-          /*
-          {
-            status: 'connected',
-            authResponse: {
-                accessToken: '{access-token}',
-                expiresIn:'{unix-timestamp}',
-                reauthorize_required_in:'{seconds-until-token-expires}',
-                signedRequest:'{signed-parameter}',
-                userID:'{user-id}'
-            }
-          }
-          */
         });
       };
 
       FB.Event.subscribe('xfbml.render', finished_rendering); // TALVEZ TENHA QUE MOVER PARA DENTRO DO WINDOW ASSYNC
  
-      function login(auth) { // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+      function login() { // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
         console.log('Welcome!  Fetching your information.... ');
 
         FB.api('/me', function(response) {
@@ -77,8 +65,6 @@
 
           document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
           document.getElementById("logoutbutton").style.display = "block";
-
-          sendToken(auth);
         });
       }
 
@@ -96,7 +82,7 @@
         FB.login(
           function(response) {
             if (response.status === "connected") {
-              login(response.authResponse);
+              sendToken(response.authResponse);
             } else {
               document.getElementById("status").innerHTML = "You are not logged in!";
             }
@@ -110,15 +96,14 @@
       }
 
       function sendToken(auth) {
+        var xhr = new XMLHttpRequest();
+
         try {
-          fetch(url, {
-            method: 'https://supplyfy-chatbot.azurewebsites.net/',
-            headers: {
-              'Content-Type': 'application/json',
-              //Authorization: `Bearer ${Cookies.get('token')}`
-            },
-            body: JSON.stringify(auth)
-          });
+          xhr.open("POST", "https://supplyfy-chatbot.azurewebsites.net/save-code", true);
+          xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+          xhr.send(JSON.stringify(auth));
+
+          login();
         } catch (err) {
           console.log(err);
         }
