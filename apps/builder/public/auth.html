@@ -53,9 +53,9 @@
         FB.getLoginStatus(function(response) {   // Called after the JS SDK has been initialized.
           statusChangeCallback(response);        // Returns the login status.
         });
-      };
 
-      FB.Event.subscribe('xfbml.render', finished_rendering); // TALVEZ TENHA QUE MOVER PARA DENTRO DO WINDOW ASSYNC
+        FB.Event.subscribe('xfbml.render', finished_rendering);
+      };
  
       function login() { // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
         console.log('Welcome!  Fetching your information.... ');
@@ -64,11 +64,11 @@
           console.log('Successful login for: ' + response.name);
 
           document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
-          document.getElementById("logoutbutton").style.display = "block";
+          //document.getElementById("logoutbutton").style.display = "block";
         });
       }
 
-      function logout(){
+      /*function logout(){
         console.log('Called logout!');
 
         FB.logout(function(response) {
@@ -76,7 +76,7 @@
           document.getElementById("logoutbutton").style.display = "none";
           document.getElementById("loginbutton").style.display = "block";
         });
-      }
+      }*/
 
       function loginUsingJSSDKLoginDialog() {
         FB.login(
@@ -88,7 +88,7 @@
             }
           },
           {
-            config_id: '<CONFIG_ID>',
+            config_id: '486379303720362',
             response_type: 'code',
             override_default_response_type: true
           }
@@ -108,6 +108,10 @@
           console.log(err);
         }
       }
+
+      function toggleDelete() {
+
+      }
     </script>
     <!-- The JS SDK Login Button -->
     <div 
@@ -122,7 +126,7 @@
     >
       Carregando...
       <fb:login-button  
-        config_id="{config_id}" 
+        config_id="486379303720362" 
         width="240px" 
         size="large"
         auto-logout-link="false" 
@@ -130,10 +134,20 @@
       </fb:login-button>
     </div>
     <div id="status"></div>
+    <div class="container-fluid">
+      <h1>Pagina de Integração: Ignai-bot</h1>
+      <p>Autorize o compartilhamento para iniciar a utilização da solução</p>
 
-    <div class="fb-login-button" data-width="" data-size="" data-button-type="" data-layout="" data-auto-logout-link="false" data-use-continue-as="false"></div>
-    <!--<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>-->
+      <div class="alert alert-info" role="alert">
+        É necessario conceder acesso para a funcionamento da aplicação!
+      </div>
 
+      <div class="alert alert-dark" role="alert">
+        Solicitar exclusão dos dados
+      </div>
+
+      <button type="button" class="btn btn-dark" onclick="toggleDelete()">Remover acesso</button>
+    </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   </body>
 </html>
