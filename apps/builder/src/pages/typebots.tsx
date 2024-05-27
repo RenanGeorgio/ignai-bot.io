@@ -1,7 +1,15 @@
 import { DashboardPage } from '@/features/dashboard/components/DashboardPage'
 import { GetServerSidePropsContext } from 'next'
+import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
+// import { useRouter } from 'next/navigation'
 
 export default function Page() {
+  const { currentRole } = useWorkspace()
+  // const navigate = useRouter()
+  if (currentRole === 'OPERATOR') {
+    return <div>Operator page</div> // redirecionar para a rota correta
+  }
+
   return <DashboardPage />
 }
 

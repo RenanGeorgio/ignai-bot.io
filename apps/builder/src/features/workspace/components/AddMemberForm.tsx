@@ -32,7 +32,7 @@ export const AddMemberForm = ({
   const { t } = useTranslate()
   const [invitationEmail, setInvitationEmail] = useState('')
   const [invitationRole, setInvitationRole] = useState<WorkspaceRole>(
-    WorkspaceRole.MEMBER
+    WorkspaceRole.OPERATOR
   )
 
   const [isSendingInvitation, setIsSendingInvitation] = useState(false)
@@ -105,6 +105,9 @@ const WorkspaceRoleMenuButton = ({
           <MenuItem onClick={() => onChange(WorkspaceRole.MEMBER)}>
             {convertWorkspaceRoleToReadable(WorkspaceRole.MEMBER)}
           </MenuItem>
+          <MenuItem onClick={() => onChange(WorkspaceRole.OPERATOR)}>
+            {convertWorkspaceRoleToReadable(WorkspaceRole.OPERATOR)}
+          </MenuItem>
         </Stack>
       </MenuList>
     </Menu>
@@ -117,6 +120,8 @@ export const convertWorkspaceRoleToReadable = (role: WorkspaceRole): string => {
       return 'Admin'
     case WorkspaceRole.MEMBER:
       return 'Member'
+    case WorkspaceRole.OPERATOR:
+      return 'Operator'
     case WorkspaceRole.GUEST:
       return 'Guest'
   }
