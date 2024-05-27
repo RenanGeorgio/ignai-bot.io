@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie'
 
-export const baseUrl = 'http:/localhost:7000'
+export const baseUrl = process.env.REACT_APP_SERVER_API;
 
 interface ApiResponse<T> {
   error?: boolean
