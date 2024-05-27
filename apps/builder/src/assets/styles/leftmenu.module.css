@@ -1,0 +1,550 @@
+.left-menu {
+  align-items: flex-start;
+  border: 1px rgba(145, 145, 145, 0.261) solid;
+  border-radius: 3px 0px 0px 6px;
+  border-right-width: 1px;
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  height: auto;
+  margin-left: 20%;
+  height: auto;
+}
+
+.left-menu .header-left {
+  display: inline-flex;
+  padding: 10px 5px 10px 1px;
+  align-items: center;
+  gap: 1px;
+  align-self: stretch;
+  width: 100%;
+  border-bottom: 1px rgba(100, 100, 100, 0.048) solid;
+  justify-content: space-around;
+  height: 23px;
+}
+
+.left-menu .status-indicator-instance {
+  position: relative !important;
+}
+
+.left-menu .design-component-instance-node {
+  background-color: var(--lightsolid-colorprimaryprimary-400) !important;
+}
+
+.left-menu .instance {
+  border-radius: 20px !important;
+  flex-grow: 1 0 !important;
+  width: 80% !important;
+  height: 100%;
+  padding: 2px;
+  margin-top: 15px;
+  border: #c4c2c27c 1px solid;
+}
+
+.left-menu .icon-instance-node {
+  height: 30px !important;
+  position: relative !important;
+  width: 30px !important;
+  background-color: #c4c2c2;
+  border-radius: 50%;
+}
+
+.div-3 {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px -5px 0px 3px;
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow-y: hidden !important;
+  overflow-x: hidden !important;
+}
+
+.left-menu .heading {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  padding: 10px, 16px, 10px, 10px;
+  width: 100%;
+  border: #c4c2c2 1px solid;
+  margin-left: -0%;
+}
+
+.left-menu .adicionar-ticket {
+  color: #c4c2c2;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: 5px;
+  justify-content: space-evenly;
+  align-items: center;
+  cursor: pointer;
+}
+
+.blueButtonTicket {
+  background-color: rgba(115, 103, 240, 1);
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: none;
+  cursor: pointer;
+  align-items: center;
+  width: 100%;
+  height: 100% !important;
+  display: flex;
+  justify-content: space-between;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.grayButtonTicket {
+  background-color: rgba(168, 170, 174, 0.397);
+  color: rgba(168, 170, 174, 1);
+  padding: 10px;
+  border: none;
+  border-radius: 0px;
+  cursor: pointer;
+  align-items: center;
+  width: 100%;
+  height: 100% !important;
+  display: flex;
+  justify-content: space-between;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.phoneCall {
+  height: 22px !important;
+  position: relative !important;
+  width: 22px !important;
+  color: #fff !important;
+}
+
+.left-menu .chevron-down {
+  height: 20px !important;
+  margin-right: -156px !important;
+  position: relative !important;
+  width: 20px !important;
+}
+
+.left-menu .heading-2 {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 192px;
+  padding: 10px 16px;
+  width: 100%;
+  border-bottom: #33333328 1px solid;
+}
+
+.div-content {
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+  padding: 0px 0px 30px 0px;
+}
+
+.div-content::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 20px;
+}
+
+.div-content::-webkit-scrollbar-track {
+  background: rgb(192, 192, 192);
+  width: 8px;
+  border-radius: 20px;
+}
+
+.div-content::-webkit-scrollbar-thumb {
+  background-color: rgb(109, 109, 109);
+  border-radius: 20px;
+}
+
+.left-menu .text-wrapper-3 {
+  font-family: var(--light-basic-typography-h5-heading-font-family);
+  font-style: var(--light-basic-typography-h5-heading-font-style);
+  font-weight: var(--light-basic-typography-h5-heading-font-weight);
+  margin-top: -1px;
+  position: relative;
+  width: fit-content;
+  color: #7367f0;
+}
+
+.left-menu .listLeftClient {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #8f83fb;
+  border: 0px none;
+  margin: 5px;
+  color: #fff;
+  border-radius: 6px;
+  gap: 12px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.left-menu .listLeftLead {
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  border: 0.5px solid rgba(72, 72, 72, 0.081);
+  flex: 0 0 auto;
+  gap: 12px;
+  margin-bottom: 10px;
+  padding: 8px 10px;
+  width: 95%;
+  cursor: pointer;
+}
+
+.left-menu .list-icon-chat {
+  display: block;
+  align-self: center;
+  margin-left: 105px;
+  margin-bottom: -25px;
+}
+
+/* .left-menu .avatar-client {
+  width: 30px;
+  height: 30px;
+  margin: auto;
+  background-color: #c4c2c2;
+  border-radius: 50%;
+  border: 1px solid #fff;
+} */
+
+.left-menu .status-indicator-2 {
+  border-radius: 100px !important;
+  height: 42px !important;
+  left: -2px !important;
+  top: -2px !important;
+  width: 42px !important;
+}
+
+.left-menu .status-indicator-3 {
+  border: 2px solid !important;
+  border-color: var(--lightsolid-colorextracard-background) !important;
+  height: 42px !important;
+  left: 0 !important;
+  position: absolute !important;
+  top: 0 !important;
+  width: 42px !important;
+}
+
+.left-menu .status-indicator-4 {
+  width: 38px !important;
+}
+
+.left-menu .status-indicator-5 {
+  left: 28px !important;
+  top: 29px !important;
+}
+
+.left-menu .design-component-instance-node-2 {
+  background-color: var(--lightsolid-colorwarningwarning-400) !important;
+}
+
+.left-menu .text-2 {
+  align-items: flex-start;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 1px;
+  position: relative;
+  width: min-content;
+}
+
+.left-menu .img-2 {
+  height: 24px;
+  object-fit: cover;
+  position: relative;
+  width: 24px;
+}
+
+.left-menu .namr-time {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  position: relative;
+  width: 100%;
+}
+
+.left-menu .text-wrapper-4 {
+  color: var(--lightsolid-colorextrawhite);
+  flex: 1;
+  font-family: var(--light-basic-typography-h6-heading-font-family);
+  font-size: var(--light-basic-typography-h6-heading-font-size);
+  font-style: var(--light-basic-typography-h6-heading-font-style);
+  font-weight: var(--light-basic-typography-h6-heading-font-weight);
+  letter-spacing: var(--light-basic-typography-h6-heading-letter-spacing);
+  line-height: var(--light-basic-typography-h6-heading-line-height);
+  margin-top: -1px;
+  position: relative;
+}
+
+.left-menu .text-wrapper-5 {
+  color: #fff;
+  margin-top: -1px;
+  position: relative;
+  text-align: start;
+  white-space: nowrap;
+  margin-left: 5px;
+}
+
+.left-menu .text-wrapper-6 {
+  align-self: stretch;
+  color: var(--lightsolid-colorextrawhite);
+  font-family: var(--light-basic-typography-paragraph-font-family);
+  font-size: var(--light-basic-typography-paragraph-font-size);
+  font-style: var(--light-basic-typography-paragraph-font-style);
+  font-weight: var(--light-basic-typography-paragraph-font-weight);
+  letter-spacing: var(--light-basic-typography-paragraph-letter-spacing);
+  line-height: var(--light-basic-typography-paragraph-line-height);
+  position: relative;
+}
+
+.left-menu .badge-instance {
+  background-color: #dedcdc !important;
+  border-radius: 20px !important;
+  left: 96px !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  top: 0 !important;
+}
+
+.left-menu .badge-2 {
+  color: #686efe !important;
+}
+
+.left-menu .list-2 {
+  align-items: center;
+  align-self: stretch;
+  border: 0px none;
+  border-color: var(--lightsolid-colorextradivider);
+  display: flex;
+  flex: 0 0 auto;
+  gap: 12px;
+  padding: 8px 12px;
+  position: relative;
+  width: 100%;
+}
+
+.left-menu .design-component-instance-node-3 {
+  left: 0 !important;
+  position: absolute !important;
+  top: 0 !important;
+}
+
+.left-menu .design-component-instance-node-4 {
+  background-color: var(--lightsolid-colorsecondarysecondary-400) !important;
+}
+
+.left-menu .text-wrapper-7 {
+  color: var(--lighttypography-colorheading-text);
+  flex: 1;
+  font-family: var(--light-basic-typography-h6-heading-font-family);
+  font-size: var(--light-basic-typography-h6-heading-font-size);
+  font-style: var(--light-basic-typography-h6-heading-font-style);
+  font-weight: var(--light-basic-typography-h6-heading-font-weight);
+  letter-spacing: var(--light-basic-typography-h6-heading-letter-spacing);
+  line-height: var(--light-basic-typography-h6-heading-line-height);
+  margin-top: -1px;
+  position: relative;
+}
+
+.left-menu .text-wrapper-8 {
+  color: var(--lighttypography-colormuted-text);
+  font-family: var(--light-basic-typography-paragraph-small-font-family);
+  font-size: var(--light-basic-typography-paragraph-small-font-size);
+  font-style: var(--light-basic-typography-paragraph-small-font-style);
+  font-weight: var(--light-basic-typography-paragraph-small-font-weight);
+  letter-spacing: var(--light-basic-typography-paragraph-small-letter-spacing);
+  line-height: var(--light-basic-typography-paragraph-small-line-height);
+  margin-top: -1px;
+  position: relative;
+  text-align: right;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.left-menu .text-wrapper-9 {
+  align-self: stretch;
+  color: var(--lighttypography-colormuted-text);
+  font-family: var(--light-basic-typography-paragraph-font-family);
+  font-size: var(--light-basic-typography-paragraph-font-size);
+  font-style: var(--light-basic-typography-paragraph-font-style);
+  font-weight: var(--light-basic-typography-paragraph-font-weight);
+  letter-spacing: var(--light-basic-typography-paragraph-letter-spacing);
+  line-height: var(--light-basic-typography-paragraph-line-height);
+  position: relative;
+}
+
+.left-menu .badge-3 {
+  background-color: #dedcdc !important;
+  border-radius: 20px !important;
+  left: 84px !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  top: 0 !important;
+}
+
+.left-menu .label-initials-instance {
+  left: 7px !important;
+}
+
+.left-menu .status-indicator-6 {
+  top: 1px !important;
+}
+
+.left-menu .heading-3 {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 213px;
+  padding: 10px 16px;
+  position: relative;
+  font-weight: bold;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  border-bottom: #33333328 1px solid;
+  border-top: #33333328 1px solid;
+  width: 100%;
+}
+
+.left-menu .pngwing {
+  height: 23px;
+  object-fit: cover;
+  position: relative;
+  width: 25px;
+}
+
+.left-menu .text-wrapper-10 {
+  align-self: stretch;
+  color: var(--lighttypography-colorheading-text);
+  font-family: var(--light-basic-typography-h6-heading-font-family);
+  font-size: var(--light-basic-typography-h6-heading-font-size);
+  font-style: var(--light-basic-typography-h6-heading-font-style);
+  font-weight: var(--light-basic-typography-h6-heading-font-weight);
+  letter-spacing: var(--light-basic-typography-h6-heading-letter-spacing);
+  line-height: var(--light-basic-typography-h6-heading-line-height);
+  position: relative;
+}
+
+.left-menu .avatar-instance {
+  background-color: var(--lightsolid-colorinfoinfo-400) !important;
+}
+
+.left-menu .pngwing-2 {
+  height: 22px;
+  object-fit: cover;
+  position: relative;
+  width: 30px;
+}
+
+.messageBubble {
+  background-color: #8f83fb;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 5px;
+  color: white;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.avatarWithName {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.avatar-client {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.name {
+  color: #ffffff;
+  font-size: 15px;
+}
+
+.companyName {
+  font-size: 0.7em;
+  color: #686efe;
+  position: relative;
+  background-color: #dedddd;
+  padding: 3px 8px;
+  border-radius: 10px;
+  position: absolute;
+  right: 10px;
+  top: 3px;
+}
+
+.time {
+  font-size: 0.6em;
+  color: #ffffff;
+  position: relative;
+  right: 40px;
+  bottom: -10px;
+}
+
+.messageContent {
+  color: #ffffff;
+  position: absolute;
+  right: 5px;
+}
+
+.messageLogo {
+  position: absolute;
+  top: -0px;
+  left: 50px;
+  width: 22px;
+}
+
+.imageName {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.online {
+  background-color: rgb(0, 255, 0);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid white;
+  position: absolute;
+  bottom: 18px;
+  left: 30px;
+}
+
+.offline {
+  background-color: grey;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid white;
+  position: absolute;
+  bottom: 18px;
+  left: 30px;
+}
