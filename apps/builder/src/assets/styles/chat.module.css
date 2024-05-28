@@ -438,13 +438,14 @@
 /* footer */
 .wrapperTextEnter {
   width: 98% !important;
+  height: 50px; 
   padding: 5px 15px 5px 5px;
   background: white;
   box-shadow: 0px 2px 4px rgba(165, 163, 174, 0.056);
   border-radius: 6px;
   display: flex;
   margin: auto 5px 0px auto !important;
-  align-items: flex-end;
+  align-items: center; 
 }
 
 .containertxt {
@@ -461,6 +462,7 @@
   height: 100%;
   margin-right: 20px;
   text-overflow: clip;
+  background-color: white;
 }
 
 .txt {
@@ -477,6 +479,11 @@
   padding: 0;
   border: none;
   resize: none;
+  background: white; 
+}
+
+.txt::placeholder {
+  color: #000000; 
 }
 
 .txt:focus,
@@ -488,10 +495,17 @@ input.txt:focus {
 
 .btncontainer {
   display: flex;
+  align-items: center;
   justify-content: space-around;
   align-items: flex-end;
   gap: 10px;
   width: 20%;
+}
+
+.btncontainer input[type="file"] {
+  width: auto;
+  height: auto; 
+  padding: 2px 4px; 
 }
 
 .icon {
