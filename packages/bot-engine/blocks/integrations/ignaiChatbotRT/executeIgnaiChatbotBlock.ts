@@ -40,9 +40,11 @@ const parseChatwootOpenCode = ({
     var iframe = document.createElement('iframe');
     iframe.src = "http://localhost:5000?website_token=${websiteToken}&typebot_id=${typebotId}&result_id=${resultId}";
     iframe.style.position = "fixed";
-    iframe.style.bottom = "20px";
-    iframe.style.right = "20px";
+    iframe.style.bottom = "10px";
+    iframe.style.right = "10px";
     iframe.style.zIndex = "9999";
+    iframe.style.width = "400px";
+    iframe.style.height = "400px";
     iframe.frameBorder = 0;
     setTimeout(function() {
       document.body.appendChild(iframe);
