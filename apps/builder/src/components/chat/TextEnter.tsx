@@ -54,6 +54,7 @@ export default function TextEnter({
               rows={2}
               wrap="ward"
               className={styles['txt']}
+              placeholder="Informe sua mensagem"
               value={textMessage}
             />
           </div>

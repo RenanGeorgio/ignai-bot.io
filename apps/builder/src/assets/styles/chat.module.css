@@ -145,6 +145,7 @@
   padding: 10px 16px;
   margin: 4px 0;
   margin-left: 40px;
+  margin-right: auto;
 }
 
 .chat .message p,
@@ -452,6 +453,7 @@
   gap: 2px;
   display: flex;
   width: 100%;
+  height: 50px;
 }
 
 .txtwrapp {
@@ -481,6 +483,7 @@
 input.txt:focus {
   box-shadow: 0 0 0 0;
   outline: 0;
+  background-color: white;
 }
 
 .btncontainer {
