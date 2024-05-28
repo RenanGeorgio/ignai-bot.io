@@ -36,7 +36,8 @@
   border-radius: 20px !important;
   flex-grow: 1 0 !important;
   width: 80% !important;
-  height: 50px !important;
+  height: 25px !important;
+  color: #fff;
   padding: 2px;
   margin-top: 15px;
   border: #c4c2c27c 1px solid;
@@ -45,7 +46,7 @@
 .left-menu .icon-instance-node {
   height: 30px !important;
   position: relative !important;
-  margin-top: 5px;
+  margin-top: 15px;
   width: 30px !important;
   background-color: #c4c2c2;
   border-radius: 50%;
