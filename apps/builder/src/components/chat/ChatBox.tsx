@@ -245,7 +245,14 @@ export const ChatBox: React.FC<Props> = ({
 
       <div className={styles.chat}>
         {messages?.map((message, index: number) => (
-          <div key={index} className={styles['message-wrapper']}>
+          <div
+            key={index}
+            className={`${styles['message-wrapper']} ${
+              message?.senderId === user?.companyId
+                ? styles['sent']
+                : styles['received']
+            }`}
+          >
             {message?.senderId === user?.companyId
               ? getTextMessageAvatar()
               : getMessageAvatar()}
