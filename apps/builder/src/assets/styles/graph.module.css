@@ -3,7 +3,7 @@
   border: 1px solid #ddd;
   border-radius: 6px;
   background-color: #fff;
-  width: calc(50% - 20px); 
+  width: calc(45% - 20px); 
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1); 
   height: 300px; 
   margin-bottom: 20px;
@@ -94,10 +94,10 @@
   color: #000;
 }
 
-.graph-row {
+.graph-container-flex {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between; 
+  justify-content: space-between;
 }
 
 .graph-container-inline {
@@ -137,7 +137,7 @@
 }
 
 .data-row-themes {
-  margin-bottom: 5px;
+  margin-bottom: 15px;
 }
 
 .data-row-4 {
