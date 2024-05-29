@@ -95,14 +95,10 @@ const Chat: React.FC = () => {
             <div className={styles['graph-container-flex']}>
               <div className={styles['graph-container']}>
                 <GraphChat data={{ datasets: [], labels: [] }} />
-              </div>
-              <div className={styles['graph-container']}>
                 <GraphTicket data={[50, 30, 20, 10]} />
               </div>
               <div className={styles['graph-container']}>
                 <GraphThemes month={''} />
-              </div>
-              <div className={styles['graph-container']}>
                 <GraphTicketYou data={[50, 30, 20, 10]} />
               </div>
             </div>
