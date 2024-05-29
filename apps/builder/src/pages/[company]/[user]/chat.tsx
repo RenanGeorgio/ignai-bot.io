@@ -92,20 +92,16 @@ const Chat: React.FC = () => {
             </>
           )}
           {activePage === 'Painel' && (
-            <div className={styles['graph-container']}>
-              <div className={styles['graph-item']}>
+            <>
+              <div className={styles['graph-row']}>
                 <GraphChat data={{ datasets: [], labels: [] }} />
-              </div>
-              <div className={styles['graph-item']}>
                 <GraphTicket data={[50, 30, 20, 10]} />
               </div>
-              <div className={styles['graph-item']}>
+              <div className={styles['graph-row']}>
                 <GraphThemes month={''} />
-              </div>
-              <div className={styles['graph-item']}>
                 <GraphTicketYou data={[50, 30, 20, 10]} />
               </div>
-            </div>
+            </>
           )}
         </div>
       </div>
