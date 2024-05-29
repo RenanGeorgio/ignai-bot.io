@@ -1,9 +1,11 @@
 .graph-container {
+  display: flex;
+  flex-wrap: wrap;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 6px;
   background-color: #fff;
-  width: calc(45% - 20px); 
+  width: calc(48% - 10px); 
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1); 
   height: 300px; 
   margin-bottom: 20px;
@@ -97,11 +99,6 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-}
-
-.graph-container-inline {
-  width: calc(50% - 20px);
-  margin-bottom: 0;
 }
 
 .graph-container-themes {
