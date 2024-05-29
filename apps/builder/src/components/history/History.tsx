@@ -164,6 +164,7 @@ export default function HistoryComponent() {
           display: 'flex',
           width: '98%',
           padding: '5px 0px 1px 10px',
+          backgroundColor: 'white'
         }}
       >
         <div
@@ -291,6 +292,7 @@ export default function HistoryComponent() {
           alignItems: 'flex-start',
           display: 'inline-flex',
           width: '100%',
+          backgroundColor: 'white'
         }}
       >
         <div
@@ -319,6 +321,7 @@ export default function HistoryComponent() {
           width: '100%',
           borderTop: '1px #DBDADE solid',
           padding: 10,
+          backgroundColor: 'white'
         }}
       >
         <div
@@ -327,6 +330,7 @@ export default function HistoryComponent() {
             justifyContent: 'flex-end',
             gap: 15,
             height: '100%',
+            backgroundColor: 'white'
           }}
         >
           <select
@@ -337,6 +341,8 @@ export default function HistoryComponent() {
               width: '5rem',
               padding: '5px 10px 5px 5px',
               borderRadius: '5px',
+              backgroundColor: 'white',
+              color: 'black'
             }}
           >
             <option selected>10</option>
