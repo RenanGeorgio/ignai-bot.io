@@ -6,7 +6,8 @@
   width: calc(50% - 20px); 
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1); 
   height: 300px; 
-  margin: 20px 0;
+  margin: 20px;
+  margin-bottom: 20px;
 }
 
 .canvas-chart {
@@ -95,6 +96,7 @@
 
 .graph-row {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between; 
 }
 
@@ -155,11 +157,16 @@
 .percentage-container {
   display: flex;
   align-items: center;
-  text-align: left;
+  justify-content: flex-end;
   position: absolute; 
   margin-top: 6%; 
   margin-left: 5%;
   color: #000;
+}
+
+.percentage-container svg {
+  width: 16px; 
+  height: 16px;
 }
 
 .percentage-container h4 {
@@ -181,6 +188,7 @@
 }
 
 .data-number{
+  margin-left: auto;
   margin-right: 20px;
   color: #000;
 }
