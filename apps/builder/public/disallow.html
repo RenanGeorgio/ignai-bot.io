@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/disallow.css">
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js"></script>
+    <title>Ignai-bot</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Solicitar remoção de dados</h1>
+      <p>
+        Ao solicitar a exclusão dos seus dados, você removerá permanentemente do nosso aplicativo todas as informações pessoais associadas à sua conta. Este processo também revogará quaisquer permissões concedidas às plataformas Meta, incluindo Instagram, Facebook e WhatsApp.
+      </p>
+      <button id="deleteButton">Solicitar exclusão de dados</button>
+      <div id="spinner" class="spinner"></div>
+      <div id="status"></div>
+    </div>
+
+    <script>
+      const handleDataDeletion = () => {
+        // Perform data deletion logic
+        AccessToken.getCurrentAccessToken().then(data => {
+          const { accessToken } = data || {};
+          if (accessToken) {
+            fetch(`https://graph.facebook.com/${accessToken.userId}?access_token=${accessToken}`)
+              .then(response => response.json())
+              .then(json => {
+                // Delete the user's Facebook data
+                console.log(json);
+              })
+              .catch(error => {
+                console.log(error);
+              });
+          }
+        });
+      };
+      
+      document.getElementById('deleteButton').addEventListener('click', function() {
+        const button = document.getElementById('deleteButton');
+        const spinner = document.getElementById('spinner');
+        const status = document.getElementById('status');
+
+        button.disabled = true;
+        spinner.style.display = 'block';
+        status.textContent = '';
+        status.className = '';
+
+        fetch('https://api.example.com/delete-data', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ userId: 'user123' })
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          status.textContent = 'Seus dados foram excluídos com sucesso. Todas as permissões Meta foram revogadas.';
+          status.className = 'success';
+        })
+        .catch(error => {
+          status.textContent = 'Houve um erro ao processar seu pedido. Por favor, tente novamente mais tarde.';
+          status.className = 'error';
+          console.error('There was an error with the fetch operation:', error);
+        })
+        .finally(() => {
+          spinner.style.display = 'none';
+          button.disabled = false;
+        });
+      });
+    </script>
+  </body>
+</html>
