@@ -20,6 +20,8 @@ const MuiTheme = createTheme({
   components: {
     MuiDataGrid: {
       styleOverrides: {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         root: {
           border: 1,
           borderColor: colors.gray,
