@@ -384,7 +384,7 @@ export default function HistoryComponent() {
         </div>
       </div>
 
-      <div style={{ height: 370, width: '100%' }}>
+      <div style={{ height: 370, width: '100%', backgroundColor: 'white' }}>
         <DataGrid rows={rows} columns={columns} checkboxSelection />
       </div>
 

@@ -22,6 +22,16 @@
   overflow-x: hidden;
 }
 
+.chat::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+.chat::-webkit-scrollbar-thumb {
+  background-color: #d3d3d3;
+  border-radius: 10px;
+  border: 3px solid #f1f1f1; 
+}
+
 .headerBoxChat {
   display: inline-flex;
   padding: 5px 20px 5px 10px;
@@ -69,6 +79,7 @@
 .name-time {
   margin-left: 15px;
   margin-right: 25px;
+  color: #4b465cc5;
 }
 
 .message-wrapper {
@@ -341,7 +352,7 @@
 }
 
 .chat .text-wrapper-4 {
-  color: var(--lighttypography-colormuted-text);
+  color: #4b465cc5;
   font-family: var(--light-basic-typography-paragraph-small-font-family);
   font-size: var(--light-basic-typography-paragraph-small-font-size);
   font-style: var(--light-basic-typography-paragraph-small-font-style);

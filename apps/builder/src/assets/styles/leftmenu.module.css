@@ -43,6 +43,11 @@
   border: #c4c2c27c 1px solid;
 }
 
+.left-menu .instance::placeholder {
+  color: #fff; 
+  padding-left: 10px; 
+}
+
 .left-menu .icon-instance-node {
   height: 30px !important;
   position: relative !important;
