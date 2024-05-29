@@ -6,6 +6,7 @@
   width: calc(50% - 10px); 
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1); 
   height: 300px; 
+  margin: 20px;
 }
 
 .canvas-chart {
@@ -89,6 +90,7 @@
 
 .legenda-texto {
   display: inline-block;
+  color: #000;
 }
 
 .graph-row {
@@ -99,6 +101,10 @@
   margin-bottom: 20px;
   justify-content: space-between;
   width: 92%;
+}
+
+.graph-row .graph-container {
+  width: calc(50% - 20px); 
 }
 
 .graph-container-themes {
@@ -162,10 +168,15 @@
   position: absolute; 
   margin-top: 6%; 
   margin-left: 5%;
+  color: #000;
+}
+
+.percentage-container h4 {
+  color: #000;
 }
 
 .graph-subtitle {
-  color: rgba(75, 70, 92, 0.673);
+  color: #000;
   display: flex;
   margin-bottom: 5%;
   margin-top: -2%;
@@ -180,4 +191,9 @@
 
 .data-number{
   margin-right: 20px;
+  color: #000;
+}
+
+.data-text {
+  color: #000;
 }

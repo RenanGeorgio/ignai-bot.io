@@ -97,6 +97,10 @@
   font-size: 13px;
 }
 
+.message-time span {
+  color: #4b465cba;
+}
+
 .time-right {
   text-align: left;
   margin-left: 50px;
