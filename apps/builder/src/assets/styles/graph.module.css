@@ -28,8 +28,15 @@
   overflow: hidden; 
 }
 
+.graph-container-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
 .graph-title {
   margin-top: 2%;
+  margin-bottom: 10px;
   margin-left: 3%;
   color: rgba(75, 70, 92, 1);
 }
@@ -132,7 +139,7 @@
 }
 
 .data-row-themes {
-  margin-bottom: 0px;
+  margin-bottom: 5px;
 }
 
 .data-row-4 {
