@@ -1,6 +1,7 @@
 .graph-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   gap: 20px; 
   padding: 10px;
   border: 1px solid #ddd;
@@ -14,6 +15,9 @@
   height: 350px;
   margin-bottom: 20px;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .canvas-chart {
