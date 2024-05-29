@@ -90,7 +90,7 @@ const GraphTicket: React.FC<GraphTicketProps> = ({ data }) => {
             className={styles['legenda-cor']}
             style={{ backgroundColor: '#7dbe9a' }}
           ></span>
-          <span className="legenda-texto">Preço do Produto</span>
+          <span className={styles['legenda-texto']}>Preço do Produto</span>
         </div>
         <div>
           <span
