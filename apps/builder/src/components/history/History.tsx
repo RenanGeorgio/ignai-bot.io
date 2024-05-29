@@ -190,7 +190,7 @@ export default function HistoryComponent() {
             }}
           >
             <form style={{ width: '100%', height: '95%' }}>
-              <select style={{ width: '80%', height: '100%', borderRadius: 6 }}>
+              <select style={{ width: '80%', height: '100%', borderRadius: 6, backgroundColor: 'white', color: 'black' }}>
                 <option value="" selected>
                   <em>None</em>
                 </option>
@@ -230,6 +230,8 @@ export default function HistoryComponent() {
                   width: '80%',
                   height: '100%',
                   borderRadius: 6,
+                  backgroundColor: 'white', 
+                  color: 'black'
                 }}
               >
                 <option value="" selected>
@@ -266,7 +268,7 @@ export default function HistoryComponent() {
           >
             <form style={{ width: '80%', height: '95%' }}>
               <select
-                style={{ width: '100%', height: '100%', borderRadius: 6 }}
+                style={{ width: '100%', height: '100%', borderRadius: 6, backgroundColor: 'white', color: 'black' }}
               >
                 <option value="" selected>
                   <em>None</em>
@@ -299,6 +301,7 @@ export default function HistoryComponent() {
             fontWeight: '500',
             lineHeight: 2,
             wordWrap: 'break-word',
+            backgroundColor: 'white'
           }}
         >
           Filtro de busca
@@ -348,6 +351,7 @@ export default function HistoryComponent() {
             justifyContent: 'flex-end',
             gap: 15,
             padding: 15,
+            backgroundColor: 'white'
           }}
         >
           <input
