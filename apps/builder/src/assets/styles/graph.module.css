@@ -2,7 +2,6 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 20px;
 }
 
 .graph-container {
@@ -18,9 +17,18 @@
 
 .graph-row {
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+  justify-content: space-between;
   width: 100%;
+  margin-bottom: 20px;
+}
+
+.graph-row > div {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.graph-row > div:last-child {
+  margin-right: 0;
 }
 
 .canvas-chart {
