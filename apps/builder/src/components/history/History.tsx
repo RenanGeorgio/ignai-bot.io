@@ -116,6 +116,7 @@ export default function HistoryComponent() {
         alignItems: 'flex-start',
         gap: 1,
         display: 'inline-flex',
+        backgroundColor: 'white'
       }}
     >
       <div
@@ -344,6 +345,7 @@ export default function HistoryComponent() {
               padding: '5px 5px 5px 5px',
               borderRadius: '5px',
               backgroundColor: 'white',
+              marginTop: '-5px',
               color: 'black',
               border: '1px solid black'
             }}
