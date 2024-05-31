@@ -93,7 +93,7 @@ const Chat: React.FC = () => {
           )}
           {activePage === 'Painel' && (
             <>
-              <div className='container-graphs-chat'>
+              <div className={styles['container-graphs-chat']}>
                 <div className={styles['graph-row']}>
                   <GraphChat data={{ datasets: [], labels: [] }} />
                   <GraphTicket data={[50, 30, 20, 10]} />
