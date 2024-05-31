@@ -556,3 +556,8 @@
   bottom: 18px;
   left: 30px;
 }
+
+.custom-placeholder::placeholder {
+  color: black;
+  margin-left: 5px;
+}

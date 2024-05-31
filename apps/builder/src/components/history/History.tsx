@@ -4,6 +4,7 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import { DotsVertical, Edit, Trash } from '@/components/icons'
 import rows from '../../assets/mock/dados/data.json'
 import ModalHistory from './ModalHistory'
+import styles from '@/assets/styles/leftmenu.module.css'
 import { Button, Modal, IconButton } from '@mui/material'
 
 interface Contato {
@@ -340,11 +341,10 @@ export default function HistoryComponent() {
               justifyContent: 'center',
               height: '2rem',
               width: '5rem',
-              padding: '5px 10px 5px 5px',
+              padding: '5px 5px 5px 5px',
               borderRadius: '5px',
               backgroundColor: 'white',
               color: 'black',
-              marginBottom: '5px',
               border: '1px solid black'
             }}
           >
@@ -364,6 +364,7 @@ export default function HistoryComponent() {
           }}
         >
           <input
+            className={styles['custom-placeholder']}
             title="Buscar"
             placeholder="Buscar"
             style={{
@@ -374,7 +375,7 @@ export default function HistoryComponent() {
               justifyContent: 'flex-start',
               alignItems: 'center',
               display: 'flex',
-              color: "black"
+              color: 'black'
             }}
           />
 
