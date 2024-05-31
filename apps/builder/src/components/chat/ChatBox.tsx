@@ -290,7 +290,7 @@ export const ChatBox: React.FC<Props> = ({
                   : styles['time-right']
               }`}
             >
-              <span>{dayjs(message?.createdAt).format('HH:mm')}</span>
+              <span style={{color: 'black'}}>{dayjs(message?.createdAt).format('HH:mm')}</span>
             </div>
           </div>
         ))}

@@ -115,8 +115,7 @@ export default function HistoryComponent() {
         justifyContent: 'center',
         alignItems: 'flex-start',
         gap: 1,
-        display: 'inline-flex',
-        backgroundColor: 'white'
+        display: 'inline-flex'
       }}
     >
       <div
@@ -345,7 +344,7 @@ export default function HistoryComponent() {
               padding: '5px 5px 5px 5px',
               borderRadius: '5px',
               backgroundColor: 'white',
-              marginTop: '-5px',
+              marginTop: '-7px',
               color: 'black',
               border: '1px solid black'
             }}
