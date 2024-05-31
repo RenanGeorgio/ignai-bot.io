@@ -63,12 +63,14 @@ export default function TextEnter({
               <Mic />
             </IconButton>
             <div className={styles['file-input-container']}>
+              {/* 
               <input
                 type="file"
                 accept="image/*"
                 onChange={handleFileUploadPhoto}
                 className={styles['file-input']}
-              />
+                />
+              */}
               <IconButton className={styles['icon']} aria-label="Photo">
                 <Photo />
               </IconButton>
