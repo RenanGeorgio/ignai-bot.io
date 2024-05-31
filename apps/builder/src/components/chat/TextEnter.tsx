@@ -34,6 +34,14 @@ export default function TextEnter({
     setTextMessage(e.currentTarget.value)
   }
 
+  const handlePhotoIconClick = () => {
+    // Simula o clique no input de arquivo quando o ícone de foto é clicado
+    const fileInput = document.getElementById('file-input')
+    if (fileInput) {
+      fileInput.click()
+    }
+  }
+
   useEffect(() => {
     // Lógica para executar quando o componente monta (equivalente a componentDidMount)
     // Por exemplo, pode ser usado para adicionar event listeners, etc.
@@ -67,11 +75,15 @@ export default function TextEnter({
                 type="file"
                 accept="image/*"
                 onChange={handleFileUploadPhoto}
-                className='file-input'
+                id="file-input" 
                 style={{ display: 'none' }}
               />
               <label htmlFor="file-input">
-                <IconButton className={styles['icon']} aria-label="Photo">
+                <IconButton
+                  className={styles['icon']}
+                  aria-label="Photo"
+                  onClick={handlePhotoIconClick} 
+                >
                   <Photo />
                 </IconButton>
               </label>
