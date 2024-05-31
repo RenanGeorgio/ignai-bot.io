@@ -67,14 +67,14 @@ export default function TextEnter({
                 type="file"
                 accept="image/*"
                 onChange={handleFileUploadPhoto}
-                className={styles['file-input']}
+                className='file-input'
                 style={{ display: 'none' }}
               />
-              <IconButton className={styles['icon']} aria-label="Photo">
-                <label htmlFor='file-input'>
+              <label htmlFor="file-input">
+                <IconButton className={styles['icon']} aria-label="Photo">
                   <Photo />
-                </label>
-              </IconButton>
+                </IconButton>
+              </label>
             </div>
             <div className={styles['btntxt']}>
               <button
