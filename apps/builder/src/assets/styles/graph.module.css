@@ -1,11 +1,9 @@
 .container-graphs-chat {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   gap: 20px;
-  margin: 0px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
   flex-direction: row; 
 }
 
