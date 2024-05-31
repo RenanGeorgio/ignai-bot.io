@@ -1,6 +1,7 @@
 .container-graphs-chat {
   display: flex;
   flex-wrap: wrap;
+  gap: 20px;
   justify-content: space-between;
 }
 
@@ -16,19 +17,8 @@
 }
 
 .graph-row {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-.graph-row > div {
-  flex: 1;
-  margin-right: 10px;
-}
-
-.graph-row > div:last-child {
-  margin-right: 0;
+  flex: 1 1 calc(50% - 20px); 
+  min-width: 300px;
 }
 
 .canvas-chart {

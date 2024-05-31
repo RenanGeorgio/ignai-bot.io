@@ -360,7 +360,7 @@ export default function HistoryComponent() {
             display: 'flex',
             justifyContent: 'flex-end',
             gap: 15,
-            padding: 15,
+            padding: '5px',
             backgroundColor: 'white'
           }}
         >
