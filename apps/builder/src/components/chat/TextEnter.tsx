@@ -13,11 +13,11 @@ interface TextEnterProps {
 }
 
 export default function TextEnter({
-  onSendMessage
-  // onUploadFilePhoto,
+  onSendMessage,
+  onUploadFilePhoto,
 }: TextEnterProps) {
   const [textMessage, setTextMessage] = useState<string>('')
-  {/* 
+
   const handleFileUploadPhoto = (event: ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files
     if (files && files.length > 0) {
@@ -29,7 +29,7 @@ export default function TextEnter({
       onUploadFilePhoto(file)
     }
   }
-*/}
+
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setTextMessage(e.currentTarget.value)
   }
@@ -63,16 +63,17 @@ export default function TextEnter({
               <Mic />
             </IconButton>
             <div className={styles['file-input-container']}>
-              {/* 
               <input
                 type="file"
                 accept="image/*"
                 onChange={handleFileUploadPhoto}
                 className={styles['file-input']}
-                />
-              */}
+                style={{ display: 'none' }}
+              />
               <IconButton className={styles['icon']} aria-label="Photo">
-                <Photo />
+                <label htmlFor='file-input'>
+                  <Photo />
+                </label>
               </IconButton>
             </div>
             <div className={styles['btntxt']}>
