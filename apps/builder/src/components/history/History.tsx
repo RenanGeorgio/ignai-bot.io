@@ -191,7 +191,7 @@ export default function HistoryComponent() {
             }}
           >
             <form style={{ width: '100%', height: '95%' }}>
-              <select style={{ width: '80%', height: '100%', borderRadius: 6, backgroundColor: 'white', color: 'black' }}>
+              <select style={{ width: '80%', height: '100%', borderRadius: 6, backgroundColor: 'white', color: 'black', border: '1px solid black' }}>
                 <option value="" selected>
                   <em>None</em>
                 </option>
@@ -232,7 +232,8 @@ export default function HistoryComponent() {
                   height: '100%',
                   borderRadius: 6,
                   backgroundColor: 'white', 
-                  color: 'black'
+                  color: 'black',
+                  border: '1px solid black'
                 }}
               >
                 <option value="" selected>
@@ -269,7 +270,7 @@ export default function HistoryComponent() {
           >
             <form style={{ width: '80%', height: '95%' }}>
               <select
-                style={{ width: '100%', height: '100%', borderRadius: 6, backgroundColor: 'white', color: 'black' }}
+                style={{ width: '100%', height: '100%', borderRadius: 6, backgroundColor: 'white', color: 'black', border: '1px solid black' }}
               >
                 <option value="" selected>
                   <em>None</em>
@@ -342,7 +343,9 @@ export default function HistoryComponent() {
               padding: '5px 10px 5px 5px',
               borderRadius: '5px',
               backgroundColor: 'white',
-              color: 'black'
+              color: 'black',
+              marginBottom: '5px',
+              border: '1px solid black'
             }}
           >
             <option selected>10</option>
@@ -371,6 +374,7 @@ export default function HistoryComponent() {
               justifyContent: 'flex-start',
               alignItems: 'center',
               display: 'flex',
+              color: "black"
             }}
           />
 
