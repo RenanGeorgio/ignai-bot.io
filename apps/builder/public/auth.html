@@ -68,16 +68,6 @@
         });
       }
 
-      /*function logout(){
-        console.log('Called logout!');
-
-        FB.logout(function(response) {
-          document.getElementById("status").innerHTML = "Logged out successfully";
-          document.getElementById("logoutbutton").style.display = "none";
-          document.getElementById("loginbutton").style.display = "block";
-        });
-      }*/
-
       function loginUsingJSSDKLoginDialog() {
         FB.login(
           function(response) {
@@ -109,10 +99,47 @@
         }
       }
 
-      function toggleDelete() {
+      function checkCheckboxes() {
+        const checkboxes = document.querySelectorAll('.form-check-input');
+        const fbLoginButton = document.getElementById('fbLoginButton');
+        let allChecked = true;
 
+        checkboxes.forEach(checkbox => {
+          if (!checkbox.checked) {
+            allChecked = false;
+          }
+        });
+
+        if (allChecked) {
+          fbLoginButton.disabled = false;
+        } else {
+          fbLoginButton.disabled = true;
+        }
       }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const checkboxes = document.querySelectorAll('.form-check-input');
+        checkboxes.forEach(checkbox => {
+          checkbox.addEventListener('change', checkCheckboxes);
+        });
+
+        checkCheckboxes();
+      });
     </script>
+    <div class="container-fluid">
+      <h1>Pagina de Integração: Ignai-bot</h1>
+      <p>Autorize o compartilhamento para iniciar a utilização da solução</p>
+
+      <div class="alert alert-info" role="alert">
+        É necessario conceder acesso para a funcionamento da aplicação!
+      </div>
+
+      <div class="alert alert-dark" role="alert">
+        Você pode a qualquer momento pedir a exclusão de seus dados e inserar a integração do software e utilização do app.
+        <a href="disallow.html" target="_blank">Clickando Aqui</a>
+      </div>
+    </div>
+
     <!-- The JS SDK Login Button -->
     <div 
       id="spinner"
@@ -126,28 +153,43 @@
     >
       Carregando...
       <fb:login-button  
+        id="fbLoginButton"
         config_id="486379303720362" 
         width="240px" 
         size="large"
         auto-logout-link="false" 
-        onlogin="checkLoginState();">
+        onlogin="checkLoginState();"
+        disabled>
       </fb:login-button>
     </div>
     <div id="status"></div>
-    <div class="container-fluid">
-      <h1>Pagina de Integração: Ignai-bot</h1>
-      <p>Autorize o compartilhamento para iniciar a utilização da solução</p>
 
-      <div class="alert alert-info" role="alert">
-        É necessario conceder acesso para a funcionamento da aplicação!
-      </div>
-
-      <div class="alert alert-dark" role="alert">
-        Solicitar exclusão dos dados
-      </div>
-
-      <button type="button" class="btn btn-dark" onclick="toggleDelete()">Remover acesso</button>
-    </div>
+    <footer class="container-fluid">
+      <h3>Preferences</h3>
+      <form>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+          <label class="form-check-label" for="defaultCheck1">
+            Politica de Privacidade
+            <br>
+            <small class="text-muted">
+              Autorizar o uso das suas informações para fins de análise e melhoria de serviços.
+            </small>
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+          <label class="form-check-label" for="defaultCheck2">
+            Termos de Uso
+            <br>
+            <small class="text-muted">
+              Permitir o compartilhamento de dados com parceiros para ofertas personalizadas.
+              <a href="link_to_detailed_explanation_3.html" target="_blank">Leia mais</a>
+            </small>
+          </label>
+        </div>
+      </form>
+    </footer>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   </body>
 </html>
