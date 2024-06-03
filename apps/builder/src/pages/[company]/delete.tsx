@@ -26,7 +26,7 @@ export default function Page(props: Props): InferGetServerSidePropsType<typeof g
     setCompanyName(props?.company);
   },[]);
 
-  if (!router.query.contains(props?.code)) {
+  if (!router?.query?.contains(props?.code)) {
     return (
       <ErrorPage error={new Error('O codigo não é compativel')} />
     );
