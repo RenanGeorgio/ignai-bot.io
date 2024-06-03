@@ -182,7 +182,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
 
     const getClients = async () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const response: any = await getRequest(`${baseUrl}/api/chat/clients`)
+      const response: any = await getRequest(`${baseUrl}/api/v1/chat/clients`)
 
       if (response.error) {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -215,7 +215,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
         setIsUserChatsLoading(true)
 
         const response = await getRequest(
-          `${baseUrl}/api/chat/${user.companyId}`
+          `${baseUrl}/api/v1/chat/${user.companyId}`
         )
 
         if (response.error) {
@@ -240,7 +240,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
 
       if (currentChat) {
         const response = await getRequest(
-          `${baseUrl}/api/chat/message/${currentChat?.id}`
+          `${baseUrl}/api/v1/chat/message/${currentChat?.id}`
         )
 
         setIsMessagesLoading(false)
@@ -273,7 +273,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
         return
       }
 
-      const response = await postRequest(`${baseUrl}/api/chat/message`, {
+      const response = await postRequest(`${baseUrl}/api/v1/chat/message`, {
         text: textMessage,
         senderId: sender.companyId,
         chatId: currentChatId,

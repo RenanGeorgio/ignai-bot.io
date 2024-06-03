@@ -207,10 +207,7 @@ export const ChatBox: React.FC<Props> = ({
       </div>
 
       <div id="chat-container" className={styles.chat}>
-        {isMessagesLoading ? (
-          <p>Carregando mensagens...</p>
-        ) : (
-          messages?.map((message, index: number) => (
+        {messages?.map((message, index: number) => (
             <div
               key={index}
               className={`${styles['message-wrapper']} ${
@@ -241,8 +238,7 @@ export const ChatBox: React.FC<Props> = ({
               <span style={{color: 'black'}}>{dayjs(message?.createdAt).format('HH:mm')}</span>
             </div>
           </div>
-        ))
-      )}
+        ))}
       </div>
       {toggleAddTicket ? (
         <AddTicket
