@@ -15,7 +15,7 @@ export default function Page(props: Props): InferGetServerSidePropsType<typeof g
   const router = useRouter();
 
   const [reload, setReload] = useState<React.SetStateAction<undefined>>(undefined);
-  const [companyName, setCompanyName] = useState<string>(undefined);
+  const [companyName, setCompanyName] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     if (router) {
