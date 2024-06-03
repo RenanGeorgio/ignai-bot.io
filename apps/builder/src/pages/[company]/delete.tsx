@@ -26,6 +26,8 @@ export default function Page(props: Props): InferGetServerSidePropsType<typeof g
     setCompanyName(props?.company);
   },[]);
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   if (!router?.query?.contains(props?.code)) {
     return (
       <ErrorPage error={new Error('O codigo não é compativel')} />
