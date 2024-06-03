@@ -1,9 +1,9 @@
-import React from 'react'
-import Head from 'next/head'
+import React from 'react';
+import Head from 'next/head';
 
 export const SocialMetaTags = ({
-  title = 'Typebot - Open-source conversational apps builder',
-  description = 'Powerful blocks to create unique chat experiences. Embed them anywhere on your apps and start collecting results like magic.',
+  title = 'Ignai-bot - Plataforma inteligente de chatbot',
+  description = 'Plataforma inteligente de chatbot da Ignai - Powered by: Diamondbigger.',
   currentUrl,
   imagePreviewUrl = 'https://home.typebot.io/images/preview.png',
 }: {

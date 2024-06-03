@@ -1,12 +1,12 @@
-import { Stack, Heading } from '@chakra-ui/react'
-import { Header } from '@/components/common/Header/Header'
-import { SocialMetaTags } from '@/components/common/SocialMetaTags'
-import { TextLink } from '@/components/common/TextLink'
+import { Stack, Heading } from '@chakra-ui/react';
+import { Header } from '@/components/common/Header/Header';
+import { SocialMetaTags } from '@/components/common/SocialMetaTags';
+import { TextLink } from '@/components/TextLink';
 
 const ServiceTerms = () => {
   return (
     <div className="flex flex-col items-center w-full overflow-x-hidden ">
-      <SocialMetaTags currentUrl={`https://www.typebot.io/terms-of-service`} />
+      <SocialMetaTags currentUrl={`https://www.bot.ignai.com.br/terms-of-service`} />
       <Header />
       <Stack spacing={10} mx="auto" maxW="3xl" my="20">
         <Heading as="h1">Website Terms and Conditions of Use</Heading>
