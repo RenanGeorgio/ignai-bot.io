@@ -125,7 +125,7 @@ export const ChatBox: React.FC<Props> = ({
     console.log('Arquivo recebido em Treatment:', file)
   }
 
-  if (isMessagesLoading) return <p>Carregando mensagens...</p>
+  // if (isMessagesLoading) return <p>Carregando mensagens...</p>
 
   const origin = currentChat?.origin.platform
 
