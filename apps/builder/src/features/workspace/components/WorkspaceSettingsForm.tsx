@@ -76,7 +76,7 @@ export const WorkspaceSettingsForm = ({ onClose }: { onClose: () => void }) => {
               </InputRightElement>
             </InputGroup>
             <FormHelperText>
-              Usado para interagir com as API's.
+              Usado para interagir com as API'&apos;s.
             </FormHelperText>
           </FormControl>
         </>
