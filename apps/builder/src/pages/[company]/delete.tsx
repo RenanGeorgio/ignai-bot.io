@@ -14,7 +14,8 @@ interface Props {
 export default function Page(props: Props): InferGetServerSidePropsType<typeof getServerSideProps> {
   const router = useRouter();
 
-  const [reload, setReload] = useState<React.SetStateAction<undefined>>(undefined);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [reload, setReload] = useState<any>(undefined);
   const [companyName, setCompanyName] = useState<string | undefined>(undefined);
 
   useEffect(() => {
