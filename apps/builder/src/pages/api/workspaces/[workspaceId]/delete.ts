@@ -1,9 +1,10 @@
-import { NextApiRequest, NextApiResponse } from 'next'
-import prisma from '@typebot.io/lib/prisma'
-import Stripe from 'stripe'
-import { getAuthenticatedUser } from '@/features/auth/helpers/getAuthenticatedUser'
-import { methodNotAllowed, notAuthenticated, notFound, forbidden, isNotEmpty } from '@typebot.io/lib/api'
-import { env } from '@typebot.io/env'
+import { NextApiRequest, NextApiResponse } from 'next';
+import Stripe from 'stripe';
+import prisma from '@typebot.io/lib/prisma';
+import { methodNotAllowed, notAuthenticated, notFound, forbidden } from '@typebot.io/lib/api';
+import { isNotEmpty } from '@typebot.io/lib';
+import { getAuthenticatedUser } from '@/features/auth/helpers/getAuthenticatedUser';
+import { env } from '@typebot.io/env';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getAuthenticatedUser(req, res);
