@@ -17,12 +17,6 @@ export default function Page(props: Props): InferGetServerSidePropsType<typeof g
   const [reload, setReload] = useState(undefined);
   const [companyName, setCompanyName] = useState(undefined);
 
-  if (!router.query.contains(props?.code)) {
-    return (
-      <ErrorPage error={new Error('O codigo não é compativel')} />
-    );
-  }
-
   useEffect(() => {
     if (router) {
       setReload(router?.reload);
@@ -30,6 +24,12 @@ export default function Page(props: Props): InferGetServerSidePropsType<typeof g
 
     setCompanyName(props?.company);
   },[]);
+
+  if (!router.query.contains(props?.code)) {
+    return (
+      <ErrorPage error={new Error('O codigo não é compativel')} />
+    );
+  }
 
   return (
     <Container>
@@ -49,6 +49,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   const company = context.params?.company as string | undefined;
   const code = context.query?.id;
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const res = await fetch('https://api.github.com/repos/vercel/next.js')
   
   return { 
