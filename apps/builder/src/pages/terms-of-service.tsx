@@ -9,131 +9,120 @@ const ServiceTerms = () => {
       <SocialMetaTags currentUrl={`https://www.bot.ignai.com.br/terms-of-service`} />
       <Header />
       <Stack spacing={10} mx="auto" maxW="3xl" my="20">
-        <Heading as="h1">Website Terms and Conditions of Use</Heading>
+        <Heading as="h1">Termos de Uso</Heading>
 
-        <Heading>1. Terms</Heading>
+        <Heading>1. Termos</Heading>
 
         <p>
-          By accessing this Website, accessible from https://typebot.io and
-          https://app.typebot.io, you are agreeing to be bound by these Website
-          Terms and Conditions of Use and agree that you are responsible for the
-          agreement with any applicable local laws. If you disagree with any of
-          these terms, you are prohibited from accessing this site. The
-          materials contained in this Website are protected by copyright and
-          trade mark law.
+          Ao acessar este site, acessível em https://www.diamondbigger.com e
+          quaiquer um de nossos serviços (disponiveis em seus respectivos sites/dominios), 
+          você concorda em ficar vinculado aos Termos e Condições de Uso deste site
+          e concorda que você é responsável pelo cumprimento com quaisquer leis locais aplicáveis. 
+          Se você discorda de algum item destes termos, você está proibido de acessar este site. 
+          Os materiais contidos neste site são protegidos por direitos autorais e direitos de marca.
         </p>
 
-        <Heading>2. Use License</Heading>
+        <Heading>2. Licença de uso</Heading>
 
         <p>
-          Permission is granted to temporarily download one copy of the
-          materials on Typebot&apos;s Website for personal, non-commercial
-          transitory viewing only. This is the grant of a license, not a
-          transfer of title, and under this license you may not:
+          É concedida permissão de uso de nosso Site e nossos
+          materiais presentes no site DiamondBigger para uso pessoal e não comercial
+          apenas visualização transitória. Esta é a concessão de uma licença, não uma
+          transferência de título, e sob esta licença você não pode:
         </p>
 
         <ul>
           <li>
-            remove any copyright or other proprietary notations from the
-            materials; or
+            remover quaisquer direitos autorais ou outras notações de propriedade presentes
+            nos materiais, de propriedade do Grupo DiamondBigger Supply Chain; ou
           </li>
           <li>
-            transferring the materials to another person or &quot;mirror&quot;
-            the materials on any other server.
+            transferir os materiais para outra pessoa ou copiar
+            os materiais para qualquer outro servidor.
           </li>
         </ul>
 
         <p>
-          This will let Typebot to terminate upon violations of any of these
-          restrictions. Upon termination, your viewing right will also be
-          terminated and you should destroy any downloaded materials in your
-          possession whether it is printed or electronic format. These Terms of
-          Service has been created with the help of the{' '}
-          <a href="https://www.termsofservicegenerator.net">
-            Terms Of Service Generator
-          </a>{' '}
-          and the{' '}
-          <a href="https://www.generateprivacypolicy.com">
-            Privacy Policy Generator
-          </a>
-          .
+          Isso permitirá que o Grupo DiamondBigger encerre a concessão da permissão de uso 
+          em caso de violação de qualquer uma destas restrições. Após a rescisão, 
+          seu direito de visualização também será rescindido e você deve destruir todos os 
+          materiais baixados em sua posse, seja em formato impresso ou eletrônico.{' '}
         </p>
 
-        <Heading>3. Disclaimer</Heading>
+        <Heading>3. Aviso Legal</Heading>
 
         <p>
-          All the materials on Typebot&apos;s Website are provided &quot;as
-          is&quot;. Typebot makes no warranties, may it be expressed or implied,
-          therefore negates all other warranties. Furthermore, Typebot does not
-          make any representations concerning the accuracy or reliability of the
-          use of the materials on its Website or otherwise relating to such
-          materials or any sites linked to this Website.
+          Todos os materiais no site do Grupo DiamondBigger são fornecidos como são. 
+          O Grupo DiamondBigger não oferece garantias, expressas ou implícitas,
+          portanto, anula todas as outras garantias. Além disso, o Grupo DiamondBigger 
+          não faz quaisquer representações relativas à precisão ou confiabilidade do
+          uso dos materiais em seu site ou de outra forma relacionados a tal
+          materiais ou quaisquer sites vinculados a este site.
         </p>
 
-        <Heading>4. Limitations</Heading>
+        <Heading>4. Limitações</Heading>
 
         <p>
-          Typebot or its suppliers will not be hold accountable for any damages
-          that will arise with the use or inability to use the materials on
-          Typebot&apos;s Website, even if Typebot or an authorize representative
-          of this Website has been notified, orally or written, of the
-          possibility of such damage. Some jurisdiction does not allow
-          limitations on implied warranties or limitations of liability for
-          incidental damages, these limitations may not apply to you.
+          O Grupo DiamondBigger ou seus fornecedores não serão responsabilizados por quaisquer 
+          danos que surgirão com o uso ou incapacidade de usar os materiais no website do grupo, 
+          mesmo que o Grupo DiamondBigger ou um representante autorizado tenha sido notificado, 
+          oralmente ou por escrito, da possibilidade de tais danos. Algumas jurisdições não permitem
+          limitações em garantias implícitas ou limitações de responsabilidade por danos incidentais, 
+          essas limitações podem não se aplicar a você.
         </p>
 
-        <Heading>5. Revisions and Errata</Heading>
+        <Heading>5. Revisões e Erratas</Heading>
 
         <p>
-          The materials appearing on Typebot&apos;s Website may include
-          technical, typographical, or photographic errors. Typebot will not
-          promise that any of the materials in this Website are accurate,
-          complete, or current. Typebot may change the materials contained on
-          its Website at any time without notice. Typebot does not make any
-          commitment to update the materials.
+          Os materiais que aparecem no website do Grupo DiamondBigger podem incluir
+          erros técnicos, tipográficos ou fotográficos. O Grupo DiamondBigger não
+          promete que quaisquer um dos materiais deste site é preciso,
+          completo ou atual. O Grupo DiamondBigger Supply Chain pode alterar os 
+          materiais contidos em seu website a qualquer momento sem aviso prévio. 
+          O grupo DiamondBigger não faz nenhum compromisso de atualizar os materiais.
         </p>
 
         <Heading>6. Links</Heading>
 
         <p>
-          Typebot has not reviewed all of the sites linked to its Website and is
-          not responsible for the contents of any such linked site. The presence
-          of any link does not imply endorsement by Typebot of the site. The use
-          of any linked website is at the user&apos;s own risk.
+          O grupo DiamondBigger não revisou todos os website vinculados ao seu site e
+          não é responsável pelo conteúdo de qualquer site vinculado. A presença
+          de qualquer link não implica endosso do site pelo grupo DiamondBigger. O uso
+          de qualquer site vinculado é por conta e risco do usuário.
         </p>
 
-        <Heading>7. Site Terms of Use Modifications</Heading>
+        <Heading>7. Modificações nos Termos de Uso do Site</Heading>
 
         <p>
-          Typebot may revise these Terms of Use for its Website at any time
-          without prior notice. By using this Website, you are agreeing to be
-          bound by the current version of these Terms and Conditions of Use.
+          O grupo DiamondBigger pode revisar estes Termos de Uso de seu site a qualquer momento
+          sem aviso prévio. Ao usar este site, você concorda em ser
+          vinculado à versão atual destes Termos e Condições de Uso.
         </p>
 
-        <Heading id="scam-typebots">8. Prohibition of Scam Typebots</Heading>
+        <Heading id="scam-typebots">8. Proibição de uso fraudulento</Heading>
         <p>
-          You agree not to create or use typebots on Typebot&apos;s Website for
-          the purpose of engaging in fraudulent activities, scamming
-          individuals, or any other unethical or illegal activities. This
-          includes but is not limited to typebots designed to deceive, defraud,
-          or mislead people for financial gain or personal benefit. Typebot
-          reserves the right to take appropriate action, including the
-          termination of any user account, if it determines that a typebot is
-          being used in violation of this provision.
+          Você concorda em não criar ou usar algum dos serviços ou nosso site para
+          o propósito de se envolver em atividades fraudulentas, fraudes
+          indivíduos ou quaisquer outras atividades antiéticas ou ilegais. Isso
+          inclui, mas não está limitado a, atividades projetadas para enganar, fraudar,
+          ou enganar as pessoas para obter ganhos financeiros ou benefícios pessoais. O grupo
+          DiamondBigger reserva-se o direito de tomar as medidas apropriadas, incluindo
+          encerramento de qualquer conta de usuário, se determinar que uma ação proibida esta
+          sendo usado em violação desta disposição.
         </p>
 
-        <Heading>9. Your Privacy</Heading>
+        <Heading>9. Sua privacidade</Heading>
 
         <p>
-          Please read our{' '}
-          <TextLink href={'/privacy-policies'}>Privacy Policy</TextLink>.
+          Por favor, leia nosso{' '}
+          <TextLink href={'/privacy-policies'}>Política de Privacidade</TextLink>.
         </p>
 
-        <Heading>10. Governing Law</Heading>
+        <Heading>10. Lei Aplicável</Heading>
 
         <p>
-          Any claim related to Typebot&apos;s Website shall be governed by the
-          laws of fr without regards to its conflict of law provisions.
+          Qualquer reclamação relacionada ao nosso site será regida pelo
+          leis da cede, sem levar em conta seu conflito de disposições legais.
         </p>
       </Stack>
     </div>
