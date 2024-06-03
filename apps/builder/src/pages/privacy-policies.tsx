@@ -106,7 +106,7 @@ const PrivacyPolicies = () => {
 
         <p>
           Servidores de anúncios ou redes de anúncios de terceiros usam tecnologias como cookies,
-          JavaScript ou Web Beacons que são usados ​​em seus respectivos
+          JavaScript ou Web Beacons que são usados em seus respectivos
           anúncios e links que aparecem no nosso website ou em algum serviço do Grupo DiamondBigger, 
           que são enviados diretamente para o navegador dos usuários. Eles recebem automaticamente 
           seu endereço IP quando isso ocorrer. Essas tecnologias são usadas para medir o
@@ -116,7 +116,7 @@ const PrivacyPolicies = () => {
 
         <p>
           Observe que o Grupo DiamondBigger não tem acesso ou controle sobre esses cookies
-          que são usados ​​por terceiros.
+          que são usados por terceiros.
         </p>
 
         <Heading>Políticas de Privacidade de terceiros</Heading>
@@ -219,7 +219,7 @@ const PrivacyPolicies = () => {
         <p>
           Outra parte da nossa prioridade é zelar e acrescentar a protecção às crianças, 
           no hambiente virtual, em em outros meios que tenham de alguma forma surgido em colaboração do mesmo. 
-          Encorajamos os pais e responsáveis ​​a observar, participar e/ou monitorar e orientar as atividade online
+          Encorajamos os pais e responsáveis a observar, participar e/ou monitorar e orientar as atividade online
           de seus dependentes.
         </p>
 
