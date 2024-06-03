@@ -14,8 +14,8 @@ interface Props {
 export default function Page(props: Props): InferGetServerSidePropsType<typeof getServerSideProps> {
   const router = useRouter();
 
-  const [reload, setReload] = useState(undefined);
-  const [companyName, setCompanyName] = useState(undefined);
+  const [reload, setReload] = useState<React.SetStateAction<undefined>>(undefined);
+  const [companyName, setCompanyName] = useState<string>(undefined);
 
   useEffect(() => {
     if (router) {
