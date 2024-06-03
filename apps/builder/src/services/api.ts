@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie'
 
-export const baseUrl = process.env.REACT_APP_SERVER_API;
+export const baseUrl = process.env.REACT_APP_CHAT_HOST;
 
 interface ApiResponse<T> {
   error?: boolean
