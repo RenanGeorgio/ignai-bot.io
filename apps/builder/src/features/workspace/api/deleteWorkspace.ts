@@ -61,4 +61,5 @@ export const deleteWorkspace = authenticatedProcedure
     return {
       message: 'Workspace deleted',
     }
-  })
+  }
+)

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/style.css">
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js"></script>
+    <title>Ignai-bot</title>
+  </head>
+  <body>
+    <script>
+      let spinner;
+      let content;
+
+      function getCode(code) {
+        let value;
+
+        try {
+          fetch('https://supplyfy-chatbot.azurewebsites.net/change-code', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              //Authorization: `Bearer ${Cookies.get('token')}`
+            },
+            body: JSON.stringify(
+              { 
+                appId: "909625074182796", 
+                redirectUri: window.location.href,
+                code: code 
+              }
+            )
+          })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+          })
+          .then(data => {
+            value = data.access_token;
+            content.innerHTML = '<pre> Autorização concluida </pre>';
+          })
+          .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+            content.innerHTML = '<p>Error fetching data</p>';
+          })
+          .finally(() => {
+            console.log(value);
+            spinner.style.display = 'none';
+
+            return value;
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      window.addEventListener('load', function() {
+        content.innerHTML = '<pre> Processando Autorização </pre>';
+
+        var searchParams = new URLSearchParams(window.location.search);
+        var value = searchParams.get("code");
+
+        getCode(value);
+      });
+
+      document.addEventListener('DOMContentLoaded', function() {
+        spinner = document.getElementById('spinner');
+        content = document.getElementById('content');
+
+        spinner.style.display = 'block';
+      });
+    </script>
+    <div id="spinner" class="spinner" style="display: none;"></div>
+    <div id="content"></div>
+  </body>
+</html>
