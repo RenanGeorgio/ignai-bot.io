@@ -14,13 +14,12 @@ import {
   BoxProps,
   FlexProps,
 } from '@chakra-ui/react';
-import { IconType } from 'react-icons';
 import { ReactText } from 'react';
 import { LaptopIcon } from './icons';
 
 interface LinkItemProps {
   name: string;
-  icon: IconType;
+  icon: any;
 }
 
 interface MobileProps extends FlexProps {
@@ -32,7 +31,7 @@ interface SidebarProps extends BoxProps {
 }
 
 interface NavItemProps extends FlexProps {
-  icon: IconType;
+  icon: any;
   children: ReactText;
 }
 
