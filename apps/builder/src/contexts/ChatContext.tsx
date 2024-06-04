@@ -61,6 +61,11 @@ export type ChatContextType = {
     currentChatId: string,
     setTextMessage: (text: string) => void
   ) => Promise<void>
+  sendMessageHttp: (
+    textMessage: string,
+    sender: { companyId: string },
+    currentChatId: string
+  ) => void
   onlineUsers: OnlineUser[]
 }
 
@@ -183,7 +188,6 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
     const getClients = async () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const response: any = await getRequest(`${baseUrl}/api/v1/chat/clients`)
-
       if (response.error) {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
@@ -272,18 +276,15 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
       if (textMessage === '') {
         return
       }
-
       const response = await postRequest(`${baseUrl}/api/v1/chat/message`, {
         text: textMessage,
         senderId: sender.companyId,
         chatId: currentChatId,
       })
-
       if (response.error) {
         // return setTextMessageError(response.error)
         return console.log(response.error)
       }
-
       const messageData = response.data as Message
       setNewMessage(messageData)
       setMessages((prev) => [...(prev || []), messageData])
@@ -291,6 +292,110 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
     },
     []
   )
+
+  useEffect(() => {
+    const findClientByEmail = async (email: string) => {
+      if (email === '') {
+        return
+      };
+      const response = await getRequest(`${baseUrl}/api/v1/chat/client/email/${user.email}`)
+  
+      if (response.error) {
+        // setMessageError(response.error.toString())
+        return console.log(response.error)
+      } 
+      if (response){
+        return response
+      }
+    }
+
+    findClientByEmail(user.email)
+  }, [user])
+
+  useEffect(() => {
+    const findClientById = async (clientId: string) => {
+      if (clientId === '') {
+        return
+      }
+      const response = await getRequest(`${baseUrl}/api/v1/chat/client/${clientId}`)
+  
+      if (response.error) {
+        // setMessageError(response.error.toString())
+        return console.log(response.error)
+      } 
+      if (response){
+        return response
+      }
+    }
+
+    findClientById(user.companyId)
+  }, [user])
+
+  { /*
+  useEffect(() => {
+    const createChat = async (userId: string, chatId: string) => {
+      const response = await postRequest(`${baseUrl}/api/v1/chat`, 
+      {
+        userId,
+        chatId
+      }
+    )
+    
+      if (response.error) {
+        // setMessageError(response.error.toString())
+        return console.log(response.error)
+      } 
+      if (response){
+        return response
+      }
+    }
+
+    createChat(user.companyId, currentChat?.id)
+  }, [])
+  */}
+  
+  useEffect(() => {
+    const findChat = async (firstId: string, secondId: string) => {
+      if (firstId && secondId === '') {
+        return
+      }
+      const response = await getRequest(`${baseUrl}/api/v1/chat/find/${firstId}/${secondId}`)
+  
+      if (response.error) {
+        // setMessageError(response.error.toString())
+        return console.log(response.error)
+      } 
+      if(response){
+        return response
+      }
+    }
+
+    findChat(user.companyId, user.companyId)
+  }, [])
+
+  const sendMessageHttp = async (
+    textMessage: string,
+    sender: { companyId: string },
+    currentChatId: string,
+  ) => {
+    if (textMessage === '') {
+      return
+    }
+    const response = await postRequest(`${baseUrl}/api/v1/chat/message/send-message`, {
+      text: textMessage,
+      senderId: sender.companyId,
+      chatId: currentChatId
+    })
+
+    if (response.error) {
+      // setMessageError(response.error.toString())
+      return console.log(response.error)
+    } 
+    const messageData = response.data as Message
+    setNewMessage(messageData)
+    setMessages((prev) => [...(prev || []), messageData])
+    return messageData;
+  }
 
   return (
     <ChatContext.Provider
@@ -305,6 +410,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
         isMessagesLoading,
         messageError,
         sendTextMessage,
+        sendMessageHttp,
         onlineUsers,
       }}
     >
