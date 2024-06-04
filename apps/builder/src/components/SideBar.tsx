@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react'
 
 interface Props {
-  onClose: Function
+  onClose: () => void
   isOpen: boolean
   variant: 'drawer' | 'sidebar'
 }
