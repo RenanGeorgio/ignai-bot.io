@@ -14,6 +14,7 @@ import { colors } from '@/lib/theme'
 import { ThemeProvider } from '@mui/material'
 
 import type {} from '@mui/x-data-grid/themeAugmentation';
+import { DashboardHeader } from '@/features/dashboard/components/DashboardHeader'
 
 const MuiTheme = createTheme({
   palette: {
@@ -47,6 +48,7 @@ const Chat: React.FC = () => {
 
   return (
     <ChatProvider>
+      <DashboardHeader />
       <div style={{ overflow: 'hidden' }} className={styles['page-content']}>
         <div className={styles['button-container']}>
           <button

@@ -15,25 +15,23 @@ export const DashboardHeader = () => {
 
   return (
     <Flex minWidth="max-content" alignItems="center" w="full" borderBottomWidth="1px" justify="center">
-      
-        <Link href="/typebots" data-testid="typebot-logo">
-          <EmojiOrImageIcon
-            boxSize="30px"
-            icon={workspace?.icon}
-            defaultIcon={LaptopIcon} 
-          />
-        </Link>
-        <Spacer />
-        <HStack>
-          <WorkspaceDropdown
-            currentWorkspace={workspace} 
-            onLogoutClick={logOut}
-            onCreateNewWorkspaceClick={handleCreateNewWorkspace}
-            onWorkspaceSelected={switchWorkspace}
-            user={user}
-          />
-        </HStack>
-      
+      <Link href="/typebots" data-testid="typebot-logo">
+        <EmojiOrImageIcon
+          boxSize="30px"
+          icon={workspace?.icon}
+          defaultIcon={LaptopIcon} 
+        />
+      </Link>
+      <Spacer />
+      <HStack>
+        <WorkspaceDropdown
+          currentWorkspace={workspace} 
+          onLogoutClick={logOut}
+          onCreateNewWorkspaceClick={handleCreateNewWorkspace}
+          onWorkspaceSelected={switchWorkspace}
+          user={user}
+        />
+      </HStack>
     </Flex>
-  )
+  );
 }
