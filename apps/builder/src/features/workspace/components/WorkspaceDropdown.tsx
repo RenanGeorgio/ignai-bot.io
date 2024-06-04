@@ -10,7 +10,6 @@ import {
 } from '@/components/icons'
 import { PlanTag } from '@/features/billing/components/PlanTag'
 import { useUser } from '@/features/account/hooks/useUser'
-import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
 import { trpc } from '@/lib/trpc'
 import { useTranslate } from '@tolgee/react'
 import {
@@ -43,7 +42,6 @@ export const WorkspaceDropdown = ({
 }: Props) => {
   const { t } = useTranslate()
   const { user } = useUser()
-  const { workspace } = useWorkspace()
   const { data } = trpc.workspace.listWorkspaces.useQuery()
 
   const [isAdmin, setAdmin] = useState<boolean>(false);
@@ -127,7 +125,7 @@ export const WorkspaceDropdown = ({
         <MenuItem icon={<UserIcon />} onClick={handleAccountClick}>
           {t('editor.header.settingsButton.label')}
         </MenuItem>
-        {!workspace.isPastDue && (
+        {!currentWorkspace?.isPastDue && (
           <MenuItem icon={<SettingsIcon />} onClick={handleWorkspaceClick}>
             {t('workspace.settings.modal.menu.workspace.label')}
           </MenuItem>
@@ -140,12 +138,12 @@ export const WorkspaceDropdown = ({
           {t('workspace.dropdown.logoutButton.label')}
         </MenuItem>
       </MenuList>
-      {user && workspace && !workspace.isPastDue && (
+      {user && currentWorkspace && !currentWorkspace?.isPastDue && (
         <WorkspaceSettingsModal
           isOpen={isOpenWorkspace}
           onClose={onCloseWorkspace}
           user={user}
-          workspace={workspace}
+          workspace={currentWorkspace}
         />
       )}
       {user && (
