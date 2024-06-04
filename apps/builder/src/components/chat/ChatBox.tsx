@@ -114,6 +114,24 @@ export const ChatBox: React.FC<Props> = ({
       updatedAt: '2024-04-22T15:47:18.873Z',
       __v: 0,
     },
+    {
+      _id: '661d1e55582bfd030342607f',
+      chatId: '662683ef2a815f652638d615',
+      senderId: '66268686bc89acbc5c55a633',
+      text: 'oi',
+      createdAt: '2024-04-22T15:47:18.873Z',
+      updatedAt: '2024-04-22T15:47:18.873Z',
+      __v: 0,
+    },
+    {
+      _id: '661d1e55582bfd030342607f',
+      chatId: '662683ef2a815f652638d615',
+      senderId: '66268686bc89acbc5c55a633',
+      text: 'ola tudo bem',
+      createdAt: '2024-04-22T15:47:18.873Z',
+      updatedAt: '2024-04-22T15:47:18.873Z',
+      __v: 0,
+    }
   ]
 
   const isMessagesLoading = false
@@ -245,7 +263,14 @@ export const ChatBox: React.FC<Props> = ({
 
       <div className={styles.chat}>
         {messages?.map((message, index: number) => (
-          <div key={index} className={styles['message-wrapper']}>
+          <div
+            key={index}
+            className={`${styles['message-wrapper']} ${
+              message?.senderId === user?.companyId
+                ? styles['sent']
+                : styles['received']
+            }`}
+          >
             {message?.senderId === user?.companyId
               ? getTextMessageAvatar()
               : getMessageAvatar()}
@@ -265,7 +290,7 @@ export const ChatBox: React.FC<Props> = ({
                   : styles['time-right']
               }`}
             >
-              <span>{dayjs(message?.createdAt).format('HH:mm')}</span>
+              <span style={{color: 'black'}}>{dayjs(message?.createdAt).format('HH:mm')}</span>
             </div>
           </div>
         ))}
