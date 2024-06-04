@@ -13,6 +13,7 @@ import { ParentModalProvider } from '@/features/graph/providers/ParentModalProvi
 import { trpc } from '@/lib/trpc'
 import { guessIfUserIsEuropean } from '@typebot.io/billing/guessIfUserIsEuropean'
 import { useTranslate } from '@tolgee/react'
+import CustomSideBar from '@/components/SideBar'
 
 export const DashboardPage = () => {
   const { t } = useTranslate()
@@ -61,6 +62,7 @@ export const DashboardPage = () => {
     <Stack minH="100vh">
       <Seo title={workspace?.name ?? t('dashboard.title')} />
       <DashboardHeader />
+      <CustomSideBar />
       {!workspace?.stripeId && (
         <ParentModalProvider>
           <PreCheckoutModal
