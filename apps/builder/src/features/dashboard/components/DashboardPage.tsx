@@ -62,7 +62,6 @@ export const DashboardPage = () => {
     <Stack minH="100vh">
       <Seo title={workspace?.name ?? t('dashboard.title')} />
       <DashboardHeader />
-      <CustomSideBar />
       {!workspace?.stripeId && (
         <ParentModalProvider>
           <PreCheckoutModal
@@ -74,6 +73,7 @@ export const DashboardPage = () => {
         </ParentModalProvider>
       )}
       <TypebotDndProvider>
+        <CustomSideBar />
         {isLoading ? (
           <VStack w="full" justifyContent="center" pt="10" spacing={6}>
             <Text>{t('dashboard.redirectionMessage')}</Text>
