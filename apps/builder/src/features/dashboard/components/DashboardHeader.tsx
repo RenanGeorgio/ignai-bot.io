@@ -29,6 +29,8 @@ export const DashboardHeader = () => {
         isOpen={isSidebarOpen}
         onClose={toggleSidebar}
       />
+      {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+      {/* @ts-ignore */}
       <Box ml={!variants?.navigationButton && 200}>
         <DashboardHeaderContent
           showSidebarButton={variants?.navigationButton}
