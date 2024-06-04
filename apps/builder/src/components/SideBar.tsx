@@ -45,7 +45,7 @@ const CustomSideBar = ({ isOpen, variant, onClose }: Props) => {
   )
 }
 
-const SidebarContent = ({ onClick }: { onClick: Function }) => (
+const SidebarContent = ({ onClick }: { onClick: () => void }) => (
   <VStack>
     <Button onClick={onClick} w="100%">
       Home
