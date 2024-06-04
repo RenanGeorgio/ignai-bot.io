@@ -9,7 +9,7 @@ import { WorkspaceDropdown } from '@/features/workspace/components/WorkspaceDrop
 import CustomSideBar from '@/components/SideBar'
  
 interface Props {
-  onShowSidebar: Function
+  onShowSidebar: () => void
   showSidebarButton?: boolean
 }
 
