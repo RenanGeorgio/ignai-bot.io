@@ -9,7 +9,6 @@ import {
   LaptopIcon
 } from '@/components/icons'
 import { PlanTag } from '@/features/billing/components/PlanTag'
-import { useUser } from '@/features/account/hooks/useUser'
 import { trpc } from '@/lib/trpc'
 import { useTranslate } from '@tolgee/react'
 import {
@@ -22,6 +21,7 @@ import {
   Text,
   useDisclosure
 } from '@chakra-ui/react'
+import { User } from '@typebot.io/prisma'
 import { WorkspaceInApp } from '../WorkspaceProvider'
 import { AccountSettingsModal } from './AccountSettingsModal'
 import { WorkspaceSettingsModal } from './WorkspaceSettingsModal'
@@ -32,6 +32,7 @@ type Props = {
   onWorkspaceSelected: (workspaceId: string) => void
   onCreateNewWorkspaceClick: () => void
   onLogoutClick: () => void
+  user: User
 }
 
 export const WorkspaceDropdown = ({
@@ -39,9 +40,9 @@ export const WorkspaceDropdown = ({
   onWorkspaceSelected,
   onLogoutClick,
   onCreateNewWorkspaceClick,
+  user
 }: Props) => {
   const { t } = useTranslate()
-  const { user } = useUser()
   const { data } = trpc.workspace.listWorkspaces.useQuery()
 
   const [isAdmin, setAdmin] = useState<boolean>(false);
