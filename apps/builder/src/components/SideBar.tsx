@@ -14,16 +14,9 @@ import {
   BoxProps,
   FlexProps,
 } from '@chakra-ui/react';
-import {
-  FiHome,
-  FiTrendingUp,
-  FiCompass,
-  FiStar,
-  FiSettings,
-  FiMenu,
-} from 'react-icons/fi';
 import { IconType } from 'react-icons';
 import { ReactText } from 'react';
+import { LaptopIcon } from './icons';
 
 interface LinkItemProps {
   name: string;
@@ -44,11 +37,11 @@ interface NavItemProps extends FlexProps {
 }
 
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome },
-  { name: 'Trending', icon: FiTrendingUp },
-  { name: 'Explore', icon: FiCompass },
-  { name: 'Favourites', icon: FiStar },
-  { name: 'Settings', icon: FiSettings },
+  { name: 'Home', icon: LaptopIcon },
+  { name: 'Trending', icon: LaptopIcon },
+  { name: 'Explore', icon: LaptopIcon },
+  { name: 'Favourites', icon: LaptopIcon },
+  { name: 'Settings', icon: LaptopIcon },
 ];
 
 export default function CustomSideBar() {
@@ -151,7 +144,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         variant="outline"
         onClick={onOpen}
         aria-label="open menu"
-        icon={<FiMenu />}
+        icon={<LaptopIcon />}
       />
 
       <Text fontSize="2xl" ml="8" fontFamily="monospace" fontWeight="bold">
