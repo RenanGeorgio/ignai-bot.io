@@ -13,7 +13,7 @@ import {
 interface Props {
   onClose: () => void
   isOpen: boolean
-  variant: 'drawer' | 'sidebar'
+  variant: string | undefined
 }
 
 
