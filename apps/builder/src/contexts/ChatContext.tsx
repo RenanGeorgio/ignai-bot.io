@@ -296,40 +296,52 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
   useEffect(() => {
     const findClientByEmail = async (email: string) => {
       if (email === '') {
-        return
-      };
-      const response = await getRequest(`${baseUrl}/api/v1/chat/client/email/${user.email}`)
-  
-      if (response.error) {
-        // setMessageError(response.error.toString())
-        return console.log(response.error)
-      } 
-      if (response){
-        return response
+        return;
       }
-    }
-
-    findClientByEmail(user.email)
-  }, [user])
+      
+      try {
+        const response = await getRequest(`${baseUrl}/api/v1/chat/client/email/${user.email}`);
+        
+        if (response.error) {
+          console.error('Erro ao buscar cliente por e-mail:', response.error);
+          return;
+        } 
+        
+        const clientData = response.data;
+        console.log('Cliente encontrado por e-mail:', clientData);
+        return clientData;
+      } catch (error) {
+        console.error('Erro ao buscar cliente por e-mail:', error);
+      }
+    };
+  
+    findClientByEmail(user.email);
+  }, [user.email]);
 
   useEffect(() => {
     const findClientById = async (clientId: string) => {
       if (clientId === '') {
-        return
+        return;
       }
-      const response = await getRequest(`${baseUrl}/api/v1/chat/client/${clientId}`)
+      
+      try {
+        const response = await getRequest(`${baseUrl}/api/v1/chat/client/${user.companyId}`);
+        
+        if (response.error) {
+          console.error('Erro ao buscar cliente por ID:', response.error);
+          return;
+        } 
+        
+        const clientData = response.data;
+        console.log('Cliente encontrado por ID:', clientData);
+        return clientData;
+      } catch (error) {
+        console.error('Erro ao buscar cliente por ID:', error);
+      }
+    };
   
-      if (response.error) {
-        // setMessageError(response.error.toString())
-        return console.log(response.error)
-      } 
-      if (response){
-        return response
-      }
-    }
-
-    findClientById(user.companyId)
-  }, [user])
+    findClientById(user.companyId);
+  }, [user.companyId]);
 
   { /*
   useEffect(() => {
@@ -371,7 +383,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
     }
 
     findChat(user.companyId, user.companyId)
-  }, [])
+  }, [user])
 
   const sendMessageHttp = async (
     textMessage: string,
@@ -379,22 +391,35 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
     currentChatId: string,
   ) => {
     if (textMessage === '') {
-      return
+      return;
     }
-    const response = await postRequest(`${baseUrl}/api/v1/chat/message/send-message`, {
-      text: textMessage,
-      senderId: sender.companyId,
-      chatId: currentChatId
-    })
-
-    if (response.error) {
-      // setMessageError(response.error.toString())
-      return console.log(response.error)
-    } 
-    const messageData = response.data as Message
-    setNewMessage(messageData)
-    setMessages((prev) => [...(prev || []), messageData])
-    return messageData;
+    try {
+      const token = Cookies.get('token');
+      if (!token) {
+        throw new Error('Token de autenticação não encontrado');
+      }
+  
+      const response = await postRequest(
+        `${baseUrl}/api/v1/chat/message/send-message`,
+        {
+          text: textMessage,
+          senderId: sender.companyId,
+          chatId: currentChatId
+        }
+      );
+  
+      if (response.error) {
+        console.log(response.error);
+        return;
+      }
+  
+      const messageData = response.data as Message;
+      setNewMessage(messageData);
+      setMessages((prev) => [...(prev || []), messageData]);
+      return messageData;
+    } catch (error) {
+      console.error('Erro ao enviar mensagem:', error);
+    }
   }
 
   return (
