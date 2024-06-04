@@ -52,6 +52,7 @@ const DashboardHeaderContent = ({ showSidebarButton = true, onShowSidebar }: Pro
         {showSidebarButton && (
           <IconButton
             icon={<ChevronRightIcon w={8} h={8} />}
+            aria-label="Colapse"
             colorScheme="blackAlpha"
             variant="outline"
             onClick={onShowSidebar}
