@@ -158,5 +158,5 @@ export const GuestTypebotHeader = () => {
         )}
       </HStack>
     </Flex>
-  )
+  );
 }

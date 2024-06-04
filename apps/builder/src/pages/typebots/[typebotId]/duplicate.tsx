@@ -39,7 +39,7 @@ const Page = () => {
       spacing={4}
     >
       <Text>
-        Choose a workspace to duplicate <strong>{typebot?.name}</strong> in:
+        Escolha um workspace para duplicar <strong>{typebot?.name}</strong> em:
       </Text>
       <RadioButtons
         direction="column"
@@ -67,10 +67,10 @@ const Page = () => {
         colorScheme="blue"
         size="sm"
       >
-        Duplicate
+        Duplicar
       </Button>
     </Stack>
-  )
+  );
 }
 
 export default Page

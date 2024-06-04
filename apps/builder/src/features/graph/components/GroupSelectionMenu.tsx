@@ -94,7 +94,7 @@ export const GroupSelectionMenu = ({
   useKeyboardShortcuts({
     copy: () => {
       handleCopy()
-      toast('Groups copied to clipboard')
+      toast('Os grupos foram copiados para o clipboard')
     },
     cut: () => {
       handleCopy()
@@ -128,7 +128,7 @@ export const GroupSelectionMenu = ({
         bgColor={useColorModeValue('white', undefined)}
         size="sm"
       >
-        {focusedGroups.length} selected
+        {focusedGroups.length} selecionado
       </Button>
       <IconButton
         borderRightWidth="1px"
@@ -143,7 +143,6 @@ export const GroupSelectionMenu = ({
         icon={<CopyIcon />}
         size="sm"
       />
-
       <IconButton
         aria-label="Delete"
         borderLeftRadius="none"

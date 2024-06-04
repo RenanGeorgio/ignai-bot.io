@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { EmojiOrImageIcon } from '@/components/EmojiOrImageIcon'
 import {
   ChevronLeftIcon,
@@ -51,7 +51,8 @@ export const WorkspaceDropdown = ({
   const workspaces = data?.workspaces ?? []
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen: isOpenAccount, onOpen: onOpenAccount, onClose: onCloseAccount } = useDisclosure();
+  const { isOpen: isOpenWorkspace, onOpen: onOpenWorkspace, onClose: onCloseWorkspace } = useDisclosure();
 
   const validAdmin = async (email: string) => {
     const data = await checkUser(email);
@@ -63,6 +64,16 @@ export const WorkspaceDropdown = ({
     } else {
       setAdmin(false);
     }
+  }
+
+  const handleWorkspaceClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onOpenWorkspace();
+  }
+
+  const handleAccountClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onOpenAccount();
   }
 
   useEffect(() => {
@@ -113,29 +124,14 @@ export const WorkspaceDropdown = ({
             {t('workspace.dropdown.newButton.label')}
           </MenuItem>
         )}
-        <MenuItem 
-          onClick={() => {
-            <AccountSettingsModal
-              isOpen={isOpen}
-              onClose={onClose}
-              user={user}
-            />}} 
-          icon={<UserIcon />}
-        >
+        <MenuItem icon={<UserIcon />} onClick={handleAccountClick}>
           {t('editor.header.settingsButton.label')}
         </MenuItem>
-        <MenuItem 
-          onClick={() => {
-            <WorkspaceSettingsModal
-              isOpen={isOpen}
-              onClose={onClose}
-              user={user}
-              workspace={workspace}
-            />}} 
-          icon={<SettingsIcon />}
-        >
-          {t('workspace.settings.modal.menu.workspace.label')}
-        </MenuItem>
+        {!workspace.isPastDue && (
+          <MenuItem icon={<SettingsIcon />} onClick={handleWorkspaceClick}>
+            {t('workspace.settings.modal.menu.workspace.label')}
+          </MenuItem>
+        )}
         <MenuItem
           onClick={onLogoutClick}
           icon={<LogOutIcon />}
@@ -144,6 +140,21 @@ export const WorkspaceDropdown = ({
           {t('workspace.dropdown.logoutButton.label')}
         </MenuItem>
       </MenuList>
+      {user && workspace && !workspace.isPastDue && (
+        <WorkspaceSettingsModal
+          isOpen={isOpenWorkspace}
+          onClose={onCloseWorkspace}
+          user={user}
+          workspace={workspace}
+        />
+      )}
+      {user && (
+        <AccountSettingsModal
+          isOpen={isOpenAccount}
+          onClose={onCloseAccount}
+          user={user}
+        />
+      )}
     </Menu>
   );
 }
