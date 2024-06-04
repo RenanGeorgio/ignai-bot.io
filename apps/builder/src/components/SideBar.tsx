@@ -19,6 +19,7 @@ import { LaptopIcon } from './icons';
 
 interface LinkItemProps {
   name: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   icon: any;
 }
 
@@ -31,6 +32,7 @@ interface SidebarProps extends BoxProps {
 }
 
 interface NavItemProps extends FlexProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   icon: any;
   children: ReactText;
 }
