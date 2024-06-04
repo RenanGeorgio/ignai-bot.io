@@ -32,7 +32,7 @@ type Props = {
   onWorkspaceSelected: (workspaceId: string) => void
   onCreateNewWorkspaceClick: () => void
   onLogoutClick: () => void
-  user: User
+  user: User | undefined
 }
 
 export const WorkspaceDropdown = ({
