@@ -15,14 +15,7 @@ export const DashboardHeader = () => {
 
   return (
     <Flex minWidth="max-content" alignItems="center" w="full" borderBottomWidth="1px" justify="center">
-      <Flex
-        justify="space-between"
-        alignItems="center"
-        align={'flex-start'}
-        h="16"
-        maxW="1000px"
-        flex="1"
-      >
+      
         <Link href="/typebots" data-testid="typebot-logo">
           <EmojiOrImageIcon
             boxSize="30px"
@@ -40,7 +33,7 @@ export const DashboardHeader = () => {
             user={user}
           />
         </HStack>
-      </Flex>
+      
     </Flex>
   )
 }
