@@ -1,5 +1,5 @@
 import React from 'react'
-import { HStack, Flex, Stack } from '@chakra-ui/react'
+import { HStack, Flex, Spacer } from '@chakra-ui/react'
 import { LaptopIcon } from '@/components/icons'
 import { useUser } from '@/features/account/hooks/useUser'
 import Link from 'next/link'
@@ -14,7 +14,7 @@ export const DashboardHeader = () => {
   const handleCreateNewWorkspace = () => createWorkspace(user?.name ?? undefined);
 
   return (
-    <Flex w="full" borderBottomWidth="1px" justify="center">
+    <Flex minWidth="max-content" alignItems="center" w="full" borderBottomWidth="1px" justify="center">
       <Flex
         justify="space-between"
         alignItems="center"
@@ -23,15 +23,14 @@ export const DashboardHeader = () => {
         maxW="1000px"
         flex="1"
       >
-        <Stack align={'flex-start'}>
-          <Link href="/typebots" data-testid="typebot-logo">
-            <EmojiOrImageIcon
-              boxSize="30px"
-              icon={workspace?.icon}
-              defaultIcon={LaptopIcon} 
-            />
-          </Link>
-        </Stack>
+        <Link href="/typebots" data-testid="typebot-logo">
+          <EmojiOrImageIcon
+            boxSize="30px"
+            icon={workspace?.icon}
+            defaultIcon={LaptopIcon} 
+          />
+        </Link>
+        <Spacer />
         <HStack>
           <WorkspaceDropdown
             currentWorkspace={workspace} 
