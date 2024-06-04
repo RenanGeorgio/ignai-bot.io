@@ -1,15 +1,9 @@
-import { BuoyIcon, ExpandIcon } from '@/components/icons'
-import {
-  Button,
-  HStack,
-  IconButton,
-  Link,
-  useColorModeValue,
-} from '@chakra-ui/react'
-import { BlockWithOptions } from '@typebot.io/schemas'
-import { getHelpDocUrl } from '@/features/graph/helpers/getHelpDocUrl'
-import { useForgedBlock } from '@/features/forge/hooks/useForgedBlock'
-import { useTranslate } from '@tolgee/react'
+import { BuoyIcon, ExpandIcon } from '@/components/icons';
+import { Button, HStack, IconButton, Link, useColorModeValue } from '@chakra-ui/react';
+import { BlockWithOptions } from '@typebot.io/schemas';
+import { getHelpDocUrl } from '@/features/graph/helpers/getHelpDocUrl';
+import { useForgedBlock } from '@/features/forge/hooks/useForgedBlock';
+import { useTranslate } from '@tolgee/react';
 
 type Props = {
   blockType: BlockWithOptions['type']
@@ -17,9 +11,10 @@ type Props = {
 }
 
 export const SettingsHoverBar = ({ blockType, onExpandClick }: Props) => {
-  const { t } = useTranslate()
-  const { blockDef } = useForgedBlock(blockType)
-  const helpDocUrl = getHelpDocUrl(blockType, blockDef)
+  const { t } = useTranslate();
+  const { blockDef } = useForgedBlock(blockType);
+  const helpDocUrl = getHelpDocUrl(blockType, blockDef);
+
   return (
     <HStack
       rounded="md"
@@ -52,5 +47,5 @@ export const SettingsHoverBar = ({ blockType, onExpandClick }: Props) => {
         </Button>
       )}
     </HStack>
-  )
+  );
 }

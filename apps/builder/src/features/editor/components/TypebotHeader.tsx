@@ -276,7 +276,7 @@ const RightElements = ({
           isLoading={isNotDefined(typebot)}
           size="sm"
         >
-          Duplicate
+          Duplicar
         </Button>
       )}
       {currentUserMode === 'write' && <PublishButton size="sm" />}

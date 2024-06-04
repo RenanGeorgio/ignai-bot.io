@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { EmojiOrImageIcon } from '@/components/EmojiOrImageIcon'
 import {
   ChevronLeftIcon,
@@ -9,8 +9,6 @@ import {
   LaptopIcon
 } from '@/components/icons'
 import { PlanTag } from '@/features/billing/components/PlanTag'
-import { useUser } from '@/features/account/hooks/useUser'
-import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
 import { trpc } from '@/lib/trpc'
 import { useTranslate } from '@tolgee/react'
 import {
@@ -23,6 +21,7 @@ import {
   Text,
   useDisclosure
 } from '@chakra-ui/react'
+import { User } from '@typebot.io/prisma'
 import { WorkspaceInApp } from '../WorkspaceProvider'
 import { AccountSettingsModal } from './AccountSettingsModal'
 import { WorkspaceSettingsModal } from './WorkspaceSettingsModal'
@@ -33,6 +32,7 @@ type Props = {
   onWorkspaceSelected: (workspaceId: string) => void
   onCreateNewWorkspaceClick: () => void
   onLogoutClick: () => void
+  user: User | undefined
 }
 
 export const WorkspaceDropdown = ({
@@ -40,10 +40,9 @@ export const WorkspaceDropdown = ({
   onWorkspaceSelected,
   onLogoutClick,
   onCreateNewWorkspaceClick,
+  user
 }: Props) => {
   const { t } = useTranslate()
-  const { user } = useUser()
-  const { workspace } = useWorkspace()
   const { data } = trpc.workspace.listWorkspaces.useQuery()
 
   const [isAdmin, setAdmin] = useState<boolean>(false);
@@ -51,7 +50,8 @@ export const WorkspaceDropdown = ({
   const workspaces = data?.workspaces ?? []
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen: isOpenAccount, onOpen: onOpenAccount, onClose: onCloseAccount } = useDisclosure();
+  const { isOpen: isOpenWorkspace, onOpen: onOpenWorkspace, onClose: onCloseWorkspace } = useDisclosure();
 
   const validAdmin = async (email: string) => {
     const data = await checkUser(email);
@@ -63,6 +63,16 @@ export const WorkspaceDropdown = ({
     } else {
       setAdmin(false);
     }
+  }
+
+  const handleWorkspaceClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onOpenWorkspace();
+  }
+
+  const handleAccountClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onOpenAccount();
   }
 
   useEffect(() => {
@@ -113,29 +123,14 @@ export const WorkspaceDropdown = ({
             {t('workspace.dropdown.newButton.label')}
           </MenuItem>
         )}
-        <MenuItem 
-          onClick={() => {
-            <AccountSettingsModal
-              isOpen={isOpen}
-              onClose={onClose}
-              user={user}
-            />}} 
-          icon={<UserIcon />}
-        >
+        <MenuItem icon={<UserIcon />} onClick={handleAccountClick}>
           {t('editor.header.settingsButton.label')}
         </MenuItem>
-        <MenuItem 
-          onClick={() => {
-            <WorkspaceSettingsModal
-              isOpen={isOpen}
-              onClose={onClose}
-              user={user}
-              workspace={workspace}
-            />}} 
-          icon={<SettingsIcon />}
-        >
-          {t('workspace.settings.modal.menu.workspace.label')}
-        </MenuItem>
+        {!currentWorkspace?.isPastDue && (
+          <MenuItem icon={<SettingsIcon />} onClick={handleWorkspaceClick}>
+            {t('workspace.settings.modal.menu.workspace.label')}
+          </MenuItem>
+        )}
         <MenuItem
           onClick={onLogoutClick}
           icon={<LogOutIcon />}
@@ -144,6 +139,21 @@ export const WorkspaceDropdown = ({
           {t('workspace.dropdown.logoutButton.label')}
         </MenuItem>
       </MenuList>
+      {user && currentWorkspace && !currentWorkspace?.isPastDue && (
+        <WorkspaceSettingsModal
+          isOpen={isOpenWorkspace}
+          onClose={onCloseWorkspace}
+          user={user}
+          workspace={currentWorkspace}
+        />
+      )}
+      {user && (
+        <AccountSettingsModal
+          isOpen={isOpenAccount}
+          onClose={onCloseAccount}
+          user={user}
+        />
+      )}
     </Menu>
   );
 }

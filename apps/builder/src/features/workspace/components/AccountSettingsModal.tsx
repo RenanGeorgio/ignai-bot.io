@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   Modal,
   ModalOverlay,
@@ -6,15 +7,14 @@ import {
   Text,
   Button,
   Avatar,
-  Flex,
-} from '@chakra-ui/react'
-import { SettingsIcon } from '@/components/icons'
-import { User } from '@typebot.io/prisma'
-import { useState } from 'react'
-import packageJson from '../../../../../../package.json'
-import { UserPreferencesForm } from '@/features/account/components/UserPreferencesForm'
-import { MyAccountForm } from '@/features/account/components/MyAccountForm'
-import { useTranslate } from '@tolgee/react'
+  Flex
+} from '@chakra-ui/react';
+import { User } from '@typebot.io/prisma';
+import { UserPreferencesForm } from '@/features/account/components/UserPreferencesForm';
+import { MyAccountForm } from '@/features/account/components/MyAccountForm';
+import { SettingsIcon } from '@/components/icons';
+import packageJson from '../../../../../../package.json';
+import { useTranslate } from '@tolgee/react';
  
 type Props = {
   isOpen: boolean
