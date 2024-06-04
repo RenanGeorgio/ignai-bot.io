@@ -13,7 +13,6 @@ import { ParentModalProvider } from '@/features/graph/providers/ParentModalProvi
 import { trpc } from '@/lib/trpc'
 import { guessIfUserIsEuropean } from '@typebot.io/billing/guessIfUserIsEuropean'
 import { useTranslate } from '@tolgee/react'
-import CustomSideBar from '@/components/SideBar'
 
 export const DashboardPage = () => {
   const { t } = useTranslate()
@@ -73,7 +72,6 @@ export const DashboardPage = () => {
         </ParentModalProvider>
       )}
       <TypebotDndProvider>
-        <CustomSideBar />
         {isLoading ? (
           <VStack w="full" justifyContent="center" pt="10" spacing={6}>
             <Text>{t('dashboard.redirectionMessage')}</Text>
