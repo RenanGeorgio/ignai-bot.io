@@ -45,7 +45,7 @@ const LinkItems: Array<LinkItemProps> = [
   { name: 'Settings', icon: LaptopIcon },
 ];
 
-export default function CustomSideBar() {
+export default function CustomSideBar({ children }: { children: React.ReactNode }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -68,6 +68,9 @@ export default function CustomSideBar() {
       </Drawer>
       {/* mobilenav */}
       <MobileNav display={{ base: 'flex', md: 'none' }} onOpen={onOpen} />
+      <Box ml={{ base: 0, md: 60 }} p="4">
+        {children}
+      </Box>
     </Box>
   );
 }
