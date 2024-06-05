@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import React, { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react'
 import { IconButton } from '@chakra-ui/react'
 import {
   Phone,
@@ -15,7 +15,7 @@ import AddTicket from './AddTicket'
 import useAuth from '@/hooks/useAuth'
 import useChat from '@/hooks/useChat'
 // import { useFetchRecipient } from '@/hooks/useFetchRecipient'
-import { AuthContextInterface } from '@/contexts/AuthContext'
+import { AuthContextInterface } from '@/contexts/auth/AuthContext'
 import Image from 'next/image'
 import web from '@/assets/images/web.svg'
 // import avatar from '@/assets/images/avatar.png'
@@ -25,7 +25,7 @@ import styles from '@/assets/styles/chat.module.css'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import 'dayjs/locale/pt-br'
-import { ChatContextType } from '@/contexts/ChatContext'
+import { ChatContextType } from '@/contexts/chat/types'
 
 dayjs.extend(relativeTime)
 dayjs.locale('pt-br')
@@ -41,7 +41,18 @@ export const ChatBox: React.FC<Props> = ({
 }): React.ReactElement => {
   const [textMessage, setTextMessage] = useState<string>('');
 
-  const { user }: AuthContextInterface = useAuth()
+  // const { user }: AuthContextInterface = useAuth()
+  const user = useMemo(() => { // mock
+    return {
+      _id: '6646294b1d1d1a722482e48d',
+      name: 'Samuel',
+      email: 'samuelmarques96@live.com',
+      cpf: '255.975.630-76',
+      company: 'Sam`s Company',
+      companyId: '1',
+    }
+  }, [])
+
 
   const { 
     currentChat, 
@@ -107,11 +118,12 @@ export const ChatBox: React.FC<Props> = ({
     )
 
   const handleSendMessage = (textMessage: string, setTextMessage: React.Dispatch<React.SetStateAction<string>>) => {
-    if (user && currentChat) {
+    console.log(user, currentChat)
+    if (currentChat) {
       sendTextMessage(
         textMessage,
         { companyId: user.companyId },
-        currentChat.id,
+        currentChat._id,
         setTextMessage
       )
     }
