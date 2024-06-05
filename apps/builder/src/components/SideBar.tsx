@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react'
 
 interface Props<T = unknown> {
-  btn: React.MutableRefObject<T>
+  btn: React.MutableRefObject<React.FocusableElement | null> | React.RefObject<React.FocusableElement | null>
   onClose: () => void
   isOpen: boolean
   variant?: string | undefined
