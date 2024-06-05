@@ -35,7 +35,7 @@ const CustomSideBar = ({ isOpen, variant, onClose }: Props) => {
       <DrawerOverlay>
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>Chakra-UI</DrawerHeader>
+          <DrawerHeader>Ignai-Bot</DrawerHeader>
           <DrawerBody>
             <SidebarContent onClick={onClose} />
           </DrawerBody>

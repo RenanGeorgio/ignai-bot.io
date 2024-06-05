@@ -17,10 +17,12 @@ const smVariant = { navigation: 'drawer', navigationButton: true }
 const mdVariant = { navigation: 'sidebar', navigationButton: false }
 
 export const DashboardHeader = () => {
-  const [isSidebarOpen, setSidebarOpen] = useState(false)
-  const variants = useBreakpointValue({ base: smVariant, md: mdVariant })
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const variants = useBreakpointValue({ base: smVariant, md: mdVariant });
 
-  const toggleSidebar = () => setSidebarOpen(!isSidebarOpen)
+  const toggleSidebar = () => {
+    setSidebarOpen(!isSidebarOpen);
+  }
 
   return (
     <>
@@ -40,7 +42,7 @@ export const DashboardHeader = () => {
     </>
   );
 }
-const DashboardHeaderContent = ({ showSidebarButton = true, onShowSidebar }: Props) => {
+const DashboardHeaderContent = ({ showSidebarButton, onShowSidebar }: Props) => {
   const { user, logOut } = useUser();
   const { workspace, switchWorkspace, createWorkspace } = useWorkspace();
 
