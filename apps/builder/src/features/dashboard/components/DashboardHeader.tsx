@@ -1,6 +1,5 @@
 import React, { useRef } from 'react'
 import { HStack, Flex, Spacer, Box, useBreakpointValue, IconButton, useDisclosure } from '@chakra-ui/react'
-import { FocusableElement } from '@chakra-ui/utils'
 import { ChevronRightIcon, LaptopIcon } from '@/components/icons'
 import { useUser } from '@/features/account/hooks/useUser'
 import Link from 'next/link'
@@ -9,6 +8,10 @@ import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
 import { WorkspaceDropdown } from '@/features/workspace/components/WorkspaceDropdown'
 import CustomSideBar from '@/components/SideBar'
  
+interface FocusableElement {
+  focus(options?: FocusOptions): void
+}
+
 interface Props {
   btn: React.MutableRefObject<FocusableElement | null> | React.RefObject<FocusableElement | null>
   onOpenSidebar: () => void
