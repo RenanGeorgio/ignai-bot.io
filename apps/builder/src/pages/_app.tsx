@@ -73,8 +73,8 @@ const App = ({ Component, pageProps }: AppProps) => {
   return (
     <TolgeeProvider tolgee={ssrTolgee}>
       <ToastContainer />
-      {/* <ChakraProvider theme={customTheme}> */}
-      <ChakraProvider theme={chakraTheme} resetCSS>
+        <ChakraProvider theme={customTheme} resetCSS>
+      {/*<ChakraProvider theme={chakraTheme} resetCSS>*/}
         <MaterialThemeProvider theme={{ [THEME_ID]: materialTheme }}>
           <Toaster />
           <SessionProvider session={pageProps.session}>

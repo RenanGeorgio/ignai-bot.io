@@ -5,7 +5,7 @@ import {
   StyleFunctionProps,
   type ThemeConfig,
 } from '@chakra-ui/react'
-import { mode } from '@chakra-ui/theme-tools'
+import { mode, createBreakpoints } from '@chakra-ui/theme-tools'
 import {
   alertAnatomy,
   accordionAnatomy,
@@ -77,6 +77,14 @@ export const colors = {
     900: '#1d1400',
   },
 }
+
+const breakpoints = createBreakpoints({
+  sm: '30em',
+  md: '48em',
+  lg: '62em',
+  xl: '80em',
+  '2xl': '96em',
+});
 
 const Modal = createMultiStyleConfigHelpers(
   modalAnatomy.keys
@@ -242,4 +250,5 @@ export const customTheme = extendTheme({
   components,
   config,
   styles,
+  breakpoints
 })
