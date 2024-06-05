@@ -13,9 +13,6 @@ export const createSession = ({
   state,
   isReplying,
 }: Props): Prisma.PrismaPromise<any> => {
-  console.log(id)
-  console.log(state)
-  console.log(isReplying)
   return prisma.chatSession.create({
     data: {
       id,

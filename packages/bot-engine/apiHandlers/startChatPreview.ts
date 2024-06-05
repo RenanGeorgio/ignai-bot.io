@@ -49,9 +49,6 @@ export const startChatPreview = async ({
     message,
   })
 
-  console.log(newSessionState);
-  console.log(input);
-  console.log(logs);
   const session = isOnlyRegistering
     ? await restartSession({
         state: newSessionState,
