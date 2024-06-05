@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { HStack, Flex, Spacer, Box, useBreakpointValue, IconButton } from '@chakra-ui/react'
+import React, { useRef } from 'react'
+import { HStack, Flex, Spacer, Box, useBreakpointValue, IconButton, useDisclosure } from '@chakra-ui/react'
 import { ChevronRightIcon, LaptopIcon } from '@/components/icons'
 import { useUser } from '@/features/account/hooks/useUser'
 import Link from 'next/link'
@@ -9,7 +9,8 @@ import { WorkspaceDropdown } from '@/features/workspace/components/WorkspaceDrop
 import CustomSideBar from '@/components/SideBar'
  
 interface Props {
-  onShowSidebar: () => void
+  btn: React.MutableRefObject
+  onOpenSidebar: () => void
   showSidebarButton?: boolean
 }
 
@@ -17,49 +18,57 @@ const smVariant = { navigation: 'drawer', navigationButton: true }
 const mdVariant = { navigation: 'sidebar', navigationButton: false }
 
 export const DashboardHeader = () => {
-  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const { isOpen: isOpenSidebar, onOpen: onOpenSidebar, onClose: onCloseSidebar } = useDisclosure();
+  const btnRef = useRef();
+
+  //const [isSidebarOpen, setSidebarOpen] = useState(false);
   const variants = useBreakpointValue({ base: smVariant, md: mdVariant });
 
-  const toggleSidebar = () => {
+  /*const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
-  }
+  }*/
 
   return (
     <>
       <CustomSideBar
+        btn={btnRef}
         variant={variants?.navigation}
-        isOpen={isSidebarOpen}
-        onClose={toggleSidebar}
+        isOpen={isOpenSidebar}
+        onClose={onCloseSidebar}
       />
       {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
       {/* @ts-ignore */}
       <Box ml={!variants?.navigationButton && 200}>
         <DashboardHeaderContent
+          btn={btnRef}
           showSidebarButton={variants?.navigationButton}
-          onShowSidebar={toggleSidebar}
+          onOpenSidebar={onOpenSidebar}
         />
       </Box>
     </>
   );
 }
-const DashboardHeaderContent = ({ showSidebarButton, onShowSidebar }: Props) => {
+const DashboardHeaderContent = ({ btn, onOpenSidebar }: Props) => {
   const { user, logOut } = useUser();
   const { workspace, switchWorkspace, createWorkspace } = useWorkspace();
 
-  const handleCreateNewWorkspace = () => createWorkspace(user?.name ?? undefined);
+  const handleCreateNewWorkspace = () => {
+    createWorkspace(user?.name ?? undefined);
+  }
 
   return (
     <Flex minWidth="max-content" alignItems="center" w="full" borderBottomWidth="1px" justify="center">
       <Box flex="1">
-        {showSidebarButton && (
-          <IconButton
-            icon={<ChevronRightIcon w={8} h={8} />}
-            aria-label="Colapse"
-            colorScheme="blackAlpha"
-            variant="outline"
-            onClick={onShowSidebar}
-          />
-        )}
+        
+        <IconButton
+          ref={btn}
+          icon={<ChevronRightIcon w={8} h={8} />}
+          aria-label="Colapse"
+          colorScheme="blackAlpha"
+          variant="outline"
+          onClick={onOpenSidebar}
+        />
+       
       </Box>
       <Link href="/typebots" data-testid="typebot-logo">
         <EmojiOrImageIcon

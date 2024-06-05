@@ -1,5 +1,5 @@
+import React from 'react'
 import {
-  Box,
   Button,
   Drawer,
   DrawerOverlay,
@@ -11,36 +11,23 @@ import {
 } from '@chakra-ui/react'
 
 interface Props {
+  btn: React.MutableRefObject
   onClose: () => void
   isOpen: boolean
-  variant: string | undefined
+  variant?: string | undefined
 }
 
-
-const CustomSideBar = ({ isOpen, variant, onClose }: Props) => {
-  return variant === 'sidebar' ? (
-    <Box
-      position="fixed"
-      left={0}
-      p={5}
-      w="200px"
-      top={0}
-      h="100%"
-      bg="#dfdfdf"
-    >
-      <SidebarContent onClick={onClose} />
-    </Box>
-  ) : (
-    <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
-      <DrawerOverlay>
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader>Ignai-Bot</DrawerHeader>
-          <DrawerBody>
-            <SidebarContent onClick={onClose} />
-          </DrawerBody>
-        </DrawerContent>
-      </DrawerOverlay>
+const CustomSideBar = ({ btn, isOpen, onClose }: Props) => {
+  return (
+    <Drawer isOpen={isOpen} placement="left" onClose={onClose} finalFocusRef={btn}>
+      <DrawerOverlay />
+      <DrawerContent>
+        <DrawerCloseButton />
+        <DrawerHeader>Ignai-Bot</DrawerHeader>
+        <DrawerBody>
+          <SidebarContent onClick={onClose} />
+        </DrawerBody>
+      </DrawerContent>
     </Drawer>
   )
 }
