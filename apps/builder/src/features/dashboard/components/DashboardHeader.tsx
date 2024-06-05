@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import { HStack, Flex, Spacer, Box, useBreakpointValue, IconButton, useDisclosure } from '@chakra-ui/react'
+import { FocusableElement } from '@chakra/utils'
 import { ChevronRightIcon, LaptopIcon } from '@/components/icons'
 import { useUser } from '@/features/account/hooks/useUser'
 import Link from 'next/link'
