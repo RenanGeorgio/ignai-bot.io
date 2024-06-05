@@ -10,7 +10,7 @@ import {
   VStack,
 } from '@chakra-ui/react'
 
-interface Props<T = unknown> {
+interface Props {
   btn: React.MutableRefObject<React.FocusableElement | null> | React.RefObject<React.FocusableElement | null>
   onClose: () => void
   isOpen: boolean

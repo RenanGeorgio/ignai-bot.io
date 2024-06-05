@@ -8,7 +8,7 @@ import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
 import { WorkspaceDropdown } from '@/features/workspace/components/WorkspaceDropdown'
 import CustomSideBar from '@/components/SideBar'
  
-interface Props<T = unknown> {
+interface Props {
   btn: React.MutableRefObject<React.FocusableElement | null> | React.RefObject<React.FocusableElement | null>
   onOpenSidebar: () => void
   showSidebarButton?: boolean
