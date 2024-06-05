@@ -9,7 +9,7 @@ import {
   DrawerContent,
   VStack,
 } from '@chakra-ui/react'
-import { FocusableElement } from '@chakra-ui/utils'
+import { FocusableElement } from '@chakra-ui/react-utils'
 
 interface Props {
   btn: React.MutableRefObject<FocusableElement | null> | React.RefObject<FocusableElement | null>
