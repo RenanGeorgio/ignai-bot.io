@@ -16,7 +16,7 @@ export const createSession = ({
   console.log(id)
   console.log(state)
   console.log(isReplying)
-  prisma.chatSession.create({
+  return prisma.chatSession.create({
     data: {
       id,
       state,
