@@ -301,14 +301,15 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
       
       try {
         const response = await getRequest(`${baseUrl}/api/v1/chat/client/email/${user.email}`);
-        
         if (response.error) {
           console.error('Erro ao buscar cliente por e-mail:', response.error);
           return;
         } 
-        
+  
         const clientData = response.data;
-        console.log('Cliente encontrado por e-mail:', clientData);
+        if(!clientData){
+          console.log('Email não encontrado');
+        }
         return clientData;
       } catch (error) {
         console.error('Erro ao buscar cliente por e-mail:', error);
@@ -326,14 +327,15 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
       
       try {
         const response = await getRequest(`${baseUrl}/api/v1/chat/client/${user.companyId}`);
-        
         if (response.error) {
           console.error('Erro ao buscar cliente por ID:', response.error);
           return;
         } 
         
         const clientData = response.data;
-        console.log('Cliente encontrado por ID:', clientData);
+        if(!clientData) {
+          console.log("Id do cliente não encontrado");
+        }
         return clientData;
       } catch (error) {
         console.error('Erro ao buscar cliente por ID:', error);
@@ -372,13 +374,11 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
         return
       }
       const response = await getRequest(`${baseUrl}/api/v1/chat/find/${firstId}/${secondId}`)
-  
       if (response.error) {
-        // setMessageError(response.error.toString())
         return console.log(response.error)
       } 
-      if(response){
-        return response
+      if (response){
+        return response.data
       }
     }
 
@@ -394,11 +394,6 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
       return;
     }
     try {
-      const token = Cookies.get('token');
-      if (!token) {
-        throw new Error('Token de autenticação não encontrado');
-      }
-  
       const response = await postRequest(
         `${baseUrl}/api/v1/chat/message/send-message`,
         {
@@ -407,7 +402,6 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
           chatId: currentChatId
         }
       );
-  
       if (response.error) {
         console.log(response.error);
         return;
