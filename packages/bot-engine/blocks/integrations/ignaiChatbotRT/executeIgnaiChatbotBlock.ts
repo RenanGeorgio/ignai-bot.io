@@ -57,7 +57,7 @@ if (window.$chatwoot) {
 }
 `
 
-export const executeIgnaiChatbotBlock = (
+export const executeIgnaiChatbotRtBlock = (
   state: SessionState,
   block: ChatwootBlock
 ): ExecuteIntegrationResponse => {

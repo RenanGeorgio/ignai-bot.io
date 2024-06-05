@@ -99,6 +99,12 @@ export const BlockLabel = ({ type }: Props): JSX.Element => {
       return (
         <Text fontSize="sm">{t('editor.sidebarBlock.zemanticAi.label')}</Text>
       )
+    case IntegrationBlockType.IGNAI_CHATBOT_RT:
+      return (
+        <Text fontSize="sm">
+          {t('editor.sidebarBlock.ignaiChatbootRT.label')}
+        </Text>
+      )
     default:
       return <ForgedBlockLabel type={type} />
   }

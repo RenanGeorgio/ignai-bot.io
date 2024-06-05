@@ -12,7 +12,7 @@ import { executeOpenAIBlock } from './blocks/integrations/legacy/openai/executeO
 import { executeForgedBlock } from './forge/executeForgedBlock'
 import { isNotDefined } from '@typebot.io/lib'
 import { env } from '@typebot.io/env'
-import { executeIgnaiChatbotBlock } from './blocks/integrations/ignaiChatbotRT/executeIgnaiChatbotBlock'
+import { executeIgnaiChatbotRtBlock } from './blocks/integrations/ignaiChatbotRT/executeIgnaiChatbotBlock'
 
 export const executeIntegration =
   (state: SessionState) =>
@@ -57,7 +57,7 @@ export const executeIntegration =
           startTimeShouldBeUpdated: true,
         }
       case IntegrationBlockType.IGNAI_CHATBOT_RT:
-        return executeIgnaiChatbotBlock(state, block)
+        return executeIgnaiChatbotRtBlock(state, block)
       default:
         return {
           ...(await executeForgedBlock(state, block)),
