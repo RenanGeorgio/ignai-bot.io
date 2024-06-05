@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react'
 
 interface Props {
-  btn: React.MutableRefObject
+  btn: React.MutableRefObject<T>
   onClose: () => void
   isOpen: boolean
   variant?: string | undefined
