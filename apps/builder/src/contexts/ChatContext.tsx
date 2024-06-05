@@ -53,6 +53,7 @@ export type ChatContextType = {
   updateCurrentChat: (chat: Chat) => void
   currentChat: Chat | null
   messages: Message[] | null
+  messagesHttp: Message[] | null
   isMessagesLoading: boolean
   messageError: string | null
   sendTextMessage: (
@@ -85,8 +86,10 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
   const [isMessagesLoading, setIsMessagesLoading] = useState<boolean>(false)
   const [messageError, setMessageError] = useState<string | null>(null)
   const [messages, setMessages] = useState<Message[] | null>(null)
+  const [messagesHttp, setMessagesHttp] = useState<Message[] | null>(null)
   // const [textMessageError, setTextMessageError] = useState<string | null>(null);
   const [newMessage, setNewMessage] = useState<Message | null>(null)
+  const [newMessageHttp, setNewMessageHttp] = useState<Message | null>(null)
   const [onlineUsers, setOnlineUsers] = useState<OnlineUser[]>([])
   const [socket, setSocket] = useState<Socket | null>(null)
 
@@ -137,6 +140,20 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
       socket.emit('sendMessage', { ...newMessage, recipientId })
     }
   }, [socket, newMessage, currentChat, user?.companyId])
+
+  useEffect(() => {
+    if (!socket) {
+      return
+    }
+
+    if (currentChat != null) {
+      const recipientId = currentChat?.members?.find(
+        (member: User) => member?.id !== user?.companyId
+      )
+
+      socket.emit('sendMessageHttp', { ...newMessageHttp, recipientId })
+    }
+  }, [socket, newMessageHttp, currentChat, user?.companyId])
 
   useEffect(() => {
     if (!socket) {
@@ -408,8 +425,8 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
       }
   
       const messageData = response.data as Message;
-      setNewMessage(messageData);
-      setMessages((prev) => [...(prev || []), messageData]);
+      setNewMessageHttp(messageData);
+      setMessagesHttp((prev) => [...(prev || []), messageData]);
       return messageData;
     } catch (error) {
       console.error('Erro ao enviar mensagem:', error);
@@ -426,6 +443,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
         updateCurrentChat,
         currentChat,
         messages,
+        messagesHttp,
         isMessagesLoading,
         messageError,
         sendTextMessage,
