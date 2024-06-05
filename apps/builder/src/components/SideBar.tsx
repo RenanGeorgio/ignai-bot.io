@@ -10,7 +10,7 @@ import {
   VStack,
 } from '@chakra-ui/react'
 
-interface Props {
+interface Props<T = unknown> {
   btn: React.MutableRefObject<T>
   onClose: () => void
   isOpen: boolean

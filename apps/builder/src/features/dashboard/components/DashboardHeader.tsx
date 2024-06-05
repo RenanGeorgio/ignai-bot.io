@@ -8,7 +8,7 @@ import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
 import { WorkspaceDropdown } from '@/features/workspace/components/WorkspaceDropdown'
 import CustomSideBar from '@/components/SideBar'
  
-interface Props {
+interface Props<T = unknown> {
   btn: React.MutableRefObject<T>
   onOpenSidebar: () => void
   showSidebarButton?: boolean
