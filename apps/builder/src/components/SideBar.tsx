@@ -19,7 +19,7 @@ interface FocusableElement extends HTMLButtonElement {
 }
 
 interface Props {
-  btn: React.MutableRefObject<FocusableElement | HTMLButtonElement> | React.RefObject<FocusableElement | HTMLButtonElement>
+  btn: React.MutableRefObject<FocusableElement | HTMLElement> | React.RefObject<FocusableElement | HTMLElement>
   onClose: () => void
   isOpen: boolean
   variant?: string | undefined
