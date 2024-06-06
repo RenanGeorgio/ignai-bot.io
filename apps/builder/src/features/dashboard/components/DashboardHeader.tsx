@@ -96,7 +96,7 @@ const DashboardHeaderContent = ({ btn, onOpenSidebar }: Props) => {
       </Flex>
       <Box flex="1">
         <IconButton
-          ref={btn}
+          ref={btn as React.RefObject<HTMLButtonElement>}
           icon={<ChevronRightIcon w={8} h={8} />}
           aria-label="Colapse"
           colorScheme="blackAlpha"
