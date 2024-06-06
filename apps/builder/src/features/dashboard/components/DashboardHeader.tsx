@@ -30,8 +30,7 @@ const mdVariant = { navigation: 'sidebar', navigationButton: false }
 
 export const DashboardHeader = () => {
   const { isOpen: isOpenSidebar, onOpen: onOpenSidebar, onClose: onCloseSidebar } = useDisclosure();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const btnRef = useRef<any>(null);
+  const btnRef = useRef<CustomElement>(null);
 
   //const [isSidebarOpen, setSidebarOpen] = useState(false);
   const variants = useBreakpointValue({ base: smVariant, md: mdVariant });
