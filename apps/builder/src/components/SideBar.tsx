@@ -10,7 +10,7 @@ import {
   VStack,
 } from '@chakra-ui/react'
 
-interface FocusableElement {
+interface FocusableElement extends HTMLButtonElement {
   focus(options?: FocusOptions): void
 }
 
