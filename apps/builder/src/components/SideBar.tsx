@@ -8,7 +8,8 @@ import {
   MenuButton,
   MenuList,
   Link,
-  IconButton
+  IconButton,
+  IconProps
 } from '@chakra-ui/react'
 import { ChevronRightIcon } from './icons'
 
@@ -31,7 +32,7 @@ export interface Props {
 }
 
 interface NavItemProps {
-  icon: JSX.Element
+  customIcon: (props: IconProps) => JSX.Element
   title: string 
   description?: string 
   active?:  boolean
@@ -40,44 +41,12 @@ interface NavItemProps {
 
 interface HoverProps {
   title: string 
-  icon: JSX.Element | undefined
+  customIcon: undefined | ((props: IconProps) => JSX.Element)
   description: string | undefined
 }
 
-/*
-const CustomSideBar = ({ btn, isOpen, onClose }: Props) => {
-  return (
-    <Drawer isOpen={isOpen} placement="left" onClose={onClose} finalFocusRef={btn}>
-      <DrawerOverlay />
-      <DrawerContent>
-        <DrawerCloseButton />
-        <DrawerHeader>Ignai-Bot</DrawerHeader>
-        <DrawerBody>
-          <SidebarContent onClick={onClose} />
-        </DrawerBody>
-      </DrawerContent>
-    </Drawer>
-  )
-}
-
-const SidebarContent = ({ onClick }: { onClick: () => void }) => (
-  <VStack>
-    <Button onClick={onClick} w="100%">
-      Home
-    </Button>
-    <Button onClick={onClick} w="100%">
-      About
-    </Button>
-    <Button onClick={onClick} w="100%">
-      Contact
-    </Button>
-  </VStack>
-)
-
-export default CustomSideBar*/
-
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const NavHoverBox = ({ title, icon, description }: HoverProps) => {
+const NavHoverBox = ({ title, customIcon, description }: HoverProps) => {
   return (
     <>
       <Flex
@@ -101,6 +70,7 @@ const NavHoverBox = ({ title, icon, description }: HoverProps) => {
         color="#fff"
         textAlign="center"
       >
+        <customIcon />
         <Heading size="md" fontWeight="normal">{title}</Heading>
         <Text>{description}</Text>
       </Flex>
@@ -108,7 +78,7 @@ const NavHoverBox = ({ title, icon, description }: HoverProps) => {
   );
 }
 
-const NavItem = ({ icon, title, description, active, navSize }: NavItemProps) => {
+const NavItem = ({ customIcon, title, description, active, navSize }: NavItemProps) => {
   return (
     <Flex
       mt={30}
@@ -126,6 +96,7 @@ const NavItem = ({ icon, title, description, active, navSize }: NavItemProps) =>
         >
           <MenuButton w="100%">
             <Flex>
+              <customIcon color={active ? "#82AAAD" : "gray.500"} />
               <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{title}</Text>
             </Flex>
           </MenuButton>
@@ -137,7 +108,7 @@ const NavItem = ({ icon, title, description, active, navSize }: NavItemProps) =>
           h={200}
           ml={5}
         >
-          <NavHoverBox title={title} icon={icon} description={description} />
+          <NavHoverBox title={title} customIcon={customIcon} description={description} />
       </MenuList>
     </Menu>
   </Flex>
@@ -179,9 +150,9 @@ const CustomSideBar = () => {
             }
           }}
         />
-        <NavItem navSize={navSize} icon={<ChevronRightIcon />} title="Dashboard" description="This is the description for the dashboard." />
-        <NavItem navSize={navSize} icon={<ChevronRightIcon />} title="Calendar" active />
-        <NavItem navSize={navSize} icon={<ChevronRightIcon />} title="Clients" />
+        <NavItem navSize={navSize} customIcon={<ChevronRightIcon />} title="Dashboard" description="This is the description for the dashboard." />
+        <NavItem navSize={navSize} customIcon={<ChevronRightIcon />} title="Calendar" active />
+        <NavItem navSize={navSize} customIcon={<ChevronRightIcon />} title="Clients" />
       </Flex>
 
       <Flex

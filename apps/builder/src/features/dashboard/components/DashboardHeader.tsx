@@ -1,49 +1,13 @@
 import React from 'react'
-import { HStack, Flex, Spacer, useDisclosure} from '@chakra-ui/react'
+import { HStack, Flex, Spacer } from '@chakra-ui/react'
 import { LaptopIcon } from '@/components/icons'
 import { useUser } from '@/features/account/hooks/useUser'
 import Link from 'next/link'
 import { EmojiOrImageIcon } from '@/components/EmojiOrImageIcon'
 import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
 import { WorkspaceDropdown } from '@/features/workspace/components/WorkspaceDropdown'
- 
-type CustomHTMLDivElement = Omit<HTMLDivElement, "removeEventListener" | "addEventListener">;
-
-interface FocusableElement extends HTMLButtonElement, CustomHTMLDivElement {
-  focus(options?: FocusOptions): void
-}
-
-type CustomElement =
-  | FocusableElement
-  | HTMLButtonElement
-  | HTMLDivElement;
-
-export interface Props {
-  btn?: React.MutableRefObject<CustomElement> | React.RefObject<CustomElement>
-  onOpenSidebar: () => void
-  showSidebarButton?: boolean
-}
-
-//const smVariant = { navigation: 'drawer', navigationButton: true }
-//const mdVariant = { navigation: 'sidebar', navigationButton: false }
 
 export const DashboardHeader = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { isOpen: isOpenSidebar, onOpen: onOpenSidebar, onClose: onCloseSidebar } = useDisclosure();
-  //const btnRef = useRef<CustomElement>(null);
-
-  //const [isSidebarOpen, setSidebarOpen] = useState(false);
- // const variants = useBreakpointValue({ base: smVariant, md: mdVariant });
-
-  /*const toggleSidebar = () => {
-    setSidebarOpen(!isSidebarOpen);
-  }*/
-
-  return (
-    <DashboardHeaderContent />
-  );
-}
-const DashboardHeaderContent = () => {
   const { user, logOut } = useUser();
   const { workspace, switchWorkspace, createWorkspace } = useWorkspace();
 
