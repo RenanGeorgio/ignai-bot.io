@@ -42,7 +42,7 @@ interface NavItemProps {
 interface HoverProps {
   title: string 
   icon: JSX.Element
-  description: string
+  description: string | undefined
 }
 
 /*
