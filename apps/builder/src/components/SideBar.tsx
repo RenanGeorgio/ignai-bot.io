@@ -83,7 +83,7 @@ const CustomSideBar = ({ btn, isOpen, onClose }: Props) => {
   const [navSize, changeNavSize] = useState<string>("large");
   return (
     <Flex
-      ref={btn}
+      ref={btn as React.RefObject<HTMLDivElement>}
       pos="sticky"
       left="5"
       h="95vh"
