@@ -34,23 +34,29 @@ export const DashboardHeader = () => {
   }*/
 
   return (
-    <>
-      {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-      {/* @ts-ignore */}
-      <Box ml={!variants?.navigationButton && 200}>
-        <DashboardHeaderContent
-          btn={btnRef}
-          showSidebarButton={variants?.navigationButton}
-          onOpenSidebar={onOpenSidebar}
-        />
-      </Box>
-      <CustomSideBar
+    <VStack>
+      <DashboardHeaderContent
         btn={btnRef}
-        variant={variants?.navigation}
-        isOpen={isOpenSidebar}
-        onClose={onCloseSidebar}
+        showSidebarButton={variants?.navigationButton}
+        onOpenSidebar={onOpenSidebar}
       />
-    </>
+      
+      <Flex w="100%">
+        <CustomSideBar
+          btn={btnRef}
+          variant={variants?.navigation}
+          isOpen={isOpenSidebar}
+          onClose={onCloseSidebar}
+        />
+        <Flex
+          pos="absolute"
+          top="50%"
+          left="50%"
+          transform="translate(-50%, -50%)"
+        >
+        </Flex>
+      </Flex>
+    </VStack>
   );
 }
 const DashboardHeaderContent = ({ btn, onOpenSidebar }: Props) => {
@@ -62,7 +68,7 @@ const DashboardHeaderContent = ({ btn, onOpenSidebar }: Props) => {
   }
 
   return (
-    <VStack>
+    <VStack align='stretch'>
       <Flex minWidth="max-content" alignItems="center" w="full" borderBottomWidth="1px" justify="center">
         <Link href="/typebots" data-testid="typebot-logo">
           <EmojiOrImageIcon
