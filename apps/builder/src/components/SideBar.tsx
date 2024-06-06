@@ -12,6 +12,7 @@ import {
   Icon,
   IconButton
 } from '@chakra-ui/react'
+import { ChevronRightIcon } from './icons'
 
 interface FocusableElement extends HTMLButtonElement {
   focus(options?: FocusOptions): void
@@ -107,9 +108,9 @@ const CustomSideBar = ({ btn, isOpen, onClose }: Props) => {
             }
           }}
         />
-        <NavItem navSize={navSize} icon={FiHome} title="Dashboard" description="This is the description for the dashboard." />
-        <NavItem navSize={navSize} icon={FiCalendar} title="Calendar" active />
-        <NavItem navSize={navSize} icon={FiUser} title="Clients" />
+        <NavItem navSize={navSize} icon={<ChevronRightIcon />} title="Dashboard" description="This is the description for the dashboard." />
+        <NavItem navSize={navSize} icon={<ChevronRightIcon />} title="Calendar" active />
+        <NavItem navSize={navSize} icon={<ChevronRightIcon />} title="Clients" />
       </Flex>
 
       <Flex
