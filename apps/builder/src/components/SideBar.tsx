@@ -20,8 +20,13 @@ interface FocusableElement extends HTMLButtonElement, CustomHTMLDivElement {
   focus(options?: FocusOptions): void
 }
 
+type CustomElement =
+  | FocusableElement
+  | HTMLButtonElement
+  | HTMLDivElement;
+
 interface Props {
-  btn: React.MutableRefObject<FocusableElement | HTMLButtonElement | HTMLDivElement> | React.RefObject<FocusableElement | HTMLButtonElement | HTMLDivElement>
+  btn: React.MutableRefObject<CustomElement | HTMLElement> | React.RefObject<CustomElement | HTMLElement>
   onClose: () => void
   isOpen: boolean
   variant?: string | undefined

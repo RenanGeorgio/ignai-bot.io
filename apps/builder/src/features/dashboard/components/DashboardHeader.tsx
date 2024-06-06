@@ -8,12 +8,19 @@ import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
 import { WorkspaceDropdown } from '@/features/workspace/components/WorkspaceDropdown'
 import CustomSideBar from '@/components/SideBar'
  
-interface FocusableElement extends HTMLButtonElement {
+type CustomHTMLDivElement = Omit<HTMLDivElement, "removeEventListener" | "addEventListener">;
+
+interface FocusableElement extends HTMLButtonElement, CustomHTMLDivElement {
   focus(options?: FocusOptions): void
 }
 
+type CustomElement =
+  | FocusableElement
+  | HTMLButtonElement
+  | HTMLDivElement;
+
 interface Props {
-  btn: React.MutableRefObject<FocusableElement | HTMLButtonElement> | React.RefObject<FocusableElement | HTMLButtonElement>
+  btn: React.MutableRefObject<CustomElement | HTMLElement> | React.RefObject<CustomElement | HTMLElement>
   onOpenSidebar: () => void
   showSidebarButton?: boolean
 }
@@ -24,7 +31,7 @@ const mdVariant = { navigation: 'sidebar', navigationButton: false }
 export const DashboardHeader = () => {
   const { isOpen: isOpenSidebar, onOpen: onOpenSidebar, onClose: onCloseSidebar } = useDisclosure();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const btnRef = useRef<any>();
+  const btnRef = useRef<any>(null);
 
   //const [isSidebarOpen, setSidebarOpen] = useState(false);
   const variants = useBreakpointValue({ base: smVariant, md: mdVariant });
