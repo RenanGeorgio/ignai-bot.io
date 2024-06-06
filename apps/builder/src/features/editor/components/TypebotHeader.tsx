@@ -299,9 +299,9 @@ const LatestElements = ({
             isRound={true}
             as={IconButton}
             aria-label='Options'
-            size='sm'
+            size='2xs'
             pos='fixed'
-            icon={<Avatar size='sm' pos='fixed' src={user?.image ?? undefined} name={user?.name ?? undefined} />}
+            icon={<Avatar size='2xs' position='fixed' w={8} h={8} src={user?.image ?? undefined} name={user?.name ?? undefined} />}
             variant='solid'
           />
           <MenuList>
