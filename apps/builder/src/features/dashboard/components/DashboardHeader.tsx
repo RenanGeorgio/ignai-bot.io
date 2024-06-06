@@ -13,7 +13,7 @@ interface FocusableElement {
 }
 
 interface Props {
-  btn: React.MutableRefObject<FocusableElement | HTMLButtonElement | undefined> | React.RefObject<FocusableElement | HTMLButtonElement | undefined>
+  btn: React.MutableRefObject<FocusableElement | HTMLButtonElement> | React.RefObject<FocusableElement | HTMLButtonElement> | undefined
   onOpenSidebar: () => void
   showSidebarButton?: boolean
 }
