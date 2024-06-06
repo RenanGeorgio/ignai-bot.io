@@ -149,7 +149,7 @@ const NavItem = ({ icon, title, description, active, navSize }: NavItemProps) =>
     >
       <Menu placement="right">
         <Link
-          backgroundColor={active ? "#AEC8CA" : null}
+          backgroundColor={active ? "#AEC8CA" : undefined}
           p={3}
           borderRadius={8}
           _hover={{ textDecor: 'none', backgroundColor: "#AEC8CA" }}
