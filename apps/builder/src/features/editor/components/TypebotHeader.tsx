@@ -73,14 +73,12 @@ export const TypebotHeader = () => {
       flexShrink={0}
     >
       <LeftElements pos="absolute" left="1rem" />
-      {/* 
       <TypebotNav
         display={{ base: 'none', xl: 'flex' }}
         pos={{ base: 'absolute' }}
         typebotId={typebot?.id}
         isResultsDisplayed={isDefined(publishedTypebot)}
       />
-      */}
       <HStack spacing='24px'>
         <RightElements
           pos="absolute"
@@ -251,13 +249,11 @@ const RightElements = ({
 
   return (
     <HStack {...props}>
-      {/* 
       <TypebotNav
         display={{ base: 'none', md: 'flex', xl: 'none' }}
         typebotId={typebot?.id}
         isResultsDisplayed={isResultsDisplayed}
       />
-      */}
       {router.pathname.includes('/edit') && isNotDefined(rightPanel) && (
         <Button
           colorScheme="gray"
@@ -305,7 +301,7 @@ const LatestElements = ({
             aria-label='Options'
             size='sm'
             position='fixed'
-            icon={<Avatar size='sm' position='fixed' src={user?.image ?? undefined} name={user?.name ?? undefined} />}
+            icon={<Avatar size='sm' position='fixed' name={user?.name ?? undefined} />}
             variant='solid'
           />
           <MenuList>
@@ -320,7 +316,7 @@ const LatestElements = ({
     </HStack>
   );
 }
-{/* 
+
 const TypebotNav = ({
   typebotId,
   isResultsDisplayed,
@@ -384,4 +380,3 @@ const TypebotNav = ({
     </HStack>
   );
 }
-*/}
