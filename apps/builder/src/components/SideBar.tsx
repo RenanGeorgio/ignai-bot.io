@@ -157,7 +157,10 @@ const NavItem = ({ icon, title, description, active, navSize }: NavItemProps) =>
         >
           <MenuButton w="100%">
             <Flex>
-              <Icon as={icon} fontSize="xl" color={active ? "#82AAAD" : "gray.500"} />
+              <Icon 
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                as={icon as any} fontSize="xl" color={active ? "#82AAAD" : "gray.500"} 
+              />
               <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{title}</Text>
             </Flex>
           </MenuButton>
