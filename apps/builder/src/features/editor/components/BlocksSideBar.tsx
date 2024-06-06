@@ -114,12 +114,9 @@ export const BlocksSideBar = () => {
   const handleLockClick = () => setIsLocked(!isLocked);
 
   const handleDockBarEnter = () => {
-    if (!isLocked) {
-      closeSideBar.flush();
-      setIsExtended(true);
-      setIsExpanded(true);
-    }
-  }  
+    setIsLocked(!isLocked);
+    setIsExtended(!isLocked);
+  }
 
   const handleMouseLeave = () => {
     if (!isLocked) {
@@ -161,7 +158,7 @@ export const BlocksSideBar = () => {
 
   return (
     <Flex
-      w={isExtended ? "360px" : "50px"}
+      w="360px"
       pos="absolute"
       left="0"
       h={`calc(100vh - ${itemSize}px)`}
