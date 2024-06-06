@@ -159,7 +159,7 @@ export const BlocksSideBar = () => {
 
   return (
     <Flex
-      w="360px"
+      w={isExtended ? "360px" : "50px"}
       pos="absolute"
       left="0"
       h={`calc(100vh - ${itemSize}px)`}
@@ -167,8 +167,7 @@ export const BlocksSideBar = () => {
       pl="4"
       py="4"
       onMouseLeave={handleMouseLeave}
-      transform={isExtended ? 'translateY(0)' : 'translateY(-80%)'}
-      transition="transform 350ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s"
+      transition="width 350ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s" 
     >
       <Stack
         w="full"
