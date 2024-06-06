@@ -14,7 +14,9 @@ import {
 } from '@chakra-ui/react'
 import { ChevronRightIcon } from './icons'
 
-interface FocusableElement extends HTMLButtonElement {
+type CustomHTMLDivElement = Omit<HTMLDivElement, "removeEventListener" | "addEventListener">;
+
+interface FocusableElement extends HTMLButtonElement, CustomHTMLDivElement {
   focus(options?: FocusOptions): void
 }
 
