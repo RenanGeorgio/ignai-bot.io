@@ -300,8 +300,8 @@ const LatestElements = ({
             as={IconButton}
             aria-label='Options'
             size='sm'
-            position='fixed'
-            icon={<Avatar size='sm' position='fixed' name={user?.name ?? undefined} />}
+            pos='fixed'
+            icon={<Avatar size='sm' pos='fixed' src={user?.image ?? undefined} name={user?.name ?? undefined} />}
             variant='solid'
           />
           <MenuList>
