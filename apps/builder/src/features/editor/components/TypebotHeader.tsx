@@ -301,6 +301,8 @@ const LatestElements = ({
             aria-label='Options'
             size='2xs'
             position='fixed'
+            right='1rem' 
+            top='1rem'
             icon={<Avatar size='2xs' position='fixed' w={8} h={8} src={user?.image ?? undefined} name={user?.name ?? undefined} />}
             variant='solid'
           />
