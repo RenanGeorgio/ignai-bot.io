@@ -19,7 +19,7 @@ type CustomElement =
   | HTMLButtonElement
   | HTMLDivElement;
 
-interface Props {
+export interface Props {
   btn: React.MutableRefObject<CustomElement> | React.RefObject<CustomElement>
   onOpenSidebar: () => void
   showSidebarButton?: boolean
@@ -29,6 +29,7 @@ const smVariant = { navigation: 'drawer', navigationButton: true }
 const mdVariant = { navigation: 'sidebar', navigationButton: false }
 
 export const DashboardHeader = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { isOpen: isOpenSidebar, onOpen: onOpenSidebar, onClose: onCloseSidebar } = useDisclosure();
   const btnRef = useRef<CustomElement>(null);
 
