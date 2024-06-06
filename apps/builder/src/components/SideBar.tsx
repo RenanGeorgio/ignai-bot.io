@@ -33,7 +33,7 @@ interface Props {
 }
 
 interface NavItemProps {
-  icon: (props: IconProps) => JSX.Element
+  icon: JSX.Element
   title: string 
   description?: string 
   active?:  boolean
@@ -42,7 +42,7 @@ interface NavItemProps {
 
 interface HoverProps {
   title: string 
-  icon: (props: IconProps) => JSX.Element
+  icon: JSX.Element
   description: string
 }
 
