@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { HStack, Flex, Spacer, Box, useBreakpointValue, IconButton, useDisclosure } from '@chakra-ui/react'
+import { HStack, Flex, Spacer, Box, useBreakpointValue, IconButton, useDisclosure, VStack } from '@chakra-ui/react'
 import { ChevronRightIcon, LaptopIcon } from '@/components/icons'
 import { useUser } from '@/features/account/hooks/useUser'
 import Link from 'next/link'
@@ -35,12 +35,6 @@ export const DashboardHeader = () => {
 
   return (
     <>
-      <CustomSideBar
-        btn={btnRef}
-        variant={variants?.navigation}
-        isOpen={isOpenSidebar}
-        onClose={onCloseSidebar}
-      />
       {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
       {/* @ts-ignore */}
       <Box ml={!variants?.navigationButton && 200}>
@@ -50,6 +44,12 @@ export const DashboardHeader = () => {
           onOpenSidebar={onOpenSidebar}
         />
       </Box>
+      <CustomSideBar
+        btn={btnRef}
+        variant={variants?.navigation}
+        isOpen={isOpenSidebar}
+        onClose={onCloseSidebar}
+      />
     </>
   );
 }
@@ -62,9 +62,27 @@ const DashboardHeaderContent = ({ btn, onOpenSidebar }: Props) => {
   }
 
   return (
-    <Flex minWidth="max-content" alignItems="center" w="full" borderBottomWidth="1px" justify="center">
+    <VStack>
+      <Flex minWidth="max-content" alignItems="center" w="full" borderBottomWidth="1px" justify="center">
+        <Link href="/typebots" data-testid="typebot-logo">
+          <EmojiOrImageIcon
+            boxSize="30px"
+            icon={workspace?.icon}
+            defaultIcon={LaptopIcon} 
+          />
+        </Link>
+        <Spacer />
+        <HStack>
+          <WorkspaceDropdown
+            currentWorkspace={workspace} 
+            onLogoutClick={logOut}
+            onCreateNewWorkspaceClick={handleCreateNewWorkspace}
+            onWorkspaceSelected={switchWorkspace}
+            user={user}
+          />
+        </HStack>
+      </Flex>
       <Box flex="1">
-        
         <IconButton
           ref={btn}
           icon={<ChevronRightIcon w={8} h={8} />}
@@ -73,25 +91,7 @@ const DashboardHeaderContent = ({ btn, onOpenSidebar }: Props) => {
           variant="outline"
           onClick={onOpenSidebar}
         />
-       
       </Box>
-      <Link href="/typebots" data-testid="typebot-logo">
-        <EmojiOrImageIcon
-          boxSize="30px"
-          icon={workspace?.icon}
-          defaultIcon={LaptopIcon} 
-        />
-      </Link>
-      <Spacer />
-      <HStack>
-        <WorkspaceDropdown
-          currentWorkspace={workspace} 
-          onLogoutClick={logOut}
-          onCreateNewWorkspaceClick={handleCreateNewWorkspace}
-          onWorkspaceSelected={switchWorkspace}
-          user={user}
-        />
-      </HStack>
-    </Flex>
+    </VStack>
   );
 }
