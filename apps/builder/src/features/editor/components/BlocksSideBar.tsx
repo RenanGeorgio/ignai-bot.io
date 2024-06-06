@@ -167,6 +167,7 @@ export const BlocksSideBar = () => {
       zIndex="2"
       pl="4"
       py="4"
+      onMouseLeave={handleMouseLeave}
       onMouseEnter={handleDockBarEnter}  
       transform={isExtended ? 'scale(1)' : 'scale(0.5)'}  
       transition="transform 350ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s"
