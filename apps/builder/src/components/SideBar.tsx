@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import {
   Flex,
-  IconProps,
   Text,
   Divider,
   Heading,
