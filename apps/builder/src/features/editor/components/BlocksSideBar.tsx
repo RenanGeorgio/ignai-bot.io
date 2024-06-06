@@ -123,8 +123,7 @@ export const BlocksSideBar = () => {
       return
     }
 
-    { /* closeSideBar(); */}
-    setIsExtended(false);
+    closeSideBar();
   }
 
   /*const handleTransform = () => {
@@ -157,12 +156,6 @@ export const BlocksSideBar = () => {
       setIndex(-1);
     }
   },[isExtended]);
-
-  const handleCollapseMouseEnter = () => {
-    if (isLocked) {
-      setIsExtended(false); 
-    }
-  };
 
   return (
     <Flex
@@ -297,7 +290,7 @@ export const BlocksSideBar = () => {
           </AccordionItem>
         </Accordion>
       </Stack>
-      <Collapse in={!isLocked} unmountOnExit onMouseEnter={handleCollapseMouseEnter}>
+      <Collapse in={!isLocked} unmountOnExit>
         <Flex
           pos="absolute"
           h="100%"
