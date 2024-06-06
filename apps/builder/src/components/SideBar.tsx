@@ -103,6 +103,7 @@ const CustomSideBar = ({ btn, isOpen, onClose }: Props) => {
       >
         <IconButton
           background="none"
+          aria-label="Colapse Sidebar"
           mt={5}
           _hover={{ background: 'none' }}
           icon={<ChevronRightIcon />}
