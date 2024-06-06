@@ -114,16 +114,18 @@ export const BlocksSideBar = () => {
   const handleLockClick = () => setIsLocked(!isLocked);
 
   const handleDockBarEnter = () => {
-    setIsLocked(!isLocked);
-    setIsExtended(!isLocked);
+    if (!isLocked) {
+      closeSideBar.flush();
+      handleLockClick(); 
+    }
   }
-
+  
   const handleMouseLeave = () => {
     if (!isLocked) {
       closeSideBar();
-      setIsExpanded(false);
+      handleLockClick(); 
     }
-  }  
+  } 
 
   /*const handleTransform = () => {
     if (isLocked) {
