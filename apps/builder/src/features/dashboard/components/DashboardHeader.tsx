@@ -1,12 +1,11 @@
 import React from 'react'
-import { HStack, Flex, Spacer, useDisclosure, VStack } from '@chakra-ui/react'
+import { HStack, Flex, Spacer, useDisclosure} from '@chakra-ui/react'
 import { LaptopIcon } from '@/components/icons'
 import { useUser } from '@/features/account/hooks/useUser'
 import Link from 'next/link'
 import { EmojiOrImageIcon } from '@/components/EmojiOrImageIcon'
 import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
 import { WorkspaceDropdown } from '@/features/workspace/components/WorkspaceDropdown'
-import CustomSideBar from '@/components/SideBar'
  
 type CustomHTMLDivElement = Omit<HTMLDivElement, "removeEventListener" | "addEventListener">;
 
@@ -41,20 +40,7 @@ export const DashboardHeader = () => {
   }*/
 
   return (
-    <VStack>
-      <DashboardHeaderContent />
-      
-      <Flex w="100%">
-        <CustomSideBar />
-        <Flex
-          pos="absolute"
-          top="50%"
-          left="50%"
-          transform="translate(-50%, -50%)"
-        >
-        </Flex>
-      </Flex>
-    </VStack>
+    <DashboardHeaderContent />
   );
 }
 const DashboardHeaderContent = () => {
