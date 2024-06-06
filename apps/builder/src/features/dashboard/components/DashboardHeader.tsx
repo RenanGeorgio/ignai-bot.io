@@ -45,10 +45,7 @@ export const DashboardHeader = () => {
       <DashboardHeaderContent />
       
       <Flex w="100%">
-        <CustomSideBar
-          isOpen={isOpenSidebar}
-          onClose={onCloseSidebar}
-        />
+        <CustomSideBar />
         <Flex
           pos="absolute"
           top="50%"
