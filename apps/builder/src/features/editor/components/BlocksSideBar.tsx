@@ -117,12 +117,14 @@ export const BlocksSideBar = () => {
     if (!isLocked) {
       closeSideBar.flush();
       setIsExtended(true);
+      setIsExpanded(true);
     }
   }  
 
   const handleMouseLeave = () => {
     if (!isLocked) {
       closeSideBar();
+      setIsExpanded(false);
     }
   }  
 
