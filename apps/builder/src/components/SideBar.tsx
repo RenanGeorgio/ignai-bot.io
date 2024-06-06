@@ -153,7 +153,7 @@ const NavItem = ({ icon, title, description, active, navSize }: NavItemProps) =>
           p={3}
           borderRadius={8}
           _hover={{ textDecor: 'none', backgroundColor: "#AEC8CA" }}
-          w={navSize == "large" && "100%"}
+          w={navSize == "large" ? "100%" : "35%"} // VERIFICAR
         >
           <MenuButton w="100%">
             <Flex>
