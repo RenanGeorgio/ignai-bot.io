@@ -203,7 +203,10 @@ const NavHoverBox = ({ title, icon, description }: HoverProps) => {
         color="#fff"
         textAlign="center"
       >
-        <Icon as={icon} fontSize="3xl" mb={4} />
+        <Icon 
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          as={icon as any} fontSize="3xl" mb={4} 
+        />
         <Heading size="md" fontWeight="normal">{title}</Heading>
         <Text>{description}</Text>
       </Flex>
