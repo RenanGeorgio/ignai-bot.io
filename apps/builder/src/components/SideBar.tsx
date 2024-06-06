@@ -25,7 +25,7 @@ type CustomElement =
   | HTMLDivElement;
 
 interface Props {
-  btn: React.MutableRefObject<CustomElement> | React.RefObject<CustomElement>
+  btn?: React.MutableRefObject<CustomElement> | React.RefObject<CustomElement>
   onClose: () => void
   isOpen: boolean
   variant?: string | undefined
@@ -78,11 +78,10 @@ const SidebarContent = ({ onClick }: { onClick: () => void }) => (
 export default CustomSideBar*/
 
 
-const CustomSideBar = ({ btn, isOpen, onClose }: Props) => {
+const CustomSideBar = ({ isOpen, onClose }: Props) => {
   const [navSize, changeNavSize] = useState<string>("large");
   return (
     <Flex
-      ref={btn as React.RefObject<HTMLDivElement>}
       pos="sticky"
       left="5"
       h="95vh"

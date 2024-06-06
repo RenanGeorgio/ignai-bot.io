@@ -1,5 +1,5 @@
-import React, { useRef } from 'react'
-import { HStack, Flex, Spacer, useBreakpointValue, useDisclosure, VStack } from '@chakra-ui/react'
+import React from 'react'
+import { HStack, Flex, Spacer, useDisclosure, VStack } from '@chakra-ui/react'
 import { LaptopIcon } from '@/components/icons'
 import { useUser } from '@/features/account/hooks/useUser'
 import Link from 'next/link'
@@ -20,21 +20,21 @@ type CustomElement =
   | HTMLDivElement;
 
 export interface Props {
-  btn: React.MutableRefObject<CustomElement> | React.RefObject<CustomElement>
+  btn?: React.MutableRefObject<CustomElement> | React.RefObject<CustomElement>
   onOpenSidebar: () => void
   showSidebarButton?: boolean
 }
 
-const smVariant = { navigation: 'drawer', navigationButton: true }
-const mdVariant = { navigation: 'sidebar', navigationButton: false }
+//const smVariant = { navigation: 'drawer', navigationButton: true }
+//const mdVariant = { navigation: 'sidebar', navigationButton: false }
 
 export const DashboardHeader = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { isOpen: isOpenSidebar, onOpen: onOpenSidebar, onClose: onCloseSidebar } = useDisclosure();
-  const btnRef = useRef<CustomElement>(null);
+  //const btnRef = useRef<CustomElement>(null);
 
   //const [isSidebarOpen, setSidebarOpen] = useState(false);
-  const variants = useBreakpointValue({ base: smVariant, md: mdVariant });
+ // const variants = useBreakpointValue({ base: smVariant, md: mdVariant });
 
   /*const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
@@ -46,8 +46,6 @@ export const DashboardHeader = () => {
       
       <Flex w="100%">
         <CustomSideBar
-          btn={btnRef}
-          variant={variants?.navigation}
           isOpen={isOpenSidebar}
           onClose={onCloseSidebar}
         />
