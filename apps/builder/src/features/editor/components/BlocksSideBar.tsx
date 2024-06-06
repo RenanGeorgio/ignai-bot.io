@@ -114,17 +114,17 @@ export const BlocksSideBar = () => {
   const handleLockClick = () => setIsLocked(!isLocked);
 
   const handleDockBarEnter = () => {
-    closeSideBar.flush();
-    setIsExtended(true);
-  }
+    if (!isLocked) {
+      closeSideBar.flush();
+      setIsExtended(true);
+    }
+  }  
 
   const handleMouseLeave = () => {
-    if (isLocked) {
-      return
+    if (!isLocked) {
+      closeSideBar();
     }
-
-    closeSideBar();
-  }
+  }  
 
   /*const handleTransform = () => {
     if (isLocked) {
@@ -167,7 +167,7 @@ export const BlocksSideBar = () => {
       pl="4"
       py="4"
       onMouseLeave={handleMouseLeave}
-      transition="width 350ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s" 
+      transition="width 350ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s"
     >
       <Stack
         w="full"
@@ -289,7 +289,7 @@ export const BlocksSideBar = () => {
           </AccordionItem>
         </Accordion>
       </Stack>
-      <Collapse in={!isLocked} unmountOnExit>
+      <Collapse in={!isLocked && !isExtended} unmountOnExit>
         <Flex
           pos="absolute"
           h="100%"
