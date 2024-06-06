@@ -26,7 +26,7 @@ type CustomElement =
   | HTMLDivElement;
 
 interface Props {
-  btn: React.MutableRefObject<CustomElement | HTMLElement> | React.RefObject<CustomElement | HTMLElement>
+  btn: React.MutableRefObject<CustomElement> | React.RefObject<CustomElement>
   onClose: () => void
   isOpen: boolean
   variant?: string | undefined
