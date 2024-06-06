@@ -13,7 +13,7 @@ interface FocusableElement {
 }
 
 interface Props {
-  btn: React.MutableRefObject<FocusableElement | HTMLButtonElement> | React.RefObject<FocusableElement | HTMLButtonElement> | undefined
+  btn: React.MutableRefObject<FocusableElement | HTMLButtonElement> | React.RefObject<FocusableElement | HTMLButtonElement>
   onOpenSidebar: () => void
   showSidebarButton?: boolean
 }
@@ -23,7 +23,8 @@ const mdVariant = { navigation: 'sidebar', navigationButton: false }
 
 export const DashboardHeader = () => {
   const { isOpen: isOpenSidebar, onOpen: onOpenSidebar, onClose: onCloseSidebar } = useDisclosure();
-  const btnRef = useRef<FocusableElement | HTMLButtonElement | undefined>();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const btnRef = useRef<any>();
 
   //const [isSidebarOpen, setSidebarOpen] = useState(false);
   const variants = useBreakpointValue({ base: smVariant, md: mdVariant });
