@@ -123,7 +123,7 @@ const NavItem = ({ title, description, active, navSize, router }: NavItemProps) 
         >
           <MenuButton w="100%">
             <Flex alignItems="center" justify="center">
-              <SidebarContent tab={title} color="rgba(255, 0, 0, 0.9)" />
+              <SidebarContent tab={title} color={active ? "rgba(255, 0, 0, 0.9)" : "gray.500"} />
               <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{title}</Text>
             </Flex>
           </MenuButton>
