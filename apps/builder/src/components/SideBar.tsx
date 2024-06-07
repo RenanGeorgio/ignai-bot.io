@@ -52,19 +52,19 @@ const SidebarContent = ({ tab, ...props }: { tab: string } & IconProps) => {
   switch (tab) {
     case 'Home':
       return (
-        <Tooltip hasArrow label='Home' bg='gray.300' color='black'>
+        <Tooltip hasArrow label="Home">
           <FolderIcon {...props}/>
         </Tooltip>
       )
     case 'Chat':
       return (
-        <Tooltip hasArrow label='Chat'>
+        <Tooltip hasArrow label="Chat">
           <ChatIcon {...props}/>
         </Tooltip>
       )
     case 'Builder':
       return (
-        <Tooltip hasArrow label='Builder' placement='auto-start'>
+        <Tooltip hasArrow label="Builder">
           <ToolIcon {...props}/>
         </Tooltip>
       )
