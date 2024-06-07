@@ -115,15 +115,15 @@ const NavItem = ({ title, description, active, navSize, router }: NavItemProps) 
     >
       <Menu placement="right">
         <Link
-          backgroundColor={active ? "#AEC8CA" : undefined}
+          backgroundColor={active ? "#rgba(255, 0, 0, 0.8)" : undefined}
           p={3}
           borderRadius={8}
-          _hover={{ textDecor: 'none', backgroundColor: "#AEC8CA" }}
+          _hover={{ textDecor: 'none', backgroundColor: "rgba(255, 0, 0, 0.8)" }}
           w={navSize == "large" ? "100%" : "35%"}
         >
           <MenuButton w="100%">
             <Flex alignItems="center" justify="center" textAlign="center">
-              <SidebarContent tab={title} color={active ? "#82AAAD" : "gray.500"} />
+              <SidebarContent tab={title} color={active ? "#rgba(255, 0, 0, 0.8)" : "rgba(254, 130, 130, 0.8)"} />
               <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{title}</Text>
             </Flex>
           </MenuButton>
@@ -151,10 +151,12 @@ const CustomSideBar = () => {
   return (
     <Flex
       pos="sticky"
-      left="5"
+      left="2"
       h="95vh"
-      marginTop="2.5vh"
+      marginTop="0.5vh"
       boxShadow="0 4px 12px 0 rgba(0, 0, 0, 0.05)"
+      backgroundColor="#fff"
+      color="#000"
       borderRadius={navSize == "small" ? "15px" : "30px"}
       w={navSize == "small" ? "75px" : "200px"}
       flexDir="column"
