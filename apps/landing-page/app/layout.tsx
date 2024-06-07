@@ -7,9 +7,8 @@ import { Providers } from './providers'
 import 'assets/style.css'
 
 export const metadata: Metadata = {
-  title: 'Typebot - Open-source conversational apps builder',
-  description:
-    'Powerful blocks to create unique chat experiences. Embed them anywhere on your apps and start collecting results like magic.',
+  title: 'Ignai-bot - construtor de aplicativos conversacionais',
+  description: 'Blocos poderosos para criar experiências de chat únicas. Incorpore-os em qualquer lugar dos seus aplicativos e comece a coletar resultados como mágica.',
 }
 
 export default function RootLayout({
@@ -36,5 +35,5 @@ export default function RootLayout({
         </Providers>
       </body>
     </html>
-  )
+  );
 }

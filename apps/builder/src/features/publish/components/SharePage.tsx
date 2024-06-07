@@ -30,65 +30,75 @@ import DomainStatusIcon from '@/features/customDomains/components/DomainStatusIc
 import { TypebotNotFoundPage } from '@/features/editor/components/TypebotNotFoundPage'
 
 export const SharePage = () => {
-  const { t } = useTranslate()
-  const { workspace } = useWorkspace()
-  const { typebot, updateTypebot, publishedTypebot, is404 } = useTypebot()
-  const { showToast } = useToast()
+  const { t } = useTranslate();
+  const { workspace } = useWorkspace();
+  const { typebot, updateTypebot, publishedTypebot, is404 } = useTypebot();
+  const { showToast } = useToast();
 
   const handlePublicIdChange = async (publicId: string) => {
-    updateTypebot({ updates: { publicId }, save: true })
+    updateTypebot({ updates: { publicId }, save: true });
   }
 
-  const publicId = typebot
-    ? typebot?.publicId ?? parseDefaultPublicId(typebot.name, typebot.id)
-    : ''
-  const isPublished = isDefined(publishedTypebot)
+  const publicId = typebot ? typebot?.publicId ?? parseDefaultPublicId(typebot.name, typebot.id) : ''
+  const isPublished = isDefined(publishedTypebot);
 
   const handlePathnameChange = (pathname: string) => {
-    if (!typebot?.customDomain) return
-    const existingHost = typebot.customDomain?.split('/')[0]
-    const newDomain =
-      pathname === '' ? existingHost : existingHost + '/' + pathname
-    handleCustomDomainChange(newDomain)
+    if (!typebot?.customDomain) {
+      return
+    }
+
+    const existingHost = typebot.customDomain?.split('/')[0];
+    const newDomain = pathname === '' ? existingHost : existingHost + '/' + pathname;
+
+    handleCustomDomainChange(newDomain);
   }
 
-  const handleCustomDomainChange = (customDomain: string | null) =>
-    updateTypebot({ updates: { customDomain }, save: true })
+  const handleCustomDomainChange = (customDomain: string | null) => updateTypebot({ updates: { customDomain }, save: true });
 
   const checkIfPathnameIsValid = (pathname: string) => {
-    const isCorrectlyFormatted =
-      /^([a-z0-9]+-[a-z0-9]*)*$/.test(pathname) || /^[a-z0-9]*$/.test(pathname)
+    const isCorrectlyFormatted = /^([a-z0-9]+-[a-z0-9]*)*$/.test(pathname) || /^[a-z0-9]*$/.test(pathname)
 
     if (!isCorrectlyFormatted) {
       showToast({
         description: 'Can only contain lowercase letters, numbers and dashes.',
-      })
+      });
+
       return false
     }
+
     return true
   }
 
   const checkIfPublicIdIsValid = async (publicId: string) => {
-    const isLongerThanAllowed = publicId.length >= 4
+    const isLongerThanAllowed = publicId.length >= 4;
+
     if (!isLongerThanAllowed && isCloudProdInstance()) {
       showToast({
         description: 'Should be longer than 4 characters',
-      })
+      });
+
       return false
     }
 
-    if (!checkIfPathnameIsValid(publicId)) return false
+    if (!checkIfPathnameIsValid(publicId)) {
+      return false
+    }
 
-    const { data } = await isPublicDomainAvailableQuery(publicId)
+    const { data } = await isPublicDomainAvailableQuery(publicId);
+
     if (!data?.isAvailable) {
-      showToast({ description: 'ID is already taken' })
+      showToast({ description: 'ID is already taken' });
+
       return false
     }
 
     return true
   }
 
-  if (is404) return <TypebotNotFoundPage />
+  if (is404) {
+    return <TypebotNotFoundPage />
+  }
+
   return (
     <Flex flexDir="column" pb="40">
       <Seo title={typebot?.name ? `${typebot.name} | Share` : 'Share'} />
@@ -97,7 +107,7 @@ export const SharePage = () => {
         <Stack maxW="1000px" w="full" pt="10" spacing={10}>
           <Stack spacing={4} align="flex-start">
             <Heading fontSize="2xl" as="h1">
-              Your typebot link
+              Seu link do Ignai-bot
             </Heading>
             {typebot && (
               <EditableUrl
@@ -142,7 +152,7 @@ export const SharePage = () => {
                     limitReachedType={t('billing.limitMessage.customDomain')}
                     excludedPlans={[Plan.STARTER]}
                   >
-                    <Text mr="2">Add my domain</Text>{' '}
+                    <Text mr="2">Adicionar dominio proprio</Text>{' '}
                     <LockTag plan={Plan.PRO} />
                   </UpgradeButton>
                 )}
@@ -152,7 +162,7 @@ export const SharePage = () => {
 
           <Stack spacing={4}>
             <Heading fontSize="2xl" as="h1">
-              Embed your typebot
+              Incorpore seu Ignai-bot
             </Heading>
             <Wrap spacing={7}>
               {integrationsList.map((IntegrationButton, idx) => (
@@ -167,5 +177,5 @@ export const SharePage = () => {
         </Stack>
       </Flex>
     </Flex>
-  )
+  );
 }

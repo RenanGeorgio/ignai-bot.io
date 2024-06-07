@@ -26,8 +26,8 @@ export const SecurityForm = ({ security, onUpdate }: Props) => {
         <FormLabel display="flex" flexShrink={0} gap="1" mr="0" mb="4">
           Allowed origins
           <MoreInfoTooltip>
-            Restrict the execution of your typebot to specific website origins.
-            By default your bot can be executed on any website.
+            Restrinja a execução do seu Ignai-bot a origens  de websites específicos.
+            Por padrão, seu bot pode ser executado em qualquer website.
           </MoreInfoTooltip>
         </FormLabel>
         <PrimitiveList
@@ -46,5 +46,5 @@ export const SecurityForm = ({ security, onUpdate }: Props) => {
         </PrimitiveList>
       </FormControl>
     </Stack>
-  )
+  );
 }

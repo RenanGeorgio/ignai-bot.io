@@ -3,8 +3,7 @@ import { AppProps } from 'next/app'
 import { SessionProvider } from 'next-auth/react'
 import {
   ChakraProvider,
-  createStandaloneToast,
-  extendTheme,
+  createStandaloneToast
 } from '@chakra-ui/react'
 import { customTheme } from '@/lib/theme'
 import { useRouterProgressBar } from '@/lib/routerProgressBar'
@@ -67,14 +66,14 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   const typebotId = router.query.typebotId?.toString()
 
-  const chakraTheme = extendTheme()
+  //const chakraTheme = extendTheme()
   const materialTheme = muiCreateTheme()
 
   return (
     <TolgeeProvider tolgee={ssrTolgee}>
       <ToastContainer />
-      {/* <ChakraProvider theme={customTheme}> */}
-      <ChakraProvider theme={chakraTheme} resetCSS>
+        <ChakraProvider theme={customTheme} resetCSS>
+      {/*<ChakraProvider theme={chakraTheme} resetCSS>*/}
         <MaterialThemeProvider theme={{ [THEME_ID]: materialTheme }}>
           <Toaster />
           <SessionProvider session={pageProps.session}>

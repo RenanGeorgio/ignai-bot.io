@@ -2,7 +2,7 @@ import { Seo } from '@/components/Seo'
 import { useUser } from '@/features/account/hooks/useUser'
 import { PreCheckoutModal, PreCheckoutModalProps } from '@/features/billing/components/PreCheckoutModal'
 import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
-import { Stack, VStack, Spinner, Text } from '@chakra-ui/react'
+import { Stack, VStack, Spinner, Text, Flex } from '@chakra-ui/react'
 import { Plan } from '@typebot.io/prisma'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
@@ -13,6 +13,7 @@ import { ParentModalProvider } from '@/features/graph/providers/ParentModalProvi
 import { trpc } from '@/lib/trpc'
 import { guessIfUserIsEuropean } from '@typebot.io/billing/guessIfUserIsEuropean'
 import { useTranslate } from '@tolgee/react'
+import CustomSideBar from '@/components/SideBar'
 
 export const DashboardPage = () => {
   const { t } = useTranslate()
@@ -78,7 +79,10 @@ export const DashboardPage = () => {
             <Spinner />
           </VStack>
         ) : (
-          <FolderContent folder={null} />
+          <Flex w="100%">
+            <CustomSideBar />
+            <FolderContent folder={null} />
+          </Flex>
         )}
       </TypebotDndProvider>
     </Stack>

@@ -128,7 +128,7 @@ export const useTemplates = (): TemplateProps[] => {
       fileName: 'high-ticket-lead-follow-up.json',
       category: 'marketing',
       description:
-        'Simulates a bot that could be triggered after a high ticket lead just downloaded a lead magnet. This bot asks questions about the prospect business and their needs. Every question are powered with AI blocks to make the conversation more engaging and human-like.',
+        'Simula um bot que pode ser acionado depois que um lead de alto ticket acabou de baixar um lead magnet. Este bot faz perguntas sobre o negócio em potencial e suas necessidades. Cada pergunta é alimentada por blocos de IA para tornar a conversa mais envolvente e humana.',
     },
     {
       name: 'Quick Carb Calculator',
@@ -137,13 +137,13 @@ export const useTemplates = (): TemplateProps[] => {
       fileName: 'quick-carb-calculator.json',
       category: 'marketing',
       description:
-        'Designed specifically for athlete fueling brands looking to attract and engage active audiences, this chatbot serves as an effective lead magnet by providing instant, customized carbohydrate intake recommendations based on user input.',
+        'Projetado especificamente para marcas que estimulam atletas que buscam atrair e envolver públicos ativos, este chatbot serve como uma isca digital eficaz, fornecendo recomendações instantâneas e personalizadas de ingestão de carboidratos com base nas informações do usuário.',
     },
     {
       name: 'OpenAI Assistant Chat',
       emoji: '🤖',
       fileName: 'openai-assistant-chat.json',
-      description: 'A simple conversation with your OpenAI assistant.',
+      description: 'Uma conversa simples com seu assistente OpenAI.',
     },
   ]
 }
