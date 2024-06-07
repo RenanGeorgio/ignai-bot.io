@@ -233,7 +233,7 @@ export const PublishButton = ({ isMoreMenuDisabled = false, ...props }: Props) =
         <Menu>
           <MenuButton
             as={IconButton}
-            colorScheme={'blue'}
+            colorScheme={'red'}
             borderLeftRadius={0}
             icon={<ChevronLeftIcon transform="rotate(-90deg)" />}
             aria-label={t('publishButton.dropdown.showMenu.label')}
