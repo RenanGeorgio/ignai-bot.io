@@ -11,7 +11,7 @@ import {
   IconButton,
   IconProps
 } from '@chakra-ui/react'
-import { ChevronRightIcon } from './icons'
+import { ChatIcon, ChevronLeftIcon, ChevronRightIcon, FolderIcon, ToolIcon } from './icons'
 
 type CustomHTMLDivElement = Omit<HTMLDivElement, "removeEventListener" | "addEventListener">;
 
@@ -45,12 +45,12 @@ interface HoverProps {
 
 const SidebarContent = ({ tab, ...props }: { tab: string } & IconProps) => {
   switch (tab) {
-    case 'Dashboard':
-      return <ChevronRightIcon {...props}/>
-    case 'Calendar':
-      return <ChevronRightIcon {...props}/>
-    case 'Clients':
-      return <ChevronRightIcon {...props}/>
+    case 'Home':
+      return <FolderIcon {...props}/>
+    case 'Chat':
+      return <ChatIcon {...props}/>
+    case 'Builder':
+      return <ToolIcon {...props}/>
     default:
       return null
   }
@@ -151,7 +151,7 @@ const CustomSideBar = () => {
           aria-label="Colapse"
           mt={5}
           _hover={{ background: 'none' }}
-          icon={<ChevronRightIcon />}
+          icon={navSize == "small" ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           onClick={() => {
             if (navSize == "small") {
               changeNavSize("large")
@@ -160,9 +160,9 @@ const CustomSideBar = () => {
             }
           }}
         />
-        <NavItem navSize={navSize} title="Dashboard" description="This is the description for the dashboard." />
-        <NavItem navSize={navSize} title="Calendar" active />
-        <NavItem navSize={navSize} title="Clients" />
+        <NavItem navSize={navSize} title="Home" description="Pagina inicial da aplicação." />
+        <NavItem navSize={navSize} title="Chat" description="Conteudo de chat disponivel." />
+        <NavItem navSize={navSize} title="Builder" description="Construtor de Bot" />
       </Flex>
 
       <Flex
