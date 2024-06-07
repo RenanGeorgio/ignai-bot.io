@@ -186,7 +186,7 @@ const CustomSideBar = () => {
           p="5%"
           flexDir="column"
           w="100%"
-          alignItems="flex-start" 
+          alignItems={navSize == "small" ? "center" : "flex-start"} 
           as="nav"
         >
           <NavItem router={router} navSize={navSize} title="Home" description="Pagina inicial da aplicação." />
