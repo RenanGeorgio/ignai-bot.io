@@ -58,9 +58,7 @@ const SidebarContent = ({ tab, ...props }: { tab: string } & IconProps) => {
       )
     case 'Chat':
       return (
-        <Tooltip hasArrow label="Chat">
-          <ChatIcon {...props}/>
-        </Tooltip>
+        <></>
       )
     case 'Builder':
       return (
