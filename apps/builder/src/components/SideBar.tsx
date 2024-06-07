@@ -81,7 +81,7 @@ const NavHoverBox = ({ title, description }: HoverProps) => {
         color="#fff"
         textAlign="center"
       >
-        <Tooltip hasArrow label={title}>
+        <Tooltip hasArrow label="small">
           <SidebarContent tab={title} fontSize="3xl" mb={4} />
           <Heading size="md" fontWeight="normal">{title}</Heading>
           <Text>{description}</Text>
@@ -109,7 +109,7 @@ const NavItem = ({ title, description, active, navSize }: NavItemProps) => {
         >
           <MenuButton w="100%">
             <Flex alignItems="center" justify="center" textAlign="center">
-              <Tooltip hasArrow label={title}>
+              <Tooltip hasArrow label="small">
                 <SidebarContent tab={title} color={active ? "#82AAAD" : "gray.500"} />
                 <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{title}</Text>
               </Tooltip>
