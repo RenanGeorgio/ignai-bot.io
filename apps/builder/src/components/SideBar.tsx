@@ -108,22 +108,22 @@ const NavHoverBox = ({ title, description }: HoverProps) => {
 const NavItem = ({ title, description, active, navSize, router }: NavItemProps) => {
   return (
     <Flex
-      mt={30}
+      mt={12} 
       flexDir="column"
       w="100%"
-      alignItems={navSize == "small" ? "center" : "flex-start"}
+      alignItems={navSize == "small" ? "center" : "flex-start"} 
     >
       <Menu placement="right">
         <Link
-          backgroundColor={active ? "#AEC8CA" : undefined}
+          backgroundColor={active ? "rgba(255, 0, 0, 0.9)" : undefined}
           p={3}
           borderRadius={8}
-          _hover={{ textDecor: 'none', backgroundColor: "#AEC8CA" }}
+          _hover={{ textDecor: 'none', backgroundColor: "rgba(255, 0, 0, 0.9)", color: "#fff", '& svg': { color: '#fff' } }}
           w={navSize == "large" ? "100%" : "35%"}
         >
           <MenuButton w="100%">
-            <Flex alignItems="center" justify="center" textAlign="center">
-              <SidebarContent tab={title} color={active ? "#82AAAD" : "gray.500"} />
+            <Flex alignItems="center" justify="center">
+              <SidebarContent tab={title} color={active ? "rgba(255, 0, 0, 0.9)" : "gray.500"} />
               <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{title}</Text>
             </Flex>
           </MenuButton>
@@ -151,24 +151,27 @@ const CustomSideBar = () => {
   return (
     <Flex
       pos="sticky"
-      left="5"
+      left="2"
       h="95vh"
-      marginTop="2.5vh"
+      marginTop="0.5vh"
       boxShadow="0 4px 12px 0 rgba(0, 0, 0, 0.05)"
+      backgroundColor="rgba(255, 217, 217, 0.8)"
+      color="#000"
       borderRadius={navSize == "small" ? "15px" : "30px"}
-      w={navSize == "small" ? "75px" : "200px"}
+      w={navSize == "small" ? "56px" : "150px"} 
       flexDir="column"
       justifyContent="space-between"
     >
       <VStack 
         w="100%"
-        alignItems={navSize == "small" ? "center" : "flex-start"}
+        alignItems={navSize == "small" ? "center" : "flex-start"} 
         spacing='24px'
       >
         <IconButton
           background="none"
           aria-label="Colapse"
           mt={5}
+          color="rgba(255, 0, 0, 0.9)" 
           _hover={{ background: 'none' }}
           icon={navSize == "small" ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           onClick={() => {
@@ -183,7 +186,7 @@ const CustomSideBar = () => {
           p="5%"
           flexDir="column"
           w="100%"
-          alignItems={navSize == "small" ? "center" : "flex-start"}
+          alignItems={navSize == "small" ? "center" : "flex-start"} 
           as="nav"
         >
           <NavItem router={router} navSize={navSize} title="Home" description="Pagina inicial da aplicação." />

@@ -29,7 +29,7 @@ export const CreateBotButton = ({
       onClick={handleClick}
       paddingX={6}
       whiteSpace={'normal'}
-      colorScheme="blue"
+      colorScheme="red"
       opacity={draggedTypebot ? 0.3 : 1}
       {...props}
     >

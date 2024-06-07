@@ -126,7 +126,7 @@ const FolderButton = ({
       <VStack spacing="4">
         <FolderIcon
           fontSize={50}
-          color={useColorModeValue('blue.500', 'blue.400')}
+          color={useColorModeValue('red.500', 'red.400')}
         />
         <Editable
           defaultValue={folder.name === '' ? 'New folder' : folder.name}

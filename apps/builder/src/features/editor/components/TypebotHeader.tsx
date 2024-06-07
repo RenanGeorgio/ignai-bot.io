@@ -300,7 +300,7 @@ const LatestElements = ({
             as={IconButton}
             aria-label='Options'
             size='2xs'
-            icon={<Avatar pos='absolute' size='2xs' w={8} h={8} src={user?.image ?? undefined} name={user?.name ?? undefined} />}
+            icon={<Avatar pos='absolute' size='2xs' border='1px solid gray' w={8} h={8} src={user?.image ?? undefined} name={user?.name ?? undefined} />}
             variant='solid'
           />
           <MenuList>
@@ -332,7 +332,7 @@ const TypebotNav = ({
       <Button
         as={Link}
         href={`/typebots/${typebotId}/edit`}
-        colorScheme={router.pathname.includes('/edit') ? 'blue' : 'gray'}
+        colorScheme={router.pathname.includes('/edit') ? 'red' : 'gray'}
         variant={router.pathname.includes('/edit') ? 'outline' : 'ghost'}
         size="sm"
       >
@@ -341,7 +341,7 @@ const TypebotNav = ({
       <Button
         as={Link}
         href={`/typebots/${typebotId}/theme`}
-        colorScheme={router.pathname.endsWith('theme') ? 'blue' : 'gray'}
+        colorScheme={router.pathname.endsWith('theme') ? 'red' : 'gray'}
         variant={router.pathname.endsWith('theme') ? 'outline' : 'ghost'}
         size="sm"
       >
@@ -350,7 +350,7 @@ const TypebotNav = ({
       <Button
         as={Link}
         href={`/typebots/${typebotId}/settings`}
-        colorScheme={router.pathname.endsWith('settings') ? 'blue' : 'gray'}
+        colorScheme={router.pathname.endsWith('settings') ? 'red' : 'gray'}
         variant={router.pathname.endsWith('settings') ? 'outline' : 'ghost'}
         size="sm"
       >
@@ -359,7 +359,7 @@ const TypebotNav = ({
       <Button
         as={Link}
         href={`/typebots/${typebotId}/share`}
-        colorScheme={router.pathname.endsWith('share') ? 'blue' : 'gray'}
+        colorScheme={router.pathname.endsWith('share') ? 'red' : 'gray'}
         variant={router.pathname.endsWith('share') ? 'outline' : 'ghost'}
         size="sm"
       >
@@ -369,7 +369,7 @@ const TypebotNav = ({
         <Button
           as={Link}
           href={`/typebots/${typebotId}/results`}
-          colorScheme={router.pathname.includes('results') ? 'blue' : 'gray'}
+          colorScheme={router.pathname.includes('results') ? 'red' : 'gray'}
           variant={router.pathname.includes('results') ? 'outline' : 'ghost'}
           size="sm"
         >
