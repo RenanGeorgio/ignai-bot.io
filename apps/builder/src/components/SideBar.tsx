@@ -9,7 +9,8 @@ import {
   MenuList,
   Link,
   IconButton,
-  IconProps
+  IconProps,
+  VStack
 } from '@chakra-ui/react'
 import { ChatIcon, ChevronLeftIcon, ChevronRightIcon, FolderIcon, ToolIcon } from './icons'
 
@@ -139,13 +140,7 @@ const CustomSideBar = () => {
       flexDir="column"
       justifyContent="space-between"
     >
-      <Flex
-        p="5%"
-        flexDir="column"
-        w="100%"
-        alignItems={navSize == "small" ? "center" : "flex-start"}
-        as="nav"
-      >
+      <VStack spacing='24px'>
         <IconButton
           background="none"
           aria-label="Colapse"
@@ -160,12 +155,21 @@ const CustomSideBar = () => {
             }
           }}
         />
-        <NavItem navSize={navSize} title="Home" description="Pagina inicial da aplicação." />
-        <NavItem navSize={navSize} title="Chat" description="Conteudo de chat disponivel." />
-        <NavItem navSize={navSize} title="Builder" description="Construtor de Bot" />
-      </Flex>
+        <Flex
+          p="5%"
+          flexDir="column"
+          w="100%"
+          alignItems={navSize == "small" ? "center" : "flex-start"}
+          as="nav"
+        >
+          <Divider display={navSize == "small" ? "none" : "flex"} />
+          <NavItem navSize={navSize} title="Home" description="Pagina inicial da aplicação." />
+          <NavItem navSize={navSize} title="Chat" description="Conteudo de chat disponivel." />
+          <NavItem navSize={navSize} title="Builder" description="Construtor de Bot" />
+        </Flex>
+      </VStack>
 
-      <Flex
+      {/*<Flex
         p="5%"
         flexDir="column"
         w="100%"
@@ -179,7 +183,7 @@ const CustomSideBar = () => {
             <Text color="gray">Admin</Text>
           </Flex>
         </Flex>
-      </Flex>
+      </Flex>*/}
     </Flex>
   );
 }
