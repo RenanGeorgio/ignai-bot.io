@@ -16,7 +16,7 @@ import {
   Accordion, 
   AccordionItem, 
   AccordionButton,
- // AccordionIcon,
+  AccordionIcon,
   AccordionPanel,
   Box
 } from '@chakra-ui/react'
@@ -200,7 +200,7 @@ export const BlocksSideBar = () => {
                     <Box as='span' flex='1' textAlign='center'>
                       Componentes
                     </Box>
-                    
+                    <AccordionIcon />
                   </AccordionButton>
                 </h2>
                 <Tooltip
