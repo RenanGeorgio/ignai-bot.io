@@ -32,7 +32,6 @@ export interface Props {
 }
 
 interface NavItemProps {
-  customIcon: (props: IconProps) => JSX.Element
   title: string 
   description?: string 
   active?:  boolean
@@ -41,12 +40,23 @@ interface NavItemProps {
 
 interface HoverProps {
   title: string 
-  customIcon: undefined | ((props: IconProps) => JSX.Element)
   description: string | undefined
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const NavHoverBox = ({ title, customIcon, description }: HoverProps) => {
+const SidebarContent = ({ tab, ...props }: { tab: string } & IconProps) => {
+  switch (tab) {
+    case 'Dashboard':
+      return <ChevronRightIcon {...props}/>
+    case 'Calendar':
+      return <ChevronRightIcon {...props}/>
+    case 'Clients':
+      return <ChevronRightIcon {...props}/>
+    default:
+      return null
+  }
+}
+
+const NavHoverBox = ({ title, description }: HoverProps) => {
   return (
     <>
       <Flex
@@ -70,7 +80,7 @@ const NavHoverBox = ({ title, customIcon, description }: HoverProps) => {
         color="#fff"
         textAlign="center"
       >
-        <customIcon />
+        <SidebarContent tab={title} fontSize="3xl" mb={4} />
         <Heading size="md" fontWeight="normal">{title}</Heading>
         <Text>{description}</Text>
       </Flex>
@@ -78,7 +88,7 @@ const NavHoverBox = ({ title, customIcon, description }: HoverProps) => {
   );
 }
 
-const NavItem = ({ customIcon, title, description, active, navSize }: NavItemProps) => {
+const NavItem = ({ title, description, active, navSize }: NavItemProps) => {
   return (
     <Flex
       mt={30}
@@ -96,7 +106,7 @@ const NavItem = ({ customIcon, title, description, active, navSize }: NavItemPro
         >
           <MenuButton w="100%">
             <Flex>
-              <customIcon color={active ? "#82AAAD" : "gray.500"} />
+              <SidebarContent tab={title} color={active ? "#82AAAD" : "gray.500"} />
               <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{title}</Text>
             </Flex>
           </MenuButton>
@@ -108,7 +118,7 @@ const NavItem = ({ customIcon, title, description, active, navSize }: NavItemPro
           h={200}
           ml={5}
         >
-          <NavHoverBox title={title} customIcon={customIcon} description={description} />
+          <NavHoverBox title={title} description={description} />
       </MenuList>
     </Menu>
   </Flex>
@@ -150,9 +160,9 @@ const CustomSideBar = () => {
             }
           }}
         />
-        <NavItem navSize={navSize} customIcon={<ChevronRightIcon />} title="Dashboard" description="This is the description for the dashboard." />
-        <NavItem navSize={navSize} customIcon={<ChevronRightIcon />} title="Calendar" active />
-        <NavItem navSize={navSize} customIcon={<ChevronRightIcon />} title="Clients" />
+        <NavItem navSize={navSize} title="Dashboard" description="This is the description for the dashboard." />
+        <NavItem navSize={navSize} title="Calendar" active />
+        <NavItem navSize={navSize} title="Clients" />
       </Flex>
 
       <Flex
