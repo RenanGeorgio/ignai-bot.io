@@ -19,7 +19,7 @@ export const DashboardHeader = () => {
     <Flex minWidth="max-content" alignItems="center" w="full" borderBottomWidth="1px" justify="center">
       <Link href="/typebots" data-testid="typebot-logo">
         <EmojiOrImageIcon
-          boxSize="30px"
+          boxSize="60px"
           icon={workspace?.icon}
           defaultIcon={IgnaiIcon} 
         />

@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import {
   Flex,
   Text,
@@ -12,8 +13,8 @@ import {
   IconProps,
   VStack,
   Tooltip
-} from '@chakra-ui/react'
-import { ChatIcon, ChevronLeftIcon, ChevronRightIcon, FolderIcon, ToolIcon } from './icons'
+} from '@chakra-ui/react';
+import { ChatIcon, ChevronLeftIcon, ChevronRightIcon, FolderIcon, ToolIcon } from './icons';
 
 type CustomHTMLDivElement = Omit<HTMLDivElement, "removeEventListener" | "addEventListener">;
 
@@ -34,6 +35,8 @@ export interface Props {
 }
 
 interface NavItemProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  router: any
   title: string 
   description?: string 
   active?:  boolean
@@ -102,7 +105,7 @@ const NavHoverBox = ({ title, description }: HoverProps) => {
   );
 }
 
-const NavItem = ({ title, description, active, navSize }: NavItemProps) => {
+const NavItem = ({ title, description, active, navSize, router }: NavItemProps) => {
   return (
     <Flex
       mt={30}
@@ -132,8 +135,9 @@ const NavItem = ({ title, description, active, navSize }: NavItemProps) => {
           h={200}
           ml={5}
         >
-          <MenuItem onClick={() => alert('Kagebunshin')}>Create a Copy</MenuItem>
-          <NavHoverBox title={title} description={description} />
+          <MenuItem onClick={() => router.push("/typebots")}>
+            <NavHoverBox title={title} description={description} />
+          </MenuItem>
       </MenuList>
     </Menu>
   </Flex>
@@ -141,7 +145,8 @@ const NavItem = ({ title, description, active, navSize }: NavItemProps) => {
 }
 
 const CustomSideBar = () => {
-  const [navSize, changeNavSize] = useState<string>("large");
+  const router = useRouter();
+  const [navSize, changeNavSize] = useState<string>("small");
 
   return (
     <Flex
@@ -181,9 +186,9 @@ const CustomSideBar = () => {
           alignItems={navSize == "small" ? "center" : "flex-start"}
           as="nav"
         >
-          <NavItem navSize={navSize} title="Home" description="Pagina inicial da aplicação." />
-          <NavItem navSize={navSize} title="Chat" description="Conteudo de chat disponivel." />
-          <NavItem navSize={navSize} title="Builder" description="Construtor de Bot" />
+          <NavItem router={router} navSize={navSize} title="Home" description="Pagina inicial da aplicação." />
+          <NavItem router={router} navSize={navSize} title="Chat" description="Conteudo de chat disponivel." />
+          <NavItem router={router} navSize={navSize} title="Builder" description="Construtor de Bot" />
         </Flex>
       </VStack>
 

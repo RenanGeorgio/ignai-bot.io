@@ -8,7 +8,6 @@ import {
   SettingsIcon,
   LaptopIcon
 } from '@/components/icons'
-import { PlanTag } from '@/features/billing/components/PlanTag'
 import { trpc } from '@/lib/trpc'
 import { useTranslate } from '@tolgee/react'
 import {
@@ -93,7 +92,6 @@ export const WorkspaceDropdown = ({
               <Text noOfLines={1} maxW="200px">
                 {currentWorkspace.name}
               </Text>
-              <PlanTag plan={currentWorkspace.plan} />
             </>
           )}
           <ChevronLeftIcon transform="rotate(-90deg)" />
@@ -111,10 +109,9 @@ export const WorkspaceDropdown = ({
                 <EmojiOrImageIcon
                   icon={workspace.icon}
                   boxSize="16px"
-                  defaultIcon={LaptopIcon}
+                  defaultIcon={LaptopIcon} // TROCAR PARA ADD
                 />
                 <Text>{workspace.name}</Text>
-                <PlanTag plan={workspace.plan} />
               </HStack>
             </MenuItem>
           ))}
