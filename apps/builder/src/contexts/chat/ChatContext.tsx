@@ -9,8 +9,8 @@ import {
 import { io, Socket } from 'socket.io-client'
 import Cookies from 'js-cookie'
 import { baseUrl, api } from '@/services/api'
-import useAuth from '@/hooks/useAuth'
-import compareArrays from '@/helpers/compareArrays'
+//import useAuth from '@/hooks/useAuth'
+//import compareArrays from '@/helpers/compareArrays'
 import { Chat, ChatClient, ChatContextType, Message, OnlineUser } from './types'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
