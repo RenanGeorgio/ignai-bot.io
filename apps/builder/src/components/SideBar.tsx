@@ -158,13 +158,13 @@ const CustomSideBar = () => {
       backgroundColor="rgba(255, 217, 217, 0.8)"
       color="#000"
       borderRadius={navSize == "small" ? "15px" : "30px"}
-      w={navSize == "small" ? "75px" : "200px"}
+      w={navSize == "small" ? "75px" : "150px"} 
       flexDir="column"
       justifyContent="space-between"
     >
       <VStack 
         w="100%"
-        alignItems="center"
+        alignItems="flex-start" 
         spacing='24px'
       >
         <IconButton
@@ -186,7 +186,7 @@ const CustomSideBar = () => {
           p="5%"
           flexDir="column"
           w="100%"
-          alignItems="center"
+          alignItems="flex-start" 
           as="nav"
         >
           <NavItem router={router} navSize={navSize} title="Home" description="Pagina inicial da aplicação." />
