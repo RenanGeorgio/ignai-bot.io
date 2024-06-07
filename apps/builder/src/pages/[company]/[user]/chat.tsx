@@ -1,14 +1,12 @@
 import { useState } from 'react'
-
 import Layout from '@/components/chat/layout/ChatLayout'
 import History from '@/components/chat/layout/HistoryLayout'
 import GraphChat from '@/components/graph/GraphChat'
 import GraphTicket from '@/components/graph/GraphTicket'
 import GraphTicketYou from '@/components/graph/GraphTicketYou'
 import GraphThemes from '@/components/graph/GraphThemes'
-import { ChatProvider } from '@/contexts/ChatContext'
+import { ChatProvider } from '@/contexts/chat/ChatContext'
 import { createTheme } from '@mui/material/styles'
-
 import styles from '@/assets/styles/forms.module.css'
 import { colors } from '@/lib/theme'
 import { ThemeProvider } from '@mui/material'
@@ -96,16 +94,12 @@ const Chat: React.FC = () => {
             </>
           )}
           {activePage === 'Painel' && (
-            <>
-              <div className={styles['graph-row']}>
-                <GraphChat data={{ datasets: [], labels: [] }} />
-                <GraphTicket data={[50, 30, 20, 10]} />
-              </div>
-              <div className={styles['graph-row']}>
-                <GraphThemes month={''} />
-                <GraphTicketYou data={[50, 30, 20, 10]} />
-              </div>
-            </>
+            <div className={styles['container-graphs-chat']}>
+              <GraphChat data={{ datasets: [], labels: [] }} />
+              <GraphTicket data={[50, 30, 20, 10]} />
+              <GraphThemes month={''} />
+              <GraphTicketYou data={[50, 30, 20, 10]} />
+            </div>
           )}
         </div>
       </div>

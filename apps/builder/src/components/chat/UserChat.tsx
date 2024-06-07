@@ -10,7 +10,7 @@ import {
 // import avatar from '../../assets/images/avatar.png'
 import web from '@/assets/images/web.svg'
 import styles from '@/assets/styles/leftmenu.module.css'
-import { Chat, OnlineUser } from '@/contexts/ChatContext'
+import { Chat, OnlineUser } from '@/contexts/chat/types'
 
 
 interface UserChatProps {

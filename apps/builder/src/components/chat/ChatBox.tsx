@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from 'react'
+import React, { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react'
 import { IconButton } from '@chakra-ui/react'
 import {
   Phone,
@@ -12,10 +12,10 @@ import {
 } from '@/components/icons'
 import TextEnter from './TextEnter'
 import AddTicket from './AddTicket'
-import useAuth from '@/hooks/useAuth'
+//import useAuth from '@/hooks/useAuth'
 import useChat from '@/hooks/useChat'
 // import { useFetchRecipient } from '@/hooks/useFetchRecipient'
-import { AuthContextInterface } from '@/contexts/AuthContext'
+//import { AuthContextInterface } from '@/contexts/auth/AuthContext'
 import Image from 'next/image'
 import web from '@/assets/images/web.svg'
 // import avatar from '@/assets/images/avatar.png'
@@ -25,7 +25,7 @@ import styles from '@/assets/styles/chat.module.css'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import 'dayjs/locale/pt-br'
-import { ChatContextType } from '@/contexts/ChatContext'
+import { ChatContextType } from '@/contexts/chat/types'
 
 dayjs.extend(relativeTime)
 dayjs.locale('pt-br')
@@ -39,27 +39,40 @@ export const ChatBox: React.FC<Props> = ({
   toggleAddTicket,
   setShowAddTicket,
 }): React.ReactElement => {
-  const [textMessage, setTextMessage] = useState<string>('')
+  const [textMessage, setTextMessage] = useState<string>('');
 
-  const { user }: AuthContextInterface = useAuth()
+  // const { user }: AuthContextInterface = useAuth()
+  const user = useMemo(() => { // mock
+    return {
+      _id: '6646294b1d1d1a722482e48d',
+      name: 'Samuel',
+      email: 'samuelmarques96@live.com',
+      cpf: '255.975.630-76',
+      company: 'Sam`s Company',
+      companyId: '1',
+    }
+  }, [])
 
-  const { sendTextMessage }: ChatContextType = useChat()
 
-  // const { currentChat, isMessagesLoading, messages, sendTextMessage } =
-  //   useChat()
+  const { 
+    currentChat, 
+    isMessagesLoading, 
+    messages, 
+    sendTextMessage 
+  }: ChatContextType = useChat()
 
   // const { recipientUser } = useFetchRecipient(currentChat, user)
 
-  const currentChat = {
-    origin: {
-      platform: 'telegram',
-      chatId: '1053301824',
-    },
-    _id: '662683ef2a815f652638d615',
-    members: ['661d1e55582bfd030342607f', '1'],
-    timestamps: '2024-04-22T15:36:15.885Z',
-    __v: 0,
-  }
+  // const currentChat = {
+  //   origin: {
+  //     platform: 'telegram',
+  //     chatId: '1053301824',
+  //   },
+  //   _id: '662683ef2a815f652638d615',
+  //   members: ['661d1e55582bfd030342607f', '1'],
+  //   timestamps: '2024-04-22T15:36:15.885Z',
+  //   __v: 0,
+  // }
 
   const recipientUser = {
     _id: '661d1e55582bfd030342607f',
@@ -68,55 +81,16 @@ export const ChatBox: React.FC<Props> = ({
     email: 'samuel@email.com',
   }
 
-  const messages = [
-    {
-      _id: '662683f62a815f652638d617',
-      chatId: '662683ef2a815f652638d615',
-      senderId: '661d1e55582bfd030342607f',
-      text: 'olá',
-      createdAt: '2024-04-22T15:36:22.788Z',
-      updatedAt: '2024-04-22T15:36:22.789Z',
-      __v: 0,
-    },
-    {
-      _id: '66268528718c33cd84bfca5c',
-      chatId: '662683ef2a815f652638d615',
-      senderId: '661d1e55582bfd030342607f',
-      text: 'oi',
-      createdAt: '2024-04-22T15:41:28.215Z',
-      updatedAt: '2024-04-22T15:41:28.215Z',
-      __v: 0,
-    },
-    {
-      _id: '66268555718c33cd84bfca5e',
-      chatId: '662683ef2a815f652638d615',
-      senderId: '661d1e55582bfd030342607f',
-      text: 'oi',
-      createdAt: '2024-04-22T15:42:13.181Z',
-      updatedAt: '2024-04-22T15:42:13.181Z',
-      __v: 0,
-    },
-    {
-      _id: '66268684bc89acbc5c55a631',
-      chatId: '662683ef2a815f652638d615',
-      senderId: '661d1e55582bfd030342607f',
-      text: '/finalizar',
-      createdAt: '2024-04-22T15:47:16.912Z',
-      updatedAt: '2024-04-22T15:47:16.912Z',
-      __v: 0,
-    },
-    {
-      _id: '66268686bc89acbc5c55a633',
-      chatId: '662683ef2a815f652638d615',
-      senderId: '661d1e55582bfd030342607f',
-      text: 'oi',
-      createdAt: '2024-04-22T15:47:18.873Z',
-      updatedAt: '2024-04-22T15:47:18.873Z',
-      __v: 0,
-    },
-  ]
+  // const isMessagesLoading = false
 
-  const isMessagesLoading = false
+  useEffect(() => {
+    if (!isMessagesLoading && messages) {
+      const chatContainer = document.getElementById('chat-container');
+      if (chatContainer) {
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      }
+    }
+  }, [isMessagesLoading, messages]);   
 
   if (!recipientUser)
     return (
@@ -143,11 +117,12 @@ export const ChatBox: React.FC<Props> = ({
       </div>
     )
 
-  const handleSendMessage = () => {
-    if (user) {
+  const handleSendMessage = (textMessage: string, setTextMessage: React.Dispatch<React.SetStateAction<string>>) => {
+    console.log(user, currentChat)
+    if (currentChat) {
       sendTextMessage(
         textMessage,
-        { companyId: user?.companyId },
+        { companyId: user.companyId },
         currentChat._id,
         setTextMessage
       )
@@ -162,7 +137,7 @@ export const ChatBox: React.FC<Props> = ({
     console.log('Arquivo recebido em Treatment:', file)
   }
 
-  if (isMessagesLoading) return <p>Carregando mensagens...</p>
+  // if (isMessagesLoading) return <p>Carregando mensagens...</p>
 
   const origin = currentChat?.origin.platform
 
@@ -201,7 +176,7 @@ export const ChatBox: React.FC<Props> = ({
       width={150}
       height={150}
     />
-  )
+  )   
 
   return (
     <div className={styles.containerchat}>
@@ -243,9 +218,16 @@ export const ChatBox: React.FC<Props> = ({
         </div>
       </div>
 
-      <div className={styles.chat}>
+      <div id="chat-container" className={styles.chat}>
         {messages?.map((message, index: number) => (
-          <div key={index} className={styles['message-wrapper']}>
+            <div
+              key={index}
+              className={`${styles['message-wrapper']} ${
+                message?.senderId === user?.companyId
+                  ? styles['sent']
+                  : styles['received']
+              }`}
+            >
             {message?.senderId === user?.companyId
               ? getTextMessageAvatar()
               : getMessageAvatar()}
@@ -265,7 +247,7 @@ export const ChatBox: React.FC<Props> = ({
                   : styles['time-right']
               }`}
             >
-              <span>{dayjs(message?.createdAt).format('HH:mm')}</span>
+              <span style={{color: 'black'}}>{dayjs(message?.createdAt).format('HH:mm')}</span>
             </div>
           </div>
         ))}
@@ -281,6 +263,10 @@ export const ChatBox: React.FC<Props> = ({
       <TextEnter
         onUploadFilePhoto={handleFileUploadPhoto}
         onSendMessage={handleSendMessage}
+        value={textMessage}
+        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+          setTextMessage(e.target.value)
+        }
       />
     </div>
   )

@@ -4,6 +4,7 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import { DotsVertical, Edit, Trash } from '@/components/icons'
 import rows from '../../assets/mock/dados/data.json'
 import ModalHistory from './ModalHistory'
+import styles from '@/assets/styles/leftmenu.module.css'
 import { Button, Modal, IconButton } from '@mui/material'
 
 interface Contato {
@@ -114,7 +115,7 @@ export default function HistoryComponent() {
         justifyContent: 'center',
         alignItems: 'flex-start',
         gap: 1,
-        display: 'inline-flex',
+        display: 'inline-flex'
       }}
     >
       <div
@@ -164,6 +165,7 @@ export default function HistoryComponent() {
           display: 'flex',
           width: '98%',
           padding: '5px 0px 1px 10px',
+          backgroundColor: 'white'
         }}
       >
         <div
@@ -190,7 +192,7 @@ export default function HistoryComponent() {
             }}
           >
             <form style={{ width: '100%', height: '95%' }}>
-              <select style={{ width: '80%', height: '100%', borderRadius: 6 }}>
+              <select style={{ width: '80%', height: '100%', borderRadius: 6, backgroundColor: 'white', color: 'black', border: '1px solid black' }}>
                 <option value="" selected>
                   <em>None</em>
                 </option>
@@ -230,6 +232,9 @@ export default function HistoryComponent() {
                   width: '80%',
                   height: '100%',
                   borderRadius: 6,
+                  backgroundColor: 'white', 
+                  color: 'black',
+                  border: '1px solid black'
                 }}
               >
                 <option value="" selected>
@@ -266,7 +271,7 @@ export default function HistoryComponent() {
           >
             <form style={{ width: '80%', height: '95%' }}>
               <select
-                style={{ width: '100%', height: '100%', borderRadius: 6 }}
+                style={{ width: '100%', height: '100%', borderRadius: 6, backgroundColor: 'white', color: 'black', border: '1px solid black' }}
               >
                 <option value="" selected>
                   <em>None</em>
@@ -289,6 +294,7 @@ export default function HistoryComponent() {
           alignItems: 'flex-start',
           display: 'inline-flex',
           width: '100%',
+          backgroundColor: 'white'
         }}
       >
         <div
@@ -299,6 +305,7 @@ export default function HistoryComponent() {
             fontWeight: '500',
             lineHeight: 2,
             wordWrap: 'break-word',
+            backgroundColor: 'white'
           }}
         >
           Filtro de busca
@@ -316,6 +323,7 @@ export default function HistoryComponent() {
           width: '100%',
           borderTop: '1px #DBDADE solid',
           padding: 10,
+          backgroundColor: 'white'
         }}
       >
         <div
@@ -324,6 +332,7 @@ export default function HistoryComponent() {
             justifyContent: 'flex-end',
             gap: 15,
             height: '100%',
+            backgroundColor: 'white'
           }}
         >
           <select
@@ -332,8 +341,12 @@ export default function HistoryComponent() {
               justifyContent: 'center',
               height: '2rem',
               width: '5rem',
-              padding: '5px 10px 5px 5px',
+              padding: '5px 5px 5px 5px',
               borderRadius: '5px',
+              backgroundColor: 'white',
+              marginTop: '-7px',
+              color: 'black',
+              border: '1px solid black'
             }}
           >
             <option selected>10</option>
@@ -347,10 +360,12 @@ export default function HistoryComponent() {
             display: 'flex',
             justifyContent: 'flex-end',
             gap: 15,
-            padding: 15,
+            padding: '5px',
+            backgroundColor: 'white'
           }}
         >
           <input
+            className={styles['custom-placeholder']}
             title="Buscar"
             placeholder="Buscar"
             style={{
@@ -361,6 +376,7 @@ export default function HistoryComponent() {
               justifyContent: 'flex-start',
               alignItems: 'center',
               display: 'flex',
+              color: 'black'
             }}
           />
 
@@ -384,7 +400,7 @@ export default function HistoryComponent() {
         </div>
       </div>
 
-      <div style={{ height: 370, width: '100%' }}>
+      <div style={{ height: 370, width: '100%', backgroundColor: 'white' }}>
         <DataGrid rows={rows} columns={columns} checkboxSelection />
       </div>
 

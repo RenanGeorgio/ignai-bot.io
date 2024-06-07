@@ -32,6 +32,8 @@
 .inputHistory {
   align-self: stretch;
   background: rgb(242, 242, 242);
+  color: #000;
+  margin-left: 5px;
   border-radius: 6px;
   border: 1px #dbdade solid;
   justify-content: flex-start;

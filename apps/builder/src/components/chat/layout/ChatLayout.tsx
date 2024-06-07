@@ -6,7 +6,7 @@ import { UserChat } from '../UserChat'
 import useChat from '@/hooks/useChat'
 
 import styles from './ChatLayout.module.css'
-import { Chat } from '@/contexts/ChatContext'
+import { Chat } from '@/contexts/chat/types'
 
 export default function LayoutChat() {
   const [showAddTicket, setShowAddTicket] = useState(false)

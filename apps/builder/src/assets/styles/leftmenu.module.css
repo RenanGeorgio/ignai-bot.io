@@ -18,6 +18,7 @@
   gap: 1px;
   align-self: stretch;
   width: 100%;
+  margin-bottom: 20px;
   border-bottom: 1px rgba(100, 100, 100, 0.048) solid;
   justify-content: space-around;
   height: 23px;
@@ -35,15 +36,22 @@
   border-radius: 20px !important;
   flex-grow: 1 0 !important;
   width: 80% !important;
-  height: 100%;
+  height: 25px !important;
+  color: #fff;
   padding: 2px;
   margin-top: 15px;
   border: #c4c2c27c 1px solid;
 }
 
+.left-menu .instance::placeholder {
+  color: #fff; 
+  padding-left: 10px; 
+}
+
 .left-menu .icon-instance-node {
   height: 30px !important;
   position: relative !important;
+  margin-top: 15px;
   width: 30px !important;
   background-color: #c4c2c2;
   border-radius: 50%;
@@ -547,4 +555,9 @@
   position: absolute;
   bottom: 18px;
   left: 30px;
+}
+
+.custom-placeholder::placeholder {
+  color: black;
+  margin-left: 10px;
 }
