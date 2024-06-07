@@ -9,7 +9,8 @@ import {
   Link,
   IconButton,
   IconProps,
-  VStack
+  VStack,
+  Tooltip
 } from '@chakra-ui/react'
 import { ChatIcon, ChevronLeftIcon, ChevronRightIcon, FolderIcon, ToolIcon } from './icons'
 
@@ -80,9 +81,11 @@ const NavHoverBox = ({ title, description }: HoverProps) => {
         color="#fff"
         textAlign="center"
       >
-        <SidebarContent tab={title} fontSize="3xl" mb={4} />
-        <Heading size="md" fontWeight="normal">{title}</Heading>
-        <Text>{description}</Text>
+        <Tooltip hasArrow label={title}>
+          <SidebarContent tab={title} fontSize="3xl" mb={4} />
+          <Heading size="md" fontWeight="normal">{title}</Heading>
+          <Text>{description}</Text>
+        </Tooltip>
       </Flex>
     </>
   );
@@ -105,9 +108,11 @@ const NavItem = ({ title, description, active, navSize }: NavItemProps) => {
           w={navSize == "large" ? "100%" : "35%"} // VERIFICAR
         >
           <MenuButton w="100%">
-            <Flex>
-              <SidebarContent tab={title} color={active ? "#82AAAD" : "gray.500"} />
-              <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{title}</Text>
+            <Flex alignItems="center" justify="center" textAlign="center">
+              <Tooltip hasArrow label={title}>
+                <SidebarContent tab={title} color={active ? "#82AAAD" : "gray.500"} />
+                <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{title}</Text>
+              </Tooltip>
             </Flex>
           </MenuButton>
         </Link>
@@ -140,7 +145,6 @@ const CustomSideBar = () => {
       justifyContent="space-between"
     >
       <VStack 
-        p="5%"
         w="100%"
         alignItems={navSize == "small" ? "center" : "flex-start"}
         spacing='24px'
