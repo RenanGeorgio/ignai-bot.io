@@ -14,7 +14,7 @@ import {
   VStack,
   Tooltip
 } from '@chakra-ui/react';
-import { ChatIcon, ChevronLeftIcon, ChevronRightIcon, FolderIcon, ToolIcon } from './icons';
+import { ChevronLeftIcon, ChevronRightIcon, FolderIcon, ToolIcon } from './icons';
 
 type CustomHTMLDivElement = Omit<HTMLDivElement, "removeEventListener" | "addEventListener">;
 
