@@ -118,14 +118,15 @@ export const BlocksSideBar = () => {
       closeSideBar.flush();
       setIsExtended(true);
       setIsExpanded(true);
+      setItemSize(height * 0.8); 
     }
   }
   
   const handleMouseLeave = () => {
     if (!isLocked) {
       closeSideBar();
-      setIsExtended(false); 
-      setIsExpanded(false); 
+      setIsExpanded(false);
+      setItemSize(headerHeight); 
     }
   }
   
@@ -163,7 +164,7 @@ export const BlocksSideBar = () => {
 
   return (
     <Flex
-      w="360px"
+      w={"360px"}
       pos="absolute"
       left="0"
       h={`calc(100vh - ${itemSize}px)`}
