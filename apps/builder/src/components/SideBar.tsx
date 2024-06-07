@@ -118,7 +118,7 @@ const NavItem = ({ title, description, active, navSize, router }: NavItemProps) 
           backgroundColor={active ? "#rgba(255, 0, 0, 0.8)" : undefined}
           p={3}
           borderRadius={8}
-          _hover={{ textDecor: 'none', backgroundColor: "rgba(255, 0, 0, 0.8)" }}
+          _hover={{ textDecor: 'none', backgroundColor: "rgba(255, 0, 0, 0.8)", color: "#fff" }}
           w={navSize == "large" ? "100%" : "35%"}
         >
           <MenuButton w="100%">
@@ -171,6 +171,7 @@ const CustomSideBar = () => {
           background="none"
           aria-label="Colapse"
           mt={5}
+          backgroundColor="rgba(255, 0, 0, 0.8)" 
           _hover={{ background: 'none' }}
           icon={navSize == "small" ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           onClick={() => {
@@ -185,7 +186,8 @@ const CustomSideBar = () => {
           p="5%"
           flexDir="column"
           w="100%"
-          alignItems={navSize == "small" ? "center" : "flex-start"}
+          // alignItems={navSize == "small" ? "center" : "flex-start"}
+          alignItems="flex-start"
           as="nav"
         >
           <NavItem router={router} navSize={navSize} title="Home" description="Pagina inicial da aplicação." />
