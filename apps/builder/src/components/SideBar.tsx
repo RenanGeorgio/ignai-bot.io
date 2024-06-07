@@ -155,7 +155,7 @@ const CustomSideBar = () => {
       h="95vh"
       marginTop="0.5vh"
       boxShadow="0 4px 12px 0 rgba(0, 0, 0, 0.05)"
-      backgroundColor="#fff"
+      backgroundColor="rgba(252, 177, 177, 0.8)"
       color="#000"
       borderRadius={navSize == "small" ? "15px" : "30px"}
       w={navSize == "small" ? "75px" : "200px"}
@@ -171,7 +171,7 @@ const CustomSideBar = () => {
           background="none"
           aria-label="Colapse"
           mt={5}
-          backgroundColor="rgba(255, 0, 0, 0.8)" 
+          color="rgba(255, 0, 0, 0.8)" 
           _hover={{ background: 'none' }}
           icon={navSize == "small" ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           onClick={() => {
@@ -186,8 +186,7 @@ const CustomSideBar = () => {
           p="5%"
           flexDir="column"
           w="100%"
-          // alignItems={navSize == "small" ? "center" : "flex-start"}
-          alignItems="flex-start"
+          alignItems={navSize == "small" ? "center" : "flex-start"}
           as="nav"
         >
           <NavItem router={router} navSize={navSize} title="Home" description="Pagina inicial da aplicação." />
