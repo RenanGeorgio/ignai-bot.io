@@ -52,6 +52,16 @@ const nextConfig = {
   experimental: {
     outputFileTracingRoot: join(__dirname, '../../'),
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'i.pravatar.cc',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+  },
   webpack: (config, { nextRuntime }) => {
     if (nextRuntime === 'nodejs') {
       return config
