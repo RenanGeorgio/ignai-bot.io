@@ -1,4 +1,4 @@
-import { Flex, HStack, Button, useColorModeValue, Divider, Text, Img } from '@chakra-ui/react'
+import { Flex, HStack, Button, useColorModeValue, Divider, Text } from '@chakra-ui/react'
 import { CopyIcon, PlayIcon } from '@/components/icons'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -8,9 +8,9 @@ import { headerHeight } from '../constants'
 import { RightPanel, useEditor } from '../providers/EditorProvider'
 import { useTypebot } from '../providers/TypebotProvider'
 import { useTranslate } from '@tolgee/react'
+import { TypebotLogo } from '@/components/TypebotLogo'
 import { EmojiOrImageIcon } from '@/components/EmojiOrImageIcon'
 import { useUser } from '@/features/account/hooks/useUser'
-import { env } from '@typebot.io/env'
 
 export const GuestTypebotHeader = () => {
   const { t } = useTranslate()
@@ -148,7 +148,7 @@ export const GuestTypebotHeader = () => {
             <Button
               as={Link}
               href={`/register`}
-              leftIcon={<Img src={`${env.NEXTAUTH_URL}/images/logo.png`} width="20px" />}
+              leftIcon={<TypebotLogo width="20px" />}
               variant="outline"
               size="sm"
             >
