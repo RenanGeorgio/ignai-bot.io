@@ -59,7 +59,7 @@ export type ChatContextType = {
     currentChatId: string,
     setTextMessage: (text: string) => void
   ) => Promise<void>
-  sendMessageHttp: (
+  sendMessageHttp?: (
     textMessage: string,
     sender: { companyId: string },
     currentChatId: string
