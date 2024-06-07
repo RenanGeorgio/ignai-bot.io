@@ -164,7 +164,7 @@ const CustomSideBar = () => {
     >
       <VStack 
         w="100%"
-        alignItems="flex-start" 
+        alignItems="center" 
         spacing='24px'
       >
         <IconButton
