@@ -20,38 +20,29 @@ type Props = {
   onProgressBarChange: (progressBar: ProgressBar) => void
 }
 
-export const ProgressBarForm = ({
-  progressBar,
-  onProgressBarChange,
-}: Props) => {
-  const updateEnabled = (isEnabled: boolean) =>
-    onProgressBarChange({ ...progressBar, isEnabled })
+export const ProgressBarForm = ({ progressBar, onProgressBarChange }: Props) => {
+  const updateEnabled = (isEnabled: boolean) => onProgressBarChange({ ...progressBar, isEnabled });
 
-  const updateColor = (color: string) =>
-    onProgressBarChange({ ...progressBar, color })
+  const updateColor = (color: string) => onProgressBarChange({ ...progressBar, color });
 
-  const updatePlacement = (placement: (typeof progressBarPlacements)[number]) =>
-    onProgressBarChange({ ...progressBar, placement })
+  const updatePlacement = (placement: (typeof progressBarPlacements)[number]) => onProgressBarChange({ ...progressBar, placement });
 
-  const updatePosition = (position: (typeof progressBarPositions)[number]) =>
-    onProgressBarChange({ ...progressBar, position })
+  const updatePosition = (position: (typeof progressBarPositions)[number]) => onProgressBarChange({ ...progressBar, position });
 
-  const updateThickness = (thickness?: number) =>
-    onProgressBarChange({ ...progressBar, thickness })
+  const updateThickness = (thickness?: number) => onProgressBarChange({ ...progressBar, thickness });
 
-  const updateBackgroundColor = (backgroundColor: string) =>
-    onProgressBarChange({ ...progressBar, backgroundColor })
+  const updateBackgroundColor = (backgroundColor: string) => onProgressBarChange({ ...progressBar, backgroundColor });
 
   return (
     <SwitchWithRelatedSettings
-      label={'Enable progress bar?'}
+      label={'Ativar barra de progresso?'}
       initialValue={progressBar?.isEnabled ?? defaultProgressBarIsEnabled}
       onCheckChange={updateEnabled}
     >
       <DropdownList
         size="sm"
         direction="row"
-        label="Placement:"
+        label="Localização:"
         currentItem={progressBar?.placement ?? defaultProgressBarPlacement}
         onItemSelect={updatePlacement}
         items={progressBarPlacements}
@@ -59,7 +50,7 @@ export const ProgressBarForm = ({
 
       <HStack justifyContent="space-between">
         <FormLabel mb="0" mr="0">
-          Background color:
+          Cor do Background:
         </FormLabel>
         <ColorPicker
           defaultValue={
@@ -70,7 +61,7 @@ export const ProgressBarForm = ({
       </HStack>
       <HStack justifyContent="space-between">
         <FormLabel mb="0" mr="0">
-          Color:
+          Cor:
         </FormLabel>
         <ColorPicker
           defaultValue={progressBar?.color ?? defaultProgressBarColor}
@@ -78,7 +69,7 @@ export const ProgressBarForm = ({
         />
       </HStack>
       <NumberInput
-        label="Thickness:"
+        label="Espessura:"
         direction="row"
         withVariableButton={false}
         maxW="100px"
@@ -89,12 +80,12 @@ export const ProgressBarForm = ({
       <DropdownList
         size="sm"
         direction="row"
-        label="Position when embedded:"
-        moreInfoTooltip='Select "fixed" to always position the progress bar at the top of the window even though your bot is embedded. Select "absolute" to position the progress bar at the top of the chat container.'
+        label="Posição quando incorporado:"
+        moreInfoTooltip='Selecione "fixo" para sempre posicionar a barra de progresso no topo da janela, mesmo que seu bot esteja incorporado. Selecione “absoluto” para posicionar a barra de progresso na parte superior do contêiner de bate-papo.'
         currentItem={progressBar?.position ?? defaultProgressBarPosition}
         onItemSelect={updatePosition}
         items={progressBarPositions}
       />
     </SwitchWithRelatedSettings>
-  )
+  );
 }

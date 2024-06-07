@@ -14,12 +14,12 @@ export const galleryTemplates: Pick<ThemeTemplate, 'id' | 'name' | 'theme'>[] =
   [
     {
       id: 'typebot-light',
-      name: 'Typebot Light',
+      name: 'Ignai-bot Light',
       theme: {},
     },
     {
       id: 'typebot-dark',
-      name: 'Typebot Dark',
+      name: 'Ignai-bot Dark',
       theme: {
         chat: {
           inputs: {
@@ -36,7 +36,7 @@ export const galleryTemplates: Pick<ThemeTemplate, 'id' | 'name' | 'theme'>[] =
     },
     {
       id: 'minimalist-black',
-      name: 'Minimalist Black',
+      name: 'Black Minimalista',
       theme: {
         chat: {
           buttons: { backgroundColor: '#303235' },
@@ -53,7 +53,7 @@ export const galleryTemplates: Pick<ThemeTemplate, 'id' | 'name' | 'theme'>[] =
     },
     {
       id: 'minimalist-teal',
-      name: 'Minimalist Teal',
+      name: 'Teal Minimalista',
       theme: {
         chat: {
           buttons: { backgroundColor: '#0d9488' },
@@ -68,7 +68,6 @@ export const galleryTemplates: Pick<ThemeTemplate, 'id' | 'name' | 'theme'>[] =
         },
       },
     },
-
     {
       id: 'bright-rain',
       name: 'Bright Rain',

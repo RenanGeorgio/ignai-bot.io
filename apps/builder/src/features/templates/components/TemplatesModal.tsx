@@ -38,24 +38,20 @@ export const TemplatesModal = ({
   const templateCardBackgroundColor = useColorModeValue('white', 'gray.800')
   const [typebot, setTypebot] = useState<Typebot>()
   const templates = useTemplates()
-  const [selectedTemplate, setSelectedTemplate] = useState<TemplateProps>(
-    templates[0]
-  )
+  const [selectedTemplate, setSelectedTemplate] = useState<TemplateProps>(templates[0])
   const [isFirstTemplateLoaded, setIsFirstTemplateLoaded] = useState(false)
   const { showToast } = useToast()
 
-  const fetchTemplate = useCallback(
-    async (template: TemplateProps) => {
-      setSelectedTemplate(template)
-      const { data, error } = await sendRequest(
-        `/templates/${template.fileName}`
-      )
-      if (error)
-        return showToast({ title: error.name, description: error.message })
-      setTypebot({ ...(data as Typebot), name: template.name })
-    },
-    [showToast]
-  )
+  const fetchTemplate = useCallback(async (template: TemplateProps) => {
+    setSelectedTemplate(template)
+    const { data, error } = await sendRequest(`/templates/${template.fileName}`)
+
+    if (error) {
+      return showToast({ title: error.name, description: error.message })
+    }
+
+    setTypebot({ ...(data as Typebot), name: template.name })
+  },[showToast])
 
   useEffect(() => {
     if (isFirstTemplateLoaded) return
@@ -209,7 +205,7 @@ export const TemplatesModal = ({
           >
             {typebot && (
               <Standard
-                key={typebot.id}
+                key={typebot.id} // TO-DO: bot exibido
                 typebot={typebot}
                 style={{
                   borderRadius: '0.25rem',
@@ -244,5 +240,5 @@ export const TemplatesModal = ({
         </ModalBody>
       </ModalContent>
     </Modal>
-  )
+  );
 }

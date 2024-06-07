@@ -262,7 +262,7 @@ test.describe.parallel('Theme page', () => {
       await page.getByRole('menuitem', { name: 'Delete' }).click()
       await expect(page.getByText('My awesome theme 2')).toBeHidden()
       await page.getByRole('button', { name: 'Gallery' }).click()
-      await page.getByText('Typebot Dark').click()
+      await page.getByText('Ignai-bot Dark').click()
       await expect(page.getByTestId('host-bubble')).toHaveCSS(
         'background-color',
         'rgb(30, 41, 59)'

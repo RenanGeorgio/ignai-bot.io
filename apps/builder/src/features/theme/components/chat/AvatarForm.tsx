@@ -22,7 +22,7 @@ import { FilePathUploadProps } from '@/features/upload/api/generateUploadUrl'
 type Props = {
   uploadFileProps: FilePathUploadProps
   title: string
-  avatarProps?: AvatarProps
+  avatarProps?: AvatarProps 
   isDefaultCheck?: boolean
   onAvatarChange: (avatarProps: AvatarProps) => void
 }
@@ -72,7 +72,7 @@ export const AvatarForm = ({
                 ) : (
                   <Image
                     onClick={onOpen}
-                    src={avatarProps.url}
+                    src={avatarProps.url} // TO-DO: Trocar este default
                     alt="Website image"
                     cursor="pointer"
                     _hover={{ filter: 'brightness(.9)' }}

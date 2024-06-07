@@ -23,7 +23,7 @@ import { useTypebot } from '@/features/editor/providers/TypebotProvider'
 import { SecurityForm } from './SecurityForm'
 
 export const SettingsSideMenu = () => {
-  const { typebot, updateTypebot } = useTypebot()
+  const { typebot, updateTypebot } = useTypebot();
 
   const updateTypingEmulation = (
     typingEmulation: Settings['typingEmulation']
@@ -31,21 +31,29 @@ export const SettingsSideMenu = () => {
     typebot &&
     updateTypebot({
       updates: { settings: { ...typebot.settings, typingEmulation } },
-    })
+    }
+  );
 
   const updateSecurity = (security: Settings['security']) =>
     typebot &&
     updateTypebot({
       updates: { settings: { ...typebot.settings, security } },
-    })
+    }
+  );
 
   const handleGeneralSettingsChange = (general: Settings['general']) =>
     typebot &&
-    updateTypebot({ updates: { settings: { ...typebot.settings, general } } })
+    updateTypebot({ 
+      updates: { settings: { ...typebot.settings, general } } 
+    }
+  );
 
   const handleMetadataChange = (metadata: Settings['metadata']) =>
     typebot &&
-    updateTypebot({ updates: { settings: { ...typebot.settings, metadata } } })
+    updateTypebot({ 
+      updates: { settings: { ...typebot.settings, metadata } } 
+    }
+  );
 
   return (
     <Stack
@@ -59,14 +67,14 @@ export const SettingsSideMenu = () => {
       pb="20"
     >
       <Heading fontSize="xl" textAlign="center">
-        Settings
+        Configurações
       </Heading>
       <Accordion allowMultiple defaultIndex={[0]}>
         <AccordionItem>
           <AccordionButton py={6}>
             <HStack flex="1" pl={2}>
               <MoreVerticalIcon transform={'rotate(90deg)'} />
-              <Heading fontSize="lg">General</Heading>
+              <Heading fontSize="lg">Geral</Heading>
             </HStack>
             <AccordionIcon />
           </AccordionButton>
@@ -83,7 +91,7 @@ export const SettingsSideMenu = () => {
           <AccordionButton py={6}>
             <HStack flex="1" pl={2}>
               <ChatIcon />
-              <Heading fontSize="lg">Typing</Heading>
+              <Heading fontSize="lg">Digitando</Heading>
             </HStack>
             <AccordionIcon />
           </AccordionButton>
@@ -100,7 +108,7 @@ export const SettingsSideMenu = () => {
           <AccordionButton py={6}>
             <HStack flex="1" pl={2}>
               <LockedIcon />
-              <Heading fontSize="lg">Security</Heading>
+              <Heading fontSize="lg">Segurança</Heading>
             </HStack>
             <AccordionIcon />
           </AccordionButton>
@@ -135,5 +143,5 @@ export const SettingsSideMenu = () => {
         </AccordionItem>
       </Accordion>
     </Stack>
-  )
+  );
 }

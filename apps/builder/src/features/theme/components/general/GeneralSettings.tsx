@@ -49,11 +49,9 @@ export const GeneralSettings = ({
   const { typebot } = useTypebot()
   const isWorkspaceFreePlan = isFreePlan(workspace)
 
-  const { mutate: trackClientEvents } =
-    trpc.telemetry.trackClientEvents.useMutation()
+  const { mutate: trackClientEvents } = trpc.telemetry.trackClientEvents.useMutation()
 
-  const updateFont = (font: Font) =>
-    onGeneralThemeChange({ ...generalTheme, font })
+  const updateFont = (font: Font) => onGeneralThemeChange({ ...generalTheme, font })
 
   const updateFontType = (type: (typeof fontTypes)[number]) => {
     onGeneralThemeChange({
@@ -65,14 +63,15 @@ export const GeneralSettings = ({
     })
   }
 
-  const handleBackgroundChange = (background: Background) =>
-    onGeneralThemeChange({ ...generalTheme, background })
+  const handleBackgroundChange = (background: Background) => onGeneralThemeChange({ ...generalTheme, background })
 
-  const updateProgressBar = (progressBar: ProgressBar) =>
-    onGeneralThemeChange({ ...generalTheme, progressBar })
+  const updateProgressBar = (progressBar: ProgressBar) => onGeneralThemeChange({ ...generalTheme, progressBar })
 
   const updateBranding = () => {
-    if (isBrandingEnabled && isWorkspaceFreePlan) return
+    if (isBrandingEnabled && isWorkspaceFreePlan) {
+      return
+    }
+
     if (
       env.NEXT_PUBLIC_POSTHOG_KEY &&
       typebot &&
@@ -122,7 +121,7 @@ export const GeneralSettings = ({
       <Accordion allowToggle>
         <AccordionItem>
           <AccordionButton justifyContent="space-between">
-            Progress Bar
+            Barra de Progresso
             <AccordionIcon />
           </AccordionButton>
           <AccordionPanel>
@@ -160,5 +159,5 @@ export const GeneralSettings = ({
         </AccordionItem>
       </Accordion>
     </Stack>
-  )
+  );
 }
