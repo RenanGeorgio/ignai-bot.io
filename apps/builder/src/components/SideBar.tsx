@@ -115,15 +115,15 @@ const NavItem = ({ title, description, active, navSize, router }: NavItemProps) 
     >
       <Menu placement="right">
         <Link
-          backgroundColor={active ? "#rgba(255, 0, 0, 0.8)" : undefined}
+          backgroundColor={active ? "#rgba(255, 0, 0, 0.9)" : undefined}
           p={3}
           borderRadius={8}
-          _hover={{ textDecor: 'none', backgroundColor: "rgba(255, 0, 0, 0.8)", color: "#fff" }}
+          _hover={{ textDecor: 'none', backgroundColor: "rgba(255, 0, 0, 0.9)", color: "#fff" }}
           w={navSize == "large" ? "100%" : "35%"}
         >
           <MenuButton w="100%">
             <Flex alignItems="center" justify="center" textAlign="center">
-              <SidebarContent tab={title} color={active ? "#rgba(255, 0, 0, 0.8)" : "rgba(254, 130, 130, 0.8)"} />
+              <SidebarContent tab={title} color={active ? "#rgba(255, 0, 0, 0.9)" : "rgba(254, 130, 130, 0.8)"} />
               <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{title}</Text>
             </Flex>
           </MenuButton>
@@ -155,7 +155,7 @@ const CustomSideBar = () => {
       h="95vh"
       marginTop="0.5vh"
       boxShadow="0 4px 12px 0 rgba(0, 0, 0, 0.05)"
-      backgroundColor="rgba(252, 177, 177, 0.8)"
+      backgroundColor="rgba(255, 217, 217, 0.8)"
       color="#000"
       borderRadius={navSize == "small" ? "15px" : "30px"}
       w={navSize == "small" ? "75px" : "200px"}
@@ -171,7 +171,7 @@ const CustomSideBar = () => {
           background="none"
           aria-label="Colapse"
           mt={5}
-          color="rgba(255, 0, 0, 0.8)" 
+          color="rgba(255, 0, 0, 0.9)" 
           _hover={{ background: 'none' }}
           icon={navSize == "small" ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           onClick={() => {
