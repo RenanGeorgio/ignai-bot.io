@@ -14,7 +14,7 @@ import {
   VStack,
   Tooltip
 } from '@chakra-ui/react';
-import { ChevronLeftIcon, ChevronRightIcon, FolderIcon, ToolIcon } from './icons';
+import { ChatIcon, ChevronLeftIcon, ChevronRightIcon, FolderIcon, ToolIcon } from './icons';
 
 type CustomHTMLDivElement = Omit<HTMLDivElement, "removeEventListener" | "addEventListener">;
 
@@ -58,7 +58,9 @@ const SidebarContent = ({ tab, ...props }: { tab: string } & IconProps) => {
       )
     case 'Chat':
       return (
-        <></>
+        <Tooltip hasArrow label="Chat">
+          <ChatIcon {...props}/>
+        </Tooltip>
       )
     case 'Builder':
       return (
