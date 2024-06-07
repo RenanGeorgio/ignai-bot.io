@@ -115,15 +115,15 @@ const NavItem = ({ title, description, active, navSize, router }: NavItemProps) 
     >
       <Menu placement="right">
         <Link
-          backgroundColor={active ? "#rgba(255, 0, 0, 0.9)" : undefined}
+          backgroundColor={active ? "rgba(255, 0, 0, 0.9)" : undefined}
           p={3}
           borderRadius={8}
-          _hover={{ textDecor: 'none', backgroundColor: "rgba(255, 0, 0, 0.9)", color: "#fff" }}
+          _hover={{ textDecor: 'none', backgroundColor: "rgba(255, 0, 0, 0.9)", color: "#fff", '& svg': { color: '#fff' } }}
           w="100%"
         >
           <MenuButton w="100%">
             <Flex alignItems="center" justify="center">
-              <SidebarContent tab={title} color={active ? "#fff" : "#fff"} />
+              <SidebarContent tab={title} color="rgba(255, 0, 0, 0.9)" />
               <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{title}</Text>
             </Flex>
           </MenuButton>
