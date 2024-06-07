@@ -119,7 +119,7 @@ const NavItem = ({ title, description, active, navSize, router }: NavItemProps) 
           p={3}
           borderRadius={8}
           _hover={{ textDecor: 'none', backgroundColor: "rgba(255, 0, 0, 0.9)", color: "#fff", '& svg': { color: '#fff' } }}
-          w="100%"
+          w={navSize == "large" ? "100%" : "35%"}
         >
           <MenuButton w="100%">
             <Flex alignItems="center" justify="center">
