@@ -6,6 +6,7 @@ import {
   Menu,
   MenuButton,
   MenuList,
+  MenuItem,
   Link,
   IconButton,
   IconProps,
@@ -115,7 +116,7 @@ const NavItem = ({ title, description, active, navSize }: NavItemProps) => {
           p={3}
           borderRadius={8}
           _hover={{ textDecor: 'none', backgroundColor: "#AEC8CA" }}
-          w={navSize == "large" ? "100%" : "35%"} // VERIFICAR
+          w={navSize == "large" ? "100%" : "35%"}
         >
           <MenuButton w="100%">
             <Flex alignItems="center" justify="center" textAlign="center">
@@ -131,6 +132,7 @@ const NavItem = ({ title, description, active, navSize }: NavItemProps) => {
           h={200}
           ml={5}
         >
+          <MenuItem onClick={() => alert('Kagebunshin')}>Create a Copy</MenuItem>
           <NavHoverBox title={title} description={description} />
       </MenuList>
     </Menu>
@@ -140,6 +142,7 @@ const NavItem = ({ title, description, active, navSize }: NavItemProps) => {
 
 const CustomSideBar = () => {
   const [navSize, changeNavSize] = useState<string>("large");
+
   return (
     <Flex
       pos="sticky"
