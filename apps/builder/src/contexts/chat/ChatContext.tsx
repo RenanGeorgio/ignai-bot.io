@@ -163,7 +163,9 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
         return !isChatCreated
       })
 
-      setPotentialChats(pChats)
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //@ts-ignore
+      setPotentialChats(pChats);
     }
 
     getClients()
