@@ -30,10 +30,11 @@ export const BubbleSettings = ({
   onThemeChange,
   onPreviewMessageChange,
 }: Props) => {
-  const updatePreviewMessage = (
-    previewMessage: BubbleProps['previewMessage']
-  ) => {
-    if (!previewMessage) return onPreviewMessageChange(undefined)
+  const updatePreviewMessage = (previewMessage: BubbleProps['previewMessage']) => {
+    if (!previewMessage) {
+      return onPreviewMessageChange(undefined)
+    }
+
     onPreviewMessageChange({
       ...previewMessage,
       autoShowDelay: previewMessage?.autoShowDelay
@@ -48,7 +49,7 @@ export const BubbleSettings = ({
 
   return (
     <Stack spacing="4">
-      <Heading size="sm">Chat bubble settings</Heading>
+      <Heading size="sm">Configurações de Balão de Bate-Papo</Heading>
       <Stack pl="4" spacing={4}>
         <PreviewMessageSettings
           defaultAvatar={defaultPreviewMessageAvatar}
@@ -59,7 +60,7 @@ export const BubbleSettings = ({
           onChange={updateTheme}
           isPreviewMessageEnabled={isDefined(previewMessage)}
         />
-        <Heading size="sm">Preview:</Heading>
+        <Heading size="sm">Visualização:</Heading>
         <Stack alignItems="flex-end">
           {isDefined(previewMessage) && (
             <HStack
@@ -99,15 +100,11 @@ export const BubbleSettings = ({
         </Stack>
       </Stack>
     </Stack>
-  )
+  );
 }
 
-const BubbleIcon = ({
-  buttonTheme,
-}: {
-  buttonTheme: NonNullable<BubbleProps['theme']>['button']
-}) => {
-  if (!buttonTheme?.customIconSrc)
+const BubbleIcon = ({ buttonTheme }: { buttonTheme: NonNullable<BubbleProps['theme']>['button'] }) => {
+  if (!buttonTheme?.customIconSrc) {
     return (
       <svg
         viewBox="0 0 24 24"
@@ -125,12 +122,10 @@ const BubbleIcon = ({
       >
         <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
       </svg>
-    )
+    );
+  }
 
-  if (
-    buttonTheme.customIconSrc.startsWith('http') ||
-    buttonTheme.customIconSrc.startsWith('data:image/svg+xml')
-  )
+  if (buttonTheme.customIconSrc.startsWith('http') || buttonTheme.customIconSrc.startsWith('data:image/svg+xml')) {
     return (
       <Image
         src={buttonTheme.customIconSrc}
@@ -146,7 +141,9 @@ const BubbleIcon = ({
         alt="Bubble button icon"
         objectFit={isSvgSrc(buttonTheme.customIconSrc) ? undefined : 'cover'}
       />
-    )
+    );
+  }
+
   return (
     <chakra.span
       transition="all 0.2s ease-in-out"
@@ -155,5 +152,5 @@ const BubbleIcon = ({
     >
       {buttonTheme.customIconSrc}
     </chakra.span>
-  )
+  );
 }

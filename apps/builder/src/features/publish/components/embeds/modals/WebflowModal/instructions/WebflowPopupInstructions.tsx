@@ -5,13 +5,13 @@ import { JavascriptPopupSnippet } from '../../Javascript/JavascriptPopupSnippet'
 import { TextLink } from '@/components/TextLink'
 
 export const WebflowPopupInstructions = () => {
-  const [inputValue, setInputValue] = useState<number>()
+  const [inputValue, setInputValue] = useState<number>();
 
   return (
     <>
       <OrderedList spacing={4} pl={5}>
         <ListItem>
-          Press <Code>A</Code> to open the <Code>Add elements</Code> panel
+          Pressione <Code>A</Code> para abrir o painel <Code>Add elements</Code>
         </ListItem>
         <ListItem>
           <Stack spacing={4}>
@@ -21,23 +21,23 @@ export const WebflowPopupInstructions = () => {
               }
             />
             <Text>
-              Add an <Code>Embed</Code> element from the <Code>components</Code>{' '}
-              section and paste this code:
+              Adicione um elemento <Code>Embed</Code> do <Code>components</Code>{' '}
+              selecione e copie este codigo:
             </Text>
             <JavascriptPopupSnippet autoShowDelay={inputValue} />
           </Stack>
         </ListItem>
       </OrderedList>
       <Text fontSize="sm" colorScheme="gray" pl="5">
-        Check out the{' '}
+        Confira a{' '}
         <TextLink
           href="https://docs.typebot.io/deploy/web/webflow#popup"
           isExternal
         >
-          Webflow embed documentation
+          Documentação do Webflow incorporado
         </TextLink>{' '}
-        for more options.
+        para mais opções.
       </Text>
     </>
-  )
+  );
 }

@@ -7,18 +7,15 @@ import { parseDefaultBubbleTheme } from '../../Javascript/instructions/Javascrip
 import { JavascriptBubbleSnippet } from '../../Javascript/JavascriptBubbleSnippet'
 
 export const WebflowBubbleInstructions = () => {
-  const { typebot } = useTypebot()
+  const { typebot } = useTypebot();
 
-  const [theme, setTheme] = useState<BubbleProps['theme']>(
-    parseDefaultBubbleTheme(typebot)
-  )
-  const [previewMessage, setPreviewMessage] =
-    useState<BubbleProps['previewMessage']>()
+  const [theme, setTheme] = useState<BubbleProps['theme']>(parseDefaultBubbleTheme(typebot));
+  const [previewMessage, setPreviewMessage] = useState<BubbleProps['previewMessage']>();
 
   return (
     <OrderedList spacing={4} pl={5}>
       <ListItem>
-        Press <Code>A</Code> to open the <Code>Add elements</Code> panel
+        Pressione <Code>A</Code> para abrir o painel <Code>Add elements</Code>
       </ListItem>
       <ListItem>
         <Stack spacing={4}>
@@ -32,8 +29,8 @@ export const WebflowBubbleInstructions = () => {
             onThemeChange={setTheme}
           />
           <Text>
-            Add an <Code>Embed</Code> element from the <Code>components</Code>{' '}
-            section and paste this code:
+            Adicione um elemento <Code>Embed</Code> da sessão <Code>components</Code>{' '}
+            e cole este código:
           </Text>
           <JavascriptBubbleSnippet
             theme={theme}
@@ -42,5 +39,5 @@ export const WebflowBubbleInstructions = () => {
         </Stack>
       </ListItem>
     </OrderedList>
-  )
+  );
 }
