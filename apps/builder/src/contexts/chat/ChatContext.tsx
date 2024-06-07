@@ -144,7 +144,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
         // return setUserChatsError(value)
       }
 
-      const data: ChatClient[] = await response.json()
+      const data: ChatClient[] | Chat[] = await response.json()
 
       const pChats = data?.filter((client) => {
         let isChatCreated = false;
@@ -156,7 +156,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
         if (userChats) {
           isChatCreated = userChats?.some((chat) => {
             const members_: string[] = chat.members;
-            members_.includes(client._id)
+            return members_?.includes(client._id)
           })
         }
 
