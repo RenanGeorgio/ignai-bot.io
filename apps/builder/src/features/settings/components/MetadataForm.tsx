@@ -128,7 +128,7 @@ export const MetadataForm = ({
           <Text>Head Code customizado:</Text>
           <MoreInfoTooltip>
             Será colado na parte inferior da seção do cabeçalho (header), logo acima do
-            fechando a 'head' tag. Somente tags `meta` e `script` são permitidas.
+            fechando a head tag. Somente tags 'meta' e 'script' são permitidas.
           </MoreInfoTooltip>
         </HStack>
         <CodeEditor
