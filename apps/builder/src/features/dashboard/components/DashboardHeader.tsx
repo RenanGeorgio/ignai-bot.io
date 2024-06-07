@@ -1,6 +1,6 @@
 import React from 'react'
 import { HStack, Flex, Spacer } from '@chakra-ui/react'
-import { Logo } from '@/components/icons'
+import { IgaiIcon } from '@/components/icons'
 import { useUser } from '@/features/account/hooks/useUser'
 import Link from 'next/link'
 import { EmojiOrImageIcon } from '@/components/EmojiOrImageIcon'
@@ -21,7 +21,7 @@ export const DashboardHeader = () => {
         <EmojiOrImageIcon
           boxSize="30px"
           icon={workspace?.icon}
-          defaultIcon={Logo} 
+          defaultIcon={IgaiIcon} 
         />
       </Link>
       <Spacer />

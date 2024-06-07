@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import {
   Flex,
   Text,
-  Divider,
   Heading,
   Menu,
   MenuButton,
@@ -140,7 +139,12 @@ const CustomSideBar = () => {
       flexDir="column"
       justifyContent="space-between"
     >
-      <VStack spacing='24px'>
+      <VStack 
+        p="5%"
+        w="100%"
+        alignItems={navSize == "small" ? "center" : "flex-start"}
+        spacing='24px'
+      >
         <IconButton
           background="none"
           aria-label="Colapse"
@@ -162,7 +166,6 @@ const CustomSideBar = () => {
           alignItems={navSize == "small" ? "center" : "flex-start"}
           as="nav"
         >
-          <Divider display={navSize == "small" ? "none" : "flex"} />
           <NavItem navSize={navSize} title="Home" description="Pagina inicial da aplicação." />
           <NavItem navSize={navSize} title="Chat" description="Conteudo de chat disponivel." />
           <NavItem navSize={navSize} title="Builder" description="Construtor de Bot" />
