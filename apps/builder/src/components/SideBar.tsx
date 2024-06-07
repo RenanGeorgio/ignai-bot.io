@@ -108,10 +108,10 @@ const NavHoverBox = ({ title, description }: HoverProps) => {
 const NavItem = ({ title, description, active, navSize, router }: NavItemProps) => {
   return (
     <Flex
-      mt={4} 
+      mt={12} 
       flexDir="column"
       w="100%"
-      alignItems="center" 
+      alignItems={navSize == "small" ? "center" : "flex-start"} 
     >
       <Menu placement="right">
         <Link
