@@ -147,14 +147,17 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
       const data: ChatClient[] = await response.json()
 
       const pChats = data?.filter((client) => {
-        let isChatCreated = false
+        let isChatCreated = false;
 
-        if (!(user?._id === client?._id)) return false
+        if (!(user?._id === client?._id)) {
+          return false
+        }
 
         if (userChats) {
-          isChatCreated = userChats?.some((chat) =>
-            chat.members.includes(client._id)
-          )
+          isChatCreated = userChats?.some((chat) => {
+            const members_: string[] = chat.members;
+            members_.includes(client._id)
+          })
         }
 
         return !isChatCreated
