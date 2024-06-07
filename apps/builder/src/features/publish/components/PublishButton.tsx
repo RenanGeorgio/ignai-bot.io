@@ -208,7 +208,7 @@ export const PublishButton = ({ isMoreMenuDisabled = false, ...props }: Props) =
         isDisabled={isNotDefined(publishedTypebot) || isPublished}
       >
         <Button
-          colorScheme="rgba(255, 0, 0, 0.9)"
+          colorScheme="red"
           isLoading={isPublishing || isUnpublishing}
           isDisabled={isPublished || isSavingLoading}
           onClick={() => {
