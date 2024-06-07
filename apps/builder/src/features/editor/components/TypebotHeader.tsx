@@ -90,7 +90,7 @@ export const TypebotHeader = () => {
           isResultsDisplayed={isDefined(publishedTypebot)}
         />
         {isOpen && <SupportBubble autoShowDelay={0} />}
-        <LatestElements pos="fixed" right="1rem" onHelpClick={handleHelpClick}/>
+        <LatestElements pos="absolute" right="1.5rem" onHelpClick={handleHelpClick}/>
       </HStack>
     </Flex>
   );
@@ -299,8 +299,8 @@ const LatestElements = ({
             isRound={true}
             as={IconButton}
             aria-label='Options'
-            size='sm'
-            icon={<Avatar size="lg" src={user?.image ?? undefined} name={user?.name ?? undefined} />}
+            size='2xs'
+            icon={<Avatar pos='absolute' size='2xs' w={8} h={8} src={user?.image ?? undefined} name={user?.name ?? undefined} />}
             variant='solid'
           />
           <MenuList>
