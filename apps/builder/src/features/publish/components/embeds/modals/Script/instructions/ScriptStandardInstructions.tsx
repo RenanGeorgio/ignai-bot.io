@@ -39,12 +39,12 @@ ${parseInitStandardCode({
         onUpdateWindowSettings={(settings) => setInputValues({ ...settings })}
       />
       <Text>
-        Make sure you have this <Code>typebot-standard</Code> element in your{' '}
+        Certifique-se de ter este <Code>typebot-standard</Code> elemento em seu{' '}
         <Code>{'<body>'}</Code>:
       </Text>
       <CodeEditor isReadOnly value={standardElementSnippet} lang="html" />
-      <Text>Then, run this script to initialize the typebot:</Text>
+      <Text>Em seguida, execute este script para inicializar o Ignai-bot:</Text>
       <CodeEditor isReadOnly value={scriptSnippet} lang="javascript" />
     </Stack>
-  )
+  );
 }

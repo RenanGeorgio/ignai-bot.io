@@ -4,12 +4,12 @@ import { PopupSettings } from '../../../settings/PopupSettings'
 import { JavascriptPopupSnippet } from '../../Javascript/JavascriptPopupSnippet'
 
 export const ShopifyPopupInstructions = () => {
-  const [inputValue, setInputValue] = useState<number>()
+  const [inputValue, setInputValue] = useState<number>();
 
   return (
     <OrderedList spacing={4} pl={5}>
       <ListItem>
-        On your shop dashboard in the <Code>Themes</Code> page, click on{' '}
+        No painel da sua loja, na pagina <Code>Themes</Code>, click em{' '}
         <Code>Actions {'>'} Edit code</Code>
       </ListItem>
       <ListItem>
@@ -20,12 +20,12 @@ export const ShopifyPopupInstructions = () => {
             }
           />
           <Text>
-            In <Code>Layout {'>'} theme.liquid</Code> file, paste this code just
-            before the closing <Code>{'<head>'}</Code> tag:
+            No arquivo <Code>Layout {'>'} theme.liquid</Code>, cole este código 
+            antes do fechamento da tag <Code>{'<head>'}</Code>:
           </Text>
           <JavascriptPopupSnippet autoShowDelay={inputValue} />
         </Stack>
       </ListItem>
     </OrderedList>
-  )
+  );
 }

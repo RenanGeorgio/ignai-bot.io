@@ -13,25 +13,43 @@ import { useEffect, useState } from 'react'
 import { PackageIcon } from './icons'
 
 export const NewVersionPopup = () => {
-  const { typebot, save } = useTypebot()
-  const [isReloading, setIsReloading] = useState(false)
-  const { data } = trpc.getAppVersionProcedure.useQuery()
-  const [currentVersion, setCurrentVersion] = useState<string>()
-  const [isNewVersionAvailable, setIsNewVersionAvailable] = useState(false)
+  const { typebot, save } = useTypebot();
+
+  const [isReloading, setIsReloading] = useState(false);
+  const { data } = trpc.getAppVersionProcedure.useQuery();
+  const [currentVersion, setCurrentVersion] = useState<string>();
+  const [isNewVersionAvailable, setIsNewVersionAvailable] = useState(false);
 
   useEffect(() => {
-    if (!data?.commitSha) return
-    if (currentVersion === data.commitSha) return
-    setCurrentVersion(data.commitSha)
-    if (currentVersion === undefined) return
-    setIsNewVersionAvailable(true)
-  }, [data, currentVersion])
+    if (!data?.commitSha) {
+      return
+    }
+
+    if (currentVersion === data.commitSha) {
+      return
+    }
+    
+    setCurrentVersion(data.commitSha);
+
+    if (currentVersion === undefined) {
+      return
+    }
+
+    setIsNewVersionAvailable(true);
+  }, [data, currentVersion]);
 
   const saveAndReload = async () => {
-    if (isReloading) return
-    setIsReloading(true)
-    if (save) await save()
-    window.location.reload()
+    if (isReloading) {
+      return
+    }
+
+    setIsReloading(true);
+
+    if (save) {
+      await save();
+    }
+
+    window.location.reload();
   }
 
   return (
@@ -62,17 +80,17 @@ export const NewVersionPopup = () => {
               <Stack spacing={1}>
                 <HStack>
                   <PackageIcon />{' '}
-                  <Text fontWeight="bold">New version available!</Text>
+                  <Text fontWeight="bold">Nova versão disponível!</Text>
                 </HStack>
 
                 <Text fontSize="sm" color="gray.100">
-                  An improved version of Typebot is available. Please reload now
-                  to upgrade.
+                  Uma versão melhorada do Ignai-bot está disponível. Por favor recarregue agora
+                  para atualizar.
                 </Text>
               </Stack>
               <Flex justifyContent="flex-end">
                 <Button size="sm" onClick={saveAndReload}>
-                  {typebot?.id ? 'Save and reload' : 'Reload'}
+                  {typebot?.id ? 'Salvar e recarregar' : 'Recarregar'}
                 </Button>
               </Flex>
             </Stack>
@@ -80,5 +98,5 @@ export const NewVersionPopup = () => {
         </Stack>
       </SlideFade>
     </DarkMode>
-  )
+  );
 }

@@ -16,12 +16,10 @@ export const parseDefaultBubbleTheme = (typebot?: Typebot) => ({
 })
 
 export const JavascriptBubbleInstructions = () => {
-  const { typebot } = useTypebot()
-  const [theme, setTheme] = useState<BubbleProps['theme']>(
-    parseDefaultBubbleTheme(typebot)
-  )
-  const [previewMessage, setPreviewMessage] =
-    useState<BubbleProps['previewMessage']>()
+  const { typebot } = useTypebot();
+
+  const [theme, setTheme] = useState<BubbleProps['theme']>(parseDefaultBubbleTheme(typebot));
+  const [previewMessage, setPreviewMessage] = useState<BubbleProps['previewMessage']>();
 
   return (
     <Stack spacing={4}>
@@ -33,9 +31,9 @@ export const JavascriptBubbleInstructions = () => {
         onPreviewMessageChange={setPreviewMessage}
       />
       <Text>
-        Paste this anywhere in the <Code>{'<body>'}</Code>:
+        Cole isso em qualquer lugar do <Code>{'<body>'}</Code>:
       </Text>
       <JavascriptBubbleSnippet theme={theme} previewMessage={previewMessage} />
     </Stack>
-  )
+  );
 }

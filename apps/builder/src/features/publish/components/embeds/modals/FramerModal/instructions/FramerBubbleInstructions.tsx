@@ -8,20 +8,17 @@ import { JavascriptBubbleSnippet } from '../../Javascript/JavascriptBubbleSnippe
 import { TextLink } from '@/components/TextLink'
 
 export const FramerBubbleInstructions = () => {
-  const { typebot } = useTypebot()
+  const { typebot } = useTypebot();
 
-  const [theme, setTheme] = useState<BubbleProps['theme']>(
-    parseDefaultBubbleTheme(typebot)
-  )
-  const [previewMessage, setPreviewMessage] =
-    useState<BubbleProps['previewMessage']>()
+  const [theme, setTheme] = useState<BubbleProps['theme']>(parseDefaultBubbleTheme(typebot));
+  const [previewMessage, setPreviewMessage] = useState<BubbleProps['previewMessage']>();
 
   return (
     <>
       <OrderedList spacing={4} pl={5}>
         <ListItem>
-          Head over to the <Code>Site Settings</Code> {'>'} <Code>General</Code>{' '}
-          {'>'} <Code>Custom Code</Code> section
+          Vá para a sessão <Code>Site Settings</Code> {'>'} <Code>General</Code>{' '}
+          {'>'} <Code>Custom Code</Code>
         </ListItem>
         <ListItem>
           <Stack spacing={4}>
@@ -35,11 +32,10 @@ export const FramerBubbleInstructions = () => {
               onThemeChange={setTheme}
             />
             <Text>
-              Paste this in the{' '}
+              Cole isso na entrada:{' '}
               <Code>
                 End of {'<'}body{'>'} tag
               </Code>{' '}
-              input:
             </Text>
             <JavascriptBubbleSnippet
               theme={theme}
@@ -49,15 +45,15 @@ export const FramerBubbleInstructions = () => {
         </ListItem>
       </OrderedList>
       <Text fontSize="sm" colorScheme="gray" pl="5">
-        Check out the{' '}
+        Confira a{' '}
         <TextLink
           href="https://www.framer.com/academy/lessons/custom-code"
           isExternal
         >
-          Custom Code Framer doc
+          Documentação do Code Framer personalizado
         </TextLink>{' '}
-        for more information.
+        para mais informações.
       </Text>
     </>
-  )
+  );
 }

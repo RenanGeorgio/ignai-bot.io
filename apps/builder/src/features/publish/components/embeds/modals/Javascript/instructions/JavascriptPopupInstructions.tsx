@@ -4,7 +4,7 @@ import { PopupSettings } from '../../../settings/PopupSettings'
 import { JavascriptPopupSnippet } from '../JavascriptPopupSnippet'
 
 export const JavascriptPopupInstructions = () => {
-  const [inputValue, setInputValue] = useState<number>()
+  const [inputValue, setInputValue] = useState<number>();
 
   return (
     <Stack spacing={4}>
@@ -12,9 +12,9 @@ export const JavascriptPopupInstructions = () => {
         onUpdateSettings={(settings) => setInputValue(settings.autoShowDelay)}
       />
       <Text>
-        Paste this anywhere in the <Code>{'<body>'}</Code>:
+        Cole isso em qualquer lugar do <Code>{'<body>'}</Code>:
       </Text>
       <JavascriptPopupSnippet autoShowDelay={inputValue} />
     </Stack>
-  )
+  );
 }
