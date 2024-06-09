@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import {
   Box,
   chakra,
@@ -15,7 +15,7 @@ import { FileIcon, MapIcon, UsersIcon } from './icons';
 interface StatsCardProps {
   title: string
   stat: string
-  icon: (ReactNode | (prop: IconProps) => JSX.Element)
+  icon: (prop: IconProps) => JSX.Element
 }
 
 const StatsCard = (props: StatsCardProps) => {
