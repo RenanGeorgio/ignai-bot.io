@@ -8,13 +8,14 @@ import {
   StatLabel,
   StatNumber,
   useColorModeValue,
+  IconProps
 } from '@chakra-ui/react';
 import { FileIcon, MapIcon, UsersIcon } from './icons';
 
 interface StatsCardProps {
-  title: string;
-  stat: string;
-  icon: ReactNode;
+  title: string
+  stat: string
+  icon: (ReactNode | (prop: IconProps) => JSX.Element)
 }
 
 const StatsCard = (props: StatsCardProps) => {
