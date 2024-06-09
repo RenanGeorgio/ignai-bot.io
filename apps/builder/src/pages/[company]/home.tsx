@@ -1,5 +1,6 @@
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { ErrorPage } from '@/components/ErrorPage'
-import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import Statistics from '@/components/Stats';
 
 type Obj = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -45,7 +46,7 @@ export default function Home({ incompatibleBrowser }: Props){
   }
   
   return (
-    <></>
+    <Statistics />
   );
 }
 
