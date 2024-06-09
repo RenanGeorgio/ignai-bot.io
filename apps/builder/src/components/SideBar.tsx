@@ -50,18 +50,24 @@ const SidebarContent = ({ tab, navSize, ...props }: { tab: string, navSize: stri
   switch (tab) {
     case 'Home':
       return (
-        <FolderIcon {...props}/>
-        <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
+        <Flex alignItems="center" justify="center">
+          <FolderIcon {...props}/>
+          <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
+        </Flex>
       )
     case 'Chat':
       return (
-        <ChatIcon {...props}/>
-        <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
+        <Flex alignItems="center" justify="center">
+          <ChatIcon {...props}/>
+          <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
+        </Flex>
       )
     case 'Builder':
       return (
-        <ToolIcon {...props}/>
-        <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
+        <Flex alignItems="center" justify="center">
+          <ToolIcon {...props}/>
+          <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
+        </Flex>
       )
     default:
       return null
@@ -119,9 +125,7 @@ const NavItem = ({ title, description, active, navSize, router }: NavItemProps) 
           w={navSize == "large" ? "100%" : "35%"}
         >
           <MenuButton w="100%">
-            <Flex alignItems="center" justify="center">
-              <SidebarContent tab={title} navSize={navSize} color={active ? "rgba(255, 0, 0, 0.9)" : "gray.500"} />
-            </Flex>
+            <SidebarContent tab={title} navSize={navSize} color={active ? "rgba(255, 0, 0, 0.9)" : "gray.500"} />
           </MenuButton>
         </Link>
         {/*<MenuList
