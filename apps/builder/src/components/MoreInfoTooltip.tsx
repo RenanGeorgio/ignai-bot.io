@@ -1,5 +1,5 @@
-import { Tooltip, chakra } from '@chakra-ui/react'
-import { HelpCircleIcon } from './icons'
+import { Tooltip, chakra } from '@chakra-ui/react';
+import { HelpCircleIcon } from './icons';
 
 type Props = {
   children: React.ReactNode
@@ -12,5 +12,5 @@ export const MoreInfoTooltip = ({ children }: Props) => {
         <HelpCircleIcon />
       </chakra.span>
     </Tooltip>
-  )
+  );
 }

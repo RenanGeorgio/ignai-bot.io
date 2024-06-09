@@ -37,14 +37,9 @@ type DialogProps = {
   onConfirm: (icon: string) => Promise<unknown> | unknown
 }
 
-export const EditableEmojiOrImageIcon = ({
-  uploadFileProps,
-  icon,
-  onChangeIcon,
-  boxSize,
-}: Props) => {
-  const { t } = useTranslate()
-  const bg = useColorModeValue('gray.100', 'gray.700')
+export const EditableEmojiOrImageIcon = ({ uploadFileProps, icon, onChangeIcon, boxSize }: Props) => {
+  const { t } = useTranslate();
+  const bg = useColorModeValue('gray.100', 'gray.700');
 
   return (
     <Popover isLazy>
@@ -85,27 +80,23 @@ export const EditableEmojiOrImageIcon = ({
         </>
       )}
     </Popover>
-  )
+  );
 }
 
-export const EditDialogEmojiOrImageIcon = ({
-  typebot,
-  workspace,
-  isOpen,
-  onClose,
-  onConfirm
-}: DialogProps) => {
-  const { t } = useTranslate()
+export const EditDialogEmojiOrImageIcon = ({ typebot, workspace, isOpen, onClose, onConfirm }: DialogProps) => {
+  const { t } = useTranslate();
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const cancelRef: RefObject<any> | MutableRefObject<undefined> = useRef(null)
+  const cancelRef: RefObject<any> | MutableRefObject<undefined> = useRef(null);
 
   const onChangeClick = async (icon: string) => {
     try {
-      await onConfirm(icon)
+      await onConfirm(icon);
     } catch (e) {
       return null
     }
-    onClose()
+
+    onClose();
   }
 
   return (
@@ -119,11 +110,9 @@ export const EditDialogEmojiOrImageIcon = ({
           <AlertDialogHeader fontSize='lg' fontWeight='bold'>
            {t('editor.header.tooltip.changeIcon.label')}
           </AlertDialogHeader>
-
           <AlertDialogBody>
             {t('editor.header.tooltip.changeIcon.label')}
           </AlertDialogBody>
-
           <AlertDialogFooter>
             <Button ref={cancelRef} onClick={onClose}>
               {t('cancel')}
@@ -141,5 +130,5 @@ export const EditDialogEmojiOrImageIcon = ({
         </AlertDialogContent>
       </AlertDialogOverlay>
     </AlertDialog>
-  )
+  );
 }
