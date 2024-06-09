@@ -10,16 +10,16 @@ import {
   useColorModeValue,
   IconProps
 } from '@chakra-ui/react';
-import { FileIcon, MapIcon, UsersIcon } from './icons';
+//import { FileIcon, MapIcon, UsersIcon } from './icons';
 
 interface StatsCardProps {
   title: string
   stat: string
-  icon: (prop: IconProps) => JSX.Element
+  icon?: (prop: IconProps) => JSX.Element
 }
 
 const StatsCard = (props: StatsCardProps) => {
-  const { title, stat, icon } = props;
+  const { title, stat } = props;
 
   return (
     <Stat
@@ -42,7 +42,6 @@ const StatsCard = (props: StatsCardProps) => {
           my={'auto'}
           color={useColorModeValue('gray.800', 'gray.200')}
           alignContent={'center'}>
-          (icon({'25px'}))
         </Box>
       </Flex>
     </Stat>
@@ -63,17 +62,17 @@ const Statistics = () => {
         <StatsCard
           title={'Users'}
           stat={'5,000'}
-          icon={<UsersIcon size={'3em'} />}
+          //icon={<UsersIcon size={'3em'} />}
         />
         <StatsCard
           title={'Servers'}
           stat={'1,000'}
-          icon={<FileIcon size={'3em'} />}
+          //icon={<FileIcon size={'3em'} />}
         />
         <StatsCard
           title={'Datacenters'}
           stat={'7'}
-          icon={<MapIcon size={'3em'} />}
+          //icon={<MapIcon size={'3em'} />}
         />
       </SimpleGrid>
     </Box>
