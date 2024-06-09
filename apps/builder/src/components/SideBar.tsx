@@ -46,31 +46,22 @@ interface HoverProps {
   description: string | undefined
 }
 
-const SidebarContent = ({ tab, ...props }: { tab: string } & IconProps) => {
+const SidebarContent = ({ tab, navSize, ...props }: { tab: string, navSize: string } & IconProps) => {
   switch (tab) {
     case 'Home':
       return (
-        <Tooltip hasArrow label="Home">
-          <span>
-            <FolderIcon {...props}/>
-          </span>
-        </Tooltip>
+        <FolderIcon {...props}/>
+        <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
       )
     case 'Chat':
       return (
-        <Tooltip hasArrow label="Chat">
-          <span>
-            <ChatIcon {...props}/>
-          </span>
-        </Tooltip>
+        <ChatIcon {...props}/>
+        <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
       )
     case 'Builder':
       return (
-        <Tooltip hasArrow label="Builder">
-          <span>
-            <ToolIcon {...props}/>
-          </span>
-        </Tooltip>
+        <ToolIcon {...props}/>
+        <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
       )
     default:
       return null
@@ -129,8 +120,7 @@ const NavItem = ({ title, description, active, navSize, router }: NavItemProps) 
         >
           <MenuButton w="100%">
             <Flex alignItems="center" justify="center">
-              <SidebarContent tab={title} color={active ? "rgba(255, 0, 0, 0.9)" : "gray.500"} />
-              <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{title}</Text>
+              <SidebarContent tab={title} navSize={navSize} color={active ? "rgba(255, 0, 0, 0.9)" : "gray.500"} />
             </Flex>
           </MenuButton>
         </Link>
