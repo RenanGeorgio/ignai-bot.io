@@ -51,19 +51,25 @@ const SidebarContent = ({ tab, ...props }: { tab: string } & IconProps) => {
     case 'Home':
       return (
         <Tooltip hasArrow label="Home">
-          <FolderIcon {...props}/>
+          <span>
+            <FolderIcon {...props}/>
+          </span>
         </Tooltip>
       )
     case 'Chat':
       return (
         <Tooltip hasArrow label="Chat">
-          <ChatIcon {...props}/>
+          <span>
+            <ChatIcon {...props}/>
+          </span>
         </Tooltip>
       )
     case 'Builder':
       return (
         <Tooltip hasArrow label="Builder">
-          <ToolIcon {...props}/>
+          <span>
+            <ToolIcon {...props}/>
+          </span>
         </Tooltip>
       )
     default:
