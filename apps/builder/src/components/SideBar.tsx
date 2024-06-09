@@ -195,9 +195,15 @@ const CustomSideBar = () => {
           alignItems={navSize == "small" ? "center" : "flex-start"} 
           as="nav"
         >
-          <NavItem router={router} navSize={navSize} title="Home" description="Pagina inicial da aplicação." />
-          <NavItem router={router} navSize={navSize} title="Chat" description="Conteudo de chat disponivel." />
-          <NavItem router={router} navSize={navSize} title="Builder" description="Construtor de Bot" />
+          <Tooltip hasArrow label="Builder">
+            <NavItem router={router} navSize={navSize} title="Home" description="Pagina inicial da aplicação." />
+          </Tooltip>
+          <Tooltip hasArrow label="Builder">
+            <NavItem router={router} navSize={navSize} title="Chat" description="Conteudo de chat disponivel." />
+          </Tooltip>
+          <Tooltip hasArrow label="Builder">
+            <NavItem router={router} navSize={navSize} title="Builder" description="Construtor de Bot" />
+          </Tooltip>
         </Flex>
       </VStack>
 
