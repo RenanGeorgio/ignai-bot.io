@@ -14,7 +14,7 @@ export const DashboardHeader = () => {
   const handleCreateNewWorkspace = () => {
     createWorkspace(user?.name ?? undefined);
   }
-
+// apareceu a mensagem de UNAUTORIZED
   return (
     <Flex minWidth="max-content" alignItems="center" w="full" borderBottomWidth="1px" justify="center">
       <Link href="/typebots" data-testid="typebot-logo">
@@ -23,7 +23,7 @@ export const DashboardHeader = () => {
           icon={workspace?.icon}
           defaultIcon={IgnaiIcon} 
         />
-      </Link>
+      </Link> 
       <Spacer />
       <HStack>
         <WorkspaceDropdown

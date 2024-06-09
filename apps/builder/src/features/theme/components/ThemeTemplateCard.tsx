@@ -44,15 +44,12 @@ export const ThemeTemplateCard = ({
   onClick: () => void
   onDeleteSuccess?: () => void
 }) => {
-  const { t } = useTranslate()
-  const borderWidth = useColorModeValue(undefined, '1px')
-  const [isDeleting, setIsDeleting] = useState(false)
+  const { t } = useTranslate();
+  const borderWidth = useColorModeValue(undefined, '1px');
+  const [isDeleting, setIsDeleting] = useState(false);
 
-  const {
-    theme: {
-      listThemeTemplates: { refetch: refetchThemeTemplates },
-    },
-  } = trpc.useContext()
+  const { theme: { listThemeTemplates: { refetch: refetchThemeTemplates } } } = trpc.useContext();
+
   const { mutate } = trpc.theme.deleteThemeTemplate.useMutation({
     onMutate: () => setIsDeleting(true),
     onSettled: () => setIsDeleting(false),
@@ -60,7 +57,7 @@ export const ThemeTemplateCard = ({
       refetchThemeTemplates()
       if (onDeleteSuccess) onDeleteSuccess()
     },
-  })
+  });
 
   const deleteThemeTemplate = () => {
     mutate({ themeTemplateId: themeTemplate.id, workspaceId })
@@ -110,7 +107,7 @@ export const ThemeTemplateCard = ({
       rounded="md"
       boxShadow={
         isSelected
-          ? `${colors['blue']['400']} 0 0 0 4px`
+          ? `${colors['red']['400']} 0 0 0 4px`
           : `rgba(0, 0, 0, 0.08) 0px 2px 4px`
       }
       style={{
@@ -122,7 +119,7 @@ export const ThemeTemplateCard = ({
         borderTopRadius="md"
         backgroundSize="cover"
         {...parseBackground(themeTemplate.theme.general?.background)}
-        borderColor={isSelected ? 'blue.400' : undefined}
+        borderColor={isSelected ? 'red.400' : undefined}
       >
         <HStack mt="4" ml="4" spacing={0.5} alignItems="flex-end">
           <AvatarPreview avatar={hostAvatar} />
@@ -195,9 +192,7 @@ export const ThemeTemplateCard = ({
   )
 }
 
-const parseBackground = (
-  background: NonNullable<Theme['general']>['background']
-) => {
+const parseBackground = (background: NonNullable<Theme['general']>['background']) => {
   switch (background?.type) {
     case undefined:
     case BackgroundType.COLOR:
@@ -211,13 +206,13 @@ const parseBackground = (
   }
 }
 
-const AvatarPreview = ({
-  avatar,
-}: {
-  avatar: NonNullable<Theme['chat']>['hostAvatar']
-}) => {
-  const { t } = useTranslate()
-  if (!avatar?.isEnabled) return null
+const AvatarPreview = ({ avatar }: { avatar: NonNullable<Theme['chat']>['hostAvatar'] }) => {
+  const { t } = useTranslate();
+
+  if (!avatar?.isEnabled) {
+    return null
+  }
+
   return avatar?.url ? (
     <Image
       src={avatar.url}

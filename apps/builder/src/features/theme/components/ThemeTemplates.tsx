@@ -22,9 +22,9 @@ export const ThemeTemplates = ({
   currentTheme,
   onTemplateSelect,
 }: Props) => {
-  const { t } = useTranslate()
+  const { t } = useTranslate();
 
-  const [selectedTab, setSelectedTab] = useState<Tab>('my-templates')
+  const [selectedTab, setSelectedTab] = useState<Tab>('my-templates');
 
   return (
     <Stack spacing={4}>
@@ -32,7 +32,7 @@ export const ThemeTemplates = ({
         <Button
           flex="1"
           variant="outline"
-          colorScheme={selectedTab === 'my-templates' ? 'blue' : 'gray'}
+          colorScheme={selectedTab === 'my-templates' ? 'red' : 'gray'}
           onClick={() => setSelectedTab('my-templates')}
         >
           {t('theme.sideMenu.template.myTemplates')}
@@ -40,7 +40,7 @@ export const ThemeTemplates = ({
         <Button
           flex="1"
           variant="outline"
-          colorScheme={selectedTab === 'gallery' ? 'blue' : 'gray'}
+          colorScheme={selectedTab === 'gallery' ? 'red' : 'gray'}
           onClick={() => setSelectedTab('gallery')}
         >
           {t('theme.sideMenu.template.gallery')}
@@ -54,7 +54,7 @@ export const ThemeTemplates = ({
         onTemplateSelect={onTemplateSelect}
       />
     </Stack>
-  )
+  );
 }
 
 const ThemeTemplatesBody = ({
