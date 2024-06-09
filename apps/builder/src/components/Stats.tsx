@@ -42,7 +42,7 @@ const StatsCard = (props: StatsCardProps) => {
           my={'auto'}
           color={useColorModeValue('gray.800', 'gray.200')}
           alignContent={'center'}>
-          {icon}
+          (icon({'25px'}))
         </Box>
       </Flex>
     </Stat>
