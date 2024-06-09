@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Flex } from '@chakra-ui/react';
+import { Flex, VStack } from '@chakra-ui/react';
 import { ThemeProvider } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 import { DashboardHeader } from '@/features/dashboard/components/DashboardHeader';
@@ -49,66 +49,68 @@ const Chat: React.FC = () => {
 
   return (
     <ChatProvider>
-      <DashboardHeader />
-      <Flex w="100%">
-        <CustomSideBar />
-        <div style={{ overflow: 'hidden' }} className={styles['page-content']}>
-          <div className={styles['button-container']}>
-            <button
-              className={
-                activePage === 'Atendimento'
-                  ? styles.redButtonChat
-                  : styles.grayButtonChat
-              }
-              onClick={() => handleButtonClick('Atendimento')}
-            >
-              Atendimento
-            </button>
-            <button
-              className={
-                activePage === 'Histórico'
-                  ? styles.redButtonChat
-                  : styles.grayButtonChat
-              }
-              onClick={() => handleButtonClick('Histórico')}
-            >
-              Histórico
-            </button>
-            <button
-              className={
-                activePage === 'Painel'
-                  ? styles.redButtonChat
-                  : styles.grayButtonChat
-              }
-              onClick={() => handleButtonClick('Painel')}
-            >
-              Painel
-            </button>
+      <VStack>
+        <DashboardHeader />
+        <Flex w="100%">
+          <CustomSideBar />
+          <div style={{ overflow: 'hidden' }} className={styles['page-content']}>
+            <div className={styles['button-container']}>
+              <button
+                className={
+                  activePage === 'Atendimento'
+                    ? styles.redButtonChat
+                    : styles.grayButtonChat
+                }
+                onClick={() => handleButtonClick('Atendimento')}
+              >
+                Atendimento
+              </button>
+              <button
+                className={
+                  activePage === 'Histórico'
+                    ? styles.redButtonChat
+                    : styles.grayButtonChat
+                }
+                onClick={() => handleButtonClick('Histórico')}
+              >
+                Histórico
+              </button>
+              <button
+                className={
+                  activePage === 'Painel'
+                    ? styles.redButtonChat
+                    : styles.grayButtonChat
+                }
+                onClick={() => handleButtonClick('Painel')}
+              >
+                Painel
+              </button>
+            </div>
+            <div>
+              {activePage === 'Atendimento' && (
+                <div>
+                  <Layout />
+                </div>
+              )}
+              {activePage === 'Histórico' && (
+                <>
+                  <ThemeProvider theme={{ ['MuiTheme']: MuiTheme }}>
+                    <History />
+                  </ThemeProvider>
+                </>
+              )}
+              {activePage === 'Painel' && (
+                <div className={styles['container-graphs-chat']}>
+                  <GraphChat data={{ datasets: [], labels: [] }} />
+                  <GraphTicket data={[50, 30, 20, 10]} />
+                  <GraphThemes month={''} />
+                  <GraphTicketYou data={[50, 30, 20, 10]} />
+                </div>
+              )}
+            </div>
           </div>
-          <div>
-            {activePage === 'Atendimento' && (
-              <div>
-                <Layout />
-              </div>
-            )}
-            {activePage === 'Histórico' && (
-              <>
-                <ThemeProvider theme={{ ['MuiTheme']: MuiTheme }}>
-                  <History />
-                </ThemeProvider>
-              </>
-            )}
-            {activePage === 'Painel' && (
-              <div className={styles['container-graphs-chat']}>
-                <GraphChat data={{ datasets: [], labels: [] }} />
-                <GraphTicket data={[50, 30, 20, 10]} />
-                <GraphThemes month={''} />
-                <GraphTicketYou data={[50, 30, 20, 10]} />
-              </div>
-            )}
-          </div>
-        </div>
-      </Flex>
+        </Flex>
+      </VStack>
     </ChatProvider>
   );
 }
