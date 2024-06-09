@@ -9,4 +9,4 @@ export const TemplatesPage = () => (
     <DashboardHeader />
     <CreateNewTypebotButtons />
   </VStack>
-)
+);
