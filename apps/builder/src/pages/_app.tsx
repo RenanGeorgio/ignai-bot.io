@@ -1,10 +1,7 @@
 import { useEffect } from 'react'
 import { AppProps } from 'next/app'
 import { SessionProvider } from 'next-auth/react'
-import {
-  ChakraProvider,
-  createStandaloneToast
-} from '@chakra-ui/react'
+import { ChakraProvider, createStandaloneToast } from '@chakra-ui/react'
 import { customTheme } from '@/lib/theme'
 import { useRouterProgressBar } from '@/lib/routerProgressBar'
 import '@/assets/styles/routerProgressBar.css'
@@ -32,48 +29,45 @@ import {
   THEME_ID,
 } from '@mui/material/styles'
 
-const { ToastContainer, toast } = createStandaloneToast(customTheme)
+const { ToastContainer, toast } = createStandaloneToast(customTheme);
 
 const App = ({ Component, pageProps }: AppProps) => {
-  const router = useRouter()
-  const ssrTolgee = useTolgeeSSR(tolgee, router.locale)
+  const router = useRouter();
+  const ssrTolgee = useTolgeeSSR(tolgee, router.locale);
 
-  useRouterProgressBar()
+  useRouterProgressBar();
 
   useEffect(() => {
-    if (
-      router.pathname.endsWith('/edit') ||
-      router.pathname.endsWith('/analytics')
-    ) {
-      document.body.style.overflow = 'hidden'
-      document.body.classList.add('disable-scroll-x-behavior')
+    if (router.pathname.endsWith('/edit') || router.pathname.endsWith('/analytics')) {
+      document.body.style.overflow = 'hidden';
+      document.body.classList.add('disable-scroll-x-behavior');
     } else {
-      document.body.style.overflow = 'auto'
-      document.body.classList.remove('disable-scroll-x-behavior')
+      document.body.style.overflow = 'auto';
+      document.body.classList.remove('disable-scroll-x-behavior');
     }
-  }, [router.pathname])
+  }, [router.pathname]);
 
   useEffect(() => {
-    const newPlan = router.query.stripe?.toString()
-    if (newPlan === Plan.STARTER || newPlan === Plan.PRO)
+    const newPlan = router.query.stripe?.toString();
+
+    if (newPlan === Plan.STARTER || newPlan === Plan.PRO) {
       toast({
         position: 'top-right',
         status: 'success',
         title: 'Upgrade success!',
         description: `Workspace upgraded to ${toTitleCase(newPlan)} 🎉`,
-      })
-  }, [router.query.stripe])
+      });
+    }
+  }, [router.query.stripe]);
 
-  const typebotId = router.query.typebotId?.toString()
+  const typebotId = router.query.typebotId?.toString();
 
-  //const chakraTheme = extendTheme()
-  const materialTheme = muiCreateTheme()
+  const materialTheme = muiCreateTheme();
 
   return (
     <TolgeeProvider tolgee={ssrTolgee}>
       <ToastContainer />
         <ChakraProvider theme={customTheme} resetCSS>
-      {/*<ChakraProvider theme={chakraTheme} resetCSS>*/}
         <MaterialThemeProvider theme={{ [THEME_ID]: materialTheme }}>
           <Toaster />
           <SessionProvider session={pageProps.session}>
@@ -91,7 +85,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         </MaterialThemeProvider>
       </ChakraProvider>
     </TolgeeProvider>
-  )
+  );
 }
 
 export default trpc.withTRPC(App)
