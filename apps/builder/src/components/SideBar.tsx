@@ -99,7 +99,6 @@ const NavHoverBox = ({ title, description }: HoverProps) => {
         color="#fff"
         textAlign="center"
       >
-        <SidebarContent tab={title} fontSize="3xl" mb={4} />
         <Heading size="md" fontWeight="normal">{title}</Heading>
         <Text>{description}</Text>
       </Flex>
