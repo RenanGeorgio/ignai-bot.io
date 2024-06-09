@@ -6,8 +6,6 @@ import {
   Heading,
   Menu,
   MenuButton,
-  MenuList,
-  MenuItem,
   Link,
   IconButton,
   IconProps,
@@ -73,6 +71,7 @@ const SidebarContent = ({ tab, ...props }: { tab: string } & IconProps) => {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const NavHoverBox = ({ title, description }: HoverProps) => {
   return (
     <>
@@ -105,6 +104,7 @@ const NavHoverBox = ({ title, description }: HoverProps) => {
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const NavItem = ({ title, description, active, navSize, router }: NavItemProps) => {
   return (
     <Flex
@@ -128,7 +128,7 @@ const NavItem = ({ title, description, active, navSize, router }: NavItemProps) 
             </Flex>
           </MenuButton>
         </Link>
-        <MenuList
+        {/*<MenuList
           py={0}
           border="none"
           w={200}
@@ -138,7 +138,7 @@ const NavItem = ({ title, description, active, navSize, router }: NavItemProps) 
           <MenuItem onClick={() => router.push("/typebots")}>
             <NavHoverBox title={title} description={description} />
           </MenuItem>
-      </MenuList>
+      </MenuList>*/}
     </Menu>
   </Flex>
   );
