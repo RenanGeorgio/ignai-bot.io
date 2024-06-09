@@ -41,30 +41,37 @@ interface NavItemProps {
   navSize: string
 }
 
+interface ContentProps {
+  tab: string
+  navSize: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  navigate: any
+}
+
 interface HoverProps {
   title: string 
   description: string | undefined
 }
 
-const SidebarContent = ({ tab, navSize, ...props }: { tab: string, navSize: string } & IconProps) => {
+const SidebarContent = ({ tab, navSize, navigate, ...props }: ContentProps & IconProps) => {
   switch (tab) {
     case 'Home':
       return (
-        <Flex alignItems="center" justify="center">
+        <Flex alignItems="center" justify="center" onClick={() => navigate.push("/typebots")}>
           <FolderIcon {...props}/>
           <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
         </Flex>
       )
     case 'Chat':
       return (
-        <Flex alignItems="center" justify="center">
+        <Flex alignItems="center" justify="center" onClick={() => navigate.push("/typebots")}>
           <ChatIcon {...props}/>
           <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
         </Flex>
       )
     case 'Builder':
       return (
-        <Flex alignItems="center" justify="center">
+        <Flex alignItems="center" justify="center" onClick={() => navigate.push("/typebots")}>
           <ToolIcon {...props}/>
           <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
         </Flex>
@@ -124,7 +131,7 @@ const NavItem = ({ title, description, active, navSize, router }: NavItemProps) 
           w={navSize == "large" ? "100%" : "35%"}
         >
           <MenuButton w="100%">
-            <SidebarContent tab={title} navSize={navSize} color={active ? "rgba(255, 0, 0, 0.9)" : "gray.500"} />
+            <SidebarContent tab={title} navSize={navSize} navigate={router} color={active ? "rgba(255, 0, 0, 0.9)" : "gray.500"} />
           </MenuButton>
         </Link>
         {/*<MenuList
