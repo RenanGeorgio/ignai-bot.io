@@ -9,6 +9,7 @@ import GraphChat from '@/components/graph/GraphChat';
 import GraphTicket from '@/components/graph/GraphTicket';
 import GraphTicketYou from '@/components/graph/GraphTicketYou';
 import GraphThemes from '@/components/graph/GraphThemes';
+import CustomSideBar from '@/components/SideBar';
 import { ChatProvider } from '@/contexts/chat/ChatContext';
 import { colors } from '@/lib/theme';
 
