@@ -1,11 +1,11 @@
-import { FormControl, FormLabel, Stack } from '@chakra-ui/react'
-import { Settings } from '@typebot.io/schemas'
-import React from 'react'
-import { isDefined } from '@typebot.io/lib'
-import { TextInput } from '@/components/inputs'
-import { env } from '@typebot.io/env'
-import { MoreInfoTooltip } from '@/components/MoreInfoTooltip'
-import { PrimitiveList } from '@/components/PrimitiveList'
+import React from 'react';
+import { FormControl, FormLabel, Stack } from '@chakra-ui/react';
+import { Settings } from '@typebot.io/schemas';
+import { isDefined } from '@typebot.io/lib';
+import { TextInput } from '@/components/inputs';
+import { env } from '@typebot.io/env';
+import { MoreInfoTooltip } from '@/components/MoreInfoTooltip';
+import { PrimitiveList } from '@/components/PrimitiveList';
 
 type Props = {
   security: Settings['security']
@@ -14,10 +14,13 @@ type Props = {
 
 export const SecurityForm = ({ security, onUpdate }: Props) => {
   const updateItems = (items: string[]) => {
-    if (items.length === 0) onUpdate(undefined)
+    if (items.length === 0) {
+      onUpdate(undefined);
+    }
+
     onUpdate({
       allowedOrigins: items.filter(isDefined),
-    })
+    });
   }
 
   return (
@@ -26,8 +29,8 @@ export const SecurityForm = ({ security, onUpdate }: Props) => {
         <FormLabel display="flex" flexShrink={0} gap="1" mr="0" mb="4">
           Allowed origins
           <MoreInfoTooltip>
-            Restrict the execution of your typebot to specific website origins.
-            By default your bot can be executed on any website.
+            Restrinja a execução do seu Ignai-bot a origens  de websites específicos.
+            Por padrão, seu bot pode ser executado em qualquer website.
           </MoreInfoTooltip>
         </FormLabel>
         <PrimitiveList
@@ -46,5 +49,5 @@ export const SecurityForm = ({ security, onUpdate }: Props) => {
         </PrimitiveList>
       </FormControl>
     </Stack>
-  )
+  );
 }

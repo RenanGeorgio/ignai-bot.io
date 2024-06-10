@@ -37,15 +37,15 @@ export const NotionModal = ({
         <ModalCloseButton />
         <ModalBody>
           {!isPublished && (
-            <AlertInfo mb="4">You need to publish your bot first.</AlertInfo>
+            <AlertInfo mb="4">Você precisa publicar seu bot primeiro.</AlertInfo>
           )}
           <OrderedList spacing={4}>
             <ListItem>
-              Type <Code>/embed</Code>
+              Digite <Code>/embed</Code>
             </ListItem>
             <ListItem>
               <Stack>
-                <Text>Paste your typebot URL</Text>
+                <Text>Cole a URL do seu Ignai-bot</Text>
                 <InputGroup size="sm">
                   <Input
                     type={'text'}
@@ -65,5 +65,5 @@ export const NotionModal = ({
         <ModalFooter />
       </ModalContent>
     </Modal>
-  )
+  );
 }

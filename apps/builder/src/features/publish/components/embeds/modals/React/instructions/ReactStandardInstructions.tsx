@@ -17,7 +17,7 @@ export const ReactStandardInstructions = () => {
     <OrderedList spacing={4} pl={5}>
       <ListItem>
         <Stack spacing={4}>
-          <Text>Install the packages</Text>
+          <Text>Instale os pacotes</Text>
           <InstallReactPackageSnippet />
         </Stack>
       </ListItem>

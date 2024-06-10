@@ -1,7 +1,7 @@
-import { Box, Button, Fade, Flex, IconButton, Stack } from '@chakra-ui/react'
-import { TrashIcon, PlusIcon } from '@/components/icons'
-import React, { useEffect, useState } from 'react'
-import { createId } from '@paralleldrive/cuid2'
+import React, { useEffect, useState } from 'react';
+import { Box, Button, Fade, Flex, IconButton, Stack } from '@chakra-ui/react';
+import { TrashIcon, PlusIcon } from '@/components/icons';
+import { createId } from '@paralleldrive/cuid2';
 
 type ItemWithId<T extends number | string | boolean> = { id: string; value?: T }
 
@@ -36,51 +36,62 @@ export const PrimitiveList = <T extends number | string | boolean>({
   ComponentBetweenItems,
   onItemsChange,
 }: Props<T>) => {
-  const [items, setItems] = useState<ItemWithId<T>[]>()
-  const [showDeleteIndex, setShowDeleteIndex] = useState<number | null>(null)
+  const [items, setItems] = useState<ItemWithId<T>[]>();
+  const [showDeleteIndex, setShowDeleteIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    if (items) return
-    if (initialItems) {
-      setItems(addIdToItems(initialItems))
-    } else if (hasDefaultItem) {
-      setItems(addIdToItems([]))
-    } else {
-      setItems([])
+    if (items) {
+      return
     }
-  }, [hasDefaultItem, initialItems, items])
+
+    if (initialItems) {
+      setItems(addIdToItems(initialItems));
+    } else if (hasDefaultItem) {
+      setItems(addIdToItems([]));
+    } else {
+      setItems([]);
+    }
+  }, [hasDefaultItem, initialItems, items]);
 
   const createItem = () => {
-    if (!items) return
-    const newItems = [...items, { id: createId() }]
-    setItems(newItems)
-    onItemsChange(removeIdFromItems(newItems))
+    if (!items) {
+      return
+    }
+
+    const newItems = [...items, { id: createId() }];
+
+    setItems(newItems);
+    onItemsChange(removeIdFromItems(newItems));
   }
 
   const updateItem = (itemIndex: number, newValue: T) => {
-    if (!items) return
-    const newItems = items.map((item, idx) =>
-      idx === itemIndex ? { ...item, value: newValue } : item
-    )
-    setItems(newItems)
-    onItemsChange(removeIdFromItems(newItems))
+    if (!items) {
+      return
+    }
+
+    const newItems = items.map((item, idx) => idx === itemIndex ? { ...item, value: newValue } : item);
+
+    setItems(newItems);
+    onItemsChange(removeIdFromItems(newItems));
   }
 
   const deleteItem = (itemIndex: number) => () => {
-    if (!items) return
-    const newItems = [...items]
-    newItems.splice(itemIndex, 1)
-    setItems([...newItems])
-    onItemsChange(removeIdFromItems([...newItems]))
+    if (!items) {
+      return
+    }
+
+    const newItems = [...items];
+    newItems.splice(itemIndex, 1);
+
+    setItems([...newItems]);
+    onItemsChange(removeIdFromItems([...newItems]));
   }
 
-  const handleMouseEnter = (itemIndex: number) => () =>
-    setShowDeleteIndex(itemIndex)
+  const handleMouseEnter = (itemIndex: number) => () => setShowDeleteIndex(itemIndex);
 
-  const handleCellChange = (itemIndex: number) => (item: T) =>
-    updateItem(itemIndex, item)
+  const handleCellChange = (itemIndex: number) => (item: T) => updateItem(itemIndex, item);
 
-  const handleMouseLeave = () => setShowDeleteIndex(null)
+  const handleMouseLeave = () => setShowDeleteIndex(null);
 
   return (
     <Stack spacing={0}>
@@ -126,10 +137,10 @@ export const PrimitiveList = <T extends number | string | boolean>({
         leftIcon={<PlusIcon />}
         onClick={createItem}
         flexShrink={0}
-        colorScheme="blue"
+        colorScheme="red"
       >
         {addLabel}
       </Button>
     </Stack>
-  )
+  );
 }

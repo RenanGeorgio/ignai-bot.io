@@ -7,18 +7,15 @@ import { parseDefaultBubbleTheme } from '../../Javascript/instructions/Javascrip
 import { JavascriptBubbleSnippet } from '../../Javascript/JavascriptBubbleSnippet'
 
 export const ShopifyBubbleInstructions = () => {
-  const { typebot } = useTypebot()
+  const { typebot } = useTypebot();
 
-  const [theme, setTheme] = useState<BubbleProps['theme']>(
-    parseDefaultBubbleTheme(typebot)
-  )
-  const [previewMessage, setPreviewMessage] =
-    useState<BubbleProps['previewMessage']>()
+  const [theme, setTheme] = useState<BubbleProps['theme']>(parseDefaultBubbleTheme(typebot));
+  const [previewMessage, setPreviewMessage] = useState<BubbleProps['previewMessage']>();
 
   return (
     <OrderedList spacing={4} pl={5}>
       <ListItem>
-        On your shop dashboard in the <Code>Themes</Code> page, click on{' '}
+        No painel da sua loja, na pagina <Code>Themes</Code>, click em{' '}
         <Code>Actions {'>'} Edit code</Code>
       </ListItem>
       <ListItem>
@@ -33,8 +30,8 @@ export const ShopifyBubbleInstructions = () => {
             onThemeChange={setTheme}
           />
           <Text>
-            In <Code>Layout {'>'} theme.liquid</Code> file, paste this code just
-            before the closing <Code>{'<head>'}</Code> tag:
+            No arquivo <Code>Layout {'>'} theme.liquid</Code>, cole este código
+            antes do fechamento da tag <Code>{'<head>'}</Code>:
           </Text>
           <JavascriptBubbleSnippet
             theme={theme}
@@ -43,5 +40,5 @@ export const ShopifyBubbleInstructions = () => {
         </Stack>
       </ListItem>
     </OrderedList>
-  )
+  );
 }

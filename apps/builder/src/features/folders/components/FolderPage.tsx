@@ -8,6 +8,7 @@ import { TypebotDndProvider } from '../TypebotDndProvider'
 import { FolderContent } from './FolderContent'
 import { trpc } from '@/lib/trpc'
 import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
+import CustomSideBar from '@/components/SideBar'
 
 export const FolderPage = () => {
   const { t } = useTranslate()
@@ -43,7 +44,10 @@ export const FolderPage = () => {
             <Spinner mx="auto" />
           </Flex>
         ) : (
-          <FolderContent folder={folder} />
+          <Flex w="100%">
+            <CustomSideBar />
+            <FolderContent folder={folder} />
+          </Flex>
         )}
       </TypebotDndProvider>
     </Stack>

@@ -1,3 +1,4 @@
+import { FormEvent, useRef, useState } from 'react'
 import { TextInput } from '@/components/inputs'
 import { useToast } from '@/hooks/useToast'
 import { trpc } from '@/lib/trpc'
@@ -15,7 +16,6 @@ import {
 import { createId } from '@paralleldrive/cuid2'
 import { useTranslate } from '@tolgee/react'
 import { ThemeTemplate } from '@typebot.io/schemas'
-import { FormEvent, useRef, useState } from 'react'
 
 type Props = {
   workspaceId: string
@@ -32,15 +32,14 @@ export const SaveThemeModal = ({
   selectedTemplate,
   theme,
 }: Props) => {
-  const { t } = useTranslate()
-  const { showToast } = useToast()
-  const [isSaving, setIsSaving] = useState(false)
-  const inputRef = useRef<HTMLInputElement>(null)
-  const {
-    theme: {
-      listThemeTemplates: { refetch: refetchThemeTemplates },
-    },
-  } = trpc.useContext()
+  const { t } = useTranslate();
+
+  const { showToast } = useToast();
+  const [isSaving, setIsSaving] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const { theme: { listThemeTemplates: { refetch: refetchThemeTemplates } } } = trpc.useContext();
+
   const { mutate } = trpc.theme.saveThemeTemplate.useMutation({
     onMutate: () => setIsSaving(true),
     onSettled: () => setIsSaving(false),
@@ -53,29 +52,37 @@ export const SaveThemeModal = ({
         description: error.message,
       })
     },
-  })
+  });
 
   const updateExistingTemplate = (e: FormEvent) => {
-    e.preventDefault()
-    const newName = inputRef.current?.value
-    if (!newName) return
+    e.preventDefault();
+
+    const newName = inputRef.current?.value;
+    if (!newName) {
+      return
+    }
+
     mutate({
       name: newName,
       theme,
       workspaceId,
       themeTemplateId: selectedTemplate?.id ?? createId(),
-    })
+    });
   }
 
   const saveNewTemplate = () => {
-    const newName = inputRef.current?.value
-    if (!newName) return
+    const newName = inputRef.current?.value;
+
+    if (!newName) {
+      return
+    }
+
     mutate({
       name: newName,
       theme,
       workspaceId,
       themeTemplateId: createId(),
-    })
+    });
   }
 
   return (
@@ -98,18 +105,17 @@ export const SaveThemeModal = ({
             isRequired
           />
         </ModalBody>
-
         <ModalFooter as={HStack}>
           {selectedTemplate?.id && (
             <Button isLoading={isSaving} onClick={saveNewTemplate}>
               {t('theme.sideMenu.template.myTemplates.saveTheme.saveAsNew')}
             </Button>
           )}
-          <Button type="submit" colorScheme="blue" isLoading={isSaving}>
+          <Button type="submit" colorScheme="red" isLoading={isSaving}>
             {selectedTemplate?.id ? t('update') : t('save')}
           </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
-  )
+  );
 }

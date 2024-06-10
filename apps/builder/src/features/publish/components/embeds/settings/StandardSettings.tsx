@@ -18,49 +18,39 @@ type Props = {
   }) => void
 } & StackProps
 
-export const StandardSettings = ({
-  onUpdateWindowSettings,
-  ...props
-}: Props) => {
-  const [isFullscreenChecked, setIsFullscreenChecked] = useState(false)
+export const StandardSettings = ({ onUpdateWindowSettings, ...props }: Props) => {
+  const [isFullscreenChecked, setIsFullscreenChecked] = useState(false);
   const [inputValues, setInputValues] = useState({
     widthValue: '100',
     widthType: '%',
     heightValue: '600',
     heightType: 'px',
-  })
+  });
 
   useEffect(() => {
     onUpdateWindowSettings({
-      widthLabel: isFullscreenChecked
-        ? undefined
-        : inputValues.widthValue + inputValues.widthType,
-      heightLabel: isFullscreenChecked
-        ? '100vh'
-        : inputValues.heightValue + inputValues.heightType,
-    })
+      widthLabel: isFullscreenChecked ? undefined : inputValues.widthValue + inputValues.widthType,
+      heightLabel: isFullscreenChecked ? '100vh' : inputValues.heightValue + inputValues.heightType,
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inputValues, isFullscreenChecked])
+  }, [inputValues, isFullscreenChecked]);
 
-  const handleWidthTypeSelect = (widthType: string) =>
-    setInputValues({ ...inputValues, widthType })
-  const handleHeightTypeSelect = (heightType: string) =>
-    setInputValues({ ...inputValues, heightType })
+  const handleWidthTypeSelect = (widthType: string) => setInputValues({ ...inputValues, widthType });
+  const handleHeightTypeSelect = (heightType: string) => setInputValues({ ...inputValues, heightType });
 
   return (
     <Stack {...props} spacing={4}>
-      <Heading size="sm">Window settings</Heading>
-
+      <Heading size="sm">Configurações da Janela</Heading>
       <Stack pl="4" spacing={4}>
         <SwitchWithLabel
-          label="Set to fullscreen?"
+          label="Definir como Tela Cheia?"
           initialValue={isFullscreenChecked}
           onCheckChange={() => setIsFullscreenChecked(!isFullscreenChecked)}
         />
         {!isFullscreenChecked && (
           <>
             <Flex justify="space-between" align="center">
-              <Text>Width</Text>
+              <Text>Largura</Text>
               <HStack>
                 <Input
                   onChange={(e) =>
@@ -80,7 +70,7 @@ export const StandardSettings = ({
               </HStack>
             </Flex>
             <Flex justify="space-between" align="center">
-              <Text>Height</Text>
+              <Text>Altura</Text>
               <HStack>
                 <Input
                   onChange={(e) =>
@@ -103,5 +93,5 @@ export const StandardSettings = ({
         )}
       </Stack>
     </Stack>
-  )
+  );
 }

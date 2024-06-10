@@ -30,4 +30,4 @@ export const TemplatesGallery = ({
       ))}
     </SimpleGrid>
   </Stack>
-)
+);

@@ -7,23 +7,21 @@ import { parseDefaultBubbleTheme } from '../../Javascript/instructions/Javascrip
 import { JavascriptBubbleSnippet } from '../../Javascript/JavascriptBubbleSnippet'
 
 export const GtmBubbleInstructions = () => {
-  const { typebot } = useTypebot()
-  const [theme, setTheme] = useState<BubbleProps['theme']>(
-    parseDefaultBubbleTheme(typebot)
-  )
-  const [previewMessage, setPreviewMessage] =
-    useState<BubbleProps['previewMessage']>()
+  const { typebot } = useTypebot();
+  
+  const [theme, setTheme] = useState<BubbleProps['theme']>(parseDefaultBubbleTheme(typebot));
+  const [previewMessage, setPreviewMessage] = useState<BubbleProps['previewMessage']>();
 
   return (
     <OrderedList spacing={4} pl={5}>
       <ListItem>
-        On your GTM account dashboard, click on <Code>Add a new tag</Code>
+        No painel da sua conta GTM, clique em <Code>Add a new tag</Code>
       </ListItem>
       <ListItem>
-        Choose <Code>Custom HTML</Code> tag type
+        Escolha tag do tipo <Code>Custom HTML</Code>
       </ListItem>
       <ListItem>
-        Check <Code>Support document.write</Code>
+        Veja <Code>Support document.write</Code>
       </ListItem>
       <ListItem>
         <Stack spacing={4}>
@@ -36,7 +34,7 @@ export const GtmBubbleInstructions = () => {
             onThemeChange={setTheme}
             onPreviewMessageChange={setPreviewMessage}
           />
-          <Text>Paste the code below:</Text>
+          <Text>Cole o código abaixo:</Text>
           <JavascriptBubbleSnippet
             theme={theme}
             previewMessage={previewMessage}
@@ -44,5 +42,5 @@ export const GtmBubbleInstructions = () => {
         </Stack>
       </ListItem>
     </OrderedList>
-  )
+  );
 }

@@ -66,26 +66,26 @@ export const GeneralSettingsForm = ({
   return (
     <Stack spacing={6}>
       <SwitchWithLabel
-        label="Prefill input"
+        label="Entrada pré-preenchida"
         initialValue={
           generalSettings?.isInputPrefillEnabled ??
           defaultSettings.general.isInputPrefillEnabled
         }
         onCheckChange={handleInputPrefillChange}
-        moreInfoContent="Inputs are automatically pre-filled whenever their associated variable has a value"
+        moreInfoContent="As entradas são automaticamente pré-preenchidas sempre que sua variável associada tiver um valor."
       />
       <SwitchWithLabel
-        label="Hide query params on bot start"
+        label="Ocultar parâmetros de consulta na inicialização do bot"
         initialValue={
           generalSettings?.isHideQueryParamsEnabled ??
           defaultSettings.general.isHideQueryParamsEnabled
         }
         onCheckChange={handleHideQueryParamsChange}
-        moreInfoContent="If your URL contains query params, they will be automatically hidden when the bot starts."
+        moreInfoContent="Se a sua URL contiver parâmetros de consulta, eles serão ocultados automaticamente no momento de inicialização do bot."
       />
       <SwitchWithRelatedSettings
-        label={'Remember user'}
-        moreInfoContent="If enabled, the chat state will be restored if the user comes back after exiting."
+        label={'Lembrar do usuario'}
+        moreInfoContent="Se ativado, o estado do chat será restaurado se o usuário retornar após sair."
         initialValue={
           generalSettings?.rememberUser?.isEnabled ??
           (isDefined(generalSettings?.isNewResultOnRefreshEnabled)
@@ -96,23 +96,23 @@ export const GeneralSettingsForm = ({
       >
         <FormControl as={HStack} justifyContent="space-between">
           <FormLabel mb="0">
-            Storage:&nbsp;
+            Armazenamento:&nbsp;
             <MoreInfoTooltip>
               <Stack>
                 <Text>
-                  Choose{' '}
+                  Selecionar{' '}
                   <Tag size="sm" bgColor={keyBg}>
-                    session
+                    sessão
                   </Tag>{' '}
-                  to remember the user as long as he does not closes the tab or
-                  the browser.
+                  lembrar do usuário desde que ele não feche a aba ou
+                  o navegador.
                 </Text>
                 <Text>
-                  Choose{' '}
+                  Selecionar{' '}
                   <Tag size="sm" bgColor={keyBg}>
                     local
                   </Tag>{' '}
-                  to remember the user forever on the same device.
+                  para lembrar o usuário para sempre no mesmo dispositivo.
                 </Text>
               </Stack>
             </MoreInfoTooltip>
@@ -125,5 +125,5 @@ export const GeneralSettingsForm = ({
         </FormControl>
       </SwitchWithRelatedSettings>
     </Stack>
-  )
+  );
 }

@@ -90,7 +90,7 @@ export const ChatThemeSettings = ({
           typebotId,
           fileName: 'hostAvatar',
         }}
-        title={t('theme.sideMenu.chat.botAvatar')}
+        title={t('theme.sideMenu.chat.botAvatar')} // AQUI
         avatarProps={chatTheme?.hostAvatar}
         isDefaultCheck
         onAvatarChange={updateHostAvatar}

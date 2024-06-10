@@ -1,5 +1,9 @@
-import { ErrorPage } from '@/components/ErrorPage'
-import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import { Flex, VStack } from '@chakra-ui/react';
+import { ErrorPage } from '@/components/ErrorPage';
+import Statistics from '@/components/Stats';
+import CustomSideBar from '@/components/SideBar';
+import { DashboardHeader } from '@/features/dashboard/components/DashboardHeader';
 
 type Obj = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -45,7 +49,13 @@ export default function Home({ incompatibleBrowser }: Props){
   }
   
   return (
-    <></>
+    <VStack>
+      <DashboardHeader />
+      <Flex w="100%">
+        <CustomSideBar />
+        <Statistics />
+      </Flex>
+    </VStack>
   );
 }
 

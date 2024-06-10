@@ -18,13 +18,13 @@ export const WixBubbleInstructions = () => {
   return (
     <OrderedList spacing={4} pl={5}>
       <ListItem>
-        Go to <Code>Settings</Code> in your dashboard on Wix
+        Vá em <Code>Settings</Code> no seu dashboard do Wix
       </ListItem>
       <ListItem>
-        Click on <Code>Custom Code</Code> under <Code>Advanced</Code>
+        Click em <Code>Custom Code</Code> na sessão <Code>Advanced</Code>
       </ListItem>
       <ListItem>
-        Click <Code>+ Add Custom Code</Code> at the top right.
+        Click <Code>+ Add Custom Code</Code> no canto superior direito.
       </ListItem>
       <ListItem>
         <Stack spacing={4}>
@@ -37,7 +37,7 @@ export const WixBubbleInstructions = () => {
             onPreviewMessageChange={setPreviewMessage}
             onThemeChange={setTheme}
           />
-          <Text> Paste this snippet in the code box:</Text>
+          <Text>Cole este trecho na caixa de código:</Text>
           <JavascriptBubbleSnippet
             theme={theme}
             previewMessage={previewMessage}
@@ -45,9 +45,9 @@ export const WixBubbleInstructions = () => {
         </Stack>
       </ListItem>
       <ListItem>
-        Select &quot;Body - start&quot; under <Code>Place Code in</Code>
+        Selecione &quot;Body - start&quot; em <Code>Place Code in</Code>
       </ListItem>
-      <ListItem>Click Apply</ListItem>
+      <ListItem>Clique em Aplicar</ListItem>
     </OrderedList>
-  )
+  );
 }

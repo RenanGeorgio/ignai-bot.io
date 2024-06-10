@@ -5,7 +5,7 @@ import {
   StyleFunctionProps,
   type ThemeConfig,
 } from '@chakra-ui/react'
-import { mode } from '@chakra-ui/theme-tools'
+import { mode, createBreakpoints } from '@chakra-ui/theme-tools'
 import {
   alertAnatomy,
   accordionAnatomy,
@@ -52,6 +52,18 @@ export const colors = {
     800: '#001751',
     900: '#1a202c',
   },
+  red: {
+    50: '#a83232',
+    100: '#ffb0b0',
+    200: '#ff7e7e',
+    300: '#ff4b4b',
+    400: '#ff1a1a',
+    500: '#da0000',
+    600: '#b40000',
+    700: '#820000',
+    800: '#510000',
+    900: '#2c1a1a',
+  },
   orange: {
     50: '#fff1da',
     100: '#ffd7ae',
@@ -77,6 +89,14 @@ export const colors = {
     900: '#1d1400',
   },
 }
+
+const breakpoints = createBreakpoints({
+  sm: '30em',
+  md: '48em',
+  lg: '62em',
+  xl: '80em',
+  '2xl': '96em',
+});
 
 const Modal = createMultiStyleConfigHelpers(
   modalAnatomy.keys
@@ -135,15 +155,18 @@ const Button = defineStyleConfig({
   }),
   variants: {
     solid: ({ colorMode, colorScheme }) => {
-      if (colorScheme !== 'blue') return {}
+      if (colorScheme !== 'red') {
+        return {}
+      }
+
       return {
-        bg: colorMode === 'dark' ? 'blue.400' : 'blue.500',
+        bg: colorMode === 'dark' ? 'red.400' : 'red.500',
         color: 'white',
         _hover: {
-          bg: colorMode === 'dark' ? 'blue.500' : 'blue.600',
+          bg: colorMode === 'dark' ? 'red.500' : 'red.600',
         },
         _active: {
-          bg: colorMode === 'dark' ? 'blue.600' : 'blue.700',
+          bg: colorMode === 'dark' ? 'red.600' : 'red.700',
         },
       }
     },
@@ -161,10 +184,13 @@ const Alert = createMultiStyleConfigHelpers(
 ).defineMultiStyleConfig({
   variants: {
     subtle: ({ colorScheme, colorMode }) => {
-      if (colorScheme !== 'blue' || colorMode === 'dark') return {}
+      if (colorScheme !== 'red' || colorMode === 'dark') {
+        return {}
+      }
+
       return {
         container: {
-          bg: 'blue.50',
+          bg: 'red.50',
         },
       }
     },
@@ -198,22 +224,22 @@ const components = {
   Switch,
   Spinner: {
     defaultProps: {
-      colorScheme: 'blue',
+      colorScheme: 'red',
     },
   },
   NumberInput: {
     baseStyle: {
-      focusBorderColor: 'blue.200',
+      focusBorderColor: 'red.200',
     },
   },
   Input: {
     baseStyle: {
-      focusBorderColor: 'blue.200',
+      focusBorderColor: 'red.200',
     },
   },
   Textarea: {
     baseStyle: {
-      focusBorderColor: 'blue.200',
+      focusBorderColor: 'red.200',
     },
   },
   Link: {
@@ -242,4 +268,5 @@ export const customTheme = extendTheme({
   components,
   config,
   styles,
+  breakpoints
 })

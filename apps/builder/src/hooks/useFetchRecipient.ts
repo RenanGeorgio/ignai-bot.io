@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { baseUrl, getRequest } from '@/services/api'
+import { baseUrl, api } from '@/services/api'
 
 interface Chat {
   members: string[]
@@ -41,7 +41,7 @@ export const useFetchRecipient = (chat: Chat, user: User) => {
       try {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        const response: ApiResponse = await getRequest(
+        const response: ApiResponse = await api(
           `${baseUrl}/api/chat/client/${recipientId}`
         )
         if ('error' in response) {

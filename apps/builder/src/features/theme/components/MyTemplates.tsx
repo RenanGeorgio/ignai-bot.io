@@ -22,27 +22,25 @@ export const MyTemplates = ({
   workspaceId,
   onTemplateSelect,
 }: Props) => {
-  const { t } = useTranslate()
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const { data } = trpc.theme.listThemeTemplates.useQuery({
-    workspaceId,
-  })
-  const selectedTemplate = data?.themeTemplates.find(
-    (themeTemplate) => themeTemplate.id === selectedTemplateId
-  )
+  const { t } = useTranslate();
 
-  const closeModalAndSelectTemplate = (
-    template?: Pick<ThemeTemplate, 'id' | 'theme'>
-  ) => {
-    if (template) onTemplateSelect(template)
-    onClose()
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { data } = trpc.theme.listThemeTemplates.useQuery({ workspaceId });
+  const selectedTemplate = data?.themeTemplates.find((themeTemplate) => themeTemplate.id === selectedTemplateId);
+
+  const closeModalAndSelectTemplate = (template?: Pick<ThemeTemplate, 'id' | 'theme'>) => {
+    if (template) {
+      onTemplateSelect(template);
+    }
+
+    onClose();
   }
 
   return (
     <Stack spacing={4}>
       {(!selectedTemplate ||
         !areThemesEqual(selectedTemplate?.theme, currentTheme)) && (
-        <Button leftIcon={<SaveIcon />} onClick={onOpen} colorScheme="blue">
+        <Button leftIcon={<SaveIcon />} onClick={onOpen} colorScheme="red">
           {t('theme.sideMenu.template.myTemplates.saveTheme')}
         </Button>
       )}
@@ -67,5 +65,5 @@ export const MyTemplates = ({
         ))}
       </SimpleGrid>
     </Stack>
-  )
+  );
 }

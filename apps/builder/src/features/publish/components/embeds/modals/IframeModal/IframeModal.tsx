@@ -32,14 +32,14 @@ export const IframeModal = ({ isPublished, isOpen, onClose }: ModalProps) => {
         <ModalCloseButton />
         <ModalBody as={Stack} spacing={4} pt="0">
           {!isPublished && (
-            <AlertInfo>You need to publish your bot first.</AlertInfo>
+            <AlertInfo>Você precisa publicar seu bot primeiro.</AlertInfo>
           )}
           <StandardSettings
             onUpdateWindowSettings={(settings) =>
               setInputValues({ ...settings })
             }
           />
-          <Text>Paste this anywhere in your HTML code:</Text>
+          <Text>Cole isto em qualquer lugar do seu código HTML:</Text>
 
           <IframeSnippet
             widthLabel={inputValues.widthLabel ?? '100%'}
@@ -49,5 +49,5 @@ export const IframeModal = ({ isPublished, isOpen, onClose }: ModalProps) => {
         <ModalFooter />
       </ModalContent>
     </Modal>
-  )
+  );
 }

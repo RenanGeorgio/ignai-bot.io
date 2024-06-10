@@ -10,7 +10,7 @@ export const JavascriptStandardInstructions = () => {
   }>({
     heightLabel: '100%',
     widthLabel: '100%',
-  })
+  });
 
   return (
     <Stack spacing={4}>
@@ -18,9 +18,9 @@ export const JavascriptStandardInstructions = () => {
         onUpdateWindowSettings={(settings) => setInputValues({ ...settings })}
       />
       <Text>
-        Paste this anywhere in the <Code>{'<body>'}</Code>:
+        Cole isso em qualquer lugar do <Code>{'<body>'}</Code>:
       </Text>
       <JavascriptStandardSnippet {...inputValues} />
     </Stack>
-  )
+  );
 }

@@ -5,7 +5,7 @@ export const WixStandardInstructions = () => {
   return (
     <OrderedList spacing={4} pl={5}>
       <ListItem>
-        In the Wix Website Editor:
+        No Editor de Websites do Wix:
         <Code>
           Add {'>'} Embed Code {'>'} Embed HTML
         </Code>
@@ -13,11 +13,11 @@ export const WixStandardInstructions = () => {
       <ListItem>
         <Stack spacing={4}>
           <Text>
-            Click on <Code>Enter code</Code> and paste this code:
+            Click no <Code>Enter code</Code> para copiar este codigo:
           </Text>
           <JavascriptStandardSnippet widthLabel="100%" heightLabel="100%" />
         </Stack>
       </ListItem>
     </OrderedList>
-  )
+  );
 }

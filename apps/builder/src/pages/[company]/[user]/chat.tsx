@@ -1,18 +1,20 @@
-import { useState } from 'react'
-import Layout from '@/components/chat/layout/ChatLayout'
-import History from '@/components/chat/layout/HistoryLayout'
-import GraphChat from '@/components/graph/GraphChat'
-import GraphTicket from '@/components/graph/GraphTicket'
-import GraphTicketYou from '@/components/graph/GraphTicketYou'
-import GraphThemes from '@/components/graph/GraphThemes'
-import { ChatProvider } from '@/contexts/ChatContext'
-import { createTheme } from '@mui/material/styles'
-import styles from '@/assets/styles/forms.module.css'
-import { colors } from '@/lib/theme'
-import { ThemeProvider } from '@mui/material'
+import { useState } from 'react';
+import { Flex, VStack } from '@chakra-ui/react';
+import { ThemeProvider } from '@mui/material';
+import { createTheme } from '@mui/material/styles';
+import { DashboardHeader } from '@/features/dashboard/components/DashboardHeader';
+import Layout from '@/components/chat/layout/ChatLayout';
+import History from '@/components/chat/layout/HistoryLayout';
+import GraphChat from '@/components/graph/GraphChat';
+import GraphTicket from '@/components/graph/GraphTicket';
+import GraphTicketYou from '@/components/graph/GraphTicketYou';
+import GraphThemes from '@/components/graph/GraphThemes';
+import CustomSideBar from '@/components/SideBar';
+import { ChatProvider } from '@/contexts/chat/ChatContext';
+import { colors } from '@/lib/theme';
 
 import type {} from '@mui/x-data-grid/themeAugmentation';
-import { DashboardHeader } from '@/features/dashboard/components/DashboardHeader'
+import styles from '@/assets/styles/forms.module.css';
 
 const MuiTheme = createTheme({
   palette: {
@@ -32,79 +34,85 @@ const MuiTheme = createTheme({
           backgroundColor: colors.gray,
           color: '#C1C2C5',
           padding: 10,
-        },
-      },
-    },
-  },
-})
+        }
+      }
+    }
+  }
+});
 
 const Chat: React.FC = () => {
-  const [activePage, setActivePage] = useState('Atendimento')
+  const [activePage, setActivePage] = useState('Atendimento');
+
   const handleButtonClick = (pageName: string) => {
-    setActivePage(pageName)
+    setActivePage(pageName);
   }
 
   return (
     <ChatProvider>
-      <DashboardHeader />
-      <div style={{ overflow: 'hidden' }} className={styles['page-content']}>
-        <div className={styles['button-container']}>
-          <button
-            className={
-              activePage === 'Atendimento'
-                ? styles.blueButtonChat
-                : styles.grayButtonChat
-            }
-            onClick={() => handleButtonClick('Atendimento')}
-          >
-            Atendimento
-          </button>
-          <button
-            className={
-              activePage === 'Histórico'
-                ? styles.blueButtonChat
-                : styles.grayButtonChat
-            }
-            onClick={() => handleButtonClick('Histórico')}
-          >
-            Histórico
-          </button>
-          <button
-            className={
-              activePage === 'Painel'
-                ? styles.blueButtonChat
-                : styles.grayButtonChat
-            }
-            onClick={() => handleButtonClick('Painel')}
-          >
-            Painel
-          </button>
-        </div>
-        <div>
-          {activePage === 'Atendimento' && (
+      <VStack>
+        <DashboardHeader />
+        <Flex w="100%">
+          <CustomSideBar />
+          <div style={{ overflow: 'hidden' }} className={styles['page-content']}>
+            <div className={styles['button-container']}>
+              <button
+                className={
+                  activePage === 'Atendimento'
+                    ? styles.redButtonChat
+                    : styles.grayButtonChat
+                }
+                onClick={() => handleButtonClick('Atendimento')}
+              >
+                Atendimento
+              </button>
+              <button
+                className={
+                  activePage === 'Histórico'
+                    ? styles.redButtonChat
+                    : styles.grayButtonChat
+                }
+                onClick={() => handleButtonClick('Histórico')}
+              >
+                Histórico
+              </button>
+              <button
+                className={
+                  activePage === 'Painel'
+                    ? styles.redButtonChat
+                    : styles.grayButtonChat
+                }
+                onClick={() => handleButtonClick('Painel')}
+              >
+                Painel
+              </button>
+            </div>
             <div>
-              <Layout />
+              {activePage === 'Atendimento' && (
+                <div>
+                  <Layout />
+                </div>
+              )}
+              {activePage === 'Histórico' && (
+                <>
+                  <ThemeProvider theme={{ ['MuiTheme']: MuiTheme }}>
+                    <History />
+                  </ThemeProvider>
+                </>
+              )}
+              {activePage === 'Painel' && (
+                <div className={styles['container-graphs-chat']}>
+                  <GraphChat data={{ datasets: [], labels: [] }} />
+                  <GraphTicket data={[50, 30, 20, 10]} />
+                  <GraphThemes month={''} />
+                  <GraphTicketYou data={[50, 30, 20, 10]} />
+                </div>
+              )}
             </div>
-          )}
-          {activePage === 'Histórico' && (
-            <>
-              <ThemeProvider theme={{ ['MuiTheme']: MuiTheme }}>
-                <History />
-              </ThemeProvider>
-            </>
-          )}
-          {activePage === 'Painel' && (
-            <div className={styles['container-graphs-chat']}>
-              <GraphChat data={{ datasets: [], labels: [] }} />
-              <GraphTicket data={[50, 30, 20, 10]} />
-              <GraphThemes month={''} />
-              <GraphTicketYou data={[50, 30, 20, 10]} />
-            </div>
-          )}
-        </div>
-      </div>
+          </div>
+        </Flex>
+      </VStack>
     </ChatProvider>
-  )
+  );
 }
 
 export default Chat

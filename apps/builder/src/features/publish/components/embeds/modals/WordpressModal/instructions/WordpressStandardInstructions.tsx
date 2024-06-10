@@ -26,20 +26,20 @@ export const WordpressStandardInstructions = ({ publicId }: Props) => {
   }>({
     height: '100%',
     width: '100%',
-  })
+  });
 
-  const elementCode = parseWordpressShortcode({ ...windowSizes, publicId })
+  const elementCode = parseWordpressShortcode({ ...windowSizes, publicId });
 
   return (
     <OrderedList spacing={4} pl={5}>
       <ListItem>
-        Install{' '}
+        Instale{' '}
         <Link
           href="https://wordpress.org/plugins/typebot/"
           isExternal
           color={useColorModeValue('blue.500', 'blue.300')}
         >
-          the official Typebot WordPress plugin
+          o plugin oficial da Ignai-bot para WordPress
           <ExternalLinkIcon mx="2px" />
         </Link>
       </ListItem>
@@ -54,17 +54,17 @@ export const WordpressStandardInstructions = ({ publicId }: Props) => {
             }
           />
           <Text>
-            You can now place the following shortcode anywhere on your site:
+            Agora você pode colocar o seguinte código de acesso em qualquer lugar do seu site:
           </Text>
           <CodeEditor value={elementCode} lang="shell" isReadOnly />
           <Text>
-            Note: Your page templating system probably has a{' '}
-            <Code>Shortcode</Code> element (if not, use a text element).
+            Nota: Seu sistema de templates de páginas provavelmente possui um elemento{' '}
+            <Code>Shortcode</Code> (caso contrário, use um elemento de texto).
           </Text>
         </Stack>
       </ListItem>
     </OrderedList>
-  )
+  );
 }
 
 const parseWordpressShortcode = ({

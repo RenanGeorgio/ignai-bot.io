@@ -27,9 +27,9 @@ export const PopupMenuButton = (props: Props) => {
           Popup
         </Text>
         <Text textColor="gray.500">
-          Embed in a popup on top of your website
+          Incorpore um pop-up no topo do seu site
         </Text>
       </Stack>
     </MotionStack>
-  )
+  );
 }

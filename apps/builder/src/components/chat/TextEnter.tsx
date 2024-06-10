@@ -10,6 +10,8 @@ interface TextEnterProps {
     setTextMessage: React.Dispatch<React.SetStateAction<string>>
   ) => void
   onUploadFilePhoto: (file: File) => void
+  value: string 
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
 }
 
 export default function TextEnter({

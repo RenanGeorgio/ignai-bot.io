@@ -23,14 +23,12 @@ const typebotCloudLibraryVersion = '0.2'
 type Props = {
   publicId: string
 }
-export const WordpressBubbleInstructions = ({ publicId }: Props) => {
-  const { typebot } = useTypebot()
 
-  const [theme, setTheme] = useState<BubbleProps['theme']>(
-    parseDefaultBubbleTheme(typebot)
-  )
-  const [previewMessage, setPreviewMessage] =
-    useState<BubbleProps['previewMessage']>()
+export const WordpressBubbleInstructions = ({ publicId }: Props) => {
+  const { typebot } = useTypebot();
+
+  const [theme, setTheme] = useState<BubbleProps['theme']>(parseDefaultBubbleTheme(typebot));
+  const [previewMessage, setPreviewMessage] = useState<BubbleProps['previewMessage']>();
 
   const initCode = parseInitBubbleCode({
     typebot: publicId,
@@ -42,23 +40,23 @@ export const WordpressBubbleInstructions = ({ publicId }: Props) => {
       },
     },
     previewMessage,
-  })
+  });
 
   return (
     <OrderedList spacing={4} pl={5}>
       <ListItem>
-        Install{' '}
+        Instale{' '}
         <Link
           href="https://wordpress.org/plugins/typebot/"
           isExternal
           color={useColorModeValue('blue.500', 'blue.300')}
         >
-          the official Typebot WordPress plugin
+          o plugin oficial da Ignai-bot para WordPress
           <ExternalLinkIcon mx="2px" />
         </Link>
       </ListItem>
       <ListItem>
-        Set <Code>Library version</Code> to{' '}
+        Definir <Code>Library version</Code> como{' '}
         <Code>
           {isCloudProdInstance()
             ? typebotCloudLibraryVersion
@@ -77,12 +75,12 @@ export const WordpressBubbleInstructions = ({ publicId }: Props) => {
             onThemeChange={setTheme}
           />
           <Text>
-            You can now place the following code snippet in the Typebot panel in
-            your WordPress admin:
+            Agora você pode colocar o seguinte trecho de código no seu painel Ignai-bot em
+            seu administrador do WordPress:
           </Text>
           <CodeEditor value={initCode} lang="javascript" isReadOnly />
         </Stack>
       </ListItem>
     </OrderedList>
-  )
+  );
 }

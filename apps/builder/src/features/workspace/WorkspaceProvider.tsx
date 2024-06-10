@@ -1,21 +1,14 @@
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react'
-import { byId } from '@typebot.io/lib'
-import { WorkspaceRole } from '@typebot.io/prisma'
-import { useRouter } from 'next/router'
-import { trpc } from '@/lib/trpc'
-import { Workspace } from '@typebot.io/schemas'
-import { useToast } from '@/hooks/useToast'
-import { useUser } from '../account/hooks/useUser'
-import { useTypebot } from '../editor/providers/TypebotProvider'
-import { setWorkspaceIdInLocalStorage } from './helpers/setWorkspaceIdInLocalStorage'
-import { parseNewName } from './helpers/parseNewName'
+import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from 'react';
+import { byId } from '@typebot.io/lib';
+import { WorkspaceRole } from '@typebot.io/prisma';
+import { useRouter } from 'next/router';
+import { trpc } from '@/lib/trpc';
+import { Workspace } from '@typebot.io/schemas';
+import { useToast } from '@/hooks/useToast';
+import { useUser } from '../account/hooks/useUser';
+import { useTypebot } from '../editor/providers/TypebotProvider';
+import { setWorkspaceIdInLocalStorage } from './helpers/setWorkspaceIdInLocalStorage';
+import { parseNewName } from './helpers/parseNewName';
 
 export type WorkspaceInApp = Omit<
   Workspace,
@@ -46,58 +39,57 @@ type WorkspaceContextProps = {
   children: ReactNode
 }
 
-export const WorkspaceProvider = ({
-  typebotId,
-  children,
-}: WorkspaceContextProps) => {
-  const { pathname, query, push, isReady: isRouterReady, replace } = useRouter()
-  const { user } = useUser()
-  const userId = user?.id
-  const [workspaceId, setWorkspaceId] = useState<string | undefined>()
+export const WorkspaceProvider = ({ typebotId, children }: WorkspaceContextProps) => {
+  const { pathname, query, push, isReady: isRouterReady, replace } = useRouter();
+  const { user } = useUser();
 
-  const { typebot } = useTypebot()
+  const userId = user?.id;
+  const [workspaceId, setWorkspaceId] = useState<string | undefined>();
 
-  const trpcContext = trpc.useContext()
+  const { typebot } = useTypebot();
+
+  const trpcContext = trpc.useContext();
 
   const { data: workspacesData } = trpc.workspace.listWorkspaces.useQuery(
     undefined,
     {
       enabled: !!user,
     }
-  )
+  );
+
   const workspaces = useMemo(
     () => workspacesData?.workspaces ?? [],
     [workspacesData?.workspaces]
-  )
+  );
 
   const { data: workspaceData } = trpc.workspace.getWorkspace.useQuery(
     { workspaceId: workspaceId as string },
     { enabled: !!workspaceId }
-  )
+  );
 
   const { data: membersData } = trpc.workspace.listMembersInWorkspace.useQuery(
     { workspaceId: workspaceId as string },
     { enabled: !!workspaceId }
-  )
+  );
 
-  const workspace = workspaceData?.workspace
-  const members = membersData?.members
+  const workspace = workspaceData?.workspace;
+  const members = membersData?.members;
 
-  const { showToast } = useToast()
+  const { showToast } = useToast();
 
   const createWorkspaceMutation = trpc.workspace.createWorkspace.useMutation({
     onError: (error) => showToast({ description: error.message }),
     onSuccess: async () => {
       trpcContext.workspace.listWorkspaces.invalidate()
     },
-  })
+  });
 
   const updateWorkspaceMutation = trpc.workspace.updateWorkspace.useMutation({
     onError: (error) => showToast({ description: error.message }),
     onSuccess: async () => {
       trpcContext.workspace.getWorkspace.invalidate()
     },
-  })
+  });
 
   const deleteWorkspaceMutation = trpc.workspace.deleteWorkspace.useMutation({
     onError: (error) => showToast({ description: error.message }),
@@ -105,12 +97,9 @@ export const WorkspaceProvider = ({
       trpcContext.workspace.listWorkspaces.invalidate()
       setWorkspaceId(undefined)
     },
-  })
+  });
 
-  const currentRole = members?.find(
-    (member) =>
-      member.user.email === user?.email && member.workspaceId === workspaceId
-  )?.role
+  const currentRole = members?.find((member) => member.user.email === user?.email && member.workspaceId === workspaceId)?.role;
 
   useEffect(() => {
     if (
@@ -120,21 +109,21 @@ export const WorkspaceProvider = ({
       workspaces.length === 0 ||
       workspaceId ||
       (typebotId && !typebot?.workspaceId)
-    )
+    ) {
       return
-    const lastWorspaceId =
-      typebot?.workspaceId ??
-      query.workspaceId?.toString() ??
-      localStorage.getItem('workspaceId')
+    }
+
+    const lastWorspaceId = typebot?.workspaceId ?? query.workspaceId?.toString() ?? localStorage.getItem('workspaceId');
 
     const defaultWorkspaceId = lastWorspaceId
       ? workspaces.find(byId(lastWorspaceId))?.id
       : members?.find((member) => member.role === WorkspaceRole.ADMIN)
           ?.workspaceId
 
-    const newWorkspaceId = defaultWorkspaceId ?? workspaces[0].id
-    setWorkspaceIdInLocalStorage(newWorkspaceId)
-    setWorkspaceId(newWorkspaceId)
+    const newWorkspaceId = defaultWorkspaceId ?? workspaces[0].id;
+
+    setWorkspaceIdInLocalStorage(newWorkspaceId);
+    setWorkspaceId(newWorkspaceId);
   }, [
     isRouterReady,
     members,
@@ -145,45 +134,61 @@ export const WorkspaceProvider = ({
     userId,
     workspaceId,
     workspaces,
-  ])
+  ]);
 
   useEffect(() => {
     if (workspace?.isSuspended) {
-      if (pathname === '/suspended') return
-      push('/suspended')
+      if (pathname === '/suspended') {
+        return
+      }
+
+      push('/suspended');
       return
     }
+
     if (workspace?.isPastDue) {
-      if (pathname === '/past-due') return
-      push('/past-due')
+      if (pathname === '/past-due') {
+        return
+      }
+
+      push('/past-due');
       return
     }
-  }, [pathname, push, workspace?.isPastDue, workspace?.isSuspended])
+  }, [pathname, push, workspace?.isPastDue, workspace?.isSuspended]);
 
   const switchWorkspace = (workspaceId: string) => {
-    setWorkspaceIdInLocalStorage(workspaceId)
-    setWorkspaceId(workspaceId)
-    replace('/typebots')
+    setWorkspaceIdInLocalStorage(workspaceId);
+    setWorkspaceId(workspaceId);
+    replace('/typebots');
   }
 
   const createWorkspace = async (userFullName?: string) => {
-    if (!workspaces) return
-    const name = parseNewName(userFullName, workspaces)
-    const { workspace } = await createWorkspaceMutation.mutateAsync({ name })
-    setWorkspaceId(workspace.id)
+    if (!workspaces) {
+      return
+    }
+
+    const name = parseNewName(userFullName, workspaces);
+    const { workspace } = await createWorkspaceMutation.mutateAsync({ name });
+    setWorkspaceId(workspace.id);
   }
 
   const updateWorkspace = (updates: { icon?: string; name?: string }) => {
-    if (!workspaceId) return
+    if (!workspaceId) {
+      return
+    }
+
     updateWorkspaceMutation.mutate({
       workspaceId,
       ...updates,
-    })
+    });
   }
 
   const deleteCurrentWorkspace = async () => {
-    if (!workspaceId || !workspaces || workspaces.length < 2) return
-    await deleteWorkspaceMutation.mutateAsync({ workspaceId })
+    if (!workspaceId || !workspaces || workspaces.length < 2) {
+      return
+    }
+
+    await deleteWorkspaceMutation.mutateAsync({ workspaceId });
   }
 
   return (
@@ -200,7 +205,7 @@ export const WorkspaceProvider = ({
     >
       {children}
     </workspaceContext.Provider>
-  )
+  );
 }
 
 export const useWorkspace = () => useContext(workspaceContext)
