@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="style.css">
     <title>Ignai-bot</title>
   </head>
   <body>
@@ -126,70 +126,61 @@
         checkCheckboxes();
       });
     </script>
-    <div class="container-fluid">
-      <h1>Pagina de Integração: Ignai-bot</h1>
+    <div class="container">
+      <h1>Página de Integração: <span class="title">Ignai-bot</span></h1>
       <p>Autorize o compartilhamento para iniciar a utilização da solução</p>
 
       <div class="alert alert-info" role="alert">
-        É necessario conceder acesso para a funcionamento da aplicação!
+        É necessário conceder acesso para o funcionamento da aplicação!
       </div>
 
       <div class="alert alert-dark" role="alert">
-        Você pode a qualquer momento pedir a exclusão de seus dados e inserar a integração do software e utilização do app.
-        <a href="disallow.html" target="_blank">Clickando Aqui</a>
+        Você pode a qualquer momento pedir a exclusão de seus dados e encerrar a integração do software e utilização do app.
+        <a href="disallow.html" target="_blank">Clique aqui</a>
       </div>
-    </div>
 
-    <!-- The JS SDK Login Button -->
-    <div 
-      id="spinner"
-      style="
-        background: #4267b2;
-        border-radius: 5px;
-        color: white;
-        height: 40px;
-        text-align: center;
-        width: 250px;"
-    >
-      Carregando...
-      <fb:login-button  
-        id="fbLoginButton"
-        config_id="486379303720362" 
-        width="240px" 
-        size="large"
-        auto-logout-link="false" 
-        onlogin="checkLoginState();"
-        disabled>
-      </fb:login-button>
-    </div>
-    <div id="status"></div>
+      <div id="spinner" class="spinner">
+        Carregando...
+        <fb:login-button  
+          id="fbLoginButton"
+          config_id="486379303720362" 
+          width="240px" 
+          size="xlarge"
+          auto-logout-link="false" 
+          onlogin="checkLoginState();"
+          disabled>
+        </fb:login-button>
+      </div>
 
-    <footer class="container-fluid">
-      <h3>Preferences</h3>
-      <form>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-          <label class="form-check-label" for="defaultCheck1">
-            Politica de Privacidade
-            <br>
-            <small class="text-muted">
-              Autorizar o uso das suas informações para fins de análise e melhoria de serviços.
-            </small>
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-          <label class="form-check-label" for="defaultCheck2">
-            Termos de Uso
-            <br>
-            <small class="text-muted">
-              Permitir o compartilhamento de dados com parceiros para ofertas personalizadas.
-              <a href="link_to_detailed_explanation_3.html" target="_blank">Leia mais</a>
-            </small>
-          </label>
-        </div>
-      </form>
-    </footer>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-  </body>
+      <div id="status"></div>
+
+      <footer class="container mt-4">
+        <h3>Preferências</h3>
+        <form>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">
+              Política de Privacidade
+              <br>
+              <small class="text-muted">
+                Autorizar o uso das suas informações para fins de análise e melhoria de serviços.
+              </small>
+            </label>
+          </div>
+          <div class="form-check mt-3">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+            <label class="form-check-label" for="defaultCheck2">
+              Termos de Uso
+              <br>
+              <small class="text-muted">
+                Permitir o compartilhamento de dados com parceiros para ofertas personalizadas.
+                <a href="link_to_detailed_explanation_3.html" target="_blank">Leia mais</a>
+              </small>
+            </label>
+          </div>
+        </form>
+      </footer>
+    </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+</body>
 </html>
