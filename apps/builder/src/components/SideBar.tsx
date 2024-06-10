@@ -9,13 +9,13 @@ import {
   DrawerContent,
   VStack,
 } from '@chakra-ui/react'
+import Link from 'next/link'
 
 interface Props {
   onClose: () => void
   isOpen: boolean
   variant: string | undefined
 }
-
 
 const CustomSideBar = ({ isOpen, variant, onClose }: Props) => {
   return variant === 'sidebar' ? (
@@ -56,6 +56,9 @@ const SidebarContent = ({ onClick }: { onClick: () => void }) => (
     <Button onClick={onClick} w="100%">
       Contact
     </Button>
+    <Link href={'/typebots/results'}>
+      All Results
+    </Link>
   </VStack>
 )
 
