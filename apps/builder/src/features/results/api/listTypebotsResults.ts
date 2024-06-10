@@ -53,8 +53,8 @@ export const listTypebotsResults = authenticatedProcedure
       typebots: z.array(typebotV5Schema._def.schema.pick({ id: true, groups: true, collaborators: true, variables: true, workspace: true }), { id: true }),
       nextCursor: z.string().nullish(),
     })
-  )
-  .query(async ({ input, ctx: { _user } }) => {
+  ) // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  .query(async ({ input, ctx: { user } }) => {
     const limit = Number(input.limit)
     if (limit < 1 || limit > maxLimit)
       throw new TRPCError({
