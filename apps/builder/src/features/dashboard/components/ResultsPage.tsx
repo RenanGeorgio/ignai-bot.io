@@ -17,7 +17,7 @@ export const ResultsPage = ({
       }[]
     | undefined
 }) => {
-  const { data, fetchNextPage, hasNextPage, _refetch } = useListResultsQuery({
+  const { data, fetchNextPage, hasNextPage } = useListResultsQuery({
     timeFilter: 'allTime',
     typebots,
     onError: (error) => {
