@@ -1,12 +1,12 @@
 import { Stack, Heading } from '@chakra-ui/react';
-import { Header } from '@/components/common/Header/Header';
-import { SocialMetaTags } from '@/components/common/SocialMetaTags';
+import { Header } from '@/components/common/Header';
 import { TextLink } from '@/components/TextLink';
+import { Seo } from '@/components/Seo';
 
 const ServiceTerms = () => {
   return (
     <div className="flex flex-col items-center w-full overflow-x-hidden ">
-      <SocialMetaTags currentUrl={`https://www.bot.ignai.com.br/terms-of-service`} />
+      <Seo title={"Ignai-bot - Termos de Serviço e Uso do Serviço"} />
       <Header />
       <Stack spacing={10} mx="auto" maxW="3xl" my="20">
         <Heading as="h1">Termos de Uso</Heading>

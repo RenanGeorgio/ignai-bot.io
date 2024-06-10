@@ -1,16 +1,13 @@
 import React from 'react';
 import { Stack, Heading } from '@chakra-ui/react';
-import { Header } from '@/components/common/Header/Header';
-import { SocialMetaTags } from '@/components/common/SocialMetaTags';
+import { Header } from '@/components/common/Header';
+import { Seo } from '@/components/Seo';
 
 const PrivacyPolicies = () => {
   return (
     <div className="flex flex-col items-center w-full overflow-x-hidden ">
+      <Seo title={"Ignai-bot - Privacy & Policies"} />
       <Header />
-      <SocialMetaTags
-        currentUrl={`https://www.bot.ignai.com.br/privacy-policies`}
-        title="Ignai-bot - Privacy & Policies"
-      />
       <Stack spacing={10} mx="auto" maxW="3xl" my="20">
         <Heading as="h1">Politica de Privacidade para Ignai-bot</Heading>
 

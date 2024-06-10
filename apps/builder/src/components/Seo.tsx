@@ -1,5 +1,5 @@
-import { env } from '@typebot.io/env'
-import Head from 'next/head'
+import { env } from '@typebot.io/env';
+import Head from 'next/head';
 
 const getOrigin = () => {
   if (typeof window !== 'undefined') {
@@ -11,7 +11,7 @@ const getOrigin = () => {
 
 export const Seo = ({
   title,
-  description = 'Create and publish conversational forms that collect 4 times more answers and feel native to your product',
+  description = 'Plataforma inteligente de chatbot da Ignai - Crie, gerencie e utilize Bots multicanais para ter conversas muito mais eficientes com seu publico e clientes | - Powered by: Diamondbigger.',
   imagePreviewUrl = `${getOrigin()}/images/og.png`,
 }: {
   title: string
@@ -38,5 +38,5 @@ export const Seo = ({
       <meta property="og:type" content="website" />
       <meta property="twitter:card" content="summary_large_image" />
     </Head>
-  )
+  );
 }

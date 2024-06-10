@@ -1,14 +1,8 @@
 'use client'
 
 import * as React from 'react';
-import {
-  Flex,
-  Heading,
-  HStack,
-  useColorModeValue as mode,
-  Link
-} from '@chakra-ui/react';
-import { Logo } from '@/components/icons';
+import { Flex, Heading, HStack, useColorModeValue as mode, Link } from '@chakra-ui/react';
+import { IgnaiIcon } from '@/components/icons';
 
 export const Header = () => {
   return (
@@ -27,10 +21,10 @@ export const Header = () => {
           align="center"
           justify="space-between"
           className="nav-content__mobile"
-          color={mode('white', 'white')}
+          color={mode('red', 'white')}
         >
           <HStack as={Link} href="/" rel="home" ml="2">
-            <Logo boxSize="35px" />
+            <IgnaiIcon boxSize="35px" />
             <Heading as="p" fontSize="lg">
               Ignai-bot
             </Heading>
