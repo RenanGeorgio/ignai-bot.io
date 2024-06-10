@@ -8,8 +8,7 @@ export default function Results() {
   const { showToast } = useToast()
   const {
     typebots,
-    isLoading: isTypebotLoading,
-    refetch: refetchTypebots,
+    isLoading: isTypebotLoading
   } = useTypebots({
     workspaceId: workspace?.id,
     folderId: 'root',
