@@ -55,9 +55,7 @@ export const ResultsPage = ({
       onScrollToBottom={fetchNextPage}
       hasMore={hasNextPage}
       timeFilter={'allTime'}
-      onLogOpenIndex={() => {}} // TODO: implement
-      onResultExpandIndex={() => {}} // TODO: implement
       onTimeFilterChange={() => {}}
     />
-  )
+  );
 }
