@@ -54,7 +54,7 @@ export const listTypebotsResults = authenticatedProcedure
       nextCursor: z.string().nullish(),
     })
   )
-  .query(async ({ input, ctx: { user } }) => {
+  .query(async ({ input, ctx: { _user } }) => {
     const limit = Number(input.limit)
     if (limit < 1 || limit > maxLimit)
       throw new TRPCError({
