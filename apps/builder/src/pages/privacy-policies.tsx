@@ -12,10 +12,17 @@ const PrivacyPolicies = () => {
         <Heading as="h1">Politica de Privacidade para Ignai-bot</Heading>
 
         <p>
-          Na DiamondBigger, acessível em https://www.diamondbigger.com, um das nossas principais
+          Na Ignai, acessível em https://www.ignai.com.br, um das nossas principais
           prioridades é a privacidade dos nossos clientes e parceiros. Esta Política de Privacidade
           documento contém tipos de informações que podem ser coletadas e registradas
           por algum de nossos serviços e como o usamos.
+        </p>
+
+        <p>
+          Temos um compromisso com a protecao dos direitos dos individuos, com a privacidade e 
+          protecao dos dados em conformidade com o Regulamento Geral de Protecao de Dados do Brasil. 
+          Isto traduz-se no modo como tratamos a informacao que pode ser utilizada para identificar, 
+          direta ou indiretamente, os dados pessoais de cada um.
         </p>
 
         <p>
@@ -26,18 +33,24 @@ const PrivacyPolicies = () => {
         <p>
           Esta Política de Privacidade aplica-se apenas às nossas atividades e é válida
           para os usuarios, parceiros e clientes  dos nossos serviços no que diz respeito 
-          às informações que são compartilhadas e/ou coletado pelos serviços do Grupo DiamondBigger. 
+          às informações que são compartilhadas e/ou coletada pela Ignai. 
           Esta política não é aplicável a qualquer informação coletada por meio não listado ou por 
-          meio de canais diferentes deste local na rede Internet. De forma que demais serviços ofertados 
-          pelo grupo podem conter uma Politica de Privacidade propria, que atue de forma complementar a 
-          este, sobre apenas o serviço a que fazem referencia.
+          meio de canais diferentes deste local (serviço) na rede Internet.
         </p>
 
         <Heading>Consentimento</Heading>
 
         <p>
-          Ao utilizar nosso site, você concorda com nossa Política de Privacidade e
+          Ao utilizar nosso serviço, você concorda com nossa Política de Privacidade e
           concordar com seus termos.
+        </p>
+
+        <Heading>Responsavel pelo Tratamento de Dados</Heading>
+
+        <p>
+          O responsavel pelo tratamento de dados dos sites administrados pela ignai 
+          Software (www.ignai.com.br), e a Ignai software,LTDA, com sede 
+          na Rua Olympio R, 116 - Jabour Vitoria - ES.
         </p>
 
         <Heading>Informações que coletamos</Heading>
@@ -81,7 +94,7 @@ const PrivacyPolicies = () => {
         <Heading>Arquivos de Registro</Heading>
 
         <p>
-          O Grupo DiamondBigger Supply Chain segue um procedimento padrão de uso de arquivos de log. Esses
+          A Ignai segue um procedimento padrão de uso de arquivos de log. Esses
           arquivos registram visitantes quando eles visitam sites ou utilizam um de nossos serviços. 
           Todas as empresas de hospedagem fazem isso e é uma parte da análise de serviços de hospedagem. 
           As informações coletadas por arquivos de log incluem endereços de protocolo de internet (IP),
@@ -98,13 +111,13 @@ const PrivacyPolicies = () => {
 
         <p>
           Você pode consultar esta lista para encontrar a Política de Privacidade de cada um dos
-          parceiros de publicidade do Grupo DiamondBigger.
+          parceiros de publicidade da Ignai.
         </p>
 
         <p>
           Servidores de anúncios ou redes de anúncios de terceiros usam tecnologias como cookies,
           JavaScript ou Web Beacons que são usados em seus respectivos
-          anúncios e links que aparecem no nosso website ou em algum serviço do Grupo DiamondBigger, 
+          anúncios e links que aparecem no nosso website ou em algum serviço da Ignai, 
           que são enviados diretamente para o navegador dos usuários. Eles recebem automaticamente 
           seu endereço IP quando isso ocorrer. Essas tecnologias são usadas para medir o
           eficácia de suas campanhas publicitárias e/ou para personalizar o
@@ -112,14 +125,14 @@ const PrivacyPolicies = () => {
         </p>
 
         <p>
-          Observe que o Grupo DiamondBigger não tem acesso ou controle sobre esses cookies
+          Observe que a Ignai não tem acesso ou controle sobre esses cookies
           que são usados por terceiros.
         </p>
 
         <Heading>Políticas de Privacidade de terceiros</Heading>
 
         <p>
-          A Política de Privacidade do Grupo DiamondBigger não se aplica a outros anunciantes
+          A Política de Privacidade da Ignai não se aplica a outros anunciantes
           ou sites (pertencentes a terceiros). Assim, aconselhamos que consulte as respectivas
           Políticas de Privacidade desses servidores (ou demais tipos de serviços) de anúncios 
           de terceiros para informações mais detalhadas a respeito. Tais informações podem incluir 
@@ -221,7 +234,7 @@ const PrivacyPolicies = () => {
         </p>
 
         <p>
-          O Grupo DiamondBigger não coleta intencionalmente qualquer identificação pessoal,
+          A Ignai não coleta intencionalmente qualquer identificação pessoal,
           Informações de crianças menores de 13 anos. Se você acha que seu
           criança forneceu esse tipo de informação em nosso site, ou em algum de nossos serviços,
           nós fortemente encorajamos você a entrar em contato conosco imediatamente e faremos o nosso melhor
