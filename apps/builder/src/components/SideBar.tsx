@@ -6,7 +6,7 @@ import {
   Heading,
   Menu,
   MenuButton,
-  MenuList,
+  MenuItem,
   Link,
   IconButton,
   IconProps,
@@ -131,24 +131,22 @@ const NavItem = ({ title, description, active, navSize, router }: NavItemProps) 
           _hover={{ textDecor: 'none', backgroundColor: "rgba(255, 0, 0, 0.9)", color: "#fff", '& svg': { color: '#fff' } }}
           w={navSize == "large" ? "100%" : "35%"}
         >
-          <MenuButton w="100%">
+          <MenuButton w="100%" as={MenuItem} onClick={() => alert("oi")}>
             <SidebarContent tab={title} navSize={navSize} navigate={router} color={active ? "rgba(255, 0, 0, 0.9)" : "gray.500"} />
           </MenuButton>
         </Link>
-        <MenuList
+       {/* <MenuList
           py={0}
           border="none"
           w={200}
           h={200}
           ml={5}
         >
-           <NavHoverBox title={title} description={description} />
-           <NavHoverBox title={title} description={description} />
-          {/*
+          
           <MenuItem onClick={() => router.push("/typebots")}>
           <NavHoverBox title={title} description={description} />
-          </MenuItem>*/}
-      </MenuList>
+          </MenuItem>
+      </MenuList>*/}
     </Menu>
   </Flex>
   );
