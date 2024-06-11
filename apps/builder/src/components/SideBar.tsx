@@ -45,8 +45,6 @@ interface NavItemProps {
 interface ContentProps {
   tab: string
   navSize: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  navigate: any
 }
 
 interface HoverProps {
@@ -54,25 +52,25 @@ interface HoverProps {
   description: string | undefined
 }
 
-const SidebarContent = ({ tab, navSize, navigate, ...props }: ContentProps & IconProps) => {
+const SidebarContent = ({ tab, navSize, ...props }: ContentProps & IconProps) => {
   switch (tab) {
     case 'Home':
       return (
-        <Flex alignItems="center" justify="center" onClick={() => navigate.push("/typebots")}>
+        <Flex alignItems="center" justify="center">
           <FolderIcon {...props}/>
           <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
         </Flex>
       )
     case 'Chat':
       return (
-        <Flex alignItems="center" justify="center" onClick={() => navigate.push("/typebots")}>
+        <Flex alignItems="center" justify="center">
           <ChatIcon {...props}/>
           <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
         </Flex>
       )
     case 'Builder':
       return (
-        <Flex alignItems="center" justify="center" onClick={() => navigate.push("/typebots")}>
+        <Flex alignItems="center" justify="center">
           <ToolIcon {...props}/>
           <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
         </Flex>
@@ -137,7 +135,7 @@ const NavItem = ({ title, description, active, navSize, router }: NavItemProps) 
             _hover={{ textDecor: 'none', backgroundColor: "rgba(255, 0, 0, 0.9)", color: "#fff", '& svg': { color: '#fff' } }}
             onClick={() => router.push("/typebots")}
           >
-            <SidebarContent tab={title} navSize={navSize} navigate={router} color={active ? "rgba(255, 0, 0, 0.9)" : "gray.500"} />
+            <SidebarContent tab={title} navSize={navSize} color={active ? "rgba(255, 0, 0, 0.9)" : "gray.500"} />
           </MenuButton>
         </Link>
        {/* <MenuList
