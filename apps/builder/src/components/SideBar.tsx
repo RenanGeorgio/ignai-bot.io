@@ -57,21 +57,21 @@ const SidebarContent = ({ tab, navSize, navigate, ...props }: ContentProps & Ico
   switch (tab) {
     case 'Home':
       return (
-        <Flex alignItems="center" justify="center" onClick={() => alert("/typebots 1")}>
+        <Flex alignItems="center" justify="center" onClick={alert("/typebots 1")}>
           <FolderIcon {...props}/>
           <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
         </Flex>
       )
     case 'Chat':
       return (
-        <Flex alignItems="center" justify="center" onClick={() => alert("/typebots 2")}>
+        <Flex alignItems="center" justify="center" onClick={alert("/typebots 2")}>
           <ChatIcon {...props}/>
           <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
         </Flex>
       )
     case 'Builder':
       return (
-        <Flex alignItems="center" justify="center" onClick={() => alert("/typebots 3")}>
+        <Flex alignItems="center" justify="center" onClick={alert("/typebots 3")}>
           <ToolIcon {...props}/>
           <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
         </Flex>
