@@ -143,6 +143,7 @@ const NavItem = ({ title, description, active, navSize, router }: NavItemProps) 
           ml={5}
         >
            <NavHoverBox title={title} description={description} />
+           <NavHoverBox title={title} description={description} />
           {/*
           <MenuItem onClick={() => router.push("/typebots")}>
           <NavHoverBox title={title} description={description} />
