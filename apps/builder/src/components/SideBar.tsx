@@ -126,14 +126,13 @@ const NavItem = ({ title, description, active, navSize, router }: NavItemProps) 
       <Menu placement="right">
         <Link
           backgroundColor={active ? "rgba(255, 0, 0, 0.9)" : undefined}
-          p={3}
-          borderRadius={8}
-          _hover={{ textDecor: 'none', backgroundColor: "rgba(255, 0, 0, 0.9)", color: "#fff", '& svg': { color: '#fff' } }}
           w={navSize == "large" ? "100%" : "35%"}
         >
           <MenuButton
             as={MenuItem}
             w={navSize == "large" ? "100%" : "35%"}
+            p={3}
+            borderRadius={8}
             backgroundColor="rgba(255, 217, 217, 0.8)"
             _hover={{ textDecor: 'none', backgroundColor: "rgba(255, 0, 0, 0.9)", color: "#fff", '& svg': { color: '#fff' } }}
             onClick={() => router.push("/typebots")}
@@ -200,7 +199,7 @@ const CustomSideBar = () => {
           p="5%"
           flexDir="column"
           w="100%"
-          alignItems={navSize == "small" ? "center" : "flex-start"} 
+          alignItems="flex-start"
           as="nav"
         >
           <Tooltip hasArrow label="Builder">
