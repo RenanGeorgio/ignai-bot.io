@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-
+// TO-DO
 export const TypebotNotFoundPage = () => {
   const { replace, asPath } = useRouter()
   const { user, isLoading } = useUser()

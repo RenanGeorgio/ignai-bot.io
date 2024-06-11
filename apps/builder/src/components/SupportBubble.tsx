@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { Bubble, BubbleProps } from '@typebot.io/nextjs'
 import { planToReadable } from '@/features/billing/helpers/planToReadable'
 import { Plan } from '@typebot.io/prisma'
-
+// TO-DO: ESTUDAR REMOVER
 export const SupportBubble = (props: Omit<BubbleProps, 'typebot'>) => {
   const { typebot } = useTypebot()
   const { user } = useUser()
@@ -39,5 +39,5 @@ export const SupportBubble = (props: Omit<BubbleProps, 'typebot'>) => {
       }}
       {...props}
     />
-  )
+  );
 }

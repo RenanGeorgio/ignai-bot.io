@@ -77,7 +77,6 @@ export const MyAccountForm = () => {
           </Text>
         </Stack>
       </HStack>
-
       <TextInput
         defaultValue={name}
         onChange={handleNameChange}
@@ -133,7 +132,6 @@ export const MyAccountForm = () => {
         <WhatsAppLogo />
         <FacebookLogo />
       </HStack>
-
       {user && <ApiTokensList user={user} />}
     </Stack>
   );
