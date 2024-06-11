@@ -135,6 +135,7 @@ const NavItem = ({ title, description, active, navSize, router }: NavItemProps) 
             as={MenuItem}
             w={navSize == "large" ? "100%" : "35%"}
             backgroundColor={active ? "rgba(255, 0, 0, 0.9)" : undefined}
+            _hover={{ textDecor: 'none', backgroundColor: "rgba(255, 0, 0, 0.9)", color: "#fff", '& svg': { color: '#fff' } }}
             onClick={() => router.push("/typebots")}
           >
             <SidebarContent tab={title} navSize={navSize} navigate={router} color={active ? "rgba(255, 0, 0, 0.9)" : "gray.500"} />
