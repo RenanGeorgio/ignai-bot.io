@@ -50,6 +50,7 @@ export const listTypebotsResults = authenticatedProcedure
   .output(
     z.object({
       results: z.array(resultWithAnswersSchema),
+      // @ts-ignore
       typebots: z.array(typebotV5Schema._def.schema.pick({ id: true, groups: true, collaborators: true, variables: true, workspace: true }), { id: true }),
       nextCursor: z.string().nullish(),
     })
