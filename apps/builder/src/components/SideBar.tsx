@@ -57,30 +57,24 @@ const SidebarContent = ({ tab, navSize, navigate, ...props }: ContentProps & Ico
   switch (tab) {
     case 'Home':
       return (
-        <Tooltip label="Home" hasArrow>
-          <Flex alignItems="center" justify="center" onClick={() => navigate.push("/home")}>
-            <FolderIcon {...props}/>
-            <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
-          </Flex>
-        </Tooltip>
+        <Flex alignItems="center" justify="center" onClick={() => navigate.push("/home")}>
+          <FolderIcon {...props}/>
+          <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
+        </Flex>
       )
     case 'Chat':
       return (
-        <Tooltip label="Chat" hasArrow>
-          <Flex alignItems="center" justify="center" onClick={() => navigate.push("/chat")}>
-            <ChatIcon {...props}/>
-            <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
-          </Flex>
-        </Tooltip>
+        <Flex alignItems="center" justify="center" onClick={() => navigate.push("/chat")}>
+          <ChatIcon {...props}/>
+          <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
+        </Flex>
       )
     case 'Builder':
       return (
-        <Tooltip label="Builder" hasArrow>
-          <Flex alignItems="center" justify="center" onClick={() => navigate.push("/builder")}>
-            <ToolIcon {...props}/>
-            <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
-          </Flex>
-        </Tooltip>
+        <Flex alignItems="center" justify="center" onClick={() => navigate.push("/builder")}>
+          <ToolIcon {...props}/>
+          <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
+        </Flex>
       )
     default:
       return null
