@@ -148,7 +148,7 @@ const NavItem = ({ title, description, active, navSize, router }: NavItemProps) 
     </Menu>
   </Flex>
   );
-}
+} 
 
 const CustomSideBar = () => {
   const router = useRouter();
