@@ -134,17 +134,19 @@ const NavItem = ({ title, description, active, navSize, router }: NavItemProps) 
             <SidebarContent tab={title} navSize={navSize} navigate={router} color={active ? "rgba(255, 0, 0, 0.9)" : "gray.500"} />
           </MenuButton>
         </Link>
-        {/*<MenuList
+        <MenuList
           py={0}
           border="none"
           w={200}
           h={200}
           ml={5}
         >
+           <NavHoverBox title={title} description={description} />
+          {/*
           <MenuItem onClick={() => router.push("/typebots")}>
-            <NavHoverBox title={title} description={description} />
-          </MenuItem>
-      </MenuList>*/}
+          <NavHoverBox title={title} description={description} />
+          </MenuItem>*/}
+      </MenuList>
     </Menu>
   </Flex>
   );
