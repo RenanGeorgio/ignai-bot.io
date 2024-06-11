@@ -57,24 +57,30 @@ const SidebarContent = ({ tab, navSize, navigate, ...props }: ContentProps & Ico
   switch (tab) {
     case 'Home':
       return (
-        <Flex alignItems="center" justify="center" onClick={() => navigate.push("/typebots")}>
-          <FolderIcon {...props}/>
-          <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
-        </Flex>
+        <Tooltip label="Home" hasArrow>
+          <Flex alignItems="center" justify="center" onClick={() => navigate.push("/home")}>
+            <FolderIcon {...props}/>
+            <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
+          </Flex>
+        </Tooltip>
       )
     case 'Chat':
       return (
-        <Flex alignItems="center" justify="center" onClick={() => navigate.push("/typebots")}>
-          <ChatIcon {...props}/>
-          <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
-        </Flex>
+        <Tooltip label="Chat" hasArrow>
+          <Flex alignItems="center" justify="center" onClick={() => navigate.push("/chat")}>
+            <ChatIcon {...props}/>
+            <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
+          </Flex>
+        </Tooltip>
       )
     case 'Builder':
       return (
-        <Flex alignItems="center" justify="center" onClick={() => navigate.push("/typebots")}>
-          <ToolIcon {...props}/>
-          <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
-        </Flex>
+        <Tooltip label="Builder" hasArrow>
+          <Flex alignItems="center" justify="center" onClick={() => navigate.push("/builder")}>
+            <ToolIcon {...props}/>
+            <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
+          </Flex>
+        </Tooltip>
       )
     default:
       return null
@@ -195,15 +201,9 @@ const CustomSideBar = () => {
           alignItems={navSize == "small" ? "center" : "flex-start"} 
           as="nav"
         >
-          <Tooltip hasArrow label="Builder">
-            <NavItem router={router} navSize={navSize} title="Home" description="Pagina inicial da aplicação." />
-          </Tooltip>
-          <Tooltip hasArrow label="Builder">
-            <NavItem router={router} navSize={navSize} title="Chat" description="Conteudo de chat disponivel." />
-          </Tooltip>
-          <Tooltip hasArrow label="Builder">
-            <NavItem router={router} navSize={navSize} title="Builder" description="Construtor de Bot" />
-          </Tooltip>
+          <NavItem router={router} navSize={navSize} title="Home" description="Pagina inicial da aplicação." />
+          <NavItem router={router} navSize={navSize} title="Chat" description="Conteudo de chat disponivel." />
+          <NavItem router={router} navSize={navSize} title="Builder" description="Construtor de Bot" />
         </Flex>
       </VStack>
 
