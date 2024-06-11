@@ -9,8 +9,7 @@ import {
   Link,
   IconButton,
   IconProps,
-  VStack,
-  Tooltip
+  VStack
 } from '@chakra-ui/react';
 import { ChatIcon, ChevronLeftIcon, ChevronRightIcon, FolderIcon, ToolIcon } from './icons';
 
@@ -45,7 +44,7 @@ interface ContentProps {
   tab: string
   navSize: string
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  navigate: any
+  router: any
 }
 
 interface HoverProps {
@@ -53,25 +52,25 @@ interface HoverProps {
   description: string | undefined
 }
 
-const SidebarContent = ({ tab, navSize, navigate, ...props }: ContentProps & IconProps) => {
+const SidebarContent = ({ tab, navSize, router, ...props }: ContentProps & IconProps) => {
   switch (tab) {
     case 'Home':
       return (
-        <Flex alignItems="center" justify="center" onClick={() => navigate.push("/home")}>
+        <Flex alignItems="center" justify="center" onClick={() => router.push("/home")}>
           <FolderIcon {...props}/>
           <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
         </Flex>
       )
     case 'Chat':
       return (
-        <Flex alignItems="center" justify="center" onClick={() => navigate.push("/chat")}>
+        <Flex alignItems="center" justify="center" onClick={() => router.push("/chat")}>
           <ChatIcon {...props}/>
           <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
         </Flex>
       )
     case 'Builder':
-      return (
-        <Flex alignItems="center" justify="center" onClick={() => navigate.push("/builder")}>
+      return (                                    
+        <Flex alignItems="center" justify="center" onClick={() => router.push("/typebots")}>
           <ToolIcon {...props}/>
           <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
         </Flex>
