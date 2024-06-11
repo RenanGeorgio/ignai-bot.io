@@ -44,7 +44,7 @@ interface ContentProps {
   tab: string
   navSize: string
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  router: any
+  navigate: any
 }
 
 interface HoverProps {
@@ -52,25 +52,25 @@ interface HoverProps {
   description: string | undefined
 }
 
-const SidebarContent = ({ tab, navSize, router, ...props }: ContentProps & IconProps) => {
+const SidebarContent = ({ tab, navSize, navigate, ...props }: ContentProps & IconProps) => {
   switch (tab) {
     case 'Home':
       return (
-        <Flex alignItems="center" justify="center" onClick={() => router.push("/home")}>
+        <Flex alignItems="center" justify="center" onClick={() => navigate.push("/home")}>
           <FolderIcon {...props}/>
           <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
         </Flex>
       )
     case 'Chat':
       return (
-        <Flex alignItems="center" justify="center" onClick={() => router.push("/chat")}>
+        <Flex alignItems="center" justify="center" onClick={() => navigate.push("/chat")}>
           <ChatIcon {...props}/>
           <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
         </Flex>
       )
     case 'Builder':
       return (                                    
-        <Flex alignItems="center" justify="center" onClick={() => router.push("/typebots")}>
+        <Flex alignItems="center" justify="center" onClick={() => navigate.push("/typebots")}>
           <ToolIcon {...props}/>
           <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
         </Flex>
