@@ -1,12 +1,19 @@
 import React from 'react';
 import { GetServerSidePropsContext } from 'next';
-import prisma, { User } from '@typebot.io/prisma';
+import { User } from '@typebot.io/prisma';
+import prisma from '@typebot.io/lib/prisma';
 import { ChatProvider } from '@/contexts/chat/ChatContext';
 import ChatPage from '@/components/Chat';
 
 import type {} from '@mui/x-data-grid/themeAugmentation';
+import { useUser } from '@/features/account/hooks/useUser';
 
 export default function Page() {
+  const { user } = useUser();
+
+  if (!user) {
+    return
+  }
   //const { replace } = useRouter();
   //const { workspace } = useWorkspace();
 
