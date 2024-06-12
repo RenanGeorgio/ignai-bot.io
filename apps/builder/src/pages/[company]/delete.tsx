@@ -23,27 +23,27 @@ export default function Page(props: Props): InferGetServerSidePropsType<typeof g
 
   const { showToast } = useToast();
 
-  const { typebots, isLoading: isTypebotLoading } = useTypebots({
-    workspaceId: workspace?.id,
-    folderId: 'root',
-    onError: (error) => {
-      showToast({
-        description: error.message,
-      })
-    }
-  });
-
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   if (!router?.query?.contains(props?.code)) {
     return <ErrorPage error={new Error('O codigo não é compativel')} />
   }
 
+  const { isLoading: isTypebotLoading } = useTypebots({
+    workspaceId: workspace?.id,
+    folderId: 'root',
+    onError: (error) => {
+      showToast({
+        description: error?.message,
+      })
+    }
+  });
+
   if (isTypebotLoading) {
     return <Container>Loading...</Container>
   }
 
-  if (!(typebots?.length > 0)) {
+  if (workspace != undefined) {
     return (
       <WarningResult title="Atenção" description="Dados não foram excluídos" />
     );
