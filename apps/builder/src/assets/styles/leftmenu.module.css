@@ -3,6 +3,7 @@
   border: 1px rgba(145, 145, 145, 0.261) solid;
   border-radius: 3px 0px 0px 6px;
   border-right-width: 1px;
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   width: auto;
@@ -37,14 +38,14 @@
   flex-grow: 1 0 !important;
   width: 80% !important;
   height: 25px !important;
-  color: #fff;
+  color: #000000;
   padding: 2px;
   margin-top: 15px;
   border: #c4c2c27c 1px solid;
 }
 
 .left-menu .instance::placeholder {
-  color: #fff; 
+  color: #000000; 
   padding-left: 10px; 
 }
 
@@ -98,7 +99,7 @@
 }
 
 .blueButtonTicket {
-  background-color: rgba(115, 103, 240, 1);
+  background-color: rgb(240, 103, 103);
   color: white;
   padding: 10px;
   border: none;
@@ -116,8 +117,8 @@
 }
 
 .grayButtonTicket {
-  background-color: rgba(168, 170, 174, 0.397);
-  color: rgba(168, 170, 174, 1);
+  background-color: rgb(255, 184, 184);
+  color: rgb(0, 0, 0);
   padding: 10px;
   border: none;
   border-radius: 0px;
@@ -137,7 +138,7 @@
   height: 22px !important;
   position: relative !important;
   width: 22px !important;
-  color: #fff !important;
+  color: #000000 !important;
 }
 
 .left-menu .chevron-down {
@@ -178,7 +179,7 @@
 }
 
 .div-content::-webkit-scrollbar-thumb {
-  background-color: rgb(109, 109, 109);
+  background-color: rgb(249, 158, 158);
   border-radius: 20px;
 }
 
@@ -189,14 +190,14 @@
   margin-top: -1px;
   position: relative;
   width: fit-content;
-  color: #7367f0;
+  color: rgb(184, 0, 0);
 }
 
 .left-menu .listLeftClient {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #8f83fb;
+  background-color: #ffffff;
   border: 0px none;
   margin: 5px;
   color: #fff;
@@ -467,7 +468,7 @@
 }
 
 .messageBubble {
-  background-color: #8f83fb;
+  background-color: rgb(240, 103, 103);
   padding: 20px;
   border-radius: 10px;
   margin: 5px;
@@ -492,13 +493,13 @@
 }
 
 .name {
-  color: #ffffff;
+  color: #000000;
   font-size: 15px;
 }
 
 .companyName {
   font-size: 0.7em;
-  color: #686efe;
+  color: rgb(231, 4, 4);
   position: relative;
   background-color: #dedddd;
   padding: 3px 8px;

@@ -550,7 +550,7 @@ input.txt:focus {
   font-size: 15px;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-weight: 500;
-  background-color: #7367f0;
+  background-color: rgb(240, 103, 103);
   cursor: pointer;
   height: 2.3rem;
   width: 4rem;
