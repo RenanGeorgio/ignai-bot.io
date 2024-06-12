@@ -6,10 +6,10 @@ type Props = {
 }
 
 export const IgnaiChatbotNodeBody = ({ block }: Props) => {
-  console.log('block', block)
+  console.log(block.options?.baseUrl?.length, block.options, 'test')
   return block.options?.task === 'Close widget' ? (
-    <Text>Close Chatwoot</Text>
-  ) : (block.options?.websiteToken?.length ?? 0) === 0 ? (
+    <Text>Fechar Ignai Chat</Text>
+  ) : (block.options?.baseUrl?.length ?? 0) === 0 ? (
     <Text color="gray.500">Configure...</Text>
   ) : (
     <Text>Abrir Ignai Chatbot RT </Text>

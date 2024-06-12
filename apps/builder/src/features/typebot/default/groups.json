@@ -1,0 +1,149 @@
+[
+  {
+    "id": "k148kf6113d9ddajzocmp2ae",
+    "title": "Nova mensagem",
+    "blocks": [
+      {
+        "id": "ni17i15qotyt36wly0a8ty7f",
+        "type": "text input",
+        "options": {
+          "labels": {
+            "button": "Enviar",
+            "placeholder": "Escreva sua mensagem..."
+          },
+          "variableId": "vmmgg1qfkn8yg6hs26o658ri2"
+        },
+        "outgoingEdgeId": "jd19nr5kp9dn7s9i710hqg75"
+      }
+    ],
+    "graphCoordinates": {
+      "x": 604.83,
+      "y": -45.36
+    }
+  },
+  {
+    "id": "xyxmeuk9o4i75374vn4jenio",
+    "title": "Messagem Recebida",
+    "blocks": [
+      {
+        "id": "hm9zem1r0m2fuii2h8t6dkfb",
+        "type": "text",
+        "content": {
+          "richText": [
+            {
+              "type": "p",
+              "children": [
+                {
+                  "text": "{{botMessage}}"
+                }
+              ]
+            }
+          ]
+        },
+        "outgoingEdgeId": "oxs3ei9y2c3lvkkqkxa3dgta"
+      }
+    ],
+    "graphCoordinates": {
+      "x": 1611.42,
+      "y": 86.58
+    }
+  },
+  {
+    "id": "iswxdhwrgmz4ugvbghbrjary",
+    "title": "Verificação",
+    "blocks": [
+      {
+        "id": "mi2mfnjxofi772gnzlqycic1",
+        "type": "Condition",
+        "items": [
+          {
+            "id": "idnhzowx2p8hp6yuqgpeg5cz",
+            "content": {
+              "comparisons": [
+                {
+                  "id": "zcyq037j0ousuot2cmbvyr0j",
+                  "variableId": "vj47rfxpx3bynd4bu7h8fkzte",
+                  "comparisonOperator": "Is empty"
+                }
+              ]
+            },
+            "outgoingEdgeId": "z0f4rz839dtnhj9by4yc1xl2"
+          }
+        ],
+        "outgoingEdgeId": "zzo45covz7dbc2xij522gsb8"
+      }
+    ],
+    "graphCoordinates": {
+      "x": 1273.9,
+      "y": -71.42
+    }
+  },
+  {
+    "id": "jndjpbk845u64o1c311x6o5b",
+    "title": "Fallback",
+    "blocks": [
+      {
+        "id": "yxqwy626m009ltxcl87zjywb",
+        "type": "text",
+        "content": {
+          "richText": [
+            {
+              "type": "p",
+              "children": [
+                {
+                  "text": "Ocorreu um erro..."
+                }
+              ]
+            }
+          ]
+        },
+        "outgoingEdgeId": "f5pzibv6dtzffcs19o9aun6s"
+      }
+    ],
+    "graphCoordinates": {
+      "x": 1613.68,
+      "y": -64.87
+    }
+  },
+  {
+    "id": "ki3cih7a5vdpiz2rjkia9j97",
+    "title": "Retorna o fluxo",
+    "blocks": [
+      {
+        "id": "condds0det356xocnajdyiig",
+        "type": "Jump",
+        "options": {
+          "groupId": "k148kf6113d9ddajzocmp2ae"
+        }
+      }
+    ],
+    "graphCoordinates": {
+      "x": 1619.32,
+      "y": 258.76
+    }
+  },
+  {
+    "id": "jqg17imoy5gxe2a23grnp17h",
+    "title": "End",
+    "blocks": [
+      {
+        "id": "iohgbduct453ah9as6ujubpb",
+        "type": "ignai-chatbot",
+        "options": {
+          "action": "Send Message",
+          "message": "{{message}}",
+          "responseMapping": [
+            {
+              "variableId": "vj47rfxpx3bynd4bu7h8fkzte"
+            }
+          ]
+        },
+        "outgoingEdgeId": "yviyv1gvkvuouy936pf5fzu6"
+      }
+    ],
+    "graphCoordinates": {
+      "x": 942.03,
+      "y": -47.66
+    }
+  }
+]

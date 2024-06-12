@@ -1,0 +1,12 @@
+[
+  {
+    "id": "vmmgg1qfkn8yg6hs26o658ri2",
+    "name": "message",
+    "isSessionVariable": true
+  },
+  {
+    "id": "vj47rfxpx3bynd4bu7h8fkzte",
+    "name": "botMessage",
+    "isSessionVariable": true
+  }
+]

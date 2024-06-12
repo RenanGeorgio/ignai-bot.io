@@ -8,6 +8,6 @@ export const ignaiChatbotBlock = createBlock({
   name: 'Ignai Chatbot',
   tags: [],
   LightLogo: IgnaiChatbotLogo,
-  auth,
+  // auth,
   actions: [sendMessage],
 })

@@ -15,6 +15,10 @@ import { createId } from '@paralleldrive/cuid2'
 import { EventType } from '@typebot.io/schemas/features/events/constants'
 import { trackEvents } from '@typebot.io/telemetry/trackEvents'
 
+import defaultGroups from '../default/groups.json'
+import defaultVariables from '../default/variables.json'
+import defaultEdges from '../default/edges.json'
+
 const typebotCreateSchemaPick = {
   name: true,
   icon: true,
@@ -101,7 +105,7 @@ export const createTypebot = authenticatedProcedure
         selectedThemeTemplateId: typebot.selectedThemeTemplateId,
         groups: (typebot.groups
           ? await sanitizeGroups(workspaceId)(typebot.groups)
-          : []) as TypebotV6['groups'],
+          : defaultGroups) as TypebotV6['groups'],
         events: typebot.events ?? [
           {
             type: EventType.START,
@@ -118,8 +122,8 @@ export const createTypebot = authenticatedProcedure
             }
           : {},
         folderId: typebot.folderId,
-        variables: typebot.variables ?? [],
-        edges: typebot.edges ?? [],
+        variables: typebot.variables ?? defaultVariables,
+        edges: typebot.edges ?? defaultEdges,
         resultsTablePreferences: typebot.resultsTablePreferences ?? undefined,
         publicId: typebot.publicId ?? undefined,
         customDomain: typebot.customDomain ?? undefined,
