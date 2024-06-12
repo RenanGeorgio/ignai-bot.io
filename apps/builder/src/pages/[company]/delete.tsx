@@ -23,12 +23,6 @@ export default function Page(props: Props): InferGetServerSidePropsType<typeof g
 
   const { showToast } = useToast();
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  if (!router?.query?.contains(props?.code)) {
-    return <ErrorPage error={new Error('O codigo não é compativel')} />
-  }
-
   const { isLoading: isTypebotLoading } = useTypebots({
     workspaceId: workspace?.id,
     folderId: 'root',
@@ -38,6 +32,12 @@ export default function Page(props: Props): InferGetServerSidePropsType<typeof g
       })
     }
   });
+
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  if (!router?.query?.contains(props?.code)) {
+    return <ErrorPage error={new Error('O codigo não é compativel')} />
+  }
 
   if (isTypebotLoading) {
     return <Container>Loading...</Container>
