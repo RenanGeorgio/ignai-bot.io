@@ -4,8 +4,6 @@ import { User } from '@typebot.io/prisma';
 import prisma from '@typebot.io/lib/prisma';
 import { ChatProvider } from '@/contexts/chat/ChatContext';
 import ChatPage from '@/components/Chat';
-
-import type {} from '@mui/x-data-grid/themeAugmentation';
 import { useUser } from '@/features/account/hooks/useUser';
 
 export default function Page() {
