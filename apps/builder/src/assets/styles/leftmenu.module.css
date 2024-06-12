@@ -1,6 +1,6 @@
 .left-menu {
   align-items: flex-start;
-  border: 1px rgba(145, 145, 145, 0.261) solid;
+  border: 1px rgba(242, 45, 45, 0.373) solid;
   border-radius: 3px 0px 0px 6px;
   border-right-width: 1px;
   background-color: #ffffff;
@@ -20,7 +20,8 @@
   align-self: stretch;
   width: 100%;
   margin-bottom: 20px;
-  border-bottom: 1px rgba(100, 100, 100, 0.048) solid;
+  background-color: #ffffff;
+  border-bottom: 1px rgba(242, 45, 45, 0.373) solid;
   justify-content: space-around;
   height: 23px;
 }
@@ -156,7 +157,7 @@
   gap: 192px;
   padding: 10px 16px;
   width: 100%;
-  border-bottom: #33333328 1px solid;
+  border-bottom: rgba(242, 45, 45, 0.373) 1px solid;
 }
 
 .div-content {
@@ -190,7 +191,7 @@
   margin-top: -1px;
   position: relative;
   width: fit-content;
-  color: rgb(184, 0, 0);
+  color: rgb(0, 0, 0);
 }
 
 .left-menu .listLeftClient {
@@ -432,8 +433,8 @@
   font-weight: bold;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
     'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  border-bottom: #33333328 1px solid;
-  border-top: #33333328 1px solid;
+  border-bottom: rgba(242, 45, 45, 0.373)  1px solid;
+  border-top: rgba(242, 45, 45, 0.373) 8 1px solid;
   width: 100%;
 }
 
@@ -468,11 +469,11 @@
 }
 
 .messageBubble {
-  background-color: rgb(240, 103, 103);
+  background-color: rgb(255, 255, 255);
   padding: 20px;
   border-radius: 10px;
   margin: 5px;
-  color: white;
+  color: #000;
   display: flex;
   align-items: center;
   position: relative;
@@ -499,7 +500,7 @@
 
 .companyName {
   font-size: 0.7em;
-  color: rgb(231, 4, 4);
+  color: rgb(151, 0, 0);
   position: relative;
   background-color: #dedddd;
   padding: 3px 8px;

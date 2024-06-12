@@ -58,8 +58,8 @@ const Chat: React.FC = () => {
               <button
                 className={
                   activePage === 'Atendimento'
-                    ? styles.redButtonChat
-                    : styles.grayButtonChat
+                  ? styles.grayButtonChat
+                  : styles.redButtonChat
                 }
                 onClick={() => handleButtonClick('Atendimento')}
               >
@@ -68,8 +68,8 @@ const Chat: React.FC = () => {
               <button
                 className={
                   activePage === 'Histórico'
-                    ? styles.redButtonChat
-                    : styles.grayButtonChat
+                  ? styles.grayButtonChat
+                  : styles.redButtonChat
                 }
                 onClick={() => handleButtonClick('Histórico')}
               >
@@ -78,8 +78,8 @@ const Chat: React.FC = () => {
               <button
                 className={
                   activePage === 'Painel'
-                    ? styles.redButtonChat
-                    : styles.grayButtonChat
+                  ? styles.grayButtonChat
+                  : styles.redButtonChat
                 }
                 onClick={() => handleButtonClick('Painel')}
               >

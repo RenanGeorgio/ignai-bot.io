@@ -135,7 +135,8 @@ export default function HistoryComponent() {
             paddingLeft: 10,
             paddingRight: 10,
             background: '#DEDBFC',
-            borderRight: '1px rgba(115, 103, 240, 0.24) solid',
+            color: 'rgb(151, 0, 0)',
+            borderRight: '1px rgb(177, 106, 106) solid',
             justifyContent: 'end',
             alignItems: 'center',
             display: 'flex',
@@ -148,6 +149,7 @@ export default function HistoryComponent() {
             paddingLeft: 10,
             paddingRight: 10,
             background: '#E8E6FC',
+            color: 'rgb(151, 0, 0)',
             justifyContent: 'end',
             alignItems: 'center',
             display: 'flex',
@@ -372,7 +374,7 @@ export default function HistoryComponent() {
               height: 33,
               background: 'white',
               borderRadius: 6,
-              border: '1px #DBDADE solid',
+              border: '1px rgb(149, 0, 0) solid',
               justifyContent: 'flex-start',
               alignItems: 'center',
               display: 'flex',
@@ -383,8 +385,8 @@ export default function HistoryComponent() {
           <div>
             <Button
               style={{
-                background: '#7367F0',
-                boxShadow: '0px 2px 4px rgba(165, 163, 174, 0.30)',
+                background: 'rgb(149, 0, 0)',
+                boxShadow: '0px 2px 4px rgba(174, 163, 163, 0.3)',
                 borderRadius: 6,
                 justifyContent: 'center',
                 alignItems: 'center',
