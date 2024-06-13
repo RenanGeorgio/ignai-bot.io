@@ -203,6 +203,14 @@ const azureEnv = {
   },
 }
 
+const auth0Env = {
+  server: {
+    AUTH0_ISSUER: z.string().min(1).optional().default('OAuth'),
+    AUTH0_CLIENT_ID: z.string().min(1).optional(),
+    AUTH0_CLIENT_SECRET: z.string().min(1).optional(),
+  },
+}
+
 const customOAuthEnv = {
   server: {
     CUSTOM_OAUTH_NAME: z.string().min(1).optional().default('Custom OAuth'),
@@ -419,6 +427,7 @@ export const env = createEnv({
     ...upstashRedis.server,
     ...gitlabEnv.server,
     ...azureEnv.server,
+    ...auth0Env.server,
     ...customOAuthEnv.server,
     ...sentryEnv.server,
     ...telemetryEnv.server,

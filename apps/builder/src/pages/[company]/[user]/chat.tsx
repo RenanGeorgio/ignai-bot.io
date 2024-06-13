@@ -1,51 +1,28 @@
-import { useState } from 'react';
-import { Flex, VStack } from '@chakra-ui/react';
-import { ThemeProvider } from '@mui/material';
-import { createTheme } from '@mui/material/styles';
-import { DashboardHeader } from '@/features/dashboard/components/DashboardHeader';
-import Layout from '@/components/chat/layout/ChatLayout';
-import History from '@/components/chat/layout/HistoryLayout';
-import GraphChat from '@/components/graph/GraphChat';
-import GraphTicket from '@/components/graph/GraphTicket';
-import GraphTicketYou from '@/components/graph/GraphTicketYou';
-import GraphThemes from '@/components/graph/GraphThemes';
-import CustomSideBar from '@/components/SideBar';
+import React from 'react';
+import { GetServerSidePropsContext } from 'next';
+import { User } from '@typebot.io/prisma';
+import prisma from '@typebot.io/lib/prisma';
 import { ChatProvider } from '@/contexts/chat/ChatContext';
-import { colors } from '@/lib/theme';
+import ChatPage from '@/components/Chat';
+import { useUser } from '@/features/account/hooks/useUser';
 
-import type {} from '@mui/x-data-grid/themeAugmentation';
-import styles from '@/assets/styles/forms.module.css';
+export default function Page() {
+  const { user } = useUser();
 
-const MuiTheme = createTheme({
-  palette: {
-    mode: 'light',
-  },
-  components: {
-    MuiDataGrid: {
-      styleOverrides: {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        root: {
-          border: 1,
-          borderColor: colors.gray,
-          borderStyle: 'solid',
-          borderRadius: 10,
-          boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.25)',
-          backgroundColor: colors.gray,
-          color: '#C1C2C5',
-          padding: 10,
-        }
-      }
+  if (!user) {
+    return
+  }
+  //const { replace } = useRouter();
+  //const { workspace } = useWorkspace();
+
+  /*
+  useEffect(() => {
+    if (!workspace || workspace.isPastDue) {
+      return
     }
-  }
-});
 
-const Chat: React.FC = () => {
-  const [activePage, setActivePage] = useState('Atendimento');
-
-  const handleButtonClick = (pageName: string) => {
-    setActivePage(pageName);
-  }
+    replace('/typebots');
+  }, [replace, workspace]);*/
 
   return (
     <ChatProvider>
@@ -115,4 +92,27 @@ const Chat: React.FC = () => {
   );
 }
 
-export default Chat
+export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+  const userId = context.query.user?.toString() as string;
+
+  if (!userId) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: `/signin`
+      }
+    }
+  }
+
+  const user = await prisma.user.findFirst({
+    where: { id: userId }
+  }) as User;
+
+  if (!user) {
+    return
+  }
+
+  return {
+    props: {}
+  }
+}

@@ -267,7 +267,7 @@ export const ResultsTable = ({
           </thead>
 
           <tbody>
-            {instance.getRowModel().rows.map((row, rowIndex) => (
+            {instance.getRowModel().rows?.map((row, rowIndex) => (
               <Row
                 row={row}
                 key={row.id}

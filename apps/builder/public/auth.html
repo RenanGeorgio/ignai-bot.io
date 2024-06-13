@@ -12,7 +12,17 @@
     <!-- Load the JS SDK asynchronously -->
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js"></script>
 
+    <div id="spinner" class="spinner" style="display: none;">
+      Carregando...
+    </div>
+
     <script>
+      let spinner;
+      let content;
+      let valueType;
+      let configId;
+      var isEnterprises = true;
+
       function finished_rendering() {
         console.log("finished rendering plugins");
 
@@ -34,28 +44,74 @@
       }
 
       function checkLoginState() {               // Called when a person is finished with the Login Button.
+        // Conversion tracking code
+        fbq && fbq('trackCustom', 'WhatsAppOnboardingStart', {appId: 'your-facebook-app-id', feature: 'whatsapp_embedded_signup'});
+        
         FB.getLoginStatus(function(response) {   // See the onlogin handler
           statusChangeCallback(response);
         });
       }
 
       window.fbAsyncInit = function() {
+        let appId;
+
+        switch (valueType) {
+          case 'type001':
+            appId = '909625074182796';
+            break;
+          default:
+            appId = '909625074182796';
+            break;
+        }
+
         FB.init({
-          appId            : '909625074182796',
+          appId            : appId,
           autoLogAppEvents : true,
           cookie           : true,                     // Enable cookies to allow the server to access the session.
           xfbml            : true,                     // Parse social plugins on this webpage.
-          version          : 'v19.0',           // Use this Graph API version for this call.
+          version          : 'v20.0',           // Use this Graph API version for this call.
           status           : true
         });
-
         // FB.AppEvents.logPageView();
-        FB.getLoginStatus(function(response) {   // Called after the JS SDK has been initialized.
-          statusChangeCallback(response);        // Returns the login status.
-        });
+      };
+
+      window.addEventListener('load', function() {
+        checkCheckboxes();
+
+        if (isEnterprises === false) {
+          FB.getLoginStatus(function(response) {   // Called after the JS SDK has been initialized.
+            statusChangeCallback(response);        // Returns the login status.
+          });
+        }
 
         FB.Event.subscribe('xfbml.render', finished_rendering);
-      };
+
+        content.innerHTML = '<pre> Processando Autorização </pre>';
+      });
+
+      document.addEventListener('DOMContentLoaded', function() {
+        spinner = document.getElementById('spinner');
+        content = document.getElementById('content');
+
+        spinner.style.display = 'block';
+
+        var searchParams = new URLSearchParams(window.location.search);
+        var valueApp = searchParams.get("app");
+        valueType = searchParams.get("type");
+        configId = searchParams.get("config");
+
+        if (String(valueApp).toLowerCase() === "false") {
+          isEnterprises = false;
+        } else {
+          isEnterprises = true;
+        }
+
+        var checkboxes = document.querySelectorAll('.form-check-input');
+
+        checkboxes.forEach(function(checkbox) {
+          checkbox.addEventListener('change', checkCheckboxes);
+        });
+      });
  
       function login() { // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
         console.log('Welcome!  Fetching your information.... ');
@@ -69,20 +125,41 @@
       }
 
       function loginUsingJSSDKLoginDialog() {
-        FB.login(
-          function(response) {
+        let currentConfig;
+
+        switch (configId) {
+          case 'config001':
+            currentConfig = '486379303720362';
+            break;
+          default:
+            currentConfig = '486379303720362';
+            break;
+        }
+
+        if (isEnterprises === true) {
+          FB.login(function (response) {
+            if (response.authResponse) {
+              var value = response.authResponse;
+              sendToken(value);
+            } else {
+              document.getElementById("status").innerHTML = "You are not logged in!";
+              console.log('O usuário cancelou o login ou não autorizou totalmente.');
+            }
+          }, {
+            config_id: currentConfig,
+            response_type: 'code', 
+            override_default_response_type: true
+          });
+        } else {
+          FB.login(function(response) {
             if (response.status === "connected") {
               sendToken(response.authResponse);
+              login();
             } else {
               document.getElementById("status").innerHTML = "You are not logged in!";
             }
-          },
-          {
-            config_id: '486379303720362',
-            response_type: 'code',
-            override_default_response_type: true
-          }
-        );
+          });
+        }
       }
 
       function sendToken(auth) {
@@ -92,8 +169,6 @@
           xhr.open("POST", "https://supplyfy-chatbot.azurewebsites.net/save-code", true);
           xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
           xhr.send(JSON.stringify(auth));
-
-          login();
         } catch (err) {
           console.log(err);
         }
@@ -116,15 +191,6 @@
           fbLoginButton.disabled = true;
         }
       }
-
-      document.addEventListener('DOMContentLoaded', () => {
-        const checkboxes = document.querySelectorAll('.form-check-input');
-        checkboxes.forEach(checkbox => {
-          checkbox.addEventListener('change', checkCheckboxes);
-        });
-
-        checkCheckboxes();
-      });
     </script>
     <div class="container">
       <h1>Página de Integração: <span class="title">Ignai-bot</span></h1>
@@ -139,19 +205,18 @@
         <a href="disallow.html" target="_blank">Clique aqui</a>
       </div>
 
-      <div id="spinner" class="spinner">
-        Carregando...
-        <fb:login-button  
-          id="fbLoginButton"
-          config_id="486379303720362" 
-          width="240px" 
-          size="xlarge"
-          auto-logout-link="false" 
-          onlogin="checkLoginState();"
-          disabled>
-        </fb:login-button>
-      </div>
+      <div id="content"></div>
 
+      <fb:login-button  
+        id="fbLoginButton"
+        config_id="486379303720362" 
+        width="240px" 
+        size="xlarge"
+        auto-logout-link="false" 
+        onlogin="checkLoginState();"
+        disabled>
+      </fb:login-button>
+      
       <div id="status"></div>
 
       <footer class="container mt-4">
@@ -164,6 +229,7 @@
               <br>
               <small class="text-muted">
                 Autorizar o uso das suas informações para fins de análise e melhoria de serviços.
+                <a href="https://ignaibot.com/privacy-policies" target="_blank">Leia mais</a>
               </small>
             </label>
           </div>
@@ -174,7 +240,7 @@
               <br>
               <small class="text-muted">
                 Permitir o compartilhamento de dados com parceiros para ofertas personalizadas.
-                <a href="link_to_detailed_explanation_3.html" target="_blank">Leia mais</a>
+                <a href="https://ignaibot.com/terms-of-service" target="_blank">Leia mais</a>
               </small>
             </label>
           </div>

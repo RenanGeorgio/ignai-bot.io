@@ -9,7 +9,6 @@ import {
   HStack,
   SimpleGrid,
   Stack,
-  Text,
 } from '@chakra-ui/react'
 import { Logo } from 'assets/icons/Logo'
 import { TextLink } from './TextLink'
@@ -17,7 +16,6 @@ import { TextLink } from './TextLink'
 const discordServerUrl = 'https://typebot.io/discord'
 const typebotLinkedInUrl = 'https://www.linkedin.com/company/typebot'
 const typebotTwitterUrl = 'https://twitter.com/Typebot_io'
-const baptisteTwitterUrl = 'https://twitter.com/baptisteArno'
 const statusPageUrl = 'https://status.typebot.io'
 export const contactUrl = 'https://bot.typebot.io/landing-page-bubble-en'
 export const roadmapLink = 'https://app.typebot.io/feedback'

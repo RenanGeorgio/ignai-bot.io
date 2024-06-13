@@ -27,7 +27,7 @@ export const ChangePlanForm = ({
 }: Props) => {
   const { t } = useTranslate()
 
-  const { user } = useUser()
+  const { user } = useUser();
   const { showToast } = useToast()
   const [preCheckoutPlan, setPreCheckoutPlan] =
     useState<PreCheckoutModalProps['selectedSubscription']>()

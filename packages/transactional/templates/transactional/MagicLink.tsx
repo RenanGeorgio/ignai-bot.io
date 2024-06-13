@@ -21,19 +21,19 @@ const imagesBaseUrl = `${env.NEXTAUTH_URL}/images`
 export const MagicLink = ({ magicLinkUrl }: Props) => (
   <Html>
     <Head />
-    <Preview>Log in with this magic link</Preview>
+    <Preview>Faça login com este magic link</Preview>
     <Body style={main}>
       <Container style={container}>
         <Img
           src={`${imagesBaseUrl}/logo.png`}
           width="32"
           height="32"
-          alt="Typebot's Logo"
+          alt="Ignai-bot Logo"
           style={{
             margin: '24px 0',
           }}
         />
-        <Heading style={heading}>Your magic link</Heading>
+        <Heading style={heading}>Seu magic link</Heading>
         <Link
           href={magicLinkUrl}
           target="_blank"
@@ -43,7 +43,7 @@ export const MagicLink = ({ magicLinkUrl }: Props) => (
             marginBottom: '24px',
           }}
         >
-          👉 Click here to sign in 👈
+          👉 Clique aqui para entrar 👈
         </Link>
         <Text
           style={{
@@ -53,7 +53,7 @@ export const MagicLink = ({ magicLinkUrl }: Props) => (
             marginBottom: '16px',
           }}
         >
-          If you didn&apos;t try to login, you can safely ignore this email.
+          Se você não tentou fazer login, pode ignorar este e-mail com segurança.
         </Text>
         <Text style={footer}>
           <Link
@@ -61,9 +61,9 @@ export const MagicLink = ({ magicLinkUrl }: Props) => (
             target="_blank"
             style={{ ...link, color: '#898989' }}
           >
-            Typebot.io
+            Ignai-bot
           </Link>
-          - Powering Conversations at Scale
+          - Impulsionando conversas multi-canal em grande escala
         </Text>
       </Container>
     </Body>
