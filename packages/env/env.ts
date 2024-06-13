@@ -205,7 +205,7 @@ const azureEnv = {
 
 const auth0Env = {
   server: {
-    AUTH0_ISSUER: z.string().min(1).optional(),
+    AUTH0_ISSUER: z.string().min(1).optional().default('OAuth'),
     AUTH0_CLIENT_ID: z.string().min(1).optional(),
     AUTH0_CLIENT_SECRET: z.string().min(1).optional(),
   },
