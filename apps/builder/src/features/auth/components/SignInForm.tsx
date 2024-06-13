@@ -29,7 +29,6 @@ import { TextLink } from '@/components/TextLink'
 import { SignInError } from './SignInError'
 import { useTranslate } from '@tolgee/react'
 import { sanitizeUrl } from '@braintree/sanitize-url'
-import { env } from '@typebot.io/env';
 
 type Props = {
   defaultEmail?: string
@@ -64,9 +63,10 @@ export const SignInForm = ({
     }
     ;(async () => {
       const providers = await getProviders()
-      console.log(env.AUTH0_CLIENT_ID)
       if (providers != null) {
         alert(providers?.toString())
+      } else {
+        alert("providers null")
       }
       setProviders(providers ?? undefined)
       setIsLoadingProviders(false)
