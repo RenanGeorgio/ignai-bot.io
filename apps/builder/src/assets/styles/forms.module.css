@@ -136,7 +136,7 @@
 }
 
 .red-button {
-  background-color: red;
+  background-color: rgb(228, 2, 2);
   color: white;
   border: none;
   padding: 10px 20px;
@@ -156,7 +156,7 @@
 }
   
 .redButtonChat {
-  background-color: rgb(240, 103, 103);
+  background-color: rgb(228, 2, 2);
   color: white;
   padding: 10px 10px;
   border: none;

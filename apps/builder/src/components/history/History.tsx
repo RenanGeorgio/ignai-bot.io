@@ -194,7 +194,7 @@ export default function HistoryComponent() {
             }}
           >
             <form style={{ width: '100%', height: '95%' }}>
-              <select style={{ width: '80%', height: '100%', borderRadius: 6, backgroundColor: 'white', color: 'black', border: '1px solid black' }}>
+              <select style={{ width: '80%', height: '100%', borderRadius: 6, backgroundColor: 'white', color: 'black', border: '1px solid rgb(228, 2, 2)' }}>
                 <option value="" selected>
                   <em>None</em>
                 </option>
@@ -236,7 +236,7 @@ export default function HistoryComponent() {
                   borderRadius: 6,
                   backgroundColor: 'white', 
                   color: 'black',
-                  border: '1px solid black'
+                  border: '1px solid rgb(228, 2, 2)'
                 }}
               >
                 <option value="" selected>
@@ -273,7 +273,7 @@ export default function HistoryComponent() {
           >
             <form style={{ width: '80%', height: '95%' }}>
               <select
-                style={{ width: '100%', height: '100%', borderRadius: 6, backgroundColor: 'white', color: 'black', border: '1px solid black' }}
+                style={{ width: '100%', height: '100%', borderRadius: 6, backgroundColor: 'white', color: 'black', border: '1px solid rgb(228, 2, 2)' }}
               >
                 <option value="" selected>
                   <em>None</em>
@@ -348,7 +348,7 @@ export default function HistoryComponent() {
               backgroundColor: 'white',
               marginTop: '-7px',
               color: 'black',
-              border: '1px solid black'
+              border: '1px solid rgba(242, 45, 45, 0.373)'
             }}
           >
             <option selected>10</option>
@@ -386,7 +386,7 @@ export default function HistoryComponent() {
             <Button
               style={{
                 background: 'rgb(149, 0, 0)',
-                boxShadow: '0px 2px 4px rgba(174, 163, 163, 0.3)',
+                boxShadow: '0px 2px 4px rgba(233, 232, 232, 0.3)',
                 borderRadius: 6,
                 justifyContent: 'center',
                 alignItems: 'center',
