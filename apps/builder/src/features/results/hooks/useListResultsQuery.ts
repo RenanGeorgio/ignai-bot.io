@@ -11,12 +11,13 @@ type Params = {
 const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
 
 export const useListResultsQuery = ({ timeFilter, typebots, onError }: Params) => {
+  console.log(typebots)
   const { data, error, fetchNextPage, hasNextPage, refetch } =
     trpc.results.listTypebotsResults.useInfiniteQuery(
       {
         timeZone,
         timeFilter,
-        typebots,
+        typebotsIds: typebots?.map((typebot) => typebot.id) || [],
       },
       {
         getNextPageParam: (lastPage) => lastPage.nextCursor,

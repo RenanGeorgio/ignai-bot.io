@@ -42,8 +42,8 @@ type ResultsTableProps = {
   timeFilter: (typeof timeFilterValues)[number]
   onTimeFilterChange: (timeFilter: (typeof timeFilterValues)[number]) => void
   onScrollToBottom: () => void
-  onLogOpenIndex?: (index: number) => () => void
-  onResultExpandIndex?: (index: number) => () => void
+  onLogOpenIndex: (index: number) => () => void
+  onResultExpandIndex: (index: number) => () => void
 }
 
 export const ResultsTable = ({
@@ -267,7 +267,7 @@ export const ResultsTable = ({
           </thead>
 
           <tbody>
-            {instance.getRowModel().rows.map((row, rowIndex) => (
+            {instance.getRowModel().rows?.map((row, rowIndex) => (
               <Row
                 row={row}
                 key={row.id}

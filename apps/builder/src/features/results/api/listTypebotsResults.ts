@@ -1,7 +1,10 @@
 import prisma from '@typebot.io/lib/prisma'
 import { authenticatedProcedure } from '@/helpers/server/trpc'
 import { TRPCError } from '@trpc/server'
-import { resultWithAnswersSchema, typebotV5Schema } from '@typebot.io/schemas'
+import {
+  resultWithAnswersSchema,
+  typebotV5Schema,
+} from '@typebot.io/schemas'
 import { z } from 'zod'
 
 import {
@@ -17,27 +20,20 @@ const maxLimit = 100
 
 export const listTypebotsResults = authenticatedProcedure
   .meta({
-    openapi: {
-      method: 'GET',
-      path: '/v1/typebots/results/listResults',
-      protect: true,
-      summary: 'List results ordered by descending creation date',
-      tags: ['Results'],
-    },
+    // https://github.com/jlalmes/trpc-openapi/issues/391
+    // openapi: {
+    //   method: 'GET',
+    //   path: '/v1/typebots/results/listResults',
+    //   protect: true,
+    //   summary: 'List results ordered by descending creation date',
+    //   tags: ['Results'],
+    // },
   })
   .input(
     z.object({
-      typebots: 
-        z.array(
-          typebotV5Schema._def.schema
-          .pick({
-            name: true,
-            icon: true,
-            id: true,
-          })
-          .merge(z.object({ publishedTypebotId: z.string().optional() }))
-        )
-        .optional()
+      // list of typebots ids
+      typebotsIds: z
+        .array(z.string())
         .describe(
           "[Where to find my bot's ID?](../how-to#how-to-find-my-typebotid)"
         ),
@@ -50,12 +46,19 @@ export const listTypebotsResults = authenticatedProcedure
   .output(
     z.object({
       results: z.array(resultWithAnswersSchema),
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      typebots: z.array(typebotV5Schema._def.schema.pick({ id: true, groups: true, collaborators: true, variables: true, workspace: true }), { id: true }),
+      typebots: z.array(
+        typebotV5Schema._def.schema.pick({
+          id: true,
+          groups: true,
+          collaborators: true,
+          variables: true,
+          workspace: true,
+        })
+      ),
       nextCursor: z.string().nullish(),
     })
-  ) // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  )
+  // @ts-ignore
   .query(async ({ input, ctx: { user } }) => {
     const limit = Number(input.limit)
     if (limit < 1 || limit > maxLimit)
@@ -66,7 +69,7 @@ export const listTypebotsResults = authenticatedProcedure
     const { cursor } = input
     const typebots = await prisma.typebot.findMany({
       where: {
-        id: { in: input.typebots?.map((typebot) => typebot.id) },
+        id: { in: input.typebotsIds },
       },
       select: {
         id: true,
@@ -91,7 +94,9 @@ export const listTypebotsResults = authenticatedProcedure
         variables: true,
       },
     })
-    if (!(typebots.length > 0))
+
+    console.log(typebots, 'query')
+    if (!(typebots.length > 0) || !user)
       throw new TRPCError({ code: 'NOT_FOUND', message: 'Typebot not found' })
 
     const fromDate = parseFromDateFromTimeFilter(
@@ -104,7 +109,7 @@ export const listTypebotsResults = authenticatedProcedure
       take: limit + 1,
       cursor: cursor ? { id: cursor } : undefined,
       where: {
-        typebotId: {in: typebots.map((typebot) => typebot.id)},
+        typebotId: { in: typebots.map((typebot) => typebot.id) },
         hasStarted: true,
         isArchived: false,
         createdAt: fromDate
@@ -119,7 +124,7 @@ export const listTypebotsResults = authenticatedProcedure
       },
       include: { answers: true },
     })
- 
+
     let nextCursor: typeof cursor | undefined
     if (results.length > limit) {
       const nextResult = results.pop()
