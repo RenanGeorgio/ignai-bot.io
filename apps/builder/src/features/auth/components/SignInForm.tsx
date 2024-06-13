@@ -63,7 +63,9 @@ export const SignInForm = ({
     }
     ;(async () => {
       const providers = await getProviders()
-      alert(providers.toString())
+      if (providers != null) {
+        alert(providers?.toString())
+      }
       setProviders(providers ?? undefined)
       setIsLoadingProviders(false)
     })()
