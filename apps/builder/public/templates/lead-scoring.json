@@ -20,7 +20,7 @@
           "id": "cl1sep1cc001x2e6eikrwf9jy",
           "type": "text",
           "content": {
-            "richText": [{ "type": "p", "children": [{ "text": "Hi! 👋" }] }]
+            "richText": [{ "type": "p", "children": [{ "text": "Ola! 👋" }] }]
           }
         },
         {
@@ -31,7 +31,7 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "I'm glad you are intersted in our services." }
+                  { "text": "Fico feliz que você esteja interessado em nossos serviços." }
                 ]
               }
             ]
@@ -45,7 +45,7 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "I'll need to know a little more about you" }
+                  { "text": "Vou precisar saber um pouco mais sobre você" }
                 ]
               }
             ]
@@ -74,7 +74,7 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "Do you work with a specific company?" }]
+                "children": [{ "text": "Você trabalha com uma empresa específica?" }]
               }
             ]
           }
@@ -115,7 +115,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Which company?" }] }
+              { "type": "p", "children": [{ "text": "Qual companhia?" }] }
             ]
           }
         },
@@ -142,7 +142,7 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "How many employees is your team composed of?" }
+                  { "text": "Quantos funcionários sua equipe é composta?" }
                 ]
               }
             ]
@@ -239,7 +239,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Where are you based?" }] }
+              { "type": "p", "children": [{ "text": "Onde fica a sede?" }] }
             ]
           }
         },
@@ -248,7 +248,7 @@
           "type": "text input",
           "options": {
             "labels": {
-              "placeholder": "Type your country..."
+              "placeholder": "Digite seu pais..."
             },
             "variableId": "vcl1sf525q00362e6eoyosycte"
           }
@@ -305,7 +305,7 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "Thank you for answering these questions" }
+                  { "text": "Obrigado por responder a essas perguntas" }
                 ]
               }
             ]
@@ -344,7 +344,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "What's your job role?" }] }
+              { "type": "p", "children": [{ "text": "Qual é a sua função?" }] }
             ]
           }
         },
@@ -415,7 +415,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Our service is specifically designed for your situation."
+                    "text": "Nosso serviço é projetado especificamente para sua situação."
                   }
                 ]
               }
@@ -429,7 +429,7 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "We'll get back to you ASAP. 👋" }]
+                "children": [{ "text": "Entraremos em contato com você o mais rápido possível. 👋" }]
               }
             ]
           }
@@ -449,7 +449,7 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "Our service doesn't seem to suit your need." }
+                  { "text": "Nosso serviço não parece atender às suas necessidades." }
                 ]
               }
             ]
@@ -463,7 +463,7 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "We'll still send you valuable content by email." }
+                  { "text": "Ainda lhe enviaremos conteúdo valioso por e-mail." }
                 ]
               }
             ]
@@ -474,7 +474,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Bye bye 👋" }] }
+              { "type": "p", "children": [{ "text": "Ate mais 👋" }] }
             ]
           }
         }
