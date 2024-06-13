@@ -56,6 +56,8 @@ export const ResultsPage = ({
       hasMore={hasNextPage}
       timeFilter={'allTime'}
       onTimeFilterChange={() => {}}
+      onLogOpenIndex={() => () => {}}
+      onResultExpandIndex={() => () => {}}
     />
   );
 }
