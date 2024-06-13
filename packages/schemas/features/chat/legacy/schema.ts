@@ -35,7 +35,7 @@ const startParamsSchema = z
     typebot: startTypebotSchema
       .or(z.string())
       .describe(
-        'Either a Typebot ID or a Typebot object. If you provide a Typebot object, it will be executed in preview mode. ([How can I find my typebot ID?](https://docs.typebot.io/api-reference#how-to-find-my-typebotid)).'
+        'Either a Ignai-bot ID or a Ignai-bot object. If you provide a Ignai-bot object, it will be executed in preview mode. ([How can I find my ignaibot ID?](https://docs.ignaibot.com/api-reference#how-to-find-my-ignaibotid)).'
       ),
     isPreview: z
       .boolean()
@@ -52,7 +52,7 @@ const startParamsSchema = z
       .record(z.unknown())
       .optional()
       .describe(
-        '[More info about prefilled variables.](https://docs.typebot.io/editor/variables#prefilled-variables)'
+        '[More info about prefilled variables.](https://docs.ignaibot.com/editor/variables#prefilled-variables)'
       ),
     isStreamEnabled: z
       .boolean()

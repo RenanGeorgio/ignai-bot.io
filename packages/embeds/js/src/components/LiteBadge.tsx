@@ -1,5 +1,5 @@
 import { onCleanup, onMount } from 'solid-js'
-import { TypebotLogo } from './icons/TypebotLogo'
+import { IgnaibotLogo } from './icons/IgnaibotLogo'
 
 type Props = {
   botContainer: HTMLDivElement | undefined
@@ -17,7 +17,7 @@ export const LiteBadge = (props: Props) => {
           liteBadge &&
           removedNode.id == 'lite-badge'
         ) {
-          console.log("Sorry, you can't remove the brand 😅")
+          console.log("Desculpe, você não pode remover a marca 😅")
           props.botContainer?.append(liteBadge)
         }
       })
@@ -25,7 +25,10 @@ export const LiteBadge = (props: Props) => {
   }
 
   onMount(() => {
-    if (!document || !props.botContainer) return
+    if (!document || !props.botContainer) {
+      return
+    }
+
     observer = new MutationObserver(appendBadgeIfNecessary)
     observer.observe(props.botContainer, {
       subtree: false,
@@ -40,14 +43,14 @@ export const LiteBadge = (props: Props) => {
   return (
     <a
       ref={liteBadge}
-      href={'https://www.typebot.io/?utm_source=litebadge'}
+      href={'https://www.ignaibot.com/?utm_source=litebadge'}
       target="_blank"
       rel="noopener noreferrer"
       class="lite-badge"
       id="lite-badge"
     >
-      <TypebotLogo />
-      <span>Made with Ignai-bot</span>
+      <IgnaibotLogo />
+      <span>Feito por Ignai: Ignai-bot</span>
     </a>
   )
 }

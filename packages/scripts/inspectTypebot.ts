@@ -14,13 +14,17 @@ const inspectTypebot = async () => {
     ],
   })
 
-  if (!type || isCancel(type)) process.exit()
+  if (!type || isCancel(type)) {
+    process.exit()
+  }
 
   const val = await p.text({
     message: 'Enter value',
   })
 
-  if (!val || isCancel(val)) process.exit()
+  if (!val || isCancel(val)) {
+    process.exit()
+  }
 
   const prisma = new PrismaClient({
     log: [{ emit: 'event', level: 'query' }, 'info', 'warn', 'error'],
@@ -67,11 +71,11 @@ const inspectTypebot = async () => {
   })
 
   if (!typebot) {
-    console.log('Typebot not found')
+    console.log('Ignai-Bot not found')
     return
   }
 
-  console.log(`https://app.typebot.io/typebots/${typebot.id}/edit`)
+  console.log(`https://ignaibot.com/bots/${typebot.id}/edit`)
 
   console.log(JSON.stringify(typebot, null, 2))
 }

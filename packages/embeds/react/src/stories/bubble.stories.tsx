@@ -18,19 +18,19 @@ export const Default = () => {
   return (
     <div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-        <button onClick={toggle}>Toggle chat window</button>
-        <button onClick={open}>Open chat window</button>
-        <button onClick={close}>Close chat window</button>
+        <button onClick={toggle}>Alternar janela de bate-papo</button>
+        <button onClick={open}>Abrir janela de bate-papo</button>
+        <button onClick={close}>Fechar janela de bate-papo</button>
         <button onClick={() => showPreviewMessage()}>
-          Show Preview Message
+          Mostrar simulação da mensagem
         </button>
-        <button onClick={() => setInputValue('YOOOO!')}>Set input value</button>
-        <button onClick={hidePreviewMessage}>Close Preview Message</button>
+        <button onClick={() => setInputValue('YOOOO!')}>Definir valor de entrada</button>
+        <button onClick={hidePreviewMessage}>Fechar visualização da mensagem</button>
         <div>
-          <p>Predefined name:</p>
+          <p>Nomes predefinidos:</p>
           <input value={name} onChange={(e) => setName(e.target.value)} />
           <button onClick={() => setPrefilledVariables({ Name: name })}>
-            Set predefined name
+            Definir nome predefinido
           </button>
         </div>
       </div>
@@ -43,7 +43,7 @@ export const Default = () => {
         }}
         previewMessage={{
           avatarUrl: 'https://avatars.githubusercontent.com/u/16015833?v=4',
-          message: 'Hello, I am a preview message',
+          message: 'Olá, sou uma mensagem de visualização',
           autoShowDelay: 3000,
         }}
         theme={{
