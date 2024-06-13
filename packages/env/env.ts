@@ -12,16 +12,20 @@ const guessNextAuthUrlForVercelPreview = (val: unknown) => {
     process.env.VERCEL_ENV !== 'preview' ||
     !process.env.VERCEL_BUILDER_PROJECT_NAME ||
     !process.env.NEXT_PUBLIC_VERCEL_VIEWER_PROJECT_NAME
-  )
+  ) {
     return val
-  const isBuilder = (process.env.VERCEL_BRANCH_URL as string).includes(
-    process.env.VERCEL_BUILDER_PROJECT_NAME
-  )
-  if (isBuilder) return `https://${process.env.VERCEL_BRANCH_URL}`
+  }
+
+  const isBuilder = (process.env.VERCEL_BRANCH_URL as string).includes(process.env.VERCEL_BUILDER_PROJECT_NAME);
+
+  if (isBuilder) {
+    return `https://${process.env.VERCEL_BRANCH_URL}`
+  }
+
   return `https://${process.env.VERCEL_BRANCH_URL}`.replace(
     process.env.NEXT_PUBLIC_VERCEL_VIEWER_PROJECT_NAME,
     process.env.VERCEL_BUILDER_PROJECT_NAME
-  )
+  );
 }
 
 const guessViewerUrlForVercelPreview = (val: unknown) => {
@@ -30,16 +34,20 @@ const guessViewerUrlForVercelPreview = (val: unknown) => {
     process.env.VERCEL_ENV !== 'preview' ||
     !process.env.VERCEL_BUILDER_PROJECT_NAME ||
     !process.env.NEXT_PUBLIC_VERCEL_VIEWER_PROJECT_NAME
-  )
+  ) {
     return val
-  const isViewer = (process.env.VERCEL_BRANCH_URL as string).includes(
-    process.env.NEXT_PUBLIC_VERCEL_VIEWER_PROJECT_NAME
-  )
-  if (isViewer) return `https://${process.env.VERCEL_BRANCH_URL}`
+  }
+
+  const isViewer = (process.env.VERCEL_BRANCH_URL as string).includes(process.env.NEXT_PUBLIC_VERCEL_VIEWER_PROJECT_NAME);
+
+  if (isViewer) {
+    return `https://${process.env.VERCEL_BRANCH_URL}`
+  }
+
   return `https://${process.env.VERCEL_BRANCH_URL}`.replace(
     process.env.VERCEL_BUILDER_PROJECT_NAME,
     process.env.NEXT_PUBLIC_VERCEL_VIEWER_PROJECT_NAME
-  )
+  );
 }
 
 const guessLandingUrlForVercelPreview = (val: unknown) => {
@@ -47,8 +55,10 @@ const guessLandingUrlForVercelPreview = (val: unknown) => {
     (val && typeof val === 'string' && val.length > 0) ||
     process.env.VERCEL_ENV !== 'preview' ||
     !process.env.VERCEL_LANDING_PROJECT_NAME
-  )
+  ) {
     return val
+  }
+
   return `https://${process.env.VERCEL_BRANCH_URL}`
 }
 
@@ -151,6 +161,7 @@ const baseEnv = {
     ),
   },
 }
+
 const githubEnv = {
   server: {
     GITHUB_CLIENT_ID: z.string().min(1).optional(),
@@ -412,6 +423,20 @@ const tolgeeEnv = {
   },
 }
 
+const chatServerEnv = {
+  server: {
+    CHATBOT_SERVER_URL: z.string().min(1).optional()
+  },
+  client: {
+    NEXT_PUBLIC_CHATBOT_URL: z.string().min(1).optional()
+  },
+  runtimeEnv: {
+    NEXT_PUBLIC_CHATBOT_URL: getRuntimeVariable(
+      'NEXT_PUBLIC_CHATBOT_URL'
+    )
+  }
+}
+
 export const env = createEnv({
   server: {
     ...baseEnv.server,
@@ -431,6 +456,7 @@ export const env = createEnv({
     ...customOAuthEnv.server,
     ...sentryEnv.server,
     ...telemetryEnv.server,
+    ...chatServerEnv.server,
   },
   client: {
     ...baseEnv.client,
@@ -443,6 +469,7 @@ export const env = createEnv({
     ...sentryEnv.client,
     ...posthogEnv.client,
     ...tolgeeEnv.client,
+    ...chatServerEnv.client,
   },
   experimental__runtimeEnv: {
     ...baseEnv.runtimeEnv,
@@ -455,6 +482,7 @@ export const env = createEnv({
     ...sentryEnv.runtimeEnv,
     ...posthogEnv.runtimeEnv,
     ...tolgeeEnv.runtimeEnv,
+    ...chatServerEnv.runtimeEnv,
   },
   skipValidation:
     process.env.SKIP_ENV_CHECK === 'true' ||
@@ -475,4 +503,4 @@ export const env = createEnv({
       `❌ Attempted to access a server-side environment variable on the client: ${variable}`
     )
   },
-})
+});

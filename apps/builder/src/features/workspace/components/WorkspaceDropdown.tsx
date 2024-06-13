@@ -56,8 +56,8 @@ export const WorkspaceDropdown = ({
     const data = await checkUser(email);
 
     const body = data?.response?.body;
+    console.log(body);
     if (body) {
-      console.log(body);
       setAdmin(true);
     } else {
       setAdmin(false);
@@ -77,9 +77,7 @@ export const WorkspaceDropdown = ({
   useEffect(() => {
     if (user?.email) {
       validAdmin(user?.email);
-    } else {
-      setAdmin(false); 
-    }
+    } 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
 

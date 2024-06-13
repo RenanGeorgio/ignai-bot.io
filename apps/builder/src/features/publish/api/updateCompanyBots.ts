@@ -10,7 +10,7 @@ export const registerCompanyBots = (typebotId: string) => {
 
 export const unregisterCompanyBots = (typebotId: string) => {
   sendRequest({
-    url: `/api/typebots/register?typebotId=${typebotId}`,
+    url: `/api/typebots/unregister?typebotId=${typebotId}`,
     method: 'DELETE'
   });
 }
