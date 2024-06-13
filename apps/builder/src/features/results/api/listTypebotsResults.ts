@@ -58,7 +58,8 @@ export const listTypebotsResults = authenticatedProcedure
       nextCursor: z.string().nullish(),
     })
   )
-  // @ts-ignore
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
   .query(async ({ input, ctx: { user } }) => {
     const limit = Number(input.limit)
     if (limit < 1 || limit > maxLimit)
@@ -95,7 +96,6 @@ export const listTypebotsResults = authenticatedProcedure
       },
     })
 
-    console.log(typebots, 'query')
     if (!(typebots.length > 0) || !user)
       throw new TRPCError({ code: 'NOT_FOUND', message: 'Typebot not found' })
 
