@@ -101,7 +101,7 @@ export const executeIgnaiChatbotBlock = (
         ? [
             {
               status: 'info',
-              description: 'Chatwoot block is not supported in preview',
+              description: 'Bloco de atendimento humano não é suportado no modo preview',
               details: null,
             },
           ]
