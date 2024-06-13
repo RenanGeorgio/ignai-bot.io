@@ -127,7 +127,7 @@ export const UnsplashPicker = ({ imageSize, onImageSelect }: Props) => {
 
   if (!env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY)
     return (
-      <Text>NEXT_PUBLIC_UNSPLASH_ACCESS_KEY is missing in environment</Text>
+      <Text>NEXT_PUBLIC_UNSPLASH_ACCESS_KEY esta faltando no environment</Text>
     )
 
   return (

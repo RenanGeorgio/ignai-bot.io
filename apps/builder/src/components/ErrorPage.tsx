@@ -16,14 +16,10 @@ export const ErrorPage = ({ error }: { error: Error }) => {
       {!env.NEXT_PUBLIC_VIEWER_URL[0] ? (
         <>
           <h1 style={{ fontWeight: 'bold', fontSize: '30px' }}>
-            NEXT_PUBLIC_VIEWER_URL is missing
+            NEXT_PUBLIC_VIEWER_URL esta faltando
           </h1>
           <h2>
-            Make sure to configure the app properly (
-            <a href="https://docs.typebot.io/self-hosting/configuration">
-              https://docs.typebot.io/self-hosting/configuration
-            </a>
-            )
+            Se certifque de configurar o app corretamente
           </h2>
         </>
       ) : (
