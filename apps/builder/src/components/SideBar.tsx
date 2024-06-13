@@ -162,6 +162,8 @@ const CustomSideBar = () => {
   const { user } = useUser();
   const [navSize, changeNavSize] = useState<string>("small");
 
+  const company = user?.company ?? user?.name
+
   return (
     <Flex
       pos="sticky"
@@ -204,10 +206,10 @@ const CustomSideBar = () => {
           as="nav"
         >
           <Tooltip hasArrow label="Builder">
-            <NavItem router={router} path={`/${user?.company}/home`} navSize={navSize} title="Home" description="Pagina inicial da aplicação." />
+            <NavItem router={router} path={`/${company}/home`} navSize={navSize} title="Home" description="Pagina inicial da aplicação." />
           </Tooltip>
           <Tooltip hasArrow label="Builder">
-            <NavItem router={router} path={`/${user?.company}/${user?.id}/chat`} navSize={navSize} title="Chat" description="Conteudo de chat disponivel." />
+            <NavItem router={router} path={`/${company}/${user?.id}/chat`} navSize={navSize} title="Chat" description="Conteudo de chat disponivel." />
           </Tooltip>
           <Tooltip hasArrow label="Builder">
             <NavItem router={router} path={"/typebots"} navSize={navSize} title="Builder" description="Construtor de Bot" />
