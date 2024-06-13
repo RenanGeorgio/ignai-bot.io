@@ -83,7 +83,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
     const isSignInPath = ['/signin', '/register'].includes(router.pathname);
     const isLegalPath = ['/privacy-policies', '/terms-of-service'].includes(router.pathname);
-    const isPathPublicFriendly = /\/typebots\/.+\/(edit|theme|settings)/.test(router.pathname);
+    const isPathPublicFriendly = /\/bots\/.+\/(edit|theme|settings)/.test(router.pathname);
 
     if (isSignInPath || isLegalPath || isPathPublicFriendly) {
       return

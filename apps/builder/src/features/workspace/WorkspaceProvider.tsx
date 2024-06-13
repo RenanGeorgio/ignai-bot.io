@@ -159,7 +159,7 @@ export const WorkspaceProvider = ({ typebotId, children }: WorkspaceContextProps
   const switchWorkspace = (workspaceId: string) => {
     setWorkspaceIdInLocalStorage(workspaceId);
     setWorkspaceId(workspaceId);
-    replace('/typebots');
+    replace('/bots');
   }
 
   const createWorkspace = async (userFullName?: string) => {

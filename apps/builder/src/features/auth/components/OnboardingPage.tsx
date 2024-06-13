@@ -42,10 +42,14 @@ export const OnboardingPage = () => {
   })
 
   useEffect(() => {
-    if (!user?.createdAt) return
-    if (isNewUser === false || !env.NEXT_PUBLIC_ONBOARDING_TYPEBOT_ID)
-      replace({ pathname: '/typebots', query })
-  }, [isNewUser, query, replace, user?.createdAt])
+    if (!user?.createdAt) {
+      return
+    }
+
+    if (isNewUser === false || !env.NEXT_PUBLIC_ONBOARDING_TYPEBOT_ID) {
+      replace({ pathname: '/bots', query });
+    }
+  }, [isNewUser, query, replace, user?.createdAt]);
 
   const initConfettis = () => {
     if (!confettiCanvaContainer.current || confettiCanon.current) return
@@ -93,17 +97,17 @@ export const OnboardingPage = () => {
   }
 
   const skipOnboarding = () => {
-    updateUser(onboardingReplies)
-    replace({ pathname: '/typebots', query })
+    updateUser(onboardingReplies);
+    replace({ pathname: '/bots', query });
   }
 
   const updateUserAndProceedToTypebotCreation = () => {
     updateUser(onboardingReplies)
     setTimeout(() => {
       replace({
-        pathname: '/typebots',
+        pathname: '/bots',
         query: { ...query, isFirstBot: true },
-      })
+      });
     }, 2000)
   }
 

@@ -17,7 +17,7 @@ export const DashboardHeader = () => {
 // apareceu a mensagem de UNAUTORIZED
   return (
     <Flex minWidth="max-content" alignItems="center" w="full" borderBottomWidth="1px" justify="center">
-      <Link href="/typebots" data-testid="typebot-logo">
+      <Link href="/bots" data-testid="typebot-logo">
         <EmojiOrImageIcon
           boxSize="60px"
           icon={workspace?.icon}

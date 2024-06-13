@@ -44,7 +44,7 @@ export const DashboardPage = () => {
       createCustomCheckoutSession({
         email: user.email,
         workspaceId: workspace.id,
-        returnUrl: `${window.location.origin}/typebots`,
+        returnUrl: `${window.location.origin}/bots`,
       })
     }
 

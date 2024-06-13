@@ -32,12 +32,12 @@ export const TypebotNotFoundPage = () => {
         <VStack spacing={6}>
           <VStack>
             <Heading>404</Heading>
-            <Text fontSize="xl">Typebot not found.</Text>
+            <Text fontSize="xl">Ignai-bot não encontrado.</Text>
           </VStack>
           <Button
             as={Link}
-            href="/typebots"
-            colorScheme="blue"
+            href="/bots"
+            colorScheme="red"
             leftIcon={<ChevronLeftIcon />}
           >
             Dashboard
@@ -47,5 +47,5 @@ export const TypebotNotFoundPage = () => {
         <Spinner />
       )}
     </Flex>
-  )
+  );
 }

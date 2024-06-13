@@ -81,7 +81,7 @@ export const PublishButton = ({ isMoreMenuDisabled = false, ...props }: Props) =
         }
 
         if (!publishedTypebot && !pathname.endsWith('share')) {
-          push(`/typebots/${query.typebotId}/share`)
+          push(`/bots/${query.typebotId}/share`)
         }
       },
     })

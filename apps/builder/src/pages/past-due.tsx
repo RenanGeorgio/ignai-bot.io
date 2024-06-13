@@ -15,7 +15,7 @@ export default function Page() {
       return
     }
 
-    replace('/typebots');
+    replace('/bots');
   }, [replace, workspace]);
 
   return (
