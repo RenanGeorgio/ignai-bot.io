@@ -86,22 +86,22 @@ const nextConfig = {
                 {
                   type: 'header',
                   key: 'referer',
-                  value: `https://typebot.io${path}`,
+                  value: `https://ignaibot.com${path}`,
                 },
               ],
               destination: `${process.env.LANDING_PAGE_URL}/_next/static/:static*`,
             }))
             .concat(
               landingPagePaths.map((path) => ({
-                source: '/typebots/:typebot*',
+                source: '/bots/:typebot*',
                 has: [
                   {
                     type: 'header',
                     key: 'referer',
-                    value: `https://typebot.io${path}`,
+                    value: `https://ignaibot.com${path}`,
                   },
                 ],
-                destination: `${process.env.LANDING_PAGE_URL}/typebots/:typebot*`,
+                destination: `${process.env.LANDING_PAGE_URL}/bots/:typebot*`,
               }))
             )
             .concat(
@@ -111,7 +111,7 @@ const nextConfig = {
                   {
                     type: 'header',
                     key: 'referer',
-                    value: `https://typebot.io${path}`,
+                    value: `https://ignaibot.com${path}`,
                   },
                 ],
                 destination: `${process.env.LANDING_PAGE_URL}/styles/:style*`,
@@ -123,7 +123,7 @@ const nextConfig = {
                 has: [
                   {
                     type: 'host',
-                    value: 'typebot.io',
+                    value: 'ignaibot.com',
                   },
                 ],
                 destination: `${process.env.LANDING_PAGE_URL}${path}`,
@@ -135,7 +135,7 @@ const nextConfig = {
                 has: [
                   {
                     type: 'host',
-                    value: 'typebot.io',
+                    value: 'ignaibot.com',
                   },
                 ],
                 destination: `${process.env.LANDING_PAGE_URL}/blog/:slug`,
@@ -146,7 +146,7 @@ const nextConfig = {
                   {
                     type: 'header',
                     key: 'referer',
-                    value: `https://typebot.io/blog/(?<slug>.*)`,
+                    value: `https://ignaibot.com/blog/(?<slug>.*)`,
                   },
                 ],
                 destination: `${process.env.LANDING_PAGE_URL}/_next/static/:static*`,
@@ -157,7 +157,7 @@ const nextConfig = {
                   {
                     type: 'header',
                     key: 'referer',
-                    value: `https://typebot.io/blog/(?<slug>.*)`,
+                    value: `https://ignaibot.com/blog/(?<slug>.*)`,
                   },
                 ],
                 destination: `${process.env.LANDING_PAGE_URL}/images/blog/:images*`,
@@ -168,21 +168,21 @@ const nextConfig = {
                   {
                     type: 'header',
                     key: 'referer',
-                    value: `https://typebot.io/blog`,
+                    value: `https://ignaibot.com/blog`,
                   },
                 ],
                 destination: `${process.env.LANDING_PAGE_URL}/images/blog/:images*`,
               },
               {
-                source: '/typebots/:typebot*',
+                source: '/bots/:typebot*',
                 has: [
                   {
                     type: 'header',
                     key: 'referer',
-                    value: `https://typebot.io/blog/(?<slug>.*)`,
+                    value: `https://ignaibot.com/blog/(?<slug>.*)`,
                   },
                 ],
-                destination: `${process.env.LANDING_PAGE_URL}/typebots/:typebot*`,
+                destination: `${process.env.LANDING_PAGE_URL}/bots/:typebot*`,
               },
               {
                 source: '/styles/:style*',
@@ -190,7 +190,7 @@ const nextConfig = {
                   {
                     type: 'header',
                     key: 'referer',
-                    value: `https://typebot.io/blog/(?<slug>.*)`,
+                    value: `https://ignaibot.com/blog/(?<slug>.*)`,
                   },
                 ],
                 destination: `${process.env.LANDING_PAGE_URL}/styles/:style*`,

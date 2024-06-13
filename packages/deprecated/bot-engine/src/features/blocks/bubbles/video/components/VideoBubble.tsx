@@ -73,7 +73,9 @@ const VideoContent = ({
 }) => {
   const [url] = useState(parseVariables(variables)(content?.url))
 
-  if (!content?.type) return <></>
+  if (!content?.type) {
+    return <></>
+  }
 
   switch (content.type) {
     case VideoBubbleContentType.URL: {
@@ -92,7 +94,7 @@ const VideoContent = ({
           autoPlay
         >
           <source src={url} type="video/mp4" />
-          Sorry, your browser doesn&apos;t support embedded videos.
+          Desculpe, seu navegador não suporta vídeos incorporados.
         </video>
       )
     }

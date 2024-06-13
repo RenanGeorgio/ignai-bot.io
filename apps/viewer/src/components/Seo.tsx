@@ -40,20 +40,18 @@ export const SEO = ({
       <meta
         name="description"
         content={
-          description ??
-          'Build beautiful conversational forms and embed them directly in your applications without a line of code. Triple your response rate and collect answers that has more value compared to a traditional form.'
+          description ?? 'Crie lindos formulários de conversação e incorpore-os diretamente em seus aplicativos, sem uma linha de código. Triplique sua taxa de resposta e colete respostas que tenham mais valor em comparação com um formulário tradicional.'
         }
       />
 
       <meta property="og:type" content="website" />
-      <meta property="og:url" content={url ?? 'https://bot.typebot.io'} />
+      <meta property="og:url" content={url ?? 'https://viewer.ignaibot.com'} />
       <meta property="og:title" content={title ?? typebotName} />
       <meta property="og:site_name" content={title ?? typebotName} />
       <meta
         property="og:description"
         content={
-          description ??
-          'Build beautiful conversational forms and embed them directly in your applications without a line of code. Triple your response rate and collect answers that has more value compared to a traditional form.'
+          description ?? 'Crie lindos formulários de conversação e incorpore-os diretamente em seus aplicativos, sem uma linha de código. Triplique sua taxa de resposta e colete respostas que tenham mais valor em comparação com um formulário tradicional.'
         }
       />
       <meta
@@ -66,13 +64,12 @@ export const SEO = ({
       />
 
       <meta property="twitter:card" content="summary_large_image" />
-      <meta property="twitter:url" content={url ?? 'https://bot.typebot.io'} />
+      <meta property="twitter:url" content={url ?? 'https://viewer.ignaibot.com'} />
       <meta property="twitter:title" content={title ?? typebotName} />
       <meta
         property="twitter:description"
         content={
-          description ??
-          'Build beautiful conversational forms and embed them directly in your applications without a line of code. Triple your response rate and collect answers that has more value compared to a traditional form.'
+          description ?? 'Crie lindos formulários de conversação e incorpore-os diretamente em seus aplicativos, sem uma linha de código. Triplique sua taxa de resposta e colete respostas que tenham mais valor em comparação com um formulário tradicional.'
         }
       />
       <meta

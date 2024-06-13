@@ -30,7 +30,7 @@ export const LiteBadge = () => {
   return (
     <a
       ref={liteBadge}
-      href={'https://www.typebot.io/?utm_source=litebadge'}
+      href={'https://www.ignaibot.com/?utm_source=litebadge'}
       target="_blank"
       rel="noopener noreferrer"
       className="fixed py-1 px-2 bg-white z-50 rounded shadow-md lite-badge"
@@ -39,5 +39,5 @@ export const LiteBadge = () => {
     >
       Made with <span className="text-blue-500">Ignai-bot</span>.
     </a>
-  )
+  );
 }
