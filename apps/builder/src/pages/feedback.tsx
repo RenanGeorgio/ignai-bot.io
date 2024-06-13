@@ -31,7 +31,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   return {
     redirect: {
       permanent: false,
-      destination: `https://feedback.typebot.io?sso=${sleekplanToken}`,
+      destination: `https://feedback.ignaibot.com?sso=${sleekplanToken}`,
     },
   }
 }

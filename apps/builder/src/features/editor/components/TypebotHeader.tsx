@@ -53,7 +53,7 @@ export const TypebotHeader = () => {
   const handleHelpClick = () => {
     isCloudProdInstance() && workspace?.plan && workspace.plan !== Plan.FREE
       ? onOpen()
-      : window.open('https://docs.typebot.io/guides/how-to-get-help', '_blank')
+      : window.open('https://docs.ignaibot.com/guides/how-to-get-help', '_blank')
   }
 
   if (currentUserMode === 'guest') {
@@ -153,10 +153,10 @@ const LeftElements = ({ ...props }: StackProps) => {
           icon={<ChevronLeftIcon fontSize={25} />}
           href={{
             pathname: router.query.parentId
-              ? '/typebots/[typebotId]/edit'
+              ? '/bots/[typebotId]/edit'
               : typebot?.folderId
-              ? '/typebots/folders/[id]'
-              : '/typebots',
+              ? '/bots/folders/[id]'
+              : '/bots',
             query: {
               id: typebot?.folderId ?? [],
               parentId: Array.isArray(router.query.parentId)
@@ -271,7 +271,7 @@ const RightElements = ({
       {currentUserMode === 'guest' && (
         <Button
           as={Link}
-          href={`/typebots/${typebot?.id}/duplicate`}
+          href={`/bots/${typebot?.id}/duplicate`}
           leftIcon={<CopyIcon />}
           isLoading={isNotDefined(typebot)}
           size="sm"
@@ -331,7 +331,7 @@ const TypebotNav = ({
     <HStack {...stackProps}>
       <Button
         as={Link}
-        href={`/typebots/${typebotId}/edit`}
+        href={`/bots/${typebotId}/edit`}
         colorScheme={router.pathname.includes('/edit') ? 'red' : 'gray'}
         variant={router.pathname.includes('/edit') ? 'outline' : 'ghost'}
         size="sm"
@@ -340,7 +340,7 @@ const TypebotNav = ({
       </Button>
       <Button
         as={Link}
-        href={`/typebots/${typebotId}/theme`}
+        href={`/bots/${typebotId}/theme`}
         colorScheme={router.pathname.endsWith('theme') ? 'red' : 'gray'}
         variant={router.pathname.endsWith('theme') ? 'outline' : 'ghost'}
         size="sm"
@@ -349,7 +349,7 @@ const TypebotNav = ({
       </Button>
       <Button
         as={Link}
-        href={`/typebots/${typebotId}/settings`}
+        href={`/bots/${typebotId}/settings`}
         colorScheme={router.pathname.endsWith('settings') ? 'red' : 'gray'}
         variant={router.pathname.endsWith('settings') ? 'outline' : 'ghost'}
         size="sm"
@@ -358,7 +358,7 @@ const TypebotNav = ({
       </Button>
       <Button
         as={Link}
-        href={`/typebots/${typebotId}/share`}
+        href={`/bots/${typebotId}/share`}
         colorScheme={router.pathname.endsWith('share') ? 'red' : 'gray'}
         variant={router.pathname.endsWith('share') ? 'outline' : 'ghost'}
         size="sm"
@@ -368,7 +368,7 @@ const TypebotNav = ({
       {isResultsDisplayed && (
         <Button
           as={Link}
-          href={`/typebots/${typebotId}/results`}
+          href={`/bots/${typebotId}/results`}
           colorScheme={router.pathname.includes('results') ? 'red' : 'gray'}
           variant={router.pathname.includes('results') ? 'outline' : 'ghost'}
           size="sm"

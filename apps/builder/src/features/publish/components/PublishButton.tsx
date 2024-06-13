@@ -81,7 +81,7 @@ export const PublishButton = ({ isMoreMenuDisabled = false, ...props }: Props) =
         }
 
         if (!publishedTypebot && !pathname.endsWith('share')) {
-          push(`/typebots/${query.typebotId}/share`)
+          push(`/bots/${query.typebotId}/share`)
         }
       },
     })
@@ -160,7 +160,7 @@ export const PublishButton = ({ isMoreMenuDisabled = false, ...props }: Props) =
           isOpen={isNewEngineWarningOpen}
           onConfirm={handlePublishClick}
           onClose={onNewEngineWarningClose}
-          confirmButtonColor="blue"
+          confirmButtonColor="red"
           title={t('publish.versionWarning.title.label')}
           message={
             <Stack spacing="3">
@@ -173,7 +173,7 @@ export const PublishButton = ({ isMoreMenuDisabled = false, ...props }: Props) =
                   params={{
                     link: (
                       <TextLink
-                        href="https://docs.typebot.io/breaking-changes#typebot-v6"
+                        href="https://docs.ignaibot.com/breaking-changes#typebot-v6"
                         isExternal
                       />
                     ),
@@ -228,7 +228,6 @@ export const PublishButton = ({ isMoreMenuDisabled = false, ...props }: Props) =
             : t('publishButton.label')}
         </Button>
       </Tooltip>
-
       {!isMoreMenuDisabled && publishedTypebot && (
         <Menu>
           <MenuButton
@@ -262,5 +261,5 @@ export const PublishButton = ({ isMoreMenuDisabled = false, ...props }: Props) =
         </Menu>
       )}
     </HStack>
-  )
+  );
 }

@@ -75,14 +75,14 @@ export const WhatsAppPreviewInstructions = (props: StackProps) => {
       {...props}
     >
       <HStack justifyContent="flex-end">
-        <Text fontSize="sm">Need help?</Text>
+        <Text fontSize="sm">Precisa de ajuda?</Text>
         <Button
           as={Link}
-          href="https://docs.typebot.io/deploy/whatsapp/overview"
+          href="https://docs.ignaibot.com/deploy/whatsapp/overview"
           leftIcon={<BuoyIcon />}
           size="sm"
         >
-          Check the docs
+          Verifique a documentação
         </Button>
       </HStack>
       <TextInput
@@ -99,9 +99,9 @@ export const WhatsAppPreviewInstructions = (props: StackProps) => {
           isDisabled={isEmpty(phoneNumber) || isMessageSent}
           isLoading={isSendingMessage}
           type="submit"
-          colorScheme="blue"
+          colorScheme="red"
         >
-          {hasMessageBeenSent ? 'Restart' : 'Start'} the chat
+          {hasMessageBeenSent ? 'Restart' : 'Start'} o chat
         </Button>
       )}
       <SlideFade offsetY="20px" in={isMessageSent} unmountOnExit>
@@ -110,18 +110,18 @@ export const WhatsAppPreviewInstructions = (props: StackProps) => {
             as={Link}
             href={`https://web.whatsapp.com/`}
             isExternal
-            colorScheme="blue"
+            colorScheme="red"
             rightIcon={<ExternalLinkIcon />}
           >
-            Open WhatsApp Web
+            Abrir WhatsApp Web
           </Button>
           <Alert status="success" w="100%">
             <HStack>
               <AlertIcon />
               <Stack spacing={1}>
-                <Text fontWeight="semibold">Chat started!</Text>
+                <Text fontWeight="semibold">Chat Iniciado!</Text>
                 <Text fontSize="sm">
-                  The first message can take up to 2 min to be delivered.
+                  A primeira mensagem pode levar até 2 minutos para ser entregue.
                 </Text>
               </Stack>
             </HStack>
@@ -129,5 +129,5 @@ export const WhatsAppPreviewInstructions = (props: StackProps) => {
         </Stack>
       </SlideFade>
     </Stack>
-  )
+  );
 }

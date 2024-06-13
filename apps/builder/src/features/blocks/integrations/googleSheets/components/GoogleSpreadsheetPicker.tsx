@@ -68,8 +68,13 @@ export const GoogleSpreadsheetPicker = ({
   }
 
   const createPicker = () => {
-    if (!data) return
-    if (!isPickerInitialized) throw new Error('Google Picker not inited')
+    if (!data) {
+      return
+    }
+
+    if (!isPickerInitialized) {
+      throw new Error('Google Picker not inited')
+    }
 
     const picker = new window.google.picker.PickerBuilder()
       .addView(window.google.picker.ViewId.SPREADSHEETS)
@@ -82,13 +87,19 @@ export const GoogleSpreadsheetPicker = ({
   }
 
   const pickerCallback = (data: { action: string; docs: { id: string }[] }) => {
-    if (data.action !== 'picked') return
+    if (data.action !== 'picked') {
+      return
+    }
+
     const spreadsheetId = data.docs[0]?.id
-    if (!spreadsheetId) return
-    onSpreadsheetIdSelect(spreadsheetId)
+    if (!spreadsheetId) {
+      return
+    }
+
+    onSpreadsheetIdSelect(spreadsheetId);
   }
 
-  if (spreadsheetData && spreadsheetData.name !== '')
+  if (spreadsheetData && spreadsheetData.name !== '') {
     return (
       <Flex justifyContent="space-between">
         <HStack spacing={2}>
@@ -103,7 +114,9 @@ export const GoogleSpreadsheetPicker = ({
           aria-label={'Pick another spreadsheet'}
         />
       </Flex>
-    )
+    );
+  }
+
   return (
     <Button
       onClick={createPicker}
@@ -112,7 +125,7 @@ export const GoogleSpreadsheetPicker = ({
         (isDefined(spreadsheetId) && status === 'loading')
       }
     >
-      Pick a spreadsheet
+      Escolha uma spreadsheet
     </Button>
-  )
+  );
 }

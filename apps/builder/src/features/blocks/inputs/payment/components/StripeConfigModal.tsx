@@ -31,28 +31,26 @@ type Props = {
   onNewCredentials: (id: string) => void
 }
 
-export const StripeConfigModal = ({
-  isOpen,
-  onNewCredentials,
-  onClose,
-}: Props) => {
-  const { t } = useTranslate()
-  const { user } = useUser()
-  const { workspace } = useWorkspace()
-  const [isCreating, setIsCreating] = useState(false)
-  const { showToast } = useToast()
+export const StripeConfigModal = ({ isOpen, onNewCredentials, onClose }: Props) => {
+  const { t } = useTranslate();
+  const { user } = useUser();
+  const { workspace } = useWorkspace();
+  const [isCreating, setIsCreating] = useState(false);
+  const { showToast } = useToast();
   const [stripeConfig, setStripeConfig] = useState<
     StripeCredentials['data'] & { name: string }
   >({
     name: '',
     live: { publicKey: '', secretKey: '' },
     test: { publicKey: '', secretKey: '' },
-  })
+  });
+
   const {
     credentials: {
       listCredentials: { refetch: refetchCredentials },
     },
-  } = trpc.useContext()
+  } = trpc.useContext();
+
   const { mutate } = trpc.credentials.createCredentials.useMutation({
     onMutate: () => setIsCreating(true),
     onSettled: () => setIsCreating(false),
@@ -67,7 +65,7 @@ export const StripeConfigModal = ({
       onNewCredentials(data.credentialsId)
       onClose()
     },
-  })
+  });
 
   const handleNameChange = (name: string) =>
     setStripeConfig({
@@ -100,7 +98,10 @@ export const StripeConfigModal = ({
     })
 
   const createCredentials = async () => {
-    if (!user?.email || !workspace?.id) return
+    if (!user?.email || !workspace?.id) {
+      return
+    }
+
     mutate({
       credentials: {
         data: {
@@ -118,8 +119,9 @@ export const StripeConfigModal = ({
         type: 'stripe',
         workspaceId: workspace.id,
       },
-    })
+    });
   }
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -136,7 +138,7 @@ export const StripeConfigModal = ({
                 'blocks.inputs.payment.settings.stripeConfig.accountName.label'
               )}
               onChange={handleNameChange}
-              placeholder="Typebot"
+              placeholder="Ignai-bot"
               withVariableButton={false}
               debounceTimeout={0}
             />
@@ -193,7 +195,6 @@ export const StripeConfigModal = ({
                 </FormControl>
               </HStack>
             </Stack>
-
             <Text>
               ({t('blocks.inputs.payment.settings.stripeConfig.findKeys.label')}{' '}
               <TextLink href="https://dashboard.stripe.com/apikeys" isExternal>
@@ -205,10 +206,9 @@ export const StripeConfigModal = ({
             </Text>
           </Stack>
         </ModalBody>
-
         <ModalFooter>
           <Button
-            colorScheme="blue"
+            colorScheme="red"
             onClick={createCredentials}
             isDisabled={
               stripeConfig.live.publicKey === '' ||
@@ -222,5 +222,5 @@ export const StripeConfigModal = ({
         </ModalFooter>
       </ModalContent>
     </Modal>
-  )
+  );
 }

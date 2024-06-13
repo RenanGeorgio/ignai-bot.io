@@ -31,7 +31,7 @@ export const ApiPreviewInstructions = (props: StackProps) => {
       <OrderedList spacing={6} px="1">
         <ListItem>
           Todas as suas requisições precisam ser autenticadas com um token de API.{' '}
-          <TextLink href="https://docs.typebot.io/api-reference/authentication">
+          <TextLink href="https://docs.ignaibot.com/api-reference/authentication">
             Veja instruções
           </TextLink>
           .
@@ -84,7 +84,7 @@ export const ApiPreviewInstructions = (props: StackProps) => {
       <Text fontSize="sm" pl="1">
         Confira a{' '}
         <TextLink
-          href="https://docs.typebot.io/api-reference/chat/start-preview-chat"
+          href="https://docs.ignaibot.com/api-reference/chat/start-preview-chat"
           isExternal
         >
           API reference

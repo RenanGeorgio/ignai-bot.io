@@ -54,7 +54,7 @@ export const BoardMenuButton = (props: FlexProps) => {
   }
 
   const redirectToDocumentation = () =>
-    window.open('https://docs.typebot.io/editor/graph', '_blank')
+    window.open('https://docs.ignaibot.com/editor/graph', '_blank')
 
   return (
     <Flex

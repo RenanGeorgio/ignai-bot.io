@@ -31,18 +31,19 @@ export const OpenAICredentialsModal = ({
   onClose,
   onNewCredentials,
 }: Props) => {
-  const { workspace } = useWorkspace()
-  const { showToast } = useToast()
-  const [apiKey, setApiKey] = useState('')
-  const [name, setName] = useState('')
+  const { workspace } = useWorkspace();
+  const { showToast } = useToast();
 
-  const [isCreating, setIsCreating] = useState(false)
+  const [apiKey, setApiKey] = useState('');
+  const [name, setName] = useState('');
+  const [isCreating, setIsCreating] = useState(false);
 
   const {
     credentials: {
       listCredentials: { refetch: refetchCredentials },
     },
-  } = trpc.useContext()
+  } = trpc.useContext();
+
   const { mutate } = trpc.credentials.createCredentials.useMutation({
     onMutate: () => setIsCreating(true),
     onSettled: () => setIsCreating(false),
@@ -57,11 +58,15 @@ export const OpenAICredentialsModal = ({
       onNewCredentials(data.credentialsId)
       onClose()
     },
-  })
+  });
 
   const createOpenAICredentials = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!workspace) return
+    e.preventDefault();
+
+    if (!workspace) {
+      return
+    }
+
     mutate({
       credentials: {
         type: 'openai',
@@ -71,14 +76,14 @@ export const OpenAICredentialsModal = ({
           apiKey,
         },
       },
-    })
+    });
   }
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="lg">
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Add OpenAI account</ModalHeader>
+        <ModalHeader>Adicionar conta OpenAI</ModalHeader>
         <ModalCloseButton />
         <form onSubmit={createOpenAICredentials}>
           <ModalBody as={Stack} spacing="6">
@@ -86,7 +91,7 @@ export const OpenAICredentialsModal = ({
               isRequired
               label="Name"
               onChange={setName}
-              placeholder="My account"
+              placeholder="Minha conta"
               withVariableButton={false}
               debounceTimeout={0}
             />
@@ -96,9 +101,9 @@ export const OpenAICredentialsModal = ({
               label="API key"
               helperText={
                 <>
-                  You can generate an API key{' '}
+                  Você pode gerar uma chave de API{' '}
                   <TextLink href={openAITokensPage} isExternal>
-                    here
+                    aqui
                   </TextLink>
                   .
                 </>
@@ -110,23 +115,22 @@ export const OpenAICredentialsModal = ({
             />
             <Alert status="warning">
               <AlertIcon />
-              Make sure to add a payment method to your OpenAI account.
-              Otherwise, it will not work after a few messages.
+              Certifique-se de adicionar uma forma de pagamento à sua conta OpenAI.
+              Caso contrário, não funcionará após algumas mensagens.
             </Alert>
           </ModalBody>
-
           <ModalFooter>
             <Button
               type="submit"
               isLoading={isCreating}
               isDisabled={apiKey === '' || name === ''}
-              colorScheme="blue"
+              colorScheme="red"
             >
-              Create
+              Criar
             </Button>
           </ModalFooter>
         </form>
       </ModalContent>
     </Modal>
-  )
+  );
 }

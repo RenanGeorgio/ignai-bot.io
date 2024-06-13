@@ -1,9 +1,9 @@
-import { Seo } from '@/components/Seo'
-import { TextLink } from '@/components/TextLink'
-import { T, useTranslate } from '@tolgee/react'
-import { VStack, Heading, Text } from '@chakra-ui/react'
-import { useRouter } from 'next/router'
-import { SignInForm } from './SignInForm'
+import { useRouter } from 'next/router';
+import { VStack, Heading, Text } from '@chakra-ui/react';
+import { Seo } from '@/components/Seo';
+import { TextLink } from '@/components/TextLink';
+import { T, useTranslate } from '@tolgee/react';
+import { SignInForm } from './SignInForm';
 
 type Props = {
   type: 'signin' | 'signup'
@@ -11,8 +11,8 @@ type Props = {
 }
 
 export const SignInPage = ({ type }: Props) => {
-  const { t } = useTranslate()
-  const { query } = useRouter()
+  const { t } = useTranslate();
+  const { query } = useRouter();
 
   return (
     <VStack spacing={4} h="100vh" justifyContent="center">
@@ -53,14 +53,14 @@ export const SignInPage = ({ type }: Props) => {
           <T
             keyName="auth.register.aggreeToTerms"
             params={{
-              terms: <TextLink href={'https://typebot.io/terms-of-service'} />, // TO-DO: trocar estes termos
+              terms: <TextLink href={'https://ignaibot.com/terms-of-service'} />,
               privacy: (
-                <TextLink href={'https://typebot.io/privacy-policies'} /> // TO-DO: trocar estes termos
+                <TextLink href={'https://ignaibot.com/privacy-policies'} />
               ),
             }}
           />
         </Text>
       ) : null}
     </VStack>
-  )
+  );
 }

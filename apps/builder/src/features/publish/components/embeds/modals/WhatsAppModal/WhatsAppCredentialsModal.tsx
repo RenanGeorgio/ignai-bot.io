@@ -188,7 +188,7 @@ export const WhatsAppCredentialsModal = ({
         if (message === 'taken') {
           setIsVerifying(false)
           showToast({
-            description: 'Phone number is already registered on Typebot',
+            description: 'Phone number is already registered on Ignai-bot',
           })
           return false
         }
@@ -310,7 +310,7 @@ const Requirements = () => (
     <Text>
       Make sure you have{' '}
       <TextLink
-        href="https://docs.typebot.io/deploy/whatsapp/create-meta-app"
+        href="https://docs.ignaibot.com/deploy/whatsapp/create-meta-app"
         isExternal
       >
         created a WhatsApp Meta app

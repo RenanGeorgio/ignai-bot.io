@@ -27,15 +27,15 @@ export const MakeComSettings = ({
       <Alert status={url ? 'success' : 'info'} rounded="md">
         <AlertIcon />
         {url ? (
-          <>Your scenario is correctly configured 🚀</>
+          <>Seu cenário está configurado corretamente 🚀</>
         ) : (
           <Stack>
-            <Text>Head up to Make.com to configure this block:</Text>
+            <Text>Vá até Make.com para configurar este bloco:</Text>
             <Button
               as={Link}
               href="https://www.make.com/en/integrations/typebot"
               isExternal
-              colorScheme="blue"
+              colorScheme="red"
             >
               <Text mr="2">Make.com</Text> <ExternalLinkIcon />
             </Button>
