@@ -11,6 +11,7 @@ import React, { useState } from 'react'
 import { stringify } from 'qs'
 import { BuiltInProviderType } from 'next-auth/providers'
 import { GoogleLogo } from '@/components/GoogleLogo'
+import { Auth0Logo } from '@/components/Auth0Logo'
 import { omit } from '@typebot.io/lib'
 import { AzureAdLogo } from '@/components/logos/AzureAdLogo'
 import { FacebookLogo } from '@/components/logos/FacebookLogo'
@@ -49,6 +50,8 @@ export const SocialLoginButtons = ({ providers }: Props) => {
   const handleGitlabClick = () => handleSignIn('gitlab')
 
   const handleAzureAdClick = () => handleSignIn('azure-ad')
+
+  const handleAuth0Click = () => handleSignIn('auth0')
 
   const handleCustomOAuthClick = () => handleSignIn('custom-oauth')
 
@@ -126,6 +129,20 @@ export const SocialLoginButtons = ({ providers }: Props) => {
           {t('auth.socialLogin.azureButton.label', {
             azureProviderName: providers['azure-ad'].name,
           })}
+        </Button>
+      )}
+      {providers?.auth0 && (
+        <Button
+          leftIcon={<Auth0Logo />}
+          onClick={handleAuth0Click}
+          data-testid="auth0"
+          isLoading={
+            ['loading', 'authenticated'].includes(status) ||
+            authLoading === 'auth0'
+          }
+          variant="outline"
+        >
+          {t('auth.socialLogin.auth0Button.label')}
         </Button>
       )}
       {providers?.['custom-oauth'] && (
