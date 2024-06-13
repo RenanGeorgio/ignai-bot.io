@@ -1,4 +1,4 @@
-import { ResultsPage } from '../../features/dashboard/components/ResultsPage'
+import { ResultsHome } from '../../features/dashboard/components/ResultsHome'
 import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
 import { useTypebots } from '@/features/dashboard/hooks/useTypebots'
 import { useToast } from '@/hooks/useToast'
@@ -22,5 +22,5 @@ export default function Results() {
     return <>loading...</>
   }
 
-  return <ResultsPage typebots={typebots} />
+  return <ResultsHome typebots={typebots} />
 }

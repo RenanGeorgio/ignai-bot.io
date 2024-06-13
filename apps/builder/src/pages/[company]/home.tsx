@@ -4,6 +4,10 @@ import { ErrorPage } from '@/components/ErrorPage';
 import Statistics from '@/components/Stats';
 import CustomSideBar from '@/components/SideBar';
 import { DashboardHeader } from '@/features/dashboard/components/DashboardHeader';
+import { useWorkspace } from '@/features/workspace/WorkspaceProvider';
+import { useToast } from '@/hooks/useToast';
+import { useTypebots } from '@/features/dashboard/hooks/useTypebots';
+import { ResultsHome } from '@/features/dashboard/components/ResultsHome';
 
 type Obj = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -35,7 +39,23 @@ const incompatibleBrowsers = [
   },
 ]
 
-export default function Home({ incompatibleBrowser }: Props){
+export default function Home({ incompatibleBrowser }: Props) {
+  const { workspace } = useWorkspace();
+  const { showToast } = useToast();
+
+  const {
+    typebots,
+    isLoading: isTypebotLoading
+  } = useTypebots({
+    workspaceId: workspace?.id,
+    folderId: 'root',
+    onError: (error) => {
+      showToast({
+        description: error.message,
+      })
+    },
+  });
+
   if (incompatibleBrowser) {
     return (
       <ErrorPage
@@ -47,6 +67,10 @@ export default function Home({ incompatibleBrowser }: Props){
       />
     );
   }
+
+  if (isTypebotLoading) {
+    return <>loading...</>
+  }
   
   return (
     <VStack>
@@ -54,6 +78,7 @@ export default function Home({ incompatibleBrowser }: Props){
       <Flex w="100%">
         <CustomSideBar />
         <Statistics />
+        <ResultsHome typebots={typebots} />
       </Flex>
     </VStack>
   );

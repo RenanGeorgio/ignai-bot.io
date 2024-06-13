@@ -5,7 +5,7 @@ import { parseCellContent } from '@/features/results/helpers/parseCellContent'
 import { convertResultsToTableData } from '@typebot.io/results/convertResultsToTableData'
 import { ResultsTable } from '@/features/results/components/table/ResultsTable'
 
-export const ResultsPage = ({
+export const ResultsHome = ({
   typebots,
 }: {
   typebots:
