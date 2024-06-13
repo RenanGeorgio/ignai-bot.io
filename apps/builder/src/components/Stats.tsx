@@ -56,21 +56,21 @@ const Statistics = () => {
         fontSize={'4xl'}
         py={10}
         fontWeight={'bold'}>
-        Texto 1.
+        Registro
       </chakra.h1>
       <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 5, lg: 8 }}>
         <StatsCard
-          title={'Users'}
-          stat={'5,000'}
+          title={'Tickets abertos'}
+          stat={'64'}
           //icon={<UsersIcon size={'3em'} />}
         />
         <StatsCard
-          title={'Servers'}
-          stat={'1,000'}
+          title={'Tickets fechados'}
+          stat={'41'}
           //icon={<FileIcon size={'3em'} />}
         />
         <StatsCard
-          title={'Datacenters'}
+          title={'Disputas'}
           stat={'7'}
           //icon={<MapIcon size={'3em'} />}
         />

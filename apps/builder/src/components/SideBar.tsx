@@ -160,7 +160,7 @@ const NavItem = ({ title, path, description, active, navSize, router }: NavItemP
 const CustomSideBar = () => {
   const router = useRouter();
   const { user } = useUser();
-  const [navSize, changeNavSize] = useState<string>("small");
+  const [navSize, changeNavSize] = useState<string>("large");
 
   const company = user?.company ?? user?.name
 
