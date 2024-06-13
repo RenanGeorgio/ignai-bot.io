@@ -14,6 +14,7 @@ import {
   Tooltip
 } from '@chakra-ui/react';
 import { ChatIcon, ChevronLeftIcon, ChevronRightIcon, FolderIcon, ToolIcon } from './icons';
+import { useUser } from '@/features/account/hooks/useUser';
 
 type CustomHTMLDivElement = Omit<HTMLDivElement, "removeEventListener" | "addEventListener">;
 
@@ -36,6 +37,7 @@ export interface Props {
 interface NavItemProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   router: any
+  path: string
   title: string 
   description?: string 
   active?:  boolean
@@ -113,7 +115,7 @@ const NavHoverBox = ({ title, description }: HoverProps) => {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const NavItem = ({ title, description, active, navSize, router }: NavItemProps) => {
+const NavItem = ({ title, path, description, active, navSize, router }: NavItemProps) => {
   return (
     <Flex
       mt={12} 
@@ -133,7 +135,7 @@ const NavItem = ({ title, description, active, navSize, router }: NavItemProps) 
             borderRadius={8}
             backgroundColor="rgba(255, 217, 217, 0.8)"
             _hover={{ textDecor: 'none', backgroundColor: "rgba(255, 0, 0, 0.9)", color: "#fff", '& svg': { color: '#fff' } }}
-            onClick={() => router.push("/typebots")}
+            onClick={() => router.push(path)}
           >
             <SidebarContent tab={title} navSize={navSize} color={active ? "rgba(255, 0, 0, 0.9)" : "gray.500"} />
           </MenuButton>
@@ -157,6 +159,7 @@ const NavItem = ({ title, description, active, navSize, router }: NavItemProps) 
 
 const CustomSideBar = () => {
   const router = useRouter();
+  const { user } = useUser();
   const [navSize, changeNavSize] = useState<string>("small");
 
   return (
@@ -201,13 +204,13 @@ const CustomSideBar = () => {
           as="nav"
         >
           <Tooltip hasArrow label="Builder">
-            <NavItem router={router} navSize={navSize} title="Home" description="Pagina inicial da aplicação." />
+            <NavItem router={router} path={`/${user?.company}/home`} navSize={navSize} title="Home" description="Pagina inicial da aplicação." />
           </Tooltip>
           <Tooltip hasArrow label="Builder">
-            <NavItem router={router} navSize={navSize} title="Chat" description="Conteudo de chat disponivel." />
+            <NavItem router={router} path={`/${user?.company}/${user?.id}/chat`} navSize={navSize} title="Chat" description="Conteudo de chat disponivel." />
           </Tooltip>
           <Tooltip hasArrow label="Builder">
-            <NavItem router={router} navSize={navSize} title="Builder" description="Construtor de Bot" />
+            <NavItem router={router} path={"/typebots"} navSize={navSize} title="Builder" description="Construtor de Bot" />
           </Tooltip>
         </Flex>
       </VStack>
