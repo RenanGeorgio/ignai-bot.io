@@ -10,10 +10,10 @@ import {
   Stack,
   Text,
   useColorModeValue,
-} from '@chakra-ui/react'
-import { AlertIcon, CloseIcon, InfoIcon, SmileIcon } from './icons'
-import { CodeEditor } from './inputs/CodeEditor'
-import { LanguageName } from '@uiw/codemirror-extensions-langs'
+} from '@chakra-ui/react';
+import { AlertIcon, CloseIcon, InfoIcon, SmileIcon } from './icons';
+import { CodeEditor } from './inputs/CodeEditor';
+import { LanguageName } from '@uiw/codemirror-extensions-langs';
 
 export type ToastProps = {
   title?: string
@@ -39,8 +39,8 @@ export const Toast = ({
   secondaryButton,
   onClose,
 }: ToastProps) => {
-  const bgColor = useColorModeValue('white', 'gray.800')
-  const detailsLabelColor = useColorModeValue('gray.600', 'gray.400')
+  const bgColor = useColorModeValue('white', 'gray.800');
+  const detailsLabelColor = useColorModeValue('gray.600', 'gray.400');
 
   return (
     <Flex
@@ -60,7 +60,6 @@ export const Toast = ({
             {title && <Text fontWeight="semibold">{title}</Text>}
             {description && <Text>{description}</Text>}
           </Stack>
-
           {details && (
             <Accordion allowToggle>
               <AccordionItem>
@@ -70,7 +69,7 @@ export const Toast = ({
                   py="1"
                   color={detailsLabelColor}
                 >
-                  Details
+                  Detalhes
                   <AccordionIcon />
                 </AccordionButton>
                 <AccordionPanel>
@@ -94,7 +93,6 @@ export const Toast = ({
           )}
         </Stack>
       </HStack>
-
       <IconButton
         aria-label="Close"
         icon={<CloseIcon />}
@@ -106,7 +104,7 @@ export const Toast = ({
         right={1}
       />
     </Flex>
-  )
+  );
 }
 
 const Icon = ({
@@ -116,9 +114,10 @@ const Icon = ({
   customIcon?: React.ReactNode
   status: ToastProps['status']
 }) => {
-  const accentColor = useColorModeValue('50', '0')
-  const color = parseColor(status)
-  const icon = parseIcon(status, customIcon)
+  const accentColor = useColorModeValue('50', '0');
+  const color = parseColor(status);
+  const icon = parseIcon(status, customIcon);
+
   return (
     <Flex
       bgColor={`${color}.${accentColor}`}
@@ -140,11 +139,14 @@ const Icon = ({
         {icon}
       </Flex>
     </Flex>
-  )
+  );
 }
 
 const parseColor = (status: ToastProps['status']) => {
-  if (!status) return 'red'
+  if (!status) {
+    return 'red'
+  }
+  
   switch (status) {
     case 'error':
       return 'red'
@@ -155,11 +157,11 @@ const parseColor = (status: ToastProps['status']) => {
   }
 }
 
-const parseIcon = (
-  status: ToastProps['status'],
-  customIcon?: React.ReactNode
-) => {
-  if (customIcon) return customIcon
+const parseIcon = (status: ToastProps['status'], customIcon?: React.ReactNode) => {
+  if (customIcon) {
+    return customIcon
+  }
+
   switch (status) {
     case 'error':
       return <AlertIcon />
