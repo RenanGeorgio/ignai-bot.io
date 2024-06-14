@@ -1,33 +1,22 @@
-import {
-  Text,
-  HStack,
-  Stack,
-  Heading,
-  Alert,
-  AlertIcon,
-} from '@chakra-ui/react'
-import { Plan } from '@typebot.io/prisma'
-import React from 'react'
-import { PlanTag } from './PlanTag'
-import { BillingPortalButton } from './BillingPortalButton'
-import { trpc } from '@/lib/trpc'
-import { Workspace } from '@typebot.io/schemas'
-import { useTranslate } from '@tolgee/react'
+import React from 'react';
+import { Text, HStack, Stack, Heading, Alert, AlertIcon } from '@chakra-ui/react';
+import { Plan } from '@typebot.io/prisma';
+import { PlanTag } from './PlanTag';
+import { BillingPortalButton } from './BillingPortalButton';
+import { trpc } from '@/lib/trpc';
+import { Workspace } from '@typebot.io/schemas';
+import { useTranslate } from '@tolgee/react';
 
 type Props = {
   workspace: Pick<Workspace, 'id' | 'plan' | 'stripeId'>
 }
 
 export const CurrentSubscriptionSummary = ({ workspace }: Props) => {
-  const { t } = useTranslate()
+  const { t } = useTranslate();
 
-  const { data } = trpc.billing.getSubscription.useQuery({
-    workspaceId: workspace.id,
-  })
+  const { data } = trpc.billing.getSubscription.useQuery({ workspaceId: workspace.id });
 
-  const isSubscribed =
-    (workspace.plan === Plan.STARTER || workspace.plan === Plan.PRO) &&
-    workspace.stripeId
+  const isSubscribed = (workspace.plan === Plan.STARTER || workspace.plan === Plan.PRO) && workspace.stripeId
 
   return (
     <Stack spacing="4">
@@ -50,15 +39,14 @@ export const CurrentSubscriptionSummary = ({ workspace }: Props) => {
           {t('billing.currentSubscription.pastDueAlert')}
         </Alert>
       )}
-
       {isSubscribed && (
         <BillingPortalButton
           workspaceId={workspace.id}
           colorScheme={
-            data?.subscription?.status === 'past_due' ? 'blue' : undefined
+            data?.subscription?.status === 'past_due' ? 'green' : undefined
           }
         />
       )}
     </Stack>
-  )
+  );
 }

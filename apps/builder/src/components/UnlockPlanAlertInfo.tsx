@@ -1,32 +1,16 @@
-import {
-  Alert,
-  AlertIcon,
-  AlertProps,
-  Button,
-  HStack,
-  Text,
-  useDisclosure,
-} from '@chakra-ui/react'
-import React from 'react'
-import {
-  ChangePlanModal,
-  ChangePlanModalProps,
-} from '@/features/billing/components/ChangePlanModal'
-import { useTranslate } from '@tolgee/react'
+import React from 'react';
+import { Alert, AlertIcon, AlertProps, Button, HStack, Text, useDisclosure } from '@chakra-ui/react';
+import { ChangePlanModal, ChangePlanModalProps } from '@/features/billing/components/ChangePlanModal';
+import { useTranslate } from '@tolgee/react';
 
 type Props = {
   buttonLabel?: string
-} & AlertProps &
-  Pick<ChangePlanModalProps, 'type' | 'excludedPlans'>
+} & AlertProps & Pick<ChangePlanModalProps, 'type' | 'excludedPlans'>
 
-export const UnlockPlanAlertInfo = ({
-  buttonLabel,
-  type,
-  excludedPlans,
-  ...props
-}: Props) => {
-  const { t } = useTranslate()
-  const { isOpen, onOpen, onClose } = useDisclosure()
+export const UnlockPlanAlertInfo = ({ buttonLabel, type, excludedPlans, ...props }: Props) => {
+  const { t } = useTranslate();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <Alert
       status="info"
@@ -40,7 +24,7 @@ export const UnlockPlanAlertInfo = ({
         <Text>{props.children}</Text>
       </HStack>
       <Button
-        colorScheme={props.status === 'warning' ? 'orange' : 'blue'}
+        colorScheme={props.status === 'warning' ? 'orange' : 'green'}
         onClick={onOpen}
         flexShrink={0}
         ml="2"
@@ -54,5 +38,5 @@ export const UnlockPlanAlertInfo = ({
         excludedPlans={excludedPlans}
       />
     </Alert>
-  )
+  );
 }

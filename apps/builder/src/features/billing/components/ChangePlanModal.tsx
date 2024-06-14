@@ -20,14 +20,9 @@ export type ChangePlanModalProps = {
   onClose: () => void
 }
 
-export const ChangePlanModal = ({
-  onClose,
-  isOpen,
-  type,
-  excludedPlans,
-}: ChangePlanModalProps) => {
-  const { t } = useTranslate()
-  const { workspace, currentRole } = useWorkspace()
+export const ChangePlanModal = ({ onClose, isOpen, type, excludedPlans }: ChangePlanModalProps) => {
+  const { t } = useTranslate();
+  const { workspace, currentRole } = useWorkspace();
 
   return (
     <Modal
@@ -51,7 +46,6 @@ export const ChangePlanModal = ({
             />
           )}
         </ModalBody>
-
         <ModalFooter>
           <HStack>
             <Button colorScheme="gray" onClick={onClose}>
@@ -61,5 +55,5 @@ export const ChangePlanModal = ({
         </ModalFooter>
       </ModalContent>
     </Modal>
-  )
+  );
 }
