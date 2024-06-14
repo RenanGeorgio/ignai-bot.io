@@ -15,7 +15,7 @@ import { guessIfUserIsEuropean } from '@typebot.io/billing/guessIfUserIsEuropean
 import { WorkspaceInApp } from '@/features/workspace/WorkspaceProvider';
 
 type Props = {
-  workspace: WorkspaceInApp
+  workspace: WorkspaceInApp | undefined
   currentRole?: WorkspaceRole
   excludedPlans?: ('STARTER' | 'PRO')[]
 }
