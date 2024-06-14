@@ -374,7 +374,7 @@ export default function HistoryComponent() {
               height: 33,
               background: 'white',
               borderRadius: 6,
-              border: '1px rgb(149, 0, 0) solid',
+              border: '1px solid rgba(242, 45, 45, 0.373)',
               justifyContent: 'flex-start',
               alignItems: 'center',
               display: 'flex',
@@ -385,7 +385,7 @@ export default function HistoryComponent() {
           <div>
             <Button
               style={{
-                background: 'rgb(149, 0, 0)',
+                background: 'rgb(228, 2, 2)',
                 boxShadow: '0px 2px 4px rgba(233, 232, 232, 0.3)',
                 borderRadius: 6,
                 justifyContent: 'center',

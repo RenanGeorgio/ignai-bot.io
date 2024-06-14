@@ -4,7 +4,7 @@
   align-items: center;
   gap: 20px;
   width: 100%; 
-  background-color: rgba(255, 217, 217, 0.8);
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 .graph-container,
@@ -13,12 +13,12 @@
   flex: 1; 
   display: inline-block;
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid rgb(228, 2, 2);
   border-radius: 6px;
   background-color: #fff;
   width: calc(50% - 20px); 
-  max-width: 650px;
-  height: 350px;
+  max-width: 750px;
+  height: 400px;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   margin: 10px;

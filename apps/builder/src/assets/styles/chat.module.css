@@ -120,7 +120,7 @@
 }
 
 .name-work div {
-  color: #1200d4;
+  color: #fff;
 }
 
 .img-2 {
@@ -551,7 +551,7 @@ input.txt:focus {
   font-size: 15px;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-weight: 500;
-  background-color: rgb(240, 103, 103);
+  background-color: rgb(228, 2, 2);
   cursor: pointer;
   height: 2.3rem;
   width: 4rem;

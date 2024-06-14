@@ -5,6 +5,7 @@ import prisma from '@typebot.io/lib/prisma';
 import { ChatProvider } from '@/contexts/chat/ChatContext';
 import ChatPage from '@/components/Chat';
 import { useUser } from '@/features/account/hooks/useUser';
+import styles from '@/assets/styles/forms.module.css';
 
 export default function Page() {
   const { user } = useUser();

@@ -34,7 +34,7 @@ export default function LayoutChat() {
         <div className={styles['side']}>
           <LeftMenu onAddTicketClick={toggleAddTicket}>
             <div className={styles['heading-2']}>
-              <div className={styles['text-wrapper-3']}>Clientes</div>
+              <div className={styles['text-wrapper-client']}>Clientes</div>
             </div>
             <div className={styles['div-content']}>
               {userChats?.map((chat: Chat, index: number) => (
