@@ -29,7 +29,11 @@ export const ChangePlanForm = ({ workspace, currentRole, excludedPlans }: Props)
 
   const trpcContext = trpc.useContext();
 
-  const { data, refetch } = trpc.billing.getSubscription.useQuery({ workspaceId: workspace.id });
+  if (workspace == undefined) {
+    return null
+  }
+
+  const { data, refetch } = trpc.billing.getSubscription.useQuery({ workspaceId: workspace?.id });
 
   const { mutate: updateSubscription, isLoading: isUpdatingSubscription } =
     trpc.billing.updateSubscription.useMutation({
