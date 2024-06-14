@@ -27,14 +27,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       }
     });
 
+    if (!typebot) {
+      return notFound(res, 'Typebot not found')
+    }
+
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     if (!typebot?.workspace || (await isReadTypebotForbidden(typebot, user))) {
       return notFound(res, 'Workspace not found')
-    }
-
-    if (!typebot) {
-      return notFound(res, 'Typebot not found')
     }
 
     try {

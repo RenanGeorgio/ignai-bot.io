@@ -94,11 +94,11 @@ export const PublishButton = ({ isMoreMenuDisabled = false, ...props }: Props) =
           description: error.message,
         }),
       onSuccess: () => {
-        refetchPublishedTypebot()
-
         if (typebot?.id) {
           unregisterCompanyBots(typebot?.id)
         }
+        
+        refetchPublishedTypebot()
       },
     })
 

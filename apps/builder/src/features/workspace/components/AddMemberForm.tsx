@@ -1,19 +1,10 @@
-import {
-  HStack,
-  Input,
-  Button,
-  Menu,
-  MenuButton,
-  MenuList,
-  Stack,
-  MenuItem,
-} from '@chakra-ui/react'
-import { ChevronLeftIcon } from '@/components/icons'
-import { WorkspaceInvitation, WorkspaceRole } from '@typebot.io/prisma'
-import { FormEvent, useState } from 'react'
-import { Member } from '../types'
-import { sendInvitationQuery } from '../queries/sendInvitationQuery'
-import { useTranslate } from '@tolgee/react'
+import React, { FormEvent, useState } from 'react';
+import { HStack, Input, Button, Menu, MenuButton, MenuList, Stack, MenuItem } from '@chakra-ui/react';
+import { ChevronLeftIcon } from '@/components/icons';
+import { WorkspaceInvitation, WorkspaceRole } from '@typebot.io/prisma';
+import { Member } from '../types';
+import { sendInvitationQuery } from '../queries/sendInvitationQuery';
+import { useTranslate } from '@tolgee/react';
 
 type Props = {
   workspaceId: string
@@ -22,33 +13,39 @@ type Props = {
   isLoading: boolean
   isLocked: boolean
 }
-export const AddMemberForm = ({
-  workspaceId,
-  onNewMember,
-  onNewInvitation,
-  isLoading,
-  isLocked,
-}: Props) => {
-  const { t } = useTranslate()
-  const [invitationEmail, setInvitationEmail] = useState('')
-  const [invitationRole, setInvitationRole] = useState<WorkspaceRole>(
-    WorkspaceRole.MEMBER
-  )
 
-  const [isSendingInvitation, setIsSendingInvitation] = useState(false)
+type ButtonProps = {
+  role: WorkspaceRole
+  onChange: (role: WorkspaceRole) => void
+}
+
+export const AddMemberForm = ({ workspaceId, onNewMember, onNewInvitation, isLoading, isLocked }: Props) => {
+  const { t } = useTranslate();
+
+  const [invitationEmail, setInvitationEmail] = useState('');
+  const [invitationRole, setInvitationRole] = useState<WorkspaceRole>(WorkspaceRole.MEMBER);
+  const [isSendingInvitation, setIsSendingInvitation] = useState(false);
 
   const handleInvitationSubmit = async (e: FormEvent) => {
-    e.preventDefault()
-    setIsSendingInvitation(true)
+    e.preventDefault();
+
+    setIsSendingInvitation(true);
     const { data } = await sendInvitationQuery({
       email: invitationEmail,
       type: invitationRole,
       workspaceId,
-    })
-    if (data?.member) onNewMember(data.member)
-    if (data?.invitation) onNewInvitation(data.invitation)
-    setInvitationEmail('')
-    setIsSendingInvitation(false)
+    });
+
+    if (data?.member) {
+      onNewMember(data.member);
+    }
+
+    if (data?.invitation) {
+      onNewInvitation(data.invitation);
+    }
+
+    setInvitationEmail('');
+    setIsSendingInvitation(false);
   }
 
   return (
@@ -61,7 +58,6 @@ export const AddMemberForm = ({
         rounded="md"
         isDisabled={isLocked}
       />
-
       {!isLocked && (
         <WorkspaceRoleMenuButton
           role={invitationRole}
@@ -69,7 +65,7 @@ export const AddMemberForm = ({
         />
       )}
       <Button
-        colorScheme={'blue'}
+        colorScheme={'red'}
         isLoading={isSendingInvitation}
         flexShrink={0}
         type="submit"
@@ -78,16 +74,10 @@ export const AddMemberForm = ({
         {t('workspace.membersList.inviteButton.label')}
       </Button>
     </HStack>
-  )
+  );
 }
 
-const WorkspaceRoleMenuButton = ({
-  role,
-  onChange,
-}: {
-  role: WorkspaceRole
-  onChange: (role: WorkspaceRole) => void
-}) => {
+const WorkspaceRoleMenuButton = ({ role, onChange }: ButtonProps) => {
   return (
     <Menu placement="bottom" isLazy matchWidth>
       <MenuButton
@@ -108,7 +98,7 @@ const WorkspaceRoleMenuButton = ({
         </Stack>
       </MenuList>
     </Menu>
-  )
+  );
 }
 
 export const convertWorkspaceRoleToReadable = (role: WorkspaceRole): string => {

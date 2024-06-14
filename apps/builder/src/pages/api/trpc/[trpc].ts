@@ -1,7 +1,7 @@
-import { createContext } from '@/helpers/server/context'
-import { appRouter } from '@/helpers/server/routers/appRouter'
-import * as Sentry from '@sentry/nextjs'
-import { createNextApiHandler } from '@trpc/server/adapters/next'
+import * as Sentry from '@sentry/nextjs';
+import { createNextApiHandler } from '@trpc/server/adapters/next';
+import { createContext } from '@/helpers/server/context';
+import { appRouter } from '@/helpers/server/routers/appRouter';
 
 export default createNextApiHandler({
   router: appRouter,
@@ -11,9 +11,10 @@ export default createNextApiHandler({
       Sentry.captureException(error)
       console.error('Something went wrong', error)
     }
+
     return error
   },
   batching: {
     enabled: true,
   },
-})
+});
