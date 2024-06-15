@@ -18,7 +18,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const typebotId = req.query.typebotId as string | undefined
 
     if (!typebotId) {
-      return badRequest(res);
+      return badRequest(res, 'Bot id is undefined');
     }
 
     const typebot = await prisma.typebot.findFirst({

@@ -15,7 +15,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const email = req.query.email as string | undefined
 
     if (!email) {
-      return badRequest(res);
+      return badRequest(res, 'email is missing');
     }
 
     if (req.method === 'GET') {
