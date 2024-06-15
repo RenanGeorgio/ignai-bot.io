@@ -10,13 +10,13 @@ interface User {
 }
 
 interface RecipientUser {
-  id: string
+  _id: string
   name: string
   email: string
 }
 
 interface ApiResponseSuccess {
-  id: string
+  _id: string
   name: string
   email: string
 }
@@ -41,13 +41,14 @@ export const useFetchRecipient = (chat: Chat, user: User) => {
       try {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        const response: ApiResponse = await api(
-          `${baseUrl}/api/chat/client/${recipientId}`
+        const response = await api(
+          `api/v1/chat/client/${recipientId}`
         )
-        if ('error' in response) {
-          setError(response.error)
+        if (!response.ok) {
+          setError(response.statusText)
         } else {
-          setRecipientUser(response)
+          const data: ApiResponseSuccess = await response.json()
+          setRecipientUser(data)
         }
       } catch (error) {
         console.log(error)

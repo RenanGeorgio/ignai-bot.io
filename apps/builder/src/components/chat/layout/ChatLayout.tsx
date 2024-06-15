@@ -8,23 +8,11 @@ import useChat from '@/hooks/useChat'
 import styles from './ChatLayout.module.css'
 import { Chat } from '@/contexts/chat/types'
 
-export default function LayoutChat() {
+export default function ChatLayout() {
   const [showAddTicket, setShowAddTicket] = useState(false)
   const toggleAddTicket = () => {
     setShowAddTicket(!showAddTicket)
   }
-
-  /*
-  const { user } = useAuth();
-
-  const user = {
-    _id: '65bbe0359f84da3af601f373',
-    name: 'Samuel',
-    company: 'Sam`s Company',
-    companyId: '1',
-    email: 'samuelmarques96@live.com',
-  }
-  */
 
   const { userChats, updateCurrentChat } = useChat()
 

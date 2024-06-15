@@ -14,6 +14,7 @@ import { colors } from '@/lib/theme';
 
 import type {} from '@mui/x-data-grid/themeAugmentation';
 import styles from '@/assets/styles/forms.module.css';
+import ChatLayout from '@/components/chat/layout/ChatLayout';
 
 const MuiTheme = createTheme({
   palette: {
@@ -87,7 +88,7 @@ const ChatPage: React.FC = () => {
           <div>
             {activePage === 'Atendimento' && (
               <div>
-                <Layout />
+                <ChatLayout />
               </div>
             )}
             {activePage === 'Histórico' && (
