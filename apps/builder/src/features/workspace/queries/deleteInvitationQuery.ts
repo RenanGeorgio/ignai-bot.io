@@ -7,4 +7,5 @@ export const deleteInvitationQuery = (invitation: {
   sendRequest({
     url: `/api/workspaces/${invitation.workspaceId}/invitations/${invitation.id}`,
     method: 'DELETE',
-  })
+  }
+);

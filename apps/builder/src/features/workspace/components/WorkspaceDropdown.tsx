@@ -1,30 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import { EmojiOrImageIcon } from '@/components/EmojiOrImageIcon'
-import {
-  ChevronLeftIcon,
-  PlusIcon,
-  LogOutIcon,
-  UserIcon,
-  SettingsIcon,
-  LaptopIcon
-} from '@/components/icons'
-import { trpc } from '@/lib/trpc'
-import { useTranslate } from '@tolgee/react'
-import {
-  Menu,
-  MenuButton,
-  Button,
-  HStack,
-  MenuList,
-  MenuItem,
-  Text,
-  useDisclosure
-} from '@chakra-ui/react'
-import { User } from '@typebot.io/prisma'
-import { WorkspaceInApp } from '../WorkspaceProvider'
-import { AccountSettingsModal } from './AccountSettingsModal'
-import { WorkspaceSettingsModal } from './WorkspaceSettingsModal'
-import { checkUser } from '../api/checkUser'
+import React, { useEffect, useState } from 'react';
+import { Menu, MenuButton, Button, HStack, MenuList, MenuItem, Text, useDisclosure } from '@chakra-ui/react';
+import { trpc } from '@/lib/trpc';
+import { EmojiOrImageIcon } from '@/components/EmojiOrImageIcon';
+import { ChevronLeftIcon, PlusIcon, LogOutIcon, UserIcon, SettingsIcon, LaptopIcon } from '@/components/icons';
+import { useTranslate } from '@tolgee/react';
+import { User } from '@typebot.io/prisma';
+import { WorkspaceInApp } from '../WorkspaceProvider';
+import { AccountSettingsModal } from './AccountSettingsModal';
+import { WorkspaceSettingsModal } from './WorkspaceSettingsModal';
+import { checkUserQuery } from '../queries/checkUserQuery';
 
 type Props = {
   currentWorkspace?: WorkspaceInApp
@@ -41,8 +25,8 @@ export const WorkspaceDropdown = ({
   onCreateNewWorkspaceClick,
   user
 }: Props) => {
-  const { t } = useTranslate()
-  const { data } = trpc.workspace.listWorkspaces.useQuery()
+  const { t } = useTranslate();
+  const { data } = trpc.workspace.listWorkspaces.useQuery();
 
   const [isAdmin, setAdmin] = useState<boolean>(false);
  
@@ -53,11 +37,12 @@ export const WorkspaceDropdown = ({
   const { isOpen: isOpenWorkspace, onOpen: onOpenWorkspace, onClose: onCloseWorkspace } = useDisclosure();
 
   const validAdmin = async (email: string) => {
-    const data = await checkUser(email);
+    const data = await checkUserQuery(email);
 
     const body = data?.response?.body;
-    console.log(body);
+    alert(JSON.stringify(body));
     if (body) {
+      console.log(body);
       setAdmin(true);
     } else {
       setAdmin(false);

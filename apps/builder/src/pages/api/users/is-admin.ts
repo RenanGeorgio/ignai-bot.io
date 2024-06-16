@@ -1,8 +1,8 @@
-import { NextApiRequest, NextApiResponse } from 'next'
-import { TRPCError } from '@trpc/server'
-import { getAuthenticatedUser } from '@/features/auth/helpers/getAuthenticatedUser'
-import { methodNotAllowed, badRequest, notAuthenticated } from '@typebot.io/lib/api'
-//import { env } from '@typebot.io/env'
+import { NextApiRequest, NextApiResponse } from 'next';
+import { TRPCError } from '@trpc/server';
+import { getAuthenticatedUser } from '@/features/auth/helpers/getAuthenticatedUser';
+import { methodNotAllowed, badRequest, notAuthenticated } from '@typebot.io/lib/api';
+import { env } from '@typebot.io/env';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getAuthenticatedUser(req, res);
@@ -19,9 +19,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     if (req.method === 'GET') {
-      //if (env?.ADMIN_EMAIL?.includes(email)) {
-      //  return { message: 'is admin', value: true };
-      //} 
+      if (env?.ADMIN_EMAIL?.includes(email)) {
+        return { message: 'is admin', value: true };
+      } 
 
       return { message: 'not admin', value: false };
     }
