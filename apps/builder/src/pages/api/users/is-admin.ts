@@ -20,10 +20,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     if (req.method === 'GET') {
       if (env?.ADMIN_EMAIL?.includes(email)) {
-        return { message: 'is admin', value: true };
+        return res.status(200).send({ message: 'is admin', value: true });
       } 
 
-      return { message: 'not admin', value: false };
+      return res.status(200).send({ message: 'not admin', value: false });
     }
   } catch (err) {
     console.error(err);
