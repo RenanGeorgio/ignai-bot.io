@@ -3,10 +3,10 @@ import { GetServerSidePropsContext } from 'next'
 import { User } from '@typebot.io/prisma'
 import prisma from '@typebot.io/lib/prisma'
 import { ChatProvider } from '@/contexts/chat/ChatContext'
-import ChatPage from '@/components/Chat'
 import { UserProvider } from '@/contexts/user/provider/UserProvider'
 import { User as ChatbotUser } from '@/contexts/user/UserContext'
 import Head from 'next/head'
+import Chat from '@/components/chat/Chat'
 export default function Page({ user }: { user: ChatbotUser }) {
   if (!user) {
     return
@@ -19,7 +19,7 @@ export default function Page({ user }: { user: ChatbotUser }) {
       </Head>
       <UserProvider user={user}>
         <ChatProvider>
-          <ChatPage />
+          <Chat />
         </ChatProvider>
       </UserProvider>
     </>

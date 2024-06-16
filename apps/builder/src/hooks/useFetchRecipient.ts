@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { baseUrl, api } from '@/services/api'
+import { api } from '@/services/api'
 
 interface Chat {
   members: string[]
@@ -12,6 +12,7 @@ interface User {
 interface RecipientUser {
   _id: string
   name: string
+  lastName?: string
   email: string
 }
 
@@ -21,13 +22,7 @@ interface ApiResponseSuccess {
   email: string
 }
 
-interface ApiResponseError {
-  error: string
-}
-
-type ApiResponse = ApiResponseSuccess | ApiResponseError
-
-export const useFetchRecipient = (chat: Chat, user: User) => {
+export const useFetchRecipient = (chat: Chat | null, user: User) => {
   const [recipientUser, setRecipientUser] = useState<RecipientUser | null>(null)
   const [error, setError] = useState<string | null>(null)
 
