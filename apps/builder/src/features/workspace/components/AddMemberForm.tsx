@@ -23,7 +23,7 @@ export const AddMemberForm = ({ workspaceId, onNewMember, onNewInvitation, isLoa
   const { t } = useTranslate();
 
   const [invitationEmail, setInvitationEmail] = useState('');
-  const [invitationRole, setInvitationRole] = useState<WorkspaceRole>(WorkspaceRole.MEMBER);
+  const [invitationRole, setInvitationRole] = useState<WorkspaceRole>(WorkspaceRole.OPERATOR);
   const [isSendingInvitation, setIsSendingInvitation] = useState(false);
 
   const handleInvitationSubmit = async (e: FormEvent) => {
@@ -95,6 +95,9 @@ const WorkspaceRoleMenuButton = ({ role, onChange }: ButtonProps) => {
           <MenuItem onClick={() => onChange(WorkspaceRole.MEMBER)}>
             {convertWorkspaceRoleToReadable(WorkspaceRole.MEMBER)}
           </MenuItem>
+          <MenuItem onClick={() => onChange(WorkspaceRole.OPERATOR)}>
+            {convertWorkspaceRoleToReadable(WorkspaceRole.OPERATOR)}
+          </MenuItem>
         </Stack>
       </MenuList>
     </Menu>
@@ -107,6 +110,8 @@ export const convertWorkspaceRoleToReadable = (role: WorkspaceRole): string => {
       return 'Admin'
     case WorkspaceRole.MEMBER:
       return 'Member'
+    case WorkspaceRole.OPERATOR:
+      return 'Operator'
     case WorkspaceRole.GUEST:
       return 'Guest'
   }

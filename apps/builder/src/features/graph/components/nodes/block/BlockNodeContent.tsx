@@ -39,6 +39,7 @@ import { LogicBlockType } from '@typebot.io/schemas/features/blocks/logic/consta
 import { IntegrationBlockType } from '@typebot.io/schemas/features/blocks/integrations/constants'
 import { ForgedBlockNodeContent } from '@/features/forge/components/ForgedBlockNodeContent'
 import { OpenAINodeBody } from '@/features/blocks/integrations/openai/components/OpenAINodeBody'
+import { IgnaiChatbotNodeBody } from '@/features/blocks/integrations/ignaiChatbot/IgnaiChatbotNodeBody'
 
 type Props = {
   block: BlockV6
@@ -153,6 +154,9 @@ export const BlockNodeContent = ({
     }
     case IntegrationBlockType.ZEMANTIC_AI: {
       return <ZemanticAiNodeBody options={block.options} />
+    }
+    case IntegrationBlockType.IGNAI_CHATBOT_RT: {
+      return <IgnaiChatbotNodeBody block={block} />
     }
     default: {
       return <ForgedBlockNodeContent block={block} />
