@@ -72,10 +72,7 @@ export const unpublishTypebot = authenticatedProcedure
         }
       );
     } catch (err) {
-      throw new TRPCError({
-        code: 'INTERNAL_SERVER_ERROR',
-        message: 'Failed to delete bot register value',
-      });
+      console.error(err);
     }
 
     await prisma.publicTypebot.deleteMany({

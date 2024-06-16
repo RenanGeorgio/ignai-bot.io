@@ -190,11 +190,7 @@ export const publishTypebot = authenticatedProcedure
         }
       ).json();
     } catch (err) {
-      throw new TRPCError({
-        code: 'INTERNAL_SERVER_ERROR',
-        message: 'Could not reach server to update bot state value',
-        cause: err
-      });
+      console.error(err);
     } 
 
     await trackEvents([
