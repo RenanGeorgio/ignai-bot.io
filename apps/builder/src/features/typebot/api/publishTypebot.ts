@@ -178,20 +178,16 @@ export const publishTypebot = authenticatedProcedure
       })
     }
 
-    try {
-      await ky.post(
-        `${env.CHATBOT_SERVER_URL}/domains`,
-        {
-          headers: {
-            authorization: `Bearer ${env.VERCEL_TOKEN}`, // TO-DO: TROCAR PELO METODO DE PERM CORRETO
-            'Content-Type': 'application/json',
-          },
-          json: JSON.stringify(existingTypebot)
-        }
-      ).json();
-    } catch (err) {
-      console.error(err);
-    } 
+    await ky.post(
+      `${env.CHATBOT_SERVER_URL}/domains`,
+      {
+        headers: {
+          authorization: `Bearer ${env.VERCEL_TOKEN}`, // TO-DO: TROCAR PELO METODO DE PERM CORRETO
+          'Content-Type': 'application/json',
+        },
+        json: JSON.stringify(existingTypebot)
+      }
+    ).json(); 
 
     await trackEvents([
       ...publishEvents,

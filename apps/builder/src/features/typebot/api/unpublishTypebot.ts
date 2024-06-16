@@ -64,16 +64,12 @@ export const unpublishTypebot = authenticatedProcedure
       throw new TRPCError({ code: 'NOT_FOUND', message: 'Typebot not found' })
     }
 
-    try {
-      await ky.delete(
-        `${env.CHATBOT_SERVER_URL}/domains?typebotId=${existingTypebot.id}`,
-        {
-          headers: { Authorization: `Bearer ${env.VERCEL_TOKEN}` }
-        }
-      );
-    } catch (err) {
-      console.error(err);
-    }
+    await ky.delete(
+      `${env.CHATBOT_SERVER_URL}/domains?typebotId=${existingTypebot.id}`,
+      {
+        headers: { Authorization: `Bearer ${env.VERCEL_TOKEN}` }
+      }
+    );
 
     await prisma.publicTypebot.deleteMany({
       where: {
