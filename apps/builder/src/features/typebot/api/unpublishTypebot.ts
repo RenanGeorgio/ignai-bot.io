@@ -2,7 +2,9 @@ import prisma from '@typebot.io/lib/prisma'
 import { authenticatedProcedure } from '@/helpers/server/trpc'
 import { TRPCError } from '@trpc/server'
 import { z } from 'zod'
+import ky from 'ky'
 import { isWriteTypebotForbidden } from '../helpers/isWriteTypebotForbidden'
+import { env } from '@typebot.io/env'
 
 export const unpublishTypebot = authenticatedProcedure
   .meta({
@@ -50,17 +52,31 @@ export const unpublishTypebot = authenticatedProcedure
         },
       },
     })
-    if (!existingTypebot?.publishedTypebot)
+
+    if (!existingTypebot?.publishedTypebot) {
       throw new TRPCError({
         code: 'NOT_FOUND',
         message: 'Published typebot not found',
       })
+    }
 
-    if (
-      !existingTypebot.id ||
-      (await isWriteTypebotForbidden(existingTypebot, user))
-    )
+    if (!existingTypebot.id || (await isWriteTypebotForbidden(existingTypebot, user))) {
       throw new TRPCError({ code: 'NOT_FOUND', message: 'Typebot not found' })
+    }
+
+    try {
+      await ky.delete(
+        `${env.CHATBOT_SERVER_URL}/domains?typebotId=${existingTypebot.id}`,
+        {
+          headers: { Authorization: `Bearer ${env.VERCEL_TOKEN}` }
+        }
+      );
+    } catch (err) {
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: 'Failed to delete bot register value',
+      });
+    }
 
     await prisma.publicTypebot.deleteMany({
       where: {
@@ -69,4 +85,5 @@ export const unpublishTypebot = authenticatedProcedure
     })
 
     return { message: 'success' }
-  })
+  }
+)

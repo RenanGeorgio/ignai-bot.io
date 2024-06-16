@@ -1,15 +1,9 @@
 import prisma from '@typebot.io/lib/prisma'
 import { authenticatedProcedure } from '@/helpers/server/trpc'
 import { TRPCError } from '@trpc/server'
-import {
-  edgeSchema,
-  settingsSchema,
-  themeSchema,
-  variableSchema,
-  parseGroups,
-  startEventSchema,
-} from '@typebot.io/schemas'
+import { edgeSchema, settingsSchema, themeSchema, variableSchema, parseGroups, startEventSchema } from '@typebot.io/schemas'
 import { z } from 'zod'
+import ky from 'ky'
 import { isWriteTypebotForbidden } from '../helpers/isWriteTypebotForbidden'
 import { Plan } from '@typebot.io/prisma'
 import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/constants'
@@ -66,11 +60,10 @@ export const publishTypebot = authenticatedProcedure
         },
       },
     })
-    if (
-      !existingTypebot?.id ||
-      (await isWriteTypebotForbidden(existingTypebot, user))
-    )
+
+    if (!existingTypebot?.id || (await isWriteTypebotForbidden(existingTypebot, user))) {
       throw new TRPCError({ code: 'NOT_FOUND', message: 'Typebot not found' })
+    }
 
     const hasFileUploadBlocks = parseGroups(existingTypebot.groups, {
       typebotVersion: existingTypebot.version,
@@ -78,40 +71,38 @@ export const publishTypebot = authenticatedProcedure
       group.blocks.some((block) => block.type === InputBlockType.FILE)
     )
 
-    if (hasFileUploadBlocks && existingTypebot.workspace.plan === Plan.FREE)
+    if (hasFileUploadBlocks && existingTypebot.workspace.plan === Plan.FREE) {
       throw new TRPCError({
         code: 'BAD_REQUEST',
         message: "File upload blocks can't be published on the free plan",
       })
+    }
 
-    const typebotWasVerified =
-      existingTypebot.riskLevel === -1 || existingTypebot.workspace.isVerified
+    const typebotWasVerified = existingTypebot.riskLevel === -1 || existingTypebot.workspace.isVerified
 
-    if (
-      !typebotWasVerified &&
-      existingTypebot.riskLevel &&
-      existingTypebot.riskLevel > 80
-    )
+    if (!typebotWasVerified && existingTypebot.riskLevel && existingTypebot.riskLevel > 80) {
       throw new TRPCError({
         code: 'FORBIDDEN',
-        message:
-          'Radar detected a potential malicious typebot. This bot is being manually reviewed by Fraud Prevention team.',
+        message: 'Radar detected a potential malicious typebot. This bot is being manually reviewed by Fraud Prevention team.',
       })
+    }
 
     const riskLevel = typebotWasVerified
       ? 0
       : computeRiskLevel(existingTypebot, {
           debug: env.NODE_ENV === 'development',
-        })
+        }
+    )
 
     if (riskLevel > 0 && riskLevel !== existingTypebot.riskLevel) {
-      if (env.MESSAGE_WEBHOOK_URL && riskLevel !== 100 && riskLevel > 60)
+      if (env.MESSAGE_WEBHOOK_URL && riskLevel !== 100 && riskLevel > 60) {
         await fetch(env.MESSAGE_WEBHOOK_URL, {
           method: 'POST',
           body: `⚠️ Suspicious typebot to be reviewed: ${existingTypebot.name} (${env.NEXTAUTH_URL}/typebots/${existingTypebot.id}/edit) (workspace: ${existingTypebot.workspaceId})`,
         }).catch((err) => {
           console.error('Failed to send message', err)
         })
+      }
 
       await prisma.typebot.updateMany({
         where: {
@@ -121,13 +112,16 @@ export const publishTypebot = authenticatedProcedure
           riskLevel,
         },
       })
+
       if (riskLevel > 80) {
-        if (existingTypebot.publishedTypebot)
+        if (existingTypebot.publishedTypebot) {
           await prisma.publicTypebot.deleteMany({
             where: {
               id: existingTypebot.publishedTypebot.id,
             },
           })
+        }
+
         throw new TRPCError({
           code: 'FORBIDDEN',
           message:
@@ -142,7 +136,7 @@ export const publishTypebot = authenticatedProcedure
       hasFileUploadBlocks,
     })
 
-    if (existingTypebot.publishedTypebot)
+    if (existingTypebot.publishedTypebot) {
       await prisma.publicTypebot.updateMany({
         where: {
           id: existingTypebot.publishedTypebot.id,
@@ -163,7 +157,7 @@ export const publishTypebot = authenticatedProcedure
           theme: themeSchema.parse(existingTypebot.theme),
         },
       })
-    else
+    } else {
       await prisma.publicTypebot.createMany({
         data: {
           version: existingTypebot.version,
@@ -182,6 +176,26 @@ export const publishTypebot = authenticatedProcedure
           theme: themeSchema.parse(existingTypebot.theme),
         },
       })
+    }
+
+    try {
+      await ky.post(
+        `${env.CHATBOT_SERVER_URL}/domains`,
+        {
+          headers: {
+            authorization: `Bearer ${env.VERCEL_TOKEN}`, // TO-DO: TROCAR PELO METODO DE PERM CORRETO
+            'Content-Type': 'application/json',
+          },
+          json: JSON.stringify(existingTypebot)
+        }
+      ).json();
+    } catch (err) {
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: 'Could not reach server to update bot state value',
+        cause: err
+      });
+    } 
 
     await trackEvents([
       ...publishEvents,
@@ -198,4 +212,5 @@ export const publishTypebot = authenticatedProcedure
     ])
 
     return { message: 'success' }
-  })
+  }
+)

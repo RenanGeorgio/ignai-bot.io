@@ -1,59 +1,39 @@
-import {
-  Stack,
-  FormControl,
-  FormLabel,
-  Flex,
-  Button,
-  useDisclosure,
-  Text,
-  Input,
-  InputGroup,
-  InputRightElement,
-  FormHelperText,
-} from '@chakra-ui/react'
-import { ConfirmModal } from '@/components/ConfirmModal'
-import React from 'react'
-import { EditableEmojiOrImageIcon } from '@/components/EditableEmojiOrImageIcon'
-import { useWorkspace } from '../WorkspaceProvider'
-import { TextInput } from '@/components/inputs'
-import { useTranslate } from '@tolgee/react'
-import { CopyButton } from '@/components/CopyButton'
+import React from 'react';
+import { Stack, FormControl, FormLabel, Button, useDisclosure, Text, Input, InputGroup, InputRightElement, FormHelperText } from '@chakra-ui/react';
+import { ConfirmModal } from '@/components/ConfirmModal';
+import { useWorkspace } from '../WorkspaceProvider';
+import { TextInput } from '@/components/inputs';
+import { useTranslate } from '@tolgee/react';
+import { CopyButton } from '@/components/CopyButton';
 
-export const WorkspaceSettingsForm = ({ onClose }: { onClose: () => void }) => {
-  const { t } = useTranslate()
-  const { workspace, workspaces, updateWorkspace, deleteCurrentWorkspace } =
-    useWorkspace()
+type DeleteProps = {
+  workspaceName: string
+  onConfirm: () => Promise<void>
+}
+
+type Props = {
+  onClose: () => void
+}
+
+export const WorkspaceSettingsForm = ({ onClose }: Props) => {
+  const { t } = useTranslate();
+  const { workspace, workspaces, updateWorkspace, deleteCurrentWorkspace } = useWorkspace();
 
   const handleNameChange = (name: string) => {
-    if (!workspace?.id) return
-    updateWorkspace({ name })
+    if (!workspace?.id) {
+      return
+    }
+
+    updateWorkspace({ name });
   }
 
-  const handleChangeIcon = (icon: string) => updateWorkspace({ icon })
-
   const handleDeleteClick = async () => {
-    await deleteCurrentWorkspace()
-    onClose()
+    await deleteCurrentWorkspace();
+    onClose();
   }
 
   return (
     <Stack spacing="6" w="full">
-      <FormControl>
-        <FormLabel>{t('workspace.settings.icon.title')}</FormLabel>
-        <Flex>
-          {workspace && (
-            <EditableEmojiOrImageIcon
-              uploadFileProps={{
-                workspaceId: workspace.id,
-                fileName: 'icon',
-              }}
-              icon={workspace.icon}
-              onChangeIcon={handleChangeIcon}
-              boxSize="40px"
-            />
-          )}
-        </Flex>
-      </FormControl>
       {workspace && (
         <>
           <TextInput
@@ -88,18 +68,13 @@ export const WorkspaceSettingsForm = ({ onClose }: { onClose: () => void }) => {
         />
       )}
     </Stack>
-  )
+  );
 }
 
-const DeleteWorkspaceButton = ({
-  workspaceName,
-  onConfirm,
-}: {
-  workspaceName: string
-  onConfirm: () => Promise<void>
-}) => {
-  const { t } = useTranslate()
-  const { isOpen, onOpen, onClose } = useDisclosure()
+const DeleteWorkspaceButton = ({ workspaceName, onConfirm }: DeleteProps) => {
+  const { t } = useTranslate();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <>
       <Button colorScheme="red" variant="outline" onClick={onOpen}>
@@ -119,5 +94,5 @@ const DeleteWorkspaceButton = ({
         confirmButtonLabel="Delete"
       />
     </>
-  )
+  );
 }

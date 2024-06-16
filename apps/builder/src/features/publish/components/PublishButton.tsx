@@ -27,7 +27,6 @@ import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/const
 import { ConfirmModal } from '@/components/ConfirmModal'
 import { TextLink } from '@/components/TextLink'
 import { useTimeSince } from '@/hooks/useTimeSince'
-import { registerCompanyBots, unregisterCompanyBots } from '../api/updateCompanyBots'
 
 type Props = ButtonProps & {
   isMoreMenuDisabled?: boolean
@@ -76,10 +75,6 @@ export const PublishButton = ({ isMoreMenuDisabled = false, ...props }: Props) =
           typebotId: typebot?.id as string,
         })
 
-        if (typebot?.id != undefined) {
-          registerCompanyBots(typebot?.id)
-        }
-
         if (!publishedTypebot && !pathname.endsWith('share')) {
           push(`/typebots/${query.typebotId}/share`)
         }
@@ -94,10 +89,6 @@ export const PublishButton = ({ isMoreMenuDisabled = false, ...props }: Props) =
           description: error.message,
         }),
       onSuccess: () => {
-        if (typebot?.id) {
-          unregisterCompanyBots(typebot?.id)
-        }
-        
         refetchPublishedTypebot()
       },
     })
