@@ -37,11 +37,15 @@ export const WorkspaceDropdown = ({
   const { isOpen: isOpenWorkspace, onOpen: onOpenWorkspace, onClose: onCloseWorkspace } = useDisclosure();
 
   const validAdmin = (email: string) => async () => {
-    const { message, value } = await checkUserQuery(email);
+    const body = await checkUserQuery(email);
 
-    alert(message);
-    console.log(value);
-    setAdmin(value);
+    alert(JSON.stringify(body));
+    console.log(body);
+    if (body) {
+      setAdmin(true);
+    } else {
+      setAdmin(false);
+    }
   }
 
   const handleWorkspaceClick = (e: React.MouseEvent) => {
