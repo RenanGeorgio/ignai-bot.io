@@ -1,8 +1,9 @@
 .left-menu {
   align-items: flex-start;
-  border: 1px rgba(145, 145, 145, 0.261) solid;
+  border: 1px rgba(242, 45, 45, 0.373) solid;
   border-radius: 3px 0px 0px 6px;
   border-right-width: 1px;
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   width: auto;
@@ -19,7 +20,8 @@
   align-self: stretch;
   width: 100%;
   margin-bottom: 20px;
-  border-bottom: 1px rgba(100, 100, 100, 0.048) solid;
+  background-color: #ffffff;
+  border-bottom: 1px rgba(242, 45, 45, 0.373) solid;
   justify-content: space-around;
   height: 23px;
 }
@@ -37,14 +39,15 @@
   flex-grow: 1 0 !important;
   width: 80% !important;
   height: 25px !important;
-  color: #fff;
+  color: #000;
+  background-color: #fff;
   padding: 2px;
   margin-top: 15px;
-  border: #c4c2c27c 1px solid;
+  border: rgb(228, 2, 2) 1px solid;
 }
 
 .left-menu .instance::placeholder {
-  color: #fff; 
+  color: #000000; 
   padding-left: 10px; 
 }
 
@@ -98,8 +101,8 @@
 }
 
 .blueButtonTicket {
-  background-color: rgba(115, 103, 240, 1);
-  color: white;
+  background-color: rgb(255, 184, 184);
+  color: rgb(0, 0, 0);
   padding: 10px;
   border: none;
   border-radius: none;
@@ -116,8 +119,8 @@
 }
 
 .grayButtonTicket {
-  background-color: rgba(168, 170, 174, 0.397);
-  color: rgba(168, 170, 174, 1);
+  background-color: rgb(228, 2, 2);
+  color: white;
   padding: 10px;
   border: none;
   border-radius: 0px;
@@ -137,7 +140,7 @@
   height: 22px !important;
   position: relative !important;
   width: 22px !important;
-  color: #fff !important;
+  color: #000000 !important;
 }
 
 .left-menu .chevron-down {
@@ -155,7 +158,7 @@
   gap: 192px;
   padding: 10px 16px;
   width: 100%;
-  border-bottom: #33333328 1px solid;
+  border-bottom: rgba(242, 45, 45, 0.373) 1px solid;
 }
 
 .div-content {
@@ -178,7 +181,7 @@
 }
 
 .div-content::-webkit-scrollbar-thumb {
-  background-color: rgb(109, 109, 109);
+  background-color: rgb(249, 158, 158);
   border-radius: 20px;
 }
 
@@ -189,14 +192,14 @@
   margin-top: -1px;
   position: relative;
   width: fit-content;
-  color: #7367f0;
+  color: rgb(0, 0, 0);
 }
 
 .left-menu .listLeftClient {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #8f83fb;
+  background-color: #ffffff;
   border: 0px none;
   margin: 5px;
   color: #fff;
@@ -431,8 +434,8 @@
   font-weight: bold;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
     'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  border-bottom: #33333328 1px solid;
-  border-top: #33333328 1px solid;
+  border-bottom: rgba(242, 45, 45, 0.373)  1px solid;
+  border-top: rgba(242, 45, 45, 0.373) 8 1px solid;
   width: 100%;
 }
 
@@ -467,11 +470,11 @@
 }
 
 .messageBubble {
-  background-color: #8f83fb;
+  background-color: rgb(255, 255, 255);
   padding: 20px;
   border-radius: 10px;
   margin: 5px;
-  color: white;
+  color: #000;
   display: flex;
   align-items: center;
   position: relative;
@@ -488,23 +491,23 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 .name {
-  color: #ffffff;
+  color: #000000;
   font-size: 15px;
 }
 
 .companyName {
   font-size: 0.7em;
-  color: #686efe;
+  color: rgb(151, 0, 0);
   position: relative;
   background-color: #dedddd;
   padding: 3px 8px;
   border-radius: 10px;
   position: absolute;
-  right: 10px;
+  right: 5px;
   top: 3px;
 }
 

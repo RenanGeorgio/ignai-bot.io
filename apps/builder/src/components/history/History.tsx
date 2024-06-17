@@ -135,7 +135,8 @@ export default function HistoryComponent() {
             paddingLeft: 10,
             paddingRight: 10,
             background: '#DEDBFC',
-            borderRight: '1px rgba(115, 103, 240, 0.24) solid',
+            color: 'rgb(151, 0, 0)',
+            borderRight: '1px rgb(177, 106, 106) solid',
             justifyContent: 'end',
             alignItems: 'center',
             display: 'flex',
@@ -148,6 +149,7 @@ export default function HistoryComponent() {
             paddingLeft: 10,
             paddingRight: 10,
             background: '#E8E6FC',
+            color: 'rgb(151, 0, 0)',
             justifyContent: 'end',
             alignItems: 'center',
             display: 'flex',
@@ -192,7 +194,7 @@ export default function HistoryComponent() {
             }}
           >
             <form style={{ width: '100%', height: '95%' }}>
-              <select style={{ width: '80%', height: '100%', borderRadius: 6, backgroundColor: 'white', color: 'black', border: '1px solid black' }}>
+              <select style={{ width: '80%', height: '100%', borderRadius: 6, backgroundColor: 'white', color: 'black', border: '1px solid rgb(228, 2, 2)' }}>
                 <option value="" selected>
                   <em>None</em>
                 </option>
@@ -234,7 +236,7 @@ export default function HistoryComponent() {
                   borderRadius: 6,
                   backgroundColor: 'white', 
                   color: 'black',
-                  border: '1px solid black'
+                  border: '1px solid rgb(228, 2, 2)'
                 }}
               >
                 <option value="" selected>
@@ -271,7 +273,7 @@ export default function HistoryComponent() {
           >
             <form style={{ width: '80%', height: '95%' }}>
               <select
-                style={{ width: '100%', height: '100%', borderRadius: 6, backgroundColor: 'white', color: 'black', border: '1px solid black' }}
+                style={{ width: '100%', height: '100%', borderRadius: 6, backgroundColor: 'white', color: 'black', border: '1px solid rgb(228, 2, 2)' }}
               >
                 <option value="" selected>
                   <em>None</em>
@@ -346,7 +348,7 @@ export default function HistoryComponent() {
               backgroundColor: 'white',
               marginTop: '-7px',
               color: 'black',
-              border: '1px solid black'
+              border: '1px solid rgba(242, 45, 45, 0.373)'
             }}
           >
             <option selected>10</option>
@@ -372,7 +374,7 @@ export default function HistoryComponent() {
               height: 33,
               background: 'white',
               borderRadius: 6,
-              border: '1px #DBDADE solid',
+              border: '1px solid rgba(242, 45, 45, 0.373)',
               justifyContent: 'flex-start',
               alignItems: 'center',
               display: 'flex',
@@ -383,8 +385,8 @@ export default function HistoryComponent() {
           <div>
             <Button
               style={{
-                background: '#7367F0',
-                boxShadow: '0px 2px 4px rgba(165, 163, 174, 0.30)',
+                background: 'rgb(228, 2, 2)',
+                boxShadow: '0px 2px 4px rgba(233, 232, 232, 0.3)',
                 borderRadius: 6,
                 justifyContent: 'center',
                 alignItems: 'center',

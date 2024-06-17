@@ -8,23 +8,11 @@ import useChat from '@/hooks/useChat'
 import styles from './ChatLayout.module.css'
 import { Chat } from '@/contexts/chat/types'
 
-export default function LayoutChat() {
+export default function ChatLayout() {
   const [showAddTicket, setShowAddTicket] = useState(false)
   const toggleAddTicket = () => {
     setShowAddTicket(!showAddTicket)
   }
-
-  /*
-  const { user } = useAuth();
-
-  const user = {
-    _id: '65bbe0359f84da3af601f373',
-    name: 'Samuel',
-    company: 'Sam`s Company',
-    companyId: '1',
-    email: 'samuelmarques96@live.com',
-  }
-  */
 
   const { userChats, updateCurrentChat } = useChat()
 
@@ -34,7 +22,7 @@ export default function LayoutChat() {
         <div className={styles['side']}>
           <LeftMenu onAddTicketClick={toggleAddTicket}>
             <div className={styles['heading-2']}>
-              <div className={styles['text-wrapper-3']}>Clientes</div>
+              <div className={styles['text-wrapper-client']}>Clientes</div>
             </div>
             <div className={styles['div-content']}>
               {userChats?.map((chat: Chat, index: number) => (

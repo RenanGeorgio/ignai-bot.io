@@ -1,3 +1,7 @@
+.page-content {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
 .grid{
   grid-row-start: span auto;
 }
@@ -132,7 +136,7 @@
 }
 
 .red-button {
-  background-color: red;
+  background-color: rgb(228, 2, 2);
   color: white;
   border: none;
   padding: 10px 20px;
@@ -151,21 +155,8 @@
   margin-bottom: 26px;
 }
   
-.blueButtonChat {
-  background-color: rgb(115, 103, 240);
-  color: white;
-  padding: 10px 10px;
-  border: none;
-  border-radius: 5px;
-  margin-right: 1px;
-  cursor: pointer; 
-  align-items: center;
-  display: flex;
-  font-weight: inherit;
-}
-
 .redButtonChat {
-  background-color: rgb(240, 103, 103);
+  background-color: rgb(228, 2, 2);
   color: white;
   padding: 10px 10px;
   border: none;
@@ -178,8 +169,8 @@
 }
 
 .grayButtonChat {
-  background-color: rgba(114, 103, 240, 0.134);
-  color: rgba(115, 103, 240, 1);
+  background-color: rgb(255, 184, 184);
+  color: rgb(0, 0, 0);
   padding: 10px 10px;
   border: none;
   border-radius: 5px;

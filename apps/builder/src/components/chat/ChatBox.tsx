@@ -1,4 +1,9 @@
-import React, { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react'
+import React, {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from 'react'
 import { IconButton } from '@chakra-ui/react'
 import {
   Phone,
@@ -26,6 +31,8 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import 'dayjs/locale/pt-br'
 import { ChatContextType } from '@/contexts/chat/types'
+import useUser from '@/hooks/useUser'
+import { useFetchRecipient } from '@/hooks/useFetchRecipient'
 
 dayjs.extend(relativeTime)
 dayjs.locale('pt-br')
@@ -39,58 +46,29 @@ export const ChatBox: React.FC<Props> = ({
   toggleAddTicket,
   setShowAddTicket,
 }): React.ReactElement => {
-  const [textMessage, setTextMessage] = useState<string>('');
+  const [textMessage, setTextMessage] = useState<string>('')
 
-  // const { user }: AuthContextInterface = useAuth()
-  const user = useMemo(() => { // mock
-    return {
-      _id: '6646294b1d1d1a722482e48d',
-      name: 'Samuel',
-      email: 'samuelmarques96@live.com',
-      cpf: '255.975.630-76',
-      company: 'Sam`s Company',
-      companyId: '1',
-    }
-  }, [])
+  const { user } = useUser()
 
-
-  const { 
-    currentChat, 
-    isMessagesLoading, 
-    messages, 
-    sendTextMessage 
+  const {
+    currentChat,
+    isMessagesLoading,
+    messages,
+    sendTextMessage,
   }: ChatContextType = useChat()
 
-  // const { recipientUser } = useFetchRecipient(currentChat, user)
-
-  // const currentChat = {
-  //   origin: {
-  //     platform: 'telegram',
-  //     chatId: '1053301824',
-  //   },
-  //   _id: '662683ef2a815f652638d615',
-  //   members: ['661d1e55582bfd030342607f', '1'],
-  //   timestamps: '2024-04-22T15:36:15.885Z',
-  //   __v: 0,
-  // }
-
-  const recipientUser = {
-    _id: '661d1e55582bfd030342607f',
-    name: 'Samuel',
-    lastName: ' ',
-    email: 'samuel@email.com',
-  }
+  const { recipientUser } = useFetchRecipient(currentChat, user)
 
   // const isMessagesLoading = false
 
   useEffect(() => {
     if (!isMessagesLoading && messages) {
-      const chatContainer = document.getElementById('chat-container');
+      const chatContainer = document.getElementById('chat-container')
       if (chatContainer) {
-        chatContainer.scrollTop = chatContainer.scrollHeight;
+        chatContainer.scrollTop = chatContainer.scrollHeight
       }
     }
-  }, [isMessagesLoading, messages]);   
+  }, [isMessagesLoading, messages])
 
   if (!recipientUser)
     return (
@@ -117,7 +95,10 @@ export const ChatBox: React.FC<Props> = ({
       </div>
     )
 
-  const handleSendMessage = (textMessage: string, setTextMessage: React.Dispatch<React.SetStateAction<string>>) => {
+  const handleSendMessage = (
+    textMessage: string,
+    setTextMessage: React.Dispatch<React.SetStateAction<string>>
+  ) => {
     console.log(user, currentChat)
     if (currentChat) {
       sendTextMessage(
@@ -176,7 +157,7 @@ export const ChatBox: React.FC<Props> = ({
       width={150}
       height={150}
     />
-  )   
+  )
 
   return (
     <div className={styles.containerchat}>
@@ -220,14 +201,14 @@ export const ChatBox: React.FC<Props> = ({
 
       <div id="chat-container" className={styles.chat}>
         {messages?.map((message, index: number) => (
-            <div
-              key={index}
-              className={`${styles['message-wrapper']} ${
-                message?.senderId === user?.companyId
-                  ? styles['sent']
-                  : styles['received']
-              }`}
-            >
+          <div
+            key={index}
+            className={`${styles['message-wrapper']} ${
+              message?.senderId === user?.companyId
+                ? styles['sent']
+                : styles['received']
+            }`}
+          >
             {message?.senderId === user?.companyId
               ? getTextMessageAvatar()
               : getMessageAvatar()}
@@ -247,7 +228,9 @@ export const ChatBox: React.FC<Props> = ({
                   : styles['time-right']
               }`}
             >
-              <span style={{color: 'black'}}>{dayjs(message?.createdAt).format('HH:mm')}</span>
+              <span style={{ color: 'black' }}>
+                {dayjs(message?.createdAt).format('HH:mm')}
+              </span>
             </div>
           </div>
         ))}

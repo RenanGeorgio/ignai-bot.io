@@ -1,17 +1,13 @@
-import {
-  createContext,
-  useCallback,
-  useEffect,
-  useState,
-  ReactNode,
-  useMemo,
-} from 'react'
+import React, { createContext, useCallback, useEffect, useState, ReactNode } from 'react'
 import { io, Socket } from 'socket.io-client'
 import Cookies from 'js-cookie'
 import { baseUrl, api } from '@/services/api'
 //import useAuth from '@/hooks/useAuth'
 //import compareArrays from '@/helpers/compareArrays'
 import { Chat, ChatClient, ChatContextType, Message, OnlineUser } from './types'
+import useUser from '@/hooks/useUser'
+
+// import useUser from '@/hooks/useAuth'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const ChatContext = createContext<ChatContextType>({} as any)
@@ -36,17 +32,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
   const [onlineUsers, setOnlineUsers] = useState<OnlineUser[]>([])
   const [socket, setSocket] = useState<Socket | null>(null)
 
-  // const { user } = useAuth()
-  const user = useMemo(() => {
-    return {
-      _id: '6646294b1d1d1a722482e48d',
-      name: 'Samuel',
-      email: 'samuelmarques96@live.com',
-      cpf: '255.975.630-76',
-      company: 'Sam`s Company',
-      companyId: '1',
-    }
-  }, [])
+  const { user } = useUser()
 
   useEffect(() => {
     const newSocket = io(baseUrl as string, {
