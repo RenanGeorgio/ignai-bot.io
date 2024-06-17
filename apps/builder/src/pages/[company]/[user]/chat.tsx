@@ -7,6 +7,7 @@ import { UserProvider } from '@/contexts/user/provider/UserProvider'
 import { User as ChatbotUser } from '@/contexts/user/UserContext'
 import Head from 'next/head'
 import Chat from '@/components/chat/Chat'
+
 export default function Page({ user }: { user: ChatbotUser }) {
   if (!user) {
     return
@@ -15,7 +16,7 @@ export default function Page({ user }: { user: ChatbotUser }) {
   return (
     <>
       <Head>
-        <title>My page title</title>
+        <title>Chat</title>
       </Head>
       <UserProvider user={user}>
         <ChatProvider>

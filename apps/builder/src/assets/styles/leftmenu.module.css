@@ -39,7 +39,8 @@
   flex-grow: 1 0 !important;
   width: 80% !important;
   height: 25px !important;
-  color: #000000;
+  color: #000;
+  background-color: #fff;
   padding: 2px;
   margin-top: 15px;
   border: rgb(228, 2, 2) 1px solid;
@@ -100,8 +101,8 @@
 }
 
 .blueButtonTicket {
-  background-color: rgb(228, 2, 2);
-  color: white;
+  background-color: rgb(255, 184, 184);
+  color: rgb(0, 0, 0);
   padding: 10px;
   border: none;
   border-radius: none;
@@ -118,8 +119,8 @@
 }
 
 .grayButtonTicket {
-  background-color: rgb(255, 184, 184);
-  color: rgb(0, 0, 0);
+  background-color: rgb(228, 2, 2);
+  color: white;
   padding: 10px;
   border: none;
   border-radius: 0px;
@@ -490,7 +491,7 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 .name {
@@ -506,7 +507,7 @@
   padding: 3px 8px;
   border-radius: 10px;
   position: absolute;
-  right: 10px;
+  right: 5px;
   top: 3px;
 }
 
