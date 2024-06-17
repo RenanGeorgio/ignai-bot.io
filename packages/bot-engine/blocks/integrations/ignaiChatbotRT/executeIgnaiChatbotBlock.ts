@@ -1,15 +1,15 @@
 import { ExecuteIntegrationResponse } from '../../../types'
-import { env } from '@typebot.io/env'
+//import { env } from '@typebot.io/env'
 import { isDefined } from '@typebot.io/lib'
 import {
   ChatwootBlock,
   SessionState,
-  ignaiChatbotBlock,
+  ignaiChatbotRtBlock,
 } from '@typebot.io/schemas'
 import { extractVariablesFromText } from '@typebot.io/variables/extractVariablesFromText'
 import { parseGuessedValueType } from '@typebot.io/variables/parseGuessedValueType'
 import { parseVariables } from '@typebot.io/variables/parseVariables'
-import { defaultChatwootOptions } from '@typebot.io/schemas/features/blocks/integrations/chatwoot/constants'
+//import { defaultChatwootOptions } from '@typebot.io/schemas/features/blocks/integrations/chatwoot/constants'
 
 const parseSetUserCode = (
   user: NonNullable<ChatwootBlock['options']>['user'],
@@ -31,7 +31,7 @@ const parseChatwootOpenCode = ({
   user,
   resultId,
   typebotId,
-}: ignaiChatbotBlock['options'] & { typebotId: string; resultId: string }) => {
+}: ignaiChatbotRtBlock['options'] & { typebotId: string; resultId: string }) => {
   console.log(baseUrl, websiteToken, user, resultId, typebotId)
   return `
   (function (d, t) {
