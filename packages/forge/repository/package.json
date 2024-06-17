@@ -17,6 +17,10 @@
     "@typebot.io/elevenlabs-block": "workspace:*",
     "@typebot.io/anthropic-block": "workspace:*",
     "@typebot.io/together-ai-block": "workspace:*",
-    "@typebot.io/open-router-block": "workspace:*"
+    "@typebot.io/open-router-block": "workspace:*",
+    "@typebot.io/ignai-chatbot-block": "workspace:*"
+  },
+  "dependencies": {
+    "ky": "1.2.3"
   }
 }

@@ -191,6 +191,7 @@
   "editor.sidebarBlock.website.label": "Website",
   "editor.sidebarBlock.zapier.label": "Zapier",
   "editor.sidebarBlock.zemanticAi.label": "Zemantic AI",
+  "editor.sidebarBlock.ignaiChatbotAgent.label": "Ignai Chatbot Publisher",
   "editor.sidebarBlocks.blockType.bubbles.heading": "Blasen",
   "editor.sidebarBlocks.blockType.inputs.heading": "Eingaben",
   "editor.sidebarBlocks.blockType.integrations.heading": "Integrationen",

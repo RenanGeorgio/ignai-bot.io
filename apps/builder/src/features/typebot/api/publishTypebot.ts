@@ -179,7 +179,7 @@ export const publishTypebot = authenticatedProcedure
     }
 
     await ky.post(
-      `${env.CHATBOT_SERVER_URL}/domains`,
+      `${env.CHATBOT_SERVER_URL}/typebot`,
       {
         headers: {
           authorization: `Bearer ${env.VERCEL_TOKEN}`, // TO-DO: TROCAR PELO METODO DE PERM CORRETO

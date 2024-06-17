@@ -40,6 +40,7 @@ import { LogicBlockType } from '@typebot.io/schemas/features/blocks/logic/consta
 import { Block } from '@typebot.io/schemas'
 import { OpenAILogo } from '@/features/blocks/integrations/openai/components/OpenAILogo'
 import { ForgedBlockIcon } from '@/features/forge/ForgedBlockIcon'
+import { IgnaiChatbotLogo } from '@/features/blocks/integrations/ignaiChatbot/IgnaiChatbotLogo'
 
 type BlockIconProps = { type: Block['type']; mt?: string }
 
@@ -122,6 +123,8 @@ export const BlockIcon = ({ type, mt }: BlockIconProps): JSX.Element => {
       return <FlagIcon mt={mt} />
     case IntegrationBlockType.OPEN_AI:
       return <OpenAILogo mt={mt} fill={openAIColor} />
+    case IntegrationBlockType.IGNAI_CHATBOT_RT:
+      return <IgnaiChatbotLogo mt={mt} />
     default:
       return <ForgedBlockIcon type={type} mt={mt} />
   }

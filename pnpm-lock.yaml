@@ -1438,6 +1438,28 @@ importers:
         specifier: 5.4.5
         version: 5.4.5
 
+  packages/forge/blocks/ignaiChatbot:
+    dependencies:
+      ky:
+        specifier: 1.2.3
+        version: 1.2.3
+    devDependencies:
+      '@typebot.io/forge':
+        specifier: workspace:*
+        version: link:../../core
+      '@typebot.io/lib':
+        specifier: workspace:*
+        version: link:../../../lib
+      '@typebot.io/tsconfig':
+        specifier: workspace:*
+        version: link:../../../tsconfig
+      '@types/react':
+        specifier: 18.2.15
+        version: 18.2.15
+      typescript:
+        specifier: 5.4.5
+        version: 5.4.5
+
   packages/forge/blocks/mistral:
     dependencies:
       ai:
@@ -1617,6 +1639,10 @@ importers:
         version: 18.2.15
 
   packages/forge/repository:
+    dependencies:
+      ky:
+        specifier: 1.2.3
+        version: 1.2.3
     devDependencies:
       '@typebot.io/anthropic-block':
         specifier: workspace:*
@@ -1636,6 +1662,9 @@ importers:
       '@typebot.io/forge':
         specifier: workspace:*
         version: link:../core
+      '@typebot.io/ignai-chatbot-block':
+        specifier: workspace:*
+        version: link:../blocks/ignaiChatbot
       '@typebot.io/mistral-block':
         specifier: workspace:*
         version: link:../blocks/mistral
@@ -20588,6 +20617,7 @@ packages:
 
   /react-is@18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
+    dev: true
 
   /react-markdown@9.0.1(@types/react@18.2.15)(react@18.2.0):
     resolution: {integrity: sha512-186Gw/vF1uRkydbsOIkcGXw7aHq0sZOCRFFjGrr7b9+nVZg4UfA4enXCaxm4fUzecU38sWfrNDitGhshuU7rdg==}

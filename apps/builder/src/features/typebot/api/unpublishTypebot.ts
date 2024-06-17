@@ -65,7 +65,7 @@ export const unpublishTypebot = authenticatedProcedure
     }
 
     await ky.delete(
-      `${env.CHATBOT_SERVER_URL}/domains?typebotId=${existingTypebot.id}`,
+      `${env.CHATBOT_SERVER_URL}/typebot/${existingTypebot.id}`,
       {
         headers: { Authorization: `Bearer ${env.VERCEL_TOKEN}` }
       }

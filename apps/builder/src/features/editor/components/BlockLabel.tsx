@@ -1,5 +1,5 @@
-import { Text } from '@chakra-ui/react'
 import React from 'react'
+import { Text } from '@chakra-ui/react'
 import { useTranslate } from '@tolgee/react'
 import { BubbleBlockType } from '@typebot.io/schemas/features/blocks/bubbles/constants'
 import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/constants'
@@ -99,6 +99,10 @@ export const BlockLabel = ({ type }: Props): JSX.Element => {
       return (
         <Text fontSize="sm">{t('editor.sidebarBlock.zemanticAi.label')}</Text>
       )
+    case IntegrationBlockType.IGNAI_CHATBOT_RT:
+        return (
+          <Text fontSize="sm">{t('editor.sidebarBlock.ignaiChatbotAgent.label')}</Text>
+        )
     default:
       return <ForgedBlockLabel type={type} />
   }
