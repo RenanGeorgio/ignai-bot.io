@@ -123,7 +123,7 @@ export const BlockIcon = ({ type, mt }: BlockIconProps): JSX.Element => {
       return <FlagIcon mt={mt} />
     case IntegrationBlockType.OPEN_AI:
       return <OpenAILogo mt={mt} fill={openAIColor} />
-    case IntegrationBlockType.IGNAI_CHATBOT:
+    case IntegrationBlockType.IGNAI_CHATBOT_RT:
       return <IgnaiChatbotLogo mt={mt} />
     default:
       return <ForgedBlockIcon type={type} mt={mt} />
