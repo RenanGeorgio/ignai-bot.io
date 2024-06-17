@@ -23,7 +23,7 @@ interface UserChatProps {
 export const UserChat: React.FC<UserChatProps> = ({ chat }) => {
   // export const UserChat: React.FC<UserChatProps> = ({ chat, user }) => {
   const { user } = useUser();
-  const { recipientUser, error } = useFetchRecipient(chat, user)
+  const { recipientUser } = useFetchRecipient(chat, user)
 
   const { onlineUsers } = useChat()
 
