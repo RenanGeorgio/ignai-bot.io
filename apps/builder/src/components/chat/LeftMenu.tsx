@@ -31,7 +31,7 @@ export const LeftMenu: React.FC<LeftMenuProps> = ({
         />
         <input
           className={styles.instance}
-          placeholder="Search for contact..."
+          placeholder="Pesquisar contato..."
         />
       </header>
 

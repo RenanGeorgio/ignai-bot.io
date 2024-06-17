@@ -57,8 +57,9 @@ export const ChatBox: React.FC<Props> = ({
     sendTextMessage,
   }: ChatContextType = useChat()
 
-  const { recipientUser } = useFetchRecipient(currentChat, user)
 
+  const { recipientUser } = useFetchRecipient(currentChat, user)
+  console.log(recipientUser)
   // const isMessagesLoading = false
 
   useEffect(() => {

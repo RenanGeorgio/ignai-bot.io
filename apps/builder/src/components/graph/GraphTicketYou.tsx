@@ -66,7 +66,7 @@ const GraphTicketYou: React.FC<GraphTicketYouProps> = ({ data }) => {
       <h3 className={styles['graph-title']}>
         Taxa de Solução de tickets por você
       </h3>
-      <div className={styles['menu-icon-you']}>&#8942;</div>
+      { /* <div className={styles['menu-icon-you']}>&#8942;</div> */ }
       <canvas ref={chartRef} className={styles['canvas-ticket-you']}></canvas>
       <div className={styles.legenda}>
         <div>

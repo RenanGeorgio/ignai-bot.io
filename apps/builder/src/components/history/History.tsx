@@ -126,6 +126,7 @@ export default function HistoryComponent() {
           alignItems: 'flex-start',
           display: 'flex',
           width: '100%',
+          marginBottom: '20px'
         }}
       >
         <div
@@ -134,7 +135,7 @@ export default function HistoryComponent() {
             borderBottomLeftRadius: 5,
             paddingLeft: 10,
             paddingRight: 10,
-            background: '#DEDBFC',
+            background: '#fcdbdb',
             color: 'rgb(151, 0, 0)',
             borderRight: '1px rgb(177, 106, 106) solid',
             justifyContent: 'end',
@@ -148,7 +149,7 @@ export default function HistoryComponent() {
           style={{
             paddingLeft: 10,
             paddingRight: 10,
-            background: '#E8E6FC',
+            background: '#fcdbdb',
             color: 'rgb(151, 0, 0)',
             justifyContent: 'end',
             alignItems: 'center',
@@ -296,7 +297,12 @@ export default function HistoryComponent() {
           alignItems: 'flex-start',
           display: 'inline-flex',
           width: '100%',
-          backgroundColor: 'white'
+          marginBottom: '-5px',
+          backgroundColor: 'white',
+          borderTop: '1px rgb(228, 2, 2) solid',
+          borderLeft: '1px rgb(228, 2, 2) solid',
+          borderRight: '1px rgb(228, 2, 2) solid',
+          borderRadius: '5px'
         }}
       >
         <div
@@ -323,7 +329,9 @@ export default function HistoryComponent() {
           gap: 16,
           display: 'flex',
           width: '100%',
-          borderTop: '1px #DBDADE solid',
+          borderTop: '1px rgb(228, 2, 2) solid',
+          borderLeft: '1px rgb(228, 2, 2) solid',
+          borderRight: '1px rgb(228, 2, 2) solid',
           padding: 10,
           backgroundColor: 'white'
         }}
@@ -346,7 +354,7 @@ export default function HistoryComponent() {
               padding: '5px 5px 5px 5px',
               borderRadius: '5px',
               backgroundColor: 'white',
-              marginTop: '-7px',
+              marginTop: '-8px',
               color: 'black',
               border: '1px solid rgba(242, 45, 45, 0.373)'
             }}
@@ -363,6 +371,7 @@ export default function HistoryComponent() {
             justifyContent: 'flex-end',
             gap: 15,
             padding: '5px',
+            height: 35,
             backgroundColor: 'white'
           }}
         >
@@ -371,7 +380,7 @@ export default function HistoryComponent() {
             title="Buscar"
             placeholder="Buscar"
             style={{
-              height: 33,
+              height: 25,
               background: 'white',
               borderRadius: 6,
               border: '1px solid rgba(242, 45, 45, 0.373)',
@@ -393,6 +402,8 @@ export default function HistoryComponent() {
                 color: '#fff',
                 //   fontSize: 14,
                 display: 'flex',
+                height: 35,
+                marginTop: '-6px'
               }}
               onClick={handleOpen}
             >
@@ -402,7 +413,16 @@ export default function HistoryComponent() {
         </div>
       </div>
 
-      <div style={{ height: 370, width: '100%', backgroundColor: 'white' }}>
+      <div 
+        style={{ 
+          height: 370,
+          width: '100%', 
+          backgroundColor: 'white', 
+          border: '1px solid rgb(228, 2, 2)', 
+          borderRadius: '5px', 
+          marginTop: '-2.7px'
+        }}
+      >
         <DataGrid rows={rows} columns={columns} checkboxSelection />
       </div>
 
