@@ -3,7 +3,6 @@ import { Flex, VStack } from '@chakra-ui/react';
 import { ThemeProvider } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 import { DashboardHeader } from '@/features/dashboard/components/DashboardHeader';
-import Layout from '@/components/chat/layout/ChatLayout';
 import History from '@/components/chat/layout/HistoryLayout';
 import GraphChat from '@/components/graph/GraphChat';
 import GraphTicket from '@/components/graph/GraphTicket';
@@ -14,6 +13,7 @@ import { colors } from '@/lib/theme';
 
 import type {} from '@mui/x-data-grid/themeAugmentation';
 import styles from '@/assets/styles/forms.module.css';
+import ChatLayout from './layout/ChatLayout';
 
 const MuiTheme = createTheme({
   palette: {
@@ -39,7 +39,7 @@ const MuiTheme = createTheme({
   }
 });
 
-const ChatPage: React.FC = () => {
+const Chat: React.FC = () => {
   const [activePage, setActivePage] = useState('Atendimento');
 
   const handleButtonClick = (pageName: string) => {
@@ -87,7 +87,7 @@ const ChatPage: React.FC = () => {
           <div>
             {activePage === 'Atendimento' && (
               <div>
-                <Layout />
+                <ChatLayout />
               </div>
             )}
             {activePage === 'Histórico' && (
@@ -112,4 +112,4 @@ const ChatPage: React.FC = () => {
   );
 }
 
-export default ChatPage
+export default Chat;

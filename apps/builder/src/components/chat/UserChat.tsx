@@ -11,6 +11,8 @@ import {
 import web from '@/assets/images/web.svg'
 import styles from '@/assets/styles/leftmenu.module.css'
 import { Chat, OnlineUser } from '@/contexts/chat/types'
+import { useFetchRecipient } from '@/hooks/useFetchRecipient'
+import useUser from '@/hooks/useUser'
 
 
 interface UserChatProps {
@@ -20,23 +22,21 @@ interface UserChatProps {
 
 export const UserChat: React.FC<UserChatProps> = ({ chat }) => {
   // export const UserChat: React.FC<UserChatProps> = ({ chat, user }) => {
-  // const { recipientUser, error } = useFetchRecipient(chat, user)
-  const recipientUser = {
-    _id: '661d1e55582bfd030342607f',
-    name: 'Samuel',
-    lastName: ' ',
-    email: 'samuel@email.com',
-    createdAt: '2024-04-15T12:32:21.440Z',
-    updatedAt: '2024-04-15T12:32:21.440Z',
-    __v: 0,
-  }
+  const { user } = useUser();
+  const { recipientUser, error } = useFetchRecipient(chat, user)
 
   const { onlineUsers } = useChat()
 
+  if(recipientUser === null) {
+    return <div>Carregando...</div>
+  }
+  
   const isOnline = onlineUsers?.some(
     (onlineUser: OnlineUser) => onlineUser.userId === recipientUser?._id
   )
 
+  console.log('recipientUser', recipientUser)
+  console.log('isOnline', isOnline)
   const origin = chat?.origin.platform
 
   const getChatIcon = () => {

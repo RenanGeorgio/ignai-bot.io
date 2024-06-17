@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { baseUrl, api } from '@/services/api'
+import { api } from '@/services/api'
 
 interface Chat {
   members: string[]
@@ -10,24 +10,19 @@ interface User {
 }
 
 interface RecipientUser {
-  id: string
+  _id: string
   name: string
+  lastName?: string
   email: string
 }
 
 interface ApiResponseSuccess {
-  id: string
+  _id: string
   name: string
   email: string
 }
 
-interface ApiResponseError {
-  error: string
-}
-
-type ApiResponse = ApiResponseSuccess | ApiResponseError
-
-export const useFetchRecipient = (chat: Chat, user: User) => {
+export const useFetchRecipient = (chat: Chat | null, user: User) => {
   const [recipientUser, setRecipientUser] = useState<RecipientUser | null>(null)
   const [error, setError] = useState<string | null>(null)
 
@@ -41,13 +36,14 @@ export const useFetchRecipient = (chat: Chat, user: User) => {
       try {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        const response: ApiResponse = await api(
-          `${baseUrl}/api/chat/client/${recipientId}`
+        const response = await api(
+          `api/v1/chat/client/${recipientId}`
         )
-        if ('error' in response) {
-          setError(response.error)
+        if (!response.ok) {
+          setError(response.statusText)
         } else {
-          setRecipientUser(response)
+          const data: ApiResponseSuccess = await response.json()
+          setRecipientUser(data)
         }
       } catch (error) {
         console.log(error)
