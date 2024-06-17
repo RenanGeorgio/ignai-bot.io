@@ -61,7 +61,7 @@ if (window.$chatwoot) {
 
 export const executeIgnaiChatbotBlock = (
   state: SessionState,
-  block: ChatwootBlock
+  block: ignaiChatbotRtBlock
 ): ExecuteIntegrationResponse => {
   if (state.whatsApp) return { outgoingEdgeId: block.outgoingEdgeId }
   const { typebot, resultId } = state.typebotsQueue[0]
