@@ -17,12 +17,12 @@ export const IgnaiChatbotSettings = ({ options, onOptionsChange }: Props) => {
   
   console.log(options)
   const task = options?.task ?? defaultIgnaiChatbotRtOptions.task
-  const uri = options?.baseUrl ?? defaultIgnaiChatbotRtOptions.baseUrl
+  //const uri = options?.baseUrl ?? defaultIgnaiChatbotRtOptions.baseUrl
 
   return (
     <Stack spacing={4}>
       <DropdownList
-        currentItem={task}
+        currentItem={options?.task ?? defaultIgnaiChatbotRtOptions.task}
         onItemSelect={updateTask}
         items={ignaiChatbotRtTasks}
       />
@@ -31,7 +31,7 @@ export const IgnaiChatbotSettings = ({ options, onOptionsChange }: Props) => {
           <TextInput
             isRequired
             label="Base URL"
-            defaultValue={uri}
+            defaultValue={options?.baseUrl ?? defaultIgnaiChatbotRtOptions.baseUrl}
             onChange={(baseUrl: string) => {
               onOptionsChange({ ...options, baseUrl })
             }}
