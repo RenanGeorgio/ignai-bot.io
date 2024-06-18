@@ -20,7 +20,7 @@ window.$ignaichatbot.setUser(${user?.id ?? user.email ?? `"${resultId}"`}, {
     : ''
 
 const parseIgnaiChatbotOpenCode = ({
-  baseUrl='https://agent.ignaibot.com',
+  baseUrl,
   user,
   resultId,
   typebotId,

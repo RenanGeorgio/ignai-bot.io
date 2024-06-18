@@ -5,7 +5,7 @@ import { IntegrationBlockType } from '../constants'
 
 export const ignaiChatbotRtOptionsSchema = z.object({
   task: z.enum(ignaiChatbotRtTasks).optional(),
-  baseUrl: z.string().default('https://agent.ignaibot.com'), 
+  baseUrl: z.string().optional(), 
   //websiteToken: z.string().optional(),
   user: z
     .object({
