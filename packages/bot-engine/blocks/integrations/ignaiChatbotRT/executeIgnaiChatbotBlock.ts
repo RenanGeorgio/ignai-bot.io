@@ -1,9 +1,15 @@
 import { ExecuteIntegrationResponse } from '../../../types'
+//import { env } from '@typebot.io/env'
 import { isDefined } from '@typebot.io/lib'
-import { ChatwootBlock, SessionState, ignaiChatbotRtBlock } from '@typebot.io/schemas'
+import {
+  ChatwootBlock,
+  SessionState,
+  ignaiChatbotRtBlock,
+} from '@typebot.io/schemas'
 import { extractVariablesFromText } from '@typebot.io/variables/extractVariablesFromText'
 import { parseGuessedValueType } from '@typebot.io/variables/parseGuessedValueType'
 import { parseVariables } from '@typebot.io/variables/parseVariables'
+//import { defaultChatwootOptions } from '@typebot.io/schemas/features/blocks/integrations/chatwoot/constants'
 
 const parseSetUserCode = (
   user: NonNullable<ChatwootBlock['options']>['user'],
@@ -11,7 +17,7 @@ const parseSetUserCode = (
 ) =>
   user?.email || user?.id
     ? `
-window.$ignaichatbot.setUser(${user?.id ?? user.email ?? `"${resultId}"`}, {
+window.$chatwoot.setUser(${user?.id ?? user.email ?? `"${resultId}"`}, {
   email: ${user?.email ? user.email : 'undefined'},
   name: ${user?.name ? user.name : 'undefined'},
   avatar_url: ${user?.avatarUrl ? user.avatarUrl : 'undefined'},
@@ -19,20 +25,20 @@ window.$ignaichatbot.setUser(${user?.id ?? user.email ?? `"${resultId}"`}, {
 });`
     : ''
 
-const parseIgnaiChatbotOpenCode = ({
+const parseChatwootOpenCode = ({
   baseUrl,
+  websiteToken,
   user,
   resultId,
   typebotId,
 }: ignaiChatbotRtBlock['options'] & { typebotId: string; resultId: string }) => {
-  console.log(baseUrl, user, resultId, typebotId);
-  
+  console.log(baseUrl, websiteToken, user, resultId, typebotId)
   return `
   (function (d, t) {
     // D = documento, t = script
 
     var iframe = document.createElement('iframe');
-    iframe.src = "${baseUrl}?&typebot_id=${typebotId}&result_id=${resultId}";
+    iframe.src = "http://localhost:5000?website_token=${websiteToken}&typebot_id=${typebotId}&result_id=${resultId}";
     iframe.style.position = "fixed";
     iframe.style.bottom = "10px";
     iframe.style.right = "10px";
@@ -46,10 +52,10 @@ const parseIgnaiChatbotOpenCode = ({
   })(document, "script");`
 }
 
-const ignaichatbotCloseCode = `
-if (window.$ignaichatbot) {
-  window.$ignaichatbot.toggle("close");
-  window.$ignaichatbot.toggleBubbleVisibility("hide");
+const chatwootCloseCode = `
+if (window.$chatwoot) {
+  window.$chatwoot.toggle("close");
+  window.$chatwoot.toggleBubbleVisibility("hide");
 }
 `
 
@@ -57,17 +63,13 @@ export const executeIgnaiChatbotBlock = (
   state: SessionState,
   block: ignaiChatbotRtBlock
 ): ExecuteIntegrationResponse => {
-  if (state.whatsApp) {
-    return { outgoingEdgeId: block.outgoingEdgeId }
-  }
-
-  const { typebot, resultId } = state.typebotsQueue[0];
-
-  const ignaichatbotCode =
+  if (state.whatsApp) return { outgoingEdgeId: block.outgoingEdgeId }
+  const { typebot, resultId } = state.typebotsQueue[0]
+  const chatwootCode =
     block.options?.task === 'Close widget'
-      ? ignaichatbotCloseCode
+      ? chatwootCloseCode
       : isDefined(resultId)
-      ? parseIgnaiChatbotOpenCode({
+      ? parseChatwootOpenCode({
           ...block.options,
           typebotId: typebot.id,
           resultId,
@@ -78,13 +80,13 @@ export const executeIgnaiChatbotBlock = (
     outgoingEdgeId: block.outgoingEdgeId,
     clientSideActions: [
       {
-        type: 'ignai-chatbot',
-        ignaichatbot: {
+        type: 'chatwoot',
+        chatwoot: {
           scriptToExecute: {
             content: parseVariables(typebot.variables, { fieldToParse: 'id' })(
-              ignaichatbotCode
+              chatwootCode
             ),
-            args: extractVariablesFromText(typebot.variables)(ignaichatbotCode).map(
+            args: extractVariablesFromText(typebot.variables)(chatwootCode).map(
               (variable) => ({
                 id: variable.id,
                 value: parseGuessedValueType(variable.value),
@@ -95,7 +97,7 @@ export const executeIgnaiChatbotBlock = (
       },
     ],
     logs:
-      ignaichatbotCode === ''
+      chatwootCode === ''
         ? [
             {
               status: 'info',

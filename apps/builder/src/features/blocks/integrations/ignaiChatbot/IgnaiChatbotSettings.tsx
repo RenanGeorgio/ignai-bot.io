@@ -1,9 +1,12 @@
-import React from 'react'
-import { Stack } from '@chakra-ui/react'
 import { DropdownList } from '@/components/DropdownList'
 import { TextInput } from '@/components/inputs'
-import { defaultIgnaiChatbotRtOptions, ignaiChatbotRtTasks } from '@typebot.io/schemas/features/blocks/integrations/ignaiChatbotRt/constants'
+import { Stack } from '@chakra-ui/react'
+import {
+  defaultIgnaiChatbotRtOptions,
+  ignaiChatbotRtTasks,
+} from '@typebot.io/schemas/features/blocks/integrations/ignaiChatbotRt/constants'
 import { ignaiChatbotRtBlock } from '@typebot.io/schemas/features/blocks/integrations/ignaiChatbotRt/schema'
+import React from 'react'
 
 type Props = {
   options: ignaiChatbotRtBlock['options']
@@ -14,10 +17,8 @@ export const IgnaiChatbotSettings = ({ options, onOptionsChange }: Props) => {
   const updateTask = (task: (typeof ignaiChatbotRtTasks)[number]) => {
     onOptionsChange({ ...options, task })
   }
-  
   console.log(options)
   const task = options?.task ?? defaultIgnaiChatbotRtOptions.task
-  //const uri = options?.baseUrl ?? defaultIgnaiChatbotRtOptions.baseUrl
 
   return (
     <Stack spacing={4}>
@@ -31,7 +32,9 @@ export const IgnaiChatbotSettings = ({ options, onOptionsChange }: Props) => {
           <TextInput
             isRequired
             label="Base URL"
-            defaultValue={options?.baseUrl ?? defaultIgnaiChatbotRtOptions.baseUrl}
+            defaultValue={
+              options?.baseUrl ?? defaultIgnaiChatbotRtOptions.baseUrl
+            }
             onChange={(baseUrl: string) => {
               onOptionsChange({ ...options, baseUrl })
             }}
@@ -40,5 +43,5 @@ export const IgnaiChatbotSettings = ({ options, onOptionsChange }: Props) => {
         </>
       )}
     </Stack>
-  );
+  )
 }
