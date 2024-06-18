@@ -1,3 +1,3 @@
 export const apiBaseUrl =
   //@ts-ignore
-  process.env['IGNAI_CHATBOT_SERVER'] || 'https://chatbot.ignai.com.br' // todo: alterar para a url do chat app
+  process.env['CHATBOT_SERVER_URL'] || 'https://chatbot.ignai.com.br'
