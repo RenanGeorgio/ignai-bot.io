@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { ChatBox } from '../ChatBox'
 import { LeftMenu } from '../LeftMenu'
 import { UserChat } from '../UserChat'
@@ -15,6 +15,20 @@ export default function ChatLayout() {
   }
 
   const { userChats, updateCurrentChat } = useChat()
+  
+  const sortedChats = useMemo(() => 
+    userChats.sort((a, b) => {
+      let dateA = new Date(a.createdAt).getTime();
+      let dateB = new Date(b.createdAt).getTime();
+      if (dateA < dateB) {
+          return 1;
+      }
+      if (dateA > dateB) {
+          return -1;
+      }
+      return 0;
+  }),
+  [userChats])
 
   return (
     <div className={styles['wrapper-box']}>
@@ -25,7 +39,7 @@ export default function ChatLayout() {
               <div className={styles['text-wrapper-client']}>Clientes</div>
             </div>
             <div className={styles['div-content']}>
-              {userChats?.map((chat: Chat, index: number) => (
+              {sortedChats?.map((chat: Chat, index: number) => (
                 <div
                   key={index}
                   onClick={() => {

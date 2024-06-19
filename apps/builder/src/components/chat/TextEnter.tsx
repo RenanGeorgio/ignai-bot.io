@@ -12,11 +12,13 @@ interface TextEnterProps {
   onUploadFilePhoto: (file: File) => void
   value: string 
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
+  disabled: boolean
 }
 
 export default function TextEnter({
   onSendMessage,
   onUploadFilePhoto,
+  disabled
 }: TextEnterProps) {
   const [textMessage, setTextMessage] = useState<string>('')
 
@@ -66,6 +68,7 @@ export default function TextEnter({
               className={styles['txt']}
               placeholder="Informe sua mensagem"
               value={textMessage}
+              disabled={disabled}
             />
           </div>
           <div className={styles['btncontainer']}>
@@ -79,6 +82,7 @@ export default function TextEnter({
                 onChange={handleFileUploadPhoto}
                 id="file-input" 
                 style={{ display: 'none' }}
+                disabled={true}
               />
               <label htmlFor="file-input">
                 <IconButton
@@ -96,6 +100,7 @@ export default function TextEnter({
                   onSendMessage(textMessage, setTextMessage)
                 }}
                 className={styles['btntxt']}
+                disabled={disabled}
               >
                 Enviar
               </button>

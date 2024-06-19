@@ -26,7 +26,7 @@ export const LeftMenu: React.FC<LeftMenuProps> = ({
       <header className={styles['header-left']}>
         <img
           className={styles['icon-instance-node']}
-          src="https://c.animaapp.com/5uY2Jqwr/img/avatar-14@2x.png"
+          src="https://i.pravatar.cc/150?img=3"
           alt="Avatar-14"
         />
         <input
@@ -50,7 +50,9 @@ export const LeftMenu: React.FC<LeftMenuProps> = ({
             </span>
           </button>
         </div>
-        {children}
+        <div className={styles['div-content-clients']}>
+          {children}
+        </div>
       </div>
 
       <div className={styles['div-3']}>

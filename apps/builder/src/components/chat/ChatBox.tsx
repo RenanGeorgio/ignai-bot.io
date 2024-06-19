@@ -33,6 +33,8 @@ import 'dayjs/locale/pt-br'
 import { ChatContextType } from '@/contexts/chat/types'
 import useUser from '@/hooks/useUser'
 import { useFetchRecipient } from '@/hooks/useFetchRecipient'
+import { ChatStatus } from '@/contexts/chat/enums'
+import { current } from 'immer'
 
 dayjs.extend(relativeTime)
 dayjs.locale('pt-br')
@@ -56,7 +58,6 @@ export const ChatBox: React.FC<Props> = ({
     messages,
     sendTextMessage,
   }: ChatContextType = useChat()
-
 
   const { recipientUser } = useFetchRecipient(currentChat, user)
   console.log(recipientUser)
@@ -140,6 +141,12 @@ export const ChatBox: React.FC<Props> = ({
     }
   }
 
+  const chatStatus = {
+    active: "Ativo",
+    finished: "Finalizado",
+    archived: "Arquivado"
+  }
+
   const getTextMessageAvatar = () => (
     <Image
       className={styles['img-avatar-message']}
@@ -150,11 +157,11 @@ export const ChatBox: React.FC<Props> = ({
     />
   )
 
-  const getMessageAvatar = () => (
+  const getClientAvatar = () => (
     <Image
       className={styles['img-avatar-text']}
       alt="Message Avatar"
-      src="https://i.pravatar.cc/150?img=3"
+      src="/images/blank_avatar.jpg"
       width={150}
       height={150}
     />
@@ -167,7 +174,7 @@ export const ChatBox: React.FC<Props> = ({
           <Image
             className={styles['img-avatar']}
             alt="Avatar"
-            src="https://i.pravatar.cc/150?img=3"
+            src="/images/blank_avatar.jpg"
             width={150}
             height={150}
           />
@@ -175,12 +182,14 @@ export const ChatBox: React.FC<Props> = ({
             <div className={styles['text-wrapper-4']}>
               {`${recipientUser?.name} ${recipientUser?.lastName}`}
             </div>
-            <div className={styles['text-wrapper-box-header']}>1 Minute</div>
+            <div className={styles['text-wrapper-box-header']}>{currentChat && chatStatus[currentChat.status]}</div>
           </div>
-          {getChatIcon()}
-          <div className={styles['name-work']}>
-            <div>Fazenda Minas Pro</div>
+          <div className={styles['chat-icon']}>
+            {getChatIcon()}
           </div>
+          {/* <div className={styles['name-work']}>
+            <span>Fazenda Minas Pro</span>
+          </div> */}
         </div>
         <div className={styles.rightContainer}>
           <div className={styles.rightContent}>
@@ -212,7 +221,7 @@ export const ChatBox: React.FC<Props> = ({
           >
             {message?.senderId === user?.companyId
               ? getTextMessageAvatar()
-              : getMessageAvatar()}
+              : getClientAvatar()}
             <div
               className={`${
                 message?.senderId === user?.companyId
@@ -251,6 +260,7 @@ export const ChatBox: React.FC<Props> = ({
         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
           setTextMessage(e.target.value)
         }
+        disabled={currentChat?.status != ChatStatus.ACTIVE}
       />
     </div>
   )

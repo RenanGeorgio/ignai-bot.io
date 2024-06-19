@@ -27,13 +27,26 @@
 
 .canvas-chart {
   margin: auto;
-  margin-top: 4%;
-  width: 510px;
-  height: 330px;
+  max-width: 65%; 
+  max-height: 58%;
+  margin-bottom: 5%;
+  display: block;
 }
 
 .graph-title {
   margin-bottom: 10px;
+  margin-left: 3%;
+  color: rgba(75, 70, 92, 1);
+}
+
+.graph-title-ticket {
+  margin-bottom: 30px;
+  margin-left: 3%;
+  color: rgba(75, 70, 92, 1);
+}
+
+.graph-title-ticket-you {
+  margin-bottom: 35px;
   margin-left: 3%;
   color: rgba(75, 70, 92, 1);
 }
@@ -45,18 +58,15 @@
   cursor: pointer;
 }
 
-.canvas-ticket {
+.canvas {
   margin: auto;
-  max-width: 65%; 
-  max-height: 58%;
-  margin-bottom: 5%;
   display: block;
 }
 
 .canvas-ticket-you {
   margin: auto;
-  max-width: 40%; 
-  max-height: 58%;
+  max-width: 65% !important; 
+  max-height: 58% !important;
   margin-bottom: 5%;
   display: block;
 }
@@ -197,5 +207,18 @@
     width: calc(100% - 20px); 
     max-width: 700px;
     height: 370px;
+  }
+
+  .graph-title-ticket {
+    margin-bottom: -10px;
+    margin-left: 1%;
+    color: rgba(75, 70, 92, 1);
+  }
+  
+  .graph-title-ticket-you {
+    margin-bottom: -5px;
+    margin-left: 5px;
+    margin-top: -5px;
+    color: rgba(75, 70, 92, 1);
   }
 }

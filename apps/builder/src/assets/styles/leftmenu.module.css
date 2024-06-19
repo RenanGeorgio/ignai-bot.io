@@ -71,7 +71,7 @@
   width: 80%;
   height: 300px;
   border-bottom: 1px rgba(242, 45, 45, 0.373) solid;
-  overflow-y: hidden !important;
+  overflow-y: auto !important;
   overflow-x: hidden !important;
 }
 
@@ -183,6 +183,32 @@
 }
 
 .div-content::-webkit-scrollbar-thumb {
+  background-color: rgb(249, 158, 158);
+  border-radius: 20px;
+}
+
+.div-content-clients {
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+  margin-left: 0px;
+  margin-top: 5px;
+  padding: 0px 0px 30px 0px;
+}
+
+.div-content-clients::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 20px;
+}
+
+.div-contnet-clients::-webkit-scrollbar-track {
+  background: rgb(192, 192, 192);
+  width: 8px;
+  border-radius: 20px;
+}
+
+.div-content-clients::-webkit-scrollbar-thumb {
   background-color: rgb(249, 158, 158);
   border-radius: 20px;
 }
@@ -513,7 +539,7 @@
   padding: 3px 8px;
   border-radius: 10px;
   position: absolute;
-  right: 78px;
+  right: 74px;
   top: 7px;
 }
 
