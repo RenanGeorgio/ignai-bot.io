@@ -35,7 +35,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       }
     ).json();
 
-    return res.status(200).send({ value?.body });
+    return res.status(200).send(value?.body);
   }
   
   methodNotAllowed(res)

@@ -1,6 +1,7 @@
 import { sendRequest } from '@typebot.io/lib'
 
 type Obj = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any
 }
 
