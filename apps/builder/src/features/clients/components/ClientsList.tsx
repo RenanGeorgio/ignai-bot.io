@@ -1,10 +1,10 @@
 import React from 'react';
 import { HStack, SkeletonCircle, SkeletonText, Stack } from '@chakra-ui/react';
-import { useMembers } from '../hooks/useMembers';
 import { ClientsItem } from './ClientsItem';
 import { useWorkspace } from '@/features/workspace/WorkspaceProvider';
 import { deleteLeadsQuery } from '../queries/deleteLeadsQuery';
 import { deleteClientsQuery } from '../queries/deleteClientsQuery';
+import { useMembers } from '@/features/workspace/hooks/useMembers';
 
 export const ClientsList = () => {
   const { workspace } = useWorkspace();
