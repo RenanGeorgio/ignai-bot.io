@@ -14,6 +14,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
     if (req.method === 'GET') {
+      // ACERTAR ESTA REQUSIÇÃO, POIS AI É APENAS UM PLACEHOLDER 
       const result = await ky.get(
         `${env.CHATBOT_SERVER_URL}/user?userId=${user?.id}`,
         {
