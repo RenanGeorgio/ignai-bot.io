@@ -211,15 +211,14 @@ export const getAuthOptions = ({
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const isMockingSession =
-    req.method === 'GET' &&
-    req.url === '/api/auth/session' &&
-    env.NEXT_PUBLIC_E2E_TEST
+  req.method === 'GET' &&
+  req.url === '/api/auth/session' &&
+  env.NEXT_PUBLIC_E2E_TEST
   if (isMockingSession) return res.send({ user: mockedUser })
   const requestIsFromCompanyFirewall = req.method === 'HEAD'
   if (requestIsFromCompanyFirewall) return res.status(200).end()
 
   let restricted: 'rate-limited' | undefined
-
   if (
     rateLimit &&
     req.url?.startsWith('/api/auth/signin/email') &&
@@ -231,8 +230,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       if (!success) restricted = 'rate-limited'
     }
   }
-
-  return await NextAuth(req, res, getAuthOptions({ restricted }))
+  await NextAuth(req, res, getAuthOptions({ restricted }))
+  return;
 }
 
 const updateLastActivityDate = async (user: User) => {

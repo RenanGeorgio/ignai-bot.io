@@ -5,6 +5,7 @@ export type User = {
   name: string
   email: string
   companyId: string
+  full_name: string
 }
 
 type SignInData = {

@@ -98,7 +98,7 @@ export const ColorPicker = ({
                 padding={0}
                 minWidth="unset"
                 borderRadius={3}
-                borderWidth={color === '#FFFFFF' ? 1 : undefined}
+                borderWidth={color === '#FFFFFF' ? 1 : 0}
                 _hover={{ background: color }}
                 onClick={handleClick(color)}
               />

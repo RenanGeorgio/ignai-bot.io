@@ -14,6 +14,7 @@ import { trpc } from '@/lib/trpc'
 import { guessIfUserIsEuropean } from '@typebot.io/billing/guessIfUserIsEuropean'
 import { useTranslate } from '@tolgee/react'
 import CustomSideBar from '@/components/SideBar'
+import useAuth from '@/hooks/useAuth'
 
 export const DashboardPage = () => {
   const { t } = useTranslate()
@@ -22,6 +23,7 @@ export const DashboardPage = () => {
 
   const router = useRouter()
   const { user } = useUser()
+  const auth = useAuth()
   const { workspace } = useWorkspace()
 
   const [preCheckoutPlan, setPreCheckoutPlan] = useState<PreCheckoutModalProps['selectedSubscription']>()
@@ -57,9 +59,10 @@ export const DashboardPage = () => {
       })
     }
   }, [createCustomCheckoutSession, router.query, user, workspace])
-
+  
   return (
     <Stack minH="100vh">
+      <h1>USER INFO: {JSON.stringify(auth.user)}</h1>
       <Seo title={workspace?.name ?? t('dashboard.title')} />
       <DashboardHeader />
       {!workspace?.stripeId && (

@@ -1,7 +1,7 @@
 import prisma from '@typebot.io/lib/prisma'
 import { getAuthOptions } from '@/pages/api/auth/[...nextauth]'
 import * as Sentry from '@sentry/nextjs'
-import { User } from '@typebot.io/prisma'
+import { User, Account } from '@typebot.io/prisma'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getServerSession } from 'next-auth'
 import { env } from '@typebot.io/env'
@@ -21,6 +21,14 @@ export const getAuthenticatedUser = async (
   if (!user || !('id' in user)) return
   Sentry.setUser({ id: user.id })
   return user
+}
+
+export const getAccountUser = async (id: string): Promise<Account | undefined> => {
+  const account = await prisma.account.findFirst({
+    where: { userId: { equals: id } },
+  }) as Account
+
+  return account
 }
 
 const authenticateByToken = async (
