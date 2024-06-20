@@ -24,9 +24,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       return notFound(res);
     }
 
-    const userRole = workspace.members.find((member) => member.userId === user.id)?.role;
+    const userRole = workspace?.members.find((member) => member?.userId === user?.id)?.role;
 
-    if (!workspace || (userRole !== 'ADMIN')) {
+    if (userRole !== 'ADMIN') {
       return forbidden(res);
     }
 
