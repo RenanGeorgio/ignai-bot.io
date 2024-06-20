@@ -5,6 +5,7 @@ import useChat from '@/hooks/useChat'
 
 interface GraphChatProps {
   data: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     datasets: any[]
     labels: string[]
   }
@@ -20,6 +21,7 @@ const GraphChat: React.FC<GraphChatProps> = () => {
     if (chartRef.current) {
       const ctx = chartRef.current.getContext('2d')
       if (ctx) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const labels = userChats.map((chat: any, index: number) => {
           const platform = chat.origin.platform.charAt(0).toUpperCase() + chat.origin.platform.slice(1)
           const status = chat.status.charAt(0).toUpperCase() + chat.status.slice(1)
@@ -31,6 +33,7 @@ const GraphChat: React.FC<GraphChatProps> = () => {
           datasets: [
             {
               label: 'Quantidade de Membros',
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               data: userChats.map((chat: any) => chat.members.length),
               backgroundColor: 'rgba(40, 199, 111, 1)',
               hoverOffset: 4,

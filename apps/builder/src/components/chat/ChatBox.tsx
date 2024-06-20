@@ -34,7 +34,6 @@ import { ChatContextType } from '@/contexts/chat/types'
 import useUser from '@/hooks/useUser'
 import { useFetchRecipient } from '@/hooks/useFetchRecipient'
 import { ChatStatus } from '@/contexts/chat/enums'
-import { current } from 'immer'
 
 dayjs.extend(relativeTime)
 dayjs.locale('pt-br')

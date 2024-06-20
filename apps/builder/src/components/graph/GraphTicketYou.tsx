@@ -59,6 +59,7 @@ const GraphTicketYou: React.FC<GraphTicketYouProps> = () => {
                       }
                       return {
                         text: `${label}: ${value}`,
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         fillStyle: (data.datasets[0] as any).backgroundColor[index],
                         hidden: false,
                         lineCap: 'butt',

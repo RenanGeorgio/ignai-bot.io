@@ -17,6 +17,7 @@ const GraphTicket: React.FC<GraphTicketProps> = () => {
     if (chartRef.current && messages && currentChat) {
       const ctx = chartRef.current.getContext('2d')
       if (ctx) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const data = messages.reduce((acc: { [key: string]: number }, msg: any) => {
           if (acc[msg.chatId]) {
             acc[msg.chatId]++
