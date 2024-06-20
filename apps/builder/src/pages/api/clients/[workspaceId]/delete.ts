@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import ky from 'ky';
 import prisma from '@typebot.io/lib/prisma';
-import { methodNotAllowed, notAuthenticated, notFound, forbidden } from '@typebot.io/lib/api';
+import { methodNotAllowed, notAuthenticated, notFound } from '@typebot.io/lib/api';
 import { getAuthenticatedUser } from '@/features/auth/helpers/getAuthenticatedUser';
 import { env } from '@typebot.io/env';
 
@@ -22,12 +22,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     if (!workspace) {
       return notFound(res);
-    }
-
-    const userRole = workspace?.members.find((member) => member?.userId === user?.id)?.role;
-
-    if (userRole !== 'ADMIN') {
-      return forbidden(res);
     }
 
     await ky.delete(
