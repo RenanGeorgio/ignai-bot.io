@@ -187,7 +187,7 @@ export const publishTypebot = authenticatedProcedure
         },
         json: JSON.stringify(existingTypebot)
       }
-    )
+    ).json(); 
 
     await trackEvents([
       ...publishEvents,
