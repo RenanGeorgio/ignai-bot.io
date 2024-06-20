@@ -11,10 +11,10 @@ const GraphTicket: React.FC<GraphTicketProps> = () => {
   const chartRef = useRef<HTMLCanvasElement | null>(null)
   let chartInstance: Chart<'doughnut'> | null = null
 
-  const { messages } = useChat()
+  const { messages, currentChat } = useChat()
 
   useEffect(() => {
-    if (chartRef.current && messages) {
+    if (chartRef.current && messages && currentChat) {
       const ctx = chartRef.current.getContext('2d')
       if (ctx) {
         const data = messages.reduce((acc: { [key: string]: number }, msg: any) => {
@@ -26,19 +26,25 @@ const GraphTicket: React.FC<GraphTicketProps> = () => {
           return acc
         }, {})
 
-        const counts = Object.values(data)
-        const labels = counts.map(count => `Messagens: ${count}`)
+        const messageCount = data[currentChat._id] || 0
+        const platform = currentChat.origin.platform
+        const status = currentChat.status
+
+        const labels = [
+          `Messagens: ${messageCount}`,
+          `Plataforma: ${platform}`,
+          `Status: ${status}`
+        ]
 
         const chartData = {
           labels: labels,
           datasets: [
             {
-              data: Object.values(data),
+              data: [messageCount, 1, 1],
               backgroundColor: [
                 'rgba(40, 199, 111, 1)',
                 '#7dbe9a',
-                '#95b6a4',
-                '#abcab9',
+                '#b3cfc0'
               ],
               hoverOffset: 4,
             },
@@ -53,7 +59,7 @@ const GraphTicket: React.FC<GraphTicketProps> = () => {
             plugins: {
               legend: {
                 display: true,
-                position: 'bottom'
+                position: 'bottom',
               },
             },
           },
@@ -76,8 +82,12 @@ const GraphTicket: React.FC<GraphTicketProps> = () => {
 
   return (
     <div className={styles['graph-container-ticket']}>
-      <h3 className={styles['graph-title-ticket-you']}>Quantidade de Mensagens por Conversa</h3>
-      <canvas ref={chartRef} className={styles['canvas']}></canvas>
+      <h3 className={styles['graph-title-ticket-you']}>Dados da Conversa</h3>
+      {messages && messages.length > 0 ? (
+        <canvas ref={chartRef} className={styles['canvas']}></canvas>
+      ) : (
+        <p className={styles['canvasMessage']}>Selecione uma conversa para visualizar a quantidade de mensagens!</p>
+      )}
     </div>
   )
 }

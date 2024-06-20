@@ -63,6 +63,18 @@
   display: block;
 }
 
+.canvasMessage {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  margin-top: 150px;
+  font-family: var(--light-basic-typography-paragraph-font-family);
+  font-size: var(--light-basic-typography-paragraph-font-size);
+  font-style: var(--light-basic-typography-paragraph-font-style);
+  font-weight: var(--light-basic-typography-paragraph-font-weight);
+  color: rgb(163, 162, 162);
+}
+
 .canvas-ticket-you {
   margin: auto;
   max-width: 65% !important; 

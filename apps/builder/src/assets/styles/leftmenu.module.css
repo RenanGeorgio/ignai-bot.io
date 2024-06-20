@@ -601,6 +601,10 @@
   .left-menu {
     width: auto;
   }
+
+  .left-menu .instance {
+    width: 90px !important;
+  }
 }
 
 @media (max-width: 480px) {

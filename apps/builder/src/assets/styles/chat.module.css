@@ -559,7 +559,7 @@ input.txt:focus {
   border: none;
 }
 
-@media (max-width: 1280px) and (min-width: 1000px){
+@media (max-width: 1280px) and (min-width: 1080px){
   .name-work {
     margin-left: 0px;
   }
@@ -580,7 +580,7 @@ input.txt:focus {
   }
 }
 
-@media (max-width: 999px) {
+@media (max-width: 1080px) and (min-width: 768px) {
   .name-time {
     margin-left: -10px;
   }
@@ -595,5 +595,37 @@ input.txt:focus {
 
   .rightContent {
     gap: 2px;
+  }
+
+  .wrapperTextEnter{
+    padding: 8px;
+  }
+
+  .txtwrapp {
+    flex-grow: 1;
+  }
+
+  .btncontainer {
+    gap: 0px;
+    margin-left: -50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .wrapperTextEnter {
+    padding: 6px;
+  }
+
+  .txtwrapp {
+    flex-grow: 1;
+  }
+
+  .btncontainer {
+    gap: 1px;
+    margin-left: -20px;
+  }
+
+  .btntxt button {
+    padding: 8px 12px;
   }
 }

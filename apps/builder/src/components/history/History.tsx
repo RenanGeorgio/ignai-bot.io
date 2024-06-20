@@ -27,7 +27,7 @@ const getStatusStyles = (
   status: string
 ): { color: string; backgroundColor: string } => {
   const color = status === 'pendente' ? 'red' : 'green'
-  const backgroundColor = status === 'pendente' ? '#ffadad' : 'lightgreen'
+  const backgroundColor = status === 'pendente' ? 'white' : 'white'
 
   return { color, backgroundColor }
 }
@@ -65,6 +65,10 @@ const columns: GridColDef[] = [
           border: '1px solid',
           padding: '2px',
           borderRadius: '5px',
+          textAlign: 'center',
+          width: '80px',
+          height: '45px',
+          marginTop: '3px'
         }}
       >
         {params.value}
@@ -423,7 +427,7 @@ export default function HistoryComponent() {
           marginTop: '-2.7px'
         }}
       >
-        <DataGrid rows={rows} columns={columns} checkboxSelection />
+        <DataGrid rows={rows} columns={columns} checkboxSelection /> 
       </div>
 
       <Modal

@@ -38,6 +38,13 @@ export default function TextEnter({
     setTextMessage(e.currentTarget.value)
   }
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault()
+      onSendMessage(textMessage, setTextMessage)
+    }
+  }
+
   const handlePhotoIconClick = () => {
     // Simula o clique no input de arquivo quando o ícone de foto é clicado
     const fileInput = document.getElementById('file-input')
@@ -62,6 +69,7 @@ export default function TextEnter({
           <div className={styles['txtwrapp']}>
             <textarea
               onChange={handleChange}
+              onKeyDown={handleKeyDown}
               cols={50}
               rows={2}
               wrap="ward"
@@ -97,7 +105,7 @@ export default function TextEnter({
             <div className={styles['btntxt']}>
               <button
                 onClick={() => {
-                  onSendMessage(textMessage, setTextMessage)
+                  onSendMessage(textMessage.trim(), setTextMessage)
                 }}
                 className={styles['btntxt']}
                 disabled={disabled}
