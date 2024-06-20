@@ -142,6 +142,11 @@
   margin-bottom: 15px;
 }
 
+.data-row-themes-2 {
+  margin-bottom: 15px;
+  margin-left: 15px;
+}
+
 .data-row-4 {
   margin-bottom: -20px;
 }
@@ -183,8 +188,10 @@
 .graph-subtitle {
   color: #000;
   display: flex;
-  margin-bottom: 3%;
-  margin-top: -2%;
+  color: rgba(75, 70, 92, 1);
+  font-size: 14px;
+  margin-bottom: 4%;
+  margin-top: -1%;
   margin-left: 4%;
 }
 

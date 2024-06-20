@@ -18,8 +18,8 @@ export default function ChatLayout() {
   
   const sortedChats = useMemo(() => 
     userChats.sort((a, b) => {
-      let dateA = new Date(a.createdAt).getTime();
-      let dateB = new Date(b.createdAt).getTime();
+      const dateA = new Date(a.createdAt).getTime();
+      const dateB = new Date(b.createdAt).getTime();
       if (dateA < dateB) {
           return 1;
       }
