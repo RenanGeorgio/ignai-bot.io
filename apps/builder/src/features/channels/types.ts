@@ -19,5 +19,5 @@ export type ChannelProps = {
   emailObj?: Obj 
   msgObj?: Obj 
   hasNumbers: boolean 
-  numbersList: Numbers
+  numbersList: Numbers[]
 }
