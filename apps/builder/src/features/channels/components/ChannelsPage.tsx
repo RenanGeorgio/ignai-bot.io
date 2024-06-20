@@ -24,13 +24,13 @@ const ChannelPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj
                 </Tr>
               </Thead>
               <Tbody>
-                {numbersList.map((currentNumber) => (
+                {numbersList?.map((numbers) => (
                   <Tr>
-                    <Td>{currentNumber.id}</Td>
-                    <Td>{currentNumber.country}</Td>
-                    <Td>{currentNumber.city}</Td>
-                    <Td>{currentNumber.state}</Td>
-                    <Td>{currentNumber.status}</Td>
+                    <Td>{numbers.id}</Td>
+                    <Td>{numbers.country}</Td>
+                    <Td>{numbers.city}</Td>
+                    <Td>{numbers.state}</Td>
+                    <Td>{numbers.status}</Td>
                   </Tr>
                 ))}
               </Tbody>
