@@ -1,5 +1,5 @@
-import { GraphNavigation, User as PrismaUser } from '@typebot.io/prisma'
-import { z } from '../../zod'
+import { GraphNavigation, User as PrismaUser } from '@typebot.io/prisma';
+import { z } from '../../zod';
 
 const displayedInAppNotificationsSchema = z.record(z.boolean())
 
