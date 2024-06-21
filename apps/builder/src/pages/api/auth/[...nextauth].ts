@@ -1,4 +1,4 @@
-import NextAuth, { Account, AuthOptions } from 'next-auth'
+import NextAuth, { Account, AuthOptions, Profile } from 'next-auth'
 import EmailProvider from 'next-auth/providers/email'
 import GitHubProvider from 'next-auth/providers/github'
 import GitlabProvider from 'next-auth/providers/gitlab'
@@ -112,7 +112,16 @@ if (
     Auth0Provider({
       clientId: env.AUTH0_CLIENT_ID,
       clientSecret: env.AUTH0_CLIENT_SECRET,
-      issuer: env.AUTH0_ISSUER
+      issuer: env.AUTH0_ISSUER,
+      profile(profile) {
+        return {
+          id: profile.sub,
+          name: profile.nickname,
+          email: profile.email,
+          image: profile.picture,
+          jwt: profile.jwt,
+        } as User
+      },
     })
   )
 }
@@ -174,16 +183,16 @@ export const getAuthOptions = ({
         user: userFromDb,
       }
     },
-    signIn: async ({ account, user }) => {
+    signIn: async ({ account, user, profile }) => {
       if (restricted === 'rate-limited') throw new Error('rate-limited')
-      if (!account) return false
+        if (!account) return false
       const isNewUser = !('createdAt' in user && isDefined(user.createdAt))
       if (isNewUser && user.email) {
         const data = await ky
-          .get(
-            'https://raw.githubusercontent.com/disposable-email-domains/disposable-email-domains/master/disposable_email_blocklist.conf'
-          )
-          .text()
+        .get(
+          'https://raw.githubusercontent.com/disposable-email-domains/disposable-email-domains/master/disposable_email_blocklist.conf'
+        )
+        .text()
         const disposableEmailDomains = data.split('\n')
         if (disposableEmailDomains.includes(user.email.split('@')[1]))
           return false
@@ -194,8 +203,7 @@ export const getAuthOptions = ({
         user.email &&
         !env.ADMIN_EMAIL?.includes(user.email)
       ) {
-        const { invitations, workspaceInvitations } =
-          await getNewUserInvitations(prisma, user.email)
+        const { invitations, workspaceInvitations } = await getNewUserInvitations(prisma, user.email)
         if (invitations.length === 0 && workspaceInvitations.length === 0)
           throw new Error('sign-up-disabled')
       }
@@ -203,6 +211,10 @@ export const getAuthOptions = ({
       if (requiredGroups.length > 0) {
         const userGroups = await getUserGroups(account)
         return checkHasGroups(userGroups, requiredGroups)
+      }
+      const userFromDb = user as User
+      if (profile) {
+        await updateJavaWebToken(userFromDb, profile)
       }
       return true
     },
@@ -232,7 +244,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
   }
 
-  return await NextAuth(req, res, getAuthOptions({ restricted }))
+  await NextAuth(req, res, getAuthOptions({ restricted }))
+  return 
 }
 
 const updateLastActivityDate = async (user: User) => {
@@ -250,6 +263,24 @@ const updateLastActivityDate = async (user: User) => {
       {
         name: 'User logged in',
         userId: user.id,
+      },
+    ])
+  }
+}
+
+const updateJavaWebToken = async (user: User, profile: any) => {
+  if (user.jwt !== profile.jwt) {
+    await prisma.user.updateMany({
+      where: { id: user.id },
+      data: { jwt: profile.jwt },
+    })
+    await trackEvents([
+      {
+        name: 'User updated',
+        userId: user.id,
+        data: {
+          jwt: profile.jwt ?? undefined,
+        },
       },
     ])
   }
