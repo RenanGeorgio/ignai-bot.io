@@ -1,75 +1,67 @@
 import React, { useEffect, useRef } from 'react'
 import Chart, { ChartConfiguration } from 'chart.js/auto'
 import styles from '@/assets/styles/graph.module.css'
+import useChat from '@/hooks/useChat'
 
 interface GraphChatProps {
   data: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    datasets: any[]
     labels: string[]
-    datasets: {
-      label: string
-      data: number[]
-      backgroundColor: string
-      borderColor: string
-      borderWidth: number
-      barPercentage?: number
-      fill?: boolean
-    }[]
   }
 }
 
-const GraphChat: React.FC<GraphChatProps> = ({ data }) => {
+const GraphChat: React.FC<GraphChatProps> = () => {
   const chartRef = useRef<HTMLCanvasElement | null>(null)
-  let chartInstance: Chart<'bar', number[], string> | null = null
+  let chartInstance: Chart<'bar'> | null = null
+
+  const { userChats } = useChat()
 
   useEffect(() => {
     if (chartRef.current) {
       const ctx = chartRef.current.getContext('2d')
       if (ctx) {
-        const chartConfig: ChartConfiguration<'bar', number[], string> = {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const labels = userChats.map((chat: any, index: number) => {
+          const platform = chat.origin.platform.charAt(0).toUpperCase() + chat.origin.platform.slice(1)
+          const status = chat.status.charAt(0).toUpperCase() + chat.status.slice(1)
+          return `Chat ${index + 1} - ${platform} (${status})`
+        })
+
+        const data = {
+          labels: labels,
+          datasets: [
+            {
+              label: 'Quantidade de Membros',
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              data: userChats.map((chat: any) => chat.members.length),
+              backgroundColor: 'rgba(40, 199, 111, 1)',
+              hoverOffset: 4,
+            },
+          ],
+        }
+
+        const chartConfig: ChartConfiguration<'bar'> = {
           type: 'bar',
-          data: {
-            labels: [
-              '1 Jan',
-              '2 Jan',
-              '3 Jan',
-              '4 Jan',
-              '5 Jan',
-              '6 Jan',
-              '7 Jan',
-              '8 Jan',
-              '9 Jan',
-              '10 Jan',
-            ],
-            datasets: [
-              {
-                label: 'Diário',
-                data: [38, 45, 32, 38, 50, 45, 37, 42, 45, 36],
-                backgroundColor: 'rgba(255, 159, 67, 1)',
-                borderColor: 'rgba(255, 205, 86, 1)',
-                borderWidth: 1,
-                barPercentage: 0.5,
-              },
-              {
-                type: 'bar',
-                label: 'Inscritos',
-                data: [24, 28, 26, 29, 30, 40, 35, 31, 24, 28],
-                borderColor: 'rgb(54, 162, 235)',
-              },
-            ],
-          },
+          data,
           options: {
-            indexAxis: 'x',
+            plugins: {
+              legend: {
+                display: true,
+                position: 'bottom',
+                labels: {
+                  boxWidth: 20,
+                  font: {
+                    size: 10,
+                  },
+                },
+              },
+            },
             scales: {
               y: {
                 beginAtZero: true,
-                max: 50,
                 ticks: {
-                  callback: (value: string | number) => `${value}%` as string,
-                },
-              },
-              x: {
-                grid: {
-                  display: false,
+                  stepSize: 1,
                 },
               },
             },
@@ -89,11 +81,12 @@ const GraphChat: React.FC<GraphChatProps> = ({ data }) => {
         chartInstance.destroy()
       }
     }
-  }, [data])
+  }, [userChats])
 
   return (
     <div className={styles['graph-container']}>
-      <canvas ref={chartRef} className={styles['canvas-chart']}></canvas>
+      <h3 className={styles['graph-title']}>Quantidade de Chats Disponíveis</h3>
+      <canvas ref={chartRef}></canvas>
     </div>
   )
 }

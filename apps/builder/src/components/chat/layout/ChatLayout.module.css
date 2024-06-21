@@ -31,11 +31,19 @@
   background-color: rgba(255, 255, 255, 0.8);
 }
 
+.heading-2 {
+  width: 100%;
+  border-bottom: 1px rgba(242, 45, 45, 0.373) solid;
+}
+
 .text-wrapper-client {
-  font-family: var(--light-basic-typography-h5-heading-font-family);
-  font-style: var(--light-basic-typography-h5-heading-font-style);
-  font-weight: var(--light-basic-typography-h5-heading-font-weight);
+  font-weight: bold;
   color: rgb(0, 0, 0);
   margin-top: 5px;
-  margin-left: 5px;
+  margin-left: 15px;
+  margin-bottom: 7px;
+}
+
+.div-content {
+  width: 97%;
 }

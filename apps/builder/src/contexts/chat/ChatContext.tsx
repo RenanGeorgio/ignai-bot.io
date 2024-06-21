@@ -6,6 +6,8 @@ import { baseUrl, api } from '@/services/api'
 //import compareArrays from '@/helpers/compareArrays'
 import { Chat, ChatClient, ChatContextType, Message, OnlineUser } from './types'
 import useUser from '@/hooks/useUser'
+import compareArrays from '@/helpers/compareArrays'
+import { ChatStatus } from './enums'
 
 // import useUser from '@/hooks/useAuth'
 
@@ -76,6 +78,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
     if (!recipientId) return
     console.log("send message event")
     socket.emit('sendMessage', { ...newMessage, recipientId })
+    setNewMessage(null)
   }, [newMessage, socket])
 
   useEffect(() => {
@@ -90,29 +93,31 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
     }
   }, [socket, currentChat])
 
-  // useEffect(() => {
-  //   if (socket === null) {
-  //     return
-  //   }
+  useEffect(() => {
+    if (socket === null) {
+      return
+    }
 
-  //   socket.on('newUserChat', (client: Chat) => {
-  //     if (userChats != undefined) {
-  //       const isChatCreated = userChats?.some((chat: Chat) =>
-  //         compareArrays(chat?.members, client?.members)
-  //       )
+    socket.on('newUserChat', (client: Chat) => {
+      if (userChats != undefined) {
+        const isChatCreated = userChats?.some(
+          (chat: Chat) =>
+            compareArrays(chat?.members, client?.members) &&
+            client.status === chat.status // testar
+        );
 
-  //       if (isChatCreated) {
-  //         return
-  //       }
-  //     }
+        if (isChatCreated) {
+          return
+        }
+      }
 
-  //     setUserChats((prev) => [...(prev || []), client])
-  //   })
+      setUserChats((prev) => [...(prev || []), client])
+    })
 
-  //   return () => {
-  //     socket.off('newUserChat')
-  //   }
-  // }, [socket, userChats])
+    return () => {
+      socket.off('newUserChat')
+    }
+  }, [socket, userChats])
 
   useEffect(() => {
     if (!userChats) {
@@ -142,13 +147,12 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
         if (userChats) {
           isChatCreated = userChats?.some((chat) => {
             const members_: string[] = chat.members;
-            return members_?.includes(client._id)
-          })
+            return members_?.includes(client._id) && chat.status === ChatStatus.ACTIVE;
+          });
         }
-
         return !isChatCreated
       })
-
+      console.log(pChats)
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-ignore
       setPotentialChats(pChats);
@@ -171,7 +175,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
     }
 
     getUserChats()
-  }, [user])
+  }, [user, onlineUsers]) // adicionei para que atualize a listagem dos chats quando alguem deconectar, é necessário verificar
 
   useEffect(() => {
     const getMessages = async () => {
@@ -194,6 +198,20 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
   const updateCurrentChat = useCallback((chat: Chat) => {
     setCurrentChat(chat)
   }, [])
+
+  useEffect(() => {
+    if(!socket) return;
+
+    socket?.on("disconnectClient", () => {
+      console.log("evento de desconexão")
+      if(currentChat){
+        // setCurrentChat((prev: Chat) => ({
+        //   ...prev,
+        //   status: ChatStatus.FINISHED,
+        // }))
+      }
+    })
+  }, [socket, currentChat])
 
   const sendTextMessage = useCallback(
     async (

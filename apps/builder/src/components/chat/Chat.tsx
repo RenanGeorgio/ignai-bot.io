@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Flex, VStack } from '@chakra-ui/react';
 import { ThemeProvider } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
@@ -100,9 +100,9 @@ const Chat: React.FC = () => {
             {activePage === 'Painel' && (
               <div className={styles['container-graphs-chat']}>
                 <GraphChat data={{ datasets: [], labels: [] }} />
-                <GraphTicket data={[50, 30, 20, 10]} />
+                <GraphTicket data={[]} />
                 <GraphThemes month={''} />
-                <GraphTicketYou data={[50, 30, 20, 10]} />
+                <GraphTicketYou data={[]} />
               </div>
             )}
           </div>

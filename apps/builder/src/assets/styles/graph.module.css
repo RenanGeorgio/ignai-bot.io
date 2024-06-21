@@ -16,23 +16,37 @@
   border: 1px solid rgb(228, 2, 2);
   border-radius: 6px;
   background-color: #fff;
-  width: calc(50% - 20px); 
-  max-width: 750px;
+  width: calc(49% - 20px); 
+  max-width: 700px;
   height: 400px;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   margin: 10px;
+  margin-left: 20px;
 }
 
 .canvas-chart {
   margin: auto;
-  margin-top: 4%;
-  width: 510px;
-  height: 330px;
+  max-width: 65%; 
+  max-height: 58%;
+  margin-bottom: 5%;
+  display: block;
 }
 
 .graph-title {
   margin-bottom: 10px;
+  margin-left: 3%;
+  color: rgba(75, 70, 92, 1);
+}
+
+.graph-title-ticket {
+  margin-bottom: 30px;
+  margin-left: 3%;
+  color: rgba(75, 70, 92, 1);
+}
+
+.graph-title-ticket-you {
+  margin-bottom: 35px;
   margin-left: 3%;
   color: rgba(75, 70, 92, 1);
 }
@@ -44,18 +58,27 @@
   cursor: pointer;
 }
 
-.canvas-ticket {
+.canvas {
   margin: auto;
-  max-width: 65%; 
-  max-height: 58%;
-  margin-bottom: 5%;
   display: block;
+}
+
+.canvasMessage {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  margin-top: 150px;
+  font-family: var(--light-basic-typography-paragraph-font-family);
+  font-size: var(--light-basic-typography-paragraph-font-size);
+  font-style: var(--light-basic-typography-paragraph-font-style);
+  font-weight: var(--light-basic-typography-paragraph-font-weight);
+  color: rgb(163, 162, 162);
 }
 
 .canvas-ticket-you {
   margin: auto;
-  max-width: 40%; 
-  max-height: 58%;
+  max-width: 65% !important; 
+  max-height: 58% !important;
   margin-bottom: 5%;
   display: block;
 }
@@ -119,6 +142,11 @@
   margin-bottom: 15px;
 }
 
+.data-row-themes-2 {
+  margin-bottom: 15px;
+  margin-left: 15px;
+}
+
 .data-row-4 {
   margin-bottom: -20px;
 }
@@ -160,8 +188,10 @@
 .graph-subtitle {
   color: #000;
   display: flex;
-  margin-bottom: 3%;
-  margin-top: -2%;
+  color: rgba(75, 70, 92, 1);
+  font-size: 14px;
+  margin-bottom: 4%;
+  margin-top: -1%;
   margin-left: 4%;
 }
 
@@ -179,4 +209,35 @@
 
 .data-text {
   color: #000;
+}
+
+@media (max-width: 768px) {
+  .graph-container {
+    width: calc(100% - 20px); 
+    height: 325px;
+  }
+  
+  .graph-container-ticket {
+    width: calc(100% - 20px); 
+    height: 320px;
+  }
+
+  .graph-container-themes {
+    width: calc(100% - 20px); 
+    max-width: 700px;
+    height: 370px;
+  }
+
+  .graph-title-ticket {
+    margin-bottom: -10px;
+    margin-left: 1%;
+    color: rgba(75, 70, 92, 1);
+  }
+  
+  .graph-title-ticket-you {
+    margin-bottom: -5px;
+    margin-left: 5px;
+    margin-top: -5px;
+    color: rgba(75, 70, 92, 1);
+  }
 }
