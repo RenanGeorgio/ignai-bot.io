@@ -1,10 +1,11 @@
-import React, {
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useState,
-} from 'react'
-import { IconButton } from '@chakra-ui/react'
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { IconButton } from '@chakra-ui/react';
+import Image from 'next/image';
+import { ChatContextType } from '@/contexts/chat/types';
+import useUser from '@/hooks/useUser';
+import { useFetchRecipient } from '@/hooks/useFetchRecipient';
+import useChat from '@/hooks/useChat';
+import { ChatStatus } from '@/contexts/chat/enums';
 import {
   Phone,
   Search,
@@ -14,26 +15,16 @@ import {
   InstagramIcon,
   TelegramIcon,
   WhatsAppIcon,
-} from '@/components/icons'
-import TextEnter from './TextEnter'
-import AddTicket from './AddTicket'
-//import useAuth from '@/hooks/useAuth'
-import useChat from '@/hooks/useChat'
-// import { useFetchRecipient } from '@/hooks/useFetchRecipient'
-//import { AuthContextInterface } from '@/contexts/auth/AuthContext'
-import Image from 'next/image'
-import web from '@/assets/images/web.svg'
-// import avatar from '@/assets/images/avatar.png'
+} from '@/components/icons';
+import TextEnter from './TextEnter';
+import AddTicket from './AddTicket';
+import web from '@/assets/images/web.svg';
 
-import styles from '@/assets/styles/chat.module.css'
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import 'dayjs/locale/pt-br';
 
-import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
-import 'dayjs/locale/pt-br'
-import { ChatContextType } from '@/contexts/chat/types'
-import useUser from '@/hooks/useUser'
-import { useFetchRecipient } from '@/hooks/useFetchRecipient'
-import { ChatStatus } from '@/contexts/chat/enums'
+import styles from '@/assets/styles/chat.module.css';
 
 dayjs.extend(relativeTime)
 dayjs.locale('pt-br')
@@ -262,5 +253,5 @@ export const ChatBox: React.FC<Props> = ({
         disabled={currentChat?.status != ChatStatus.ACTIVE}
       />
     </div>
-  )
+  );
 }
