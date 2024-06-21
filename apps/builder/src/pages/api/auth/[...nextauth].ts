@@ -273,7 +273,7 @@ const updateLastActivityDate = async (user: User) => {
   }
 }
 
-const updateJavaWebToken = async (user: User, profile: any) => {
+const updateJavaWebToken = async (user: User, profile: Profile) => {
   if (user.jwt !== profile.jwt) {
     await prisma.user.updateMany({
       where: { id: user.id },
