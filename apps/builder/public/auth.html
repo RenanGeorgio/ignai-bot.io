@@ -12,10 +12,12 @@
     <!-- Load the JS SDK asynchronously -->
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js"></script>
 
+    <!--
     <div id="spinner" class="spinner" style="display: none;">
       Carregando...
     </div>
-
+    -->
+    
     <script>
       let spinner;
       let content;
@@ -23,13 +25,14 @@
       let configId;
       var isEnterprises = true;
 
+      /*
       function finished_rendering() {
         console.log("finished rendering plugins");
 
         var spinner = document.getElementById("spinner");
         spinner.removeAttribute("style");
         spinner.removeChild(spinner.childNodes[0]);
-      }
+      }*/
 
       function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
         console.log('statusChangeCallback');
@@ -84,7 +87,7 @@
           });
         }
 
-        FB.Event.subscribe('xfbml.render', finished_rendering);
+        //FB.Event.subscribe('xfbml.render', finished_rendering);
 
         content.innerHTML = '<pre> Processando Autorização </pre>';
       });
