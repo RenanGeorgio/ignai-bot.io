@@ -1,27 +1,27 @@
-import NextAuth, { Account, AuthOptions, Profile } from 'next-auth'
-import EmailProvider from 'next-auth/providers/email'
-import GitHubProvider from 'next-auth/providers/github'
-import GitlabProvider from 'next-auth/providers/gitlab'
-import GoogleProvider from 'next-auth/providers/google'
-import FacebookProvider from 'next-auth/providers/facebook'
-import AzureADProvider from 'next-auth/providers/azure-ad'
-import Auth0Provider from 'next-auth/providers/auth0'
-import prisma from '@typebot.io/lib/prisma'
-import { Provider } from 'next-auth/providers'
-import { NextApiRequest, NextApiResponse } from 'next'
-import { customAdapter } from '../../../features/auth/api/customAdapter'
-import { User } from '@typebot.io/prisma'
-import { getAtPath, isDefined } from '@typebot.io/lib'
-import { mockedUser } from '@typebot.io/lib/mockedUser'
-import { getNewUserInvitations } from '@/features/auth/helpers/getNewUserInvitations'
-import { sendVerificationRequest } from '@/features/auth/helpers/sendVerificationRequest'
-import { Ratelimit } from '@upstash/ratelimit'
-import { Redis } from '@upstash/redis/nodejs'
-import ky from 'ky'
-import { env } from '@typebot.io/env'
-import * as Sentry from '@sentry/nextjs'
-import { getIp } from '@typebot.io/lib/getIp'
-import { trackEvents } from '@typebot.io/telemetry/trackEvents'
+import { NextApiRequest, NextApiResponse } from 'next';
+import NextAuth, { Account, AuthOptions, Profile } from 'next-auth';
+import EmailProvider from 'next-auth/providers/email';
+import GitHubProvider from 'next-auth/providers/github';
+import GitlabProvider from 'next-auth/providers/gitlab';
+import GoogleProvider from 'next-auth/providers/google';
+import FacebookProvider from 'next-auth/providers/facebook';
+import AzureADProvider from 'next-auth/providers/azure-ad';
+import Auth0Provider from 'next-auth/providers/auth0';
+import { Provider } from 'next-auth/providers';
+import { Ratelimit } from '@upstash/ratelimit';
+import { Redis } from '@upstash/redis/nodejs';
+import ky from 'ky';
+import * as Sentry from '@sentry/nextjs';
+import prisma from '@typebot.io/lib/prisma';
+import { customAdapter } from '../../../features/auth/api/customAdapter';
+import { User } from '@typebot.io/prisma';
+import { getAtPath, isDefined } from '@typebot.io/lib';
+import { mockedUser } from '@typebot.io/lib/mockedUser';
+import { getIp } from '@typebot.io/lib/getIp';
+import { trackEvents } from '@typebot.io/telemetry/trackEvents';
+import { getNewUserInvitations } from '@/features/auth/helpers/getNewUserInvitations';
+import { sendVerificationRequest } from '@/features/auth/helpers/sendVerificationRequest';
+import { env } from '@typebot.io/env';
 
 const providers: Provider[] = []
 
@@ -34,15 +34,16 @@ if (env.UPSTASH_REDIS_REST_URL && env.UPSTASH_REDIS_REST_TOKEN) {
   })
 }
 
-if (env.GITHUB_CLIENT_ID && env.GITHUB_CLIENT_SECRET)
+if (env.GITHUB_CLIENT_ID && env.GITHUB_CLIENT_SECRET) {
   providers.push(
     GitHubProvider({
       clientId: env.GITHUB_CLIENT_ID,
       clientSecret: env.GITHUB_CLIENT_SECRET,
     })
   )
+}
 
-if (env.NEXT_PUBLIC_SMTP_FROM && !env.SMTP_AUTH_DISABLED)
+if (env.NEXT_PUBLIC_SMTP_FROM && !env.SMTP_AUTH_DISABLED) {
   providers.push(
     EmailProvider({
       server: {
@@ -58,25 +59,29 @@ if (env.NEXT_PUBLIC_SMTP_FROM && !env.SMTP_AUTH_DISABLED)
       sendVerificationRequest,
     })
   )
+}
 
-if (env.GOOGLE_CLIENT_ID && env.GOOGLE_CLIENT_SECRET)
+if (env.GOOGLE_CLIENT_ID && env.GOOGLE_CLIENT_SECRET) {
   providers.push(
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
     })
   )
+}
 
-if (env.FACEBOOK_CLIENT_ID && env.FACEBOOK_CLIENT_SECRET)
+if (env.FACEBOOK_CLIENT_ID && env.FACEBOOK_CLIENT_SECRET) {
   providers.push(
     FacebookProvider({
       clientId: env.FACEBOOK_CLIENT_ID,
       clientSecret: env.FACEBOOK_CLIENT_SECRET,
     })
   )
+}
 
 if (env.GITLAB_CLIENT_ID && env.GITLAB_CLIENT_SECRET) {
   const BASE_URL = env.GITLAB_BASE_URL
+  
   providers.push(
     GitlabProvider({
       clientId: env.GITLAB_CLIENT_ID,
@@ -322,7 +327,6 @@ const getRequiredGroups = (provider: string): string[] => {
   }
 }
 
-const checkHasGroups = (userGroups: string[], requiredGroups: string[]) =>
-  userGroups?.some((userGroup) => requiredGroups?.includes(userGroup))
+const checkHasGroups = (userGroups: string[], requiredGroups: string[]) => userGroups?.some((userGroup) => requiredGroups?.includes(userGroup))
 
 export default handler
