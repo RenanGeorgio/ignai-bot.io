@@ -5,6 +5,7 @@ import CustomSideBar from '@/components/SideBar';
 import { DashboardHeader } from '@/features/dashboard/components/DashboardHeader';
 import { ClientsList } from './ClientsList';
 import { useTranslate } from '@tolgee/react'
+import { ClientsProvider } from '../clientsProvider';
 
 export const ClientsPage = () => {
   const { t } = useTranslate();
@@ -20,7 +21,7 @@ export const ClientsPage = () => {
     <Stack minH="100vh">
       <Seo title={"Clientes"} />
       <DashboardHeader />
-      <>
+      <ClientsProvider>
         {isLoading ? (
           <VStack w="full" justifyContent="center" pt="10" spacing={6}>
             <Text>{t('dashboard.redirectionMessage')}</Text>
@@ -32,7 +33,7 @@ export const ClientsPage = () => {
             <ClientsList />
           </Flex>
         )}
-      </>
+      <ClientsProvider/>
     </Stack>
   );
 }
