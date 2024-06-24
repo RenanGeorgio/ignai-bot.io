@@ -1,5 +1,5 @@
-import { GraphNavigation, User as PrismaUser } from '@typebot.io/prisma';
-import { z } from '../../zod';
+import { GraphNavigation, User as PrismaUser } from '@typebot.io/prisma'
+import { z } from '../../zod'
 
 const displayedInAppNotificationsSchema = z.record(z.boolean())
 
@@ -18,7 +18,6 @@ export const userSchema = z.object({
   graphNavigation: z.nativeEnum(GraphNavigation),
   preferredAppAppearance: z.string().nullable(),
   displayedInAppNotifications: displayedInAppNotificationsSchema.nullable(),
-  jwt: z.string().nullable(),
 }) satisfies z.ZodType<PrismaUser>
 
 export type User = z.infer<typeof userSchema>
