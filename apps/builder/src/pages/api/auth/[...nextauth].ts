@@ -24,7 +24,7 @@ import { sendVerificationRequest } from '@/features/auth/helpers/sendVerificatio
 import { env } from '@typebot.io/env';
 
 interface IProfile extends Profile {
-  jwt?: string
+  jwt: string | null
 }
 
 const providers: Provider[] = []
@@ -128,7 +128,7 @@ if (
           name: profile.nickname,
           email: profile.email,
           image: profile.picture,
-          jwt: profile.jwt,
+          jwt: profile?.jwt,
         } as User
       },
     })
@@ -278,17 +278,17 @@ const updateLastActivityDate = async (user: User) => {
 }
 
 const updateJavaWebToken = async (user: User, profile: IProfile) => {
-  if (user.jwt !== profile.jwt) {
+  if (user?.jwt !== profile?.jwt) {
     await prisma.user.updateMany({
       where: { id: user.id },
-      data: { jwt: profile.jwt },
+      data: { jwt: profile?.jwt },
     })
     await trackEvents([
       {
         name: 'User updated',
         userId: user.id,
         data: {
-          jwt: profile.jwt ?? undefined,
+          jwt: profile?.jwt ?? null,
         },
       },
     ])
