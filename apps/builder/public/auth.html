@@ -3,14 +3,29 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <link rel="stylesheet" href="style.css">
     <title>Ignai-bot</title>
+    <script>
+      var envVariable = "production";
+
+      fetch('/api/env')
+        .then(response => response.json())
+        .then(data => {
+          envVariable = data.NODE_ENV;
+        })
+        .catch(error => {
+          console.error('Error fetching environment variable:', error);
+        });
+    </script>
   </head>
   <body>
     <div id="fb-root"></div>
-    <!-- Load the JS SDK asynchronously -->
+    <!-- Load the JS SDK asynchronously PRODUCTION -->
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js"></script>
+    <!-- Load the JS SDK asynchronously DEV 
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk/debug.js"></script>
+    -->
 
     <!--
     <div id="spinner" class="spinner" style="display: none;">
@@ -19,20 +34,42 @@
     -->
     
     <script>
+      // whatsapp + ig + face
+      // whatsapp + ig
+      // whatsapp + face
+      // ig + face
+      // whatsapp
+      // face
+      // ig
       let spinner;
       let content;
       let valueType;
-      let configId;
+      let appId;
+      let whatsappEnabled = false;
+      let configObj;
       var isEnterprises = true;
 
-      /*
+      function getCookie(name) {
+        let cookieArr = document.cookie.split(";");
+        
+        for(let i = 0; i < cookieArr.length; i++) {
+          let cookiePair = cookieArr[i].split("=");
+          
+          if(name == cookiePair[0].trim()) {
+            return decodeURIComponent(cookiePair[1]);
+          }
+        }
+        
+        return null;
+      }
+
       function finished_rendering() {
         console.log("finished rendering plugins");
 
         var spinner = document.getElementById("spinner");
         spinner.removeAttribute("style");
         spinner.removeChild(spinner.childNodes[0]);
-      }*/
+      }
 
       function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
         console.log('statusChangeCallback');
@@ -46,24 +83,69 @@
         }
       }
 
-      function checkLoginState() {               // Called when a person is finished with the Login Button.
-        // Conversion tracking code
-        fbq && fbq('trackCustom', 'WhatsAppOnboardingStart', {appId: 'your-facebook-app-id', feature: 'whatsapp_embedded_signup'});
+      function checkLoginState() {
+        if (whatsappEnabled) {
+          fbq && fbq('trackCustom', 'WhatsAppOnboardingStart', {appId: appId, feature: 'whatsapp_embedded_signup'}); // Conversion tracking code
+        }
         
-        FB.getLoginStatus(function(response) {   // See the onlogin handler
+        FB.getLoginStatus(function(response) { 
           statusChangeCallback(response);
         });
       }
 
+      function getConfigId(value) {
+        var currentConfig;
+
+        switch (value) {
+          case 'config001':
+            currentConfig = '486379303720362';
+            break;
+          default:
+            currentConfig = '486379303720362';
+            break;
+        }
+
+        return currentConfig;
+      }
+
       window.fbAsyncInit = function() {
-        let appId;
+        var configId = getCookie("config");
+
+        let currentConfig = getConfigId(configId);
 
         switch (valueType) {
           case 'type001':
             appId = '909625074182796';
+            whatsappEnabled = false;
+            configObj = {
+              config_id: currentConfig,
+              response_type: 'code', 
+              override_default_response_type: true,
+              //auth_type: 'reauthorize',
+            }
+            break;
+          case 'type002':
+            appId = '';
+            whatsappEnabled = true;
+            configObj = {
+              config_id: currentConfig,
+              response_type: 'code', 
+              override_default_response_type: true,
+              //auth_type: 'reauthorize',
+              extras: {
+                feature: 'whatsapp_embedded_signup',
+                sessionInfoVersion: 2
+              }
+            }
             break;
           default:
             appId = '909625074182796';
+            whatsappEnabled = false;
+            configObj = {
+              config_id: currentConfig,
+              response_type: 'code', 
+              override_default_response_type: true
+            }
             break;
         }
 
@@ -71,52 +153,14 @@
           appId            : appId,
           autoLogAppEvents : true,
           cookie           : true,                     // Enable cookies to allow the server to access the session.
+          localStorage     : true,
           xfbml            : true,                     // Parse social plugins on this webpage.
           version          : 'v20.0',           // Use this Graph API version for this call.
           status           : true
         });
-        // FB.AppEvents.logPageView();
       };
-
-      window.addEventListener('load', function() {
-        checkCheckboxes();
-
-        if (isEnterprises === false) {
-          FB.getLoginStatus(function(response) {   // Called after the JS SDK has been initialized.
-            statusChangeCallback(response);        // Returns the login status.
-          });
-        }
-
-        //FB.Event.subscribe('xfbml.render', finished_rendering);
-
-        content.innerHTML = '<pre> Processando Autorização </pre>';
-      });
-
-      document.addEventListener('DOMContentLoaded', function() {
-        spinner = document.getElementById('spinner');
-        content = document.getElementById('content');
-
-        spinner.style.display = 'block';
-
-        var searchParams = new URLSearchParams(window.location.search);
-        var valueApp = searchParams.get("app");
-        valueType = searchParams.get("type");
-        configId = searchParams.get("config");
-
-        if (String(valueApp).toLowerCase() === "false") {
-          isEnterprises = false;
-        } else {
-          isEnterprises = true;
-        }
-
-        var checkboxes = document.querySelectorAll('.form-check-input');
-
-        checkboxes.forEach(function(checkbox) {
-          checkbox.addEventListener('change', checkCheckboxes);
-        });
-      });
  
-      function login() { // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+      function login() {
         console.log('Welcome!  Fetching your information.... ');
 
         FB.api('/me', function(response) {
@@ -128,32 +172,15 @@
       }
 
       function loginUsingJSSDKLoginDialog() {
-        let currentConfig;
-
-        switch (configId) {
-          case 'config001':
-            currentConfig = '486379303720362';
-            break;
-          default:
-            currentConfig = '486379303720362';
-            break;
-        }
-
         if (isEnterprises === true) {
           FB.login(function (response) {
             if (response.authResponse) {
-              var value = response.authResponse;
-              sendToken(value);
+              sendToken(response.authResponse);
             } else {
               document.getElementById("status").innerHTML = "You are not logged in!";
               console.log('O usuário cancelou o login ou não autorizou totalmente.');
             }
-          }, {
-            config_id: currentConfig,
-            response_type: 'code', 
-            auth_type: 'reauthorize', // nao sei se é necessario
-            override_default_response_type: true
-          });
+          }, { configObj });
         } else {
           FB.login(function(response) {
             if (response.status === "connected") {
@@ -170,7 +197,7 @@
         var xhr = new XMLHttpRequest();
 
         try {
-          xhr.open("POST", "https://supplyfy-chatbot.azurewebsites.net/save-code", true);
+          xhr.open("POST", "https://chatbot.ignai.com.br/save-code", true);
           xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
           xhr.send(JSON.stringify(auth));
         } catch (err) {
@@ -179,8 +206,8 @@
       }
 
       function checkCheckboxes() {
-        const checkboxes = document.querySelectorAll('.form-check-input');
-        const fbLoginButton = document.getElementById('fbLoginButton');
+        var checkboxes = document.querySelectorAll('.form-check-input');
+        var fbLoginButton = document.getElementById('fbLoginButton');
         let allChecked = true;
 
         checkboxes.forEach(checkbox => {
@@ -195,6 +222,65 @@
           fbLoginButton.disabled = true;
         }
       }
+    
+      document.addEventListener('DOMContentLoaded', function() {
+        spinner = document.getElementById('spinner');
+        content = document.getElementById('content');
+
+        spinner.style.display = 'block';
+
+        //var searchParams = new URLSearchParams(window.location.search);
+        //var valueApp = searchParams.get("app");
+        //valueType = searchParams.get("type");
+        var valueApp = getCookie("app");
+        valueType = getCookie("type");
+
+        if (String(valueApp).toLowerCase() === "false") {
+          isEnterprises = false;
+        } else {
+          isEnterprises = true;
+        }
+
+        var checkboxes = document.querySelectorAll('.form-check-input');
+
+        checkboxes.forEach(function(checkbox) {
+          checkbox.addEventListener('change', checkCheckboxes);
+        });
+      });
+
+      window.addEventListener('load', function() {
+        FB.Event.subscribe('xfbml.render', finished_rendering);
+
+        checkCheckboxes();
+
+        FB.getLoginStatus(function(response) { 
+          statusChangeCallback(response); 
+        });
+
+        content.innerHTML = '<pre> Processando Autorização </pre>';
+      });
+
+      window.addEventListener('message', function(event) {
+        if (whatsappEnabled === true) {
+          if (event.origin !== "https://www.facebook.com" && event.origin !== "https://web.facebook.com") {
+            return;
+          }
+    
+          try {
+            const data = JSON.parse(event.data);
+
+            if (data.type === 'WA_EMBEDDED_SIGNUP') {
+              if (data.event === 'FINISH') {
+                const {phone_number_id, waba_id} = data.data;
+              } else {
+                const{current_step} = data.data;
+              }
+            }
+          } catch {
+            console.log('Non JSON Response', event.data);
+          }
+        }
+      });
     </script>
     <div class="container">
       <h1>Página de Integração: <span class="title">Ignai-bot</span></h1>
@@ -215,8 +301,8 @@
         id="fbLoginButton"
         config_id="486379303720362" 
         width="240px" 
-        size="xlarge"
-        auto-logout-link="false" 
+        size="large"
+        auto_logout_link="false" 
         onlogin="checkLoginState();"
         disabled>
       </fb:login-button>
@@ -251,6 +337,5 @@
         </form>
       </footer>
     </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 </body>
 </html>
