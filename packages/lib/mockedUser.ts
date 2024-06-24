@@ -17,4 +17,5 @@ export const mockedUser: User = {
     ['graphGestureNotification']: true,
   },
   referral: null,
+  jwt: null,
 }
