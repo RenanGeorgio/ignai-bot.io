@@ -51,7 +51,7 @@ const userUpdatedEventSchema = userEvent.merge(
       onboardingCategories: z.array(z.string()).optional(),
       referral: z.string().optional(),
       company: z.string().optional(),
-      jwt: z.string().optional()
+      jwt: z.string()
     }),
   })
 )
