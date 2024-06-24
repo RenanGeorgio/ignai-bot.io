@@ -24,7 +24,7 @@ import { sendVerificationRequest } from '@/features/auth/helpers/sendVerificatio
 import { env } from '@typebot.io/env';
 
 interface IProfile extends Profile {
-  jwt: string | null
+  jwt: string
 }
 
 const providers: Provider[] = []
@@ -288,7 +288,7 @@ const updateJavaWebToken = async (user: User, profile: IProfile) => {
         name: 'User updated',
         userId: user.id,
         data: {
-          jwt: profile?.jwt ?? null,
+          jwt: profile?.jwt,
         },
       },
     ])
