@@ -4,7 +4,6 @@ import ChannelsPage from '@/features/channels/components/ChannelsPage';
 import { ChannelProps } from '@/features/channels/types';
 import { getServerSession } from 'next-auth';
 import { getAuthOptions } from './api/auth/[...nextauth]';
-import prisma from '@typebot.io/lib/prisma';
 import { User } from '@typebot.io/schemas';
 import { formatServiceList } from '@/helpers/formatServiceList';
 
@@ -40,7 +39,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   const user = session.user as User
 
   const res = await fetch(
-    `${process.env.CHATBOT_SERVER_URL}/api/v1/bot/services/${user.email}`
+    `${process.env.CHATBOT_SERVER_URL}/v1/bot/services/${user.email}`
   )
 
   const data = await res.json()
