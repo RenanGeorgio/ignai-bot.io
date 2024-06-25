@@ -24,7 +24,7 @@ import { sendVerificationRequest } from '@/features/auth/helpers/sendVerificatio
 import { env } from '@typebot.io/env';
 
 interface IProfile extends Profile {
-  jwt?: string
+  jwt: string | undefined | null
 }
 
 const providers: Provider[] = []
