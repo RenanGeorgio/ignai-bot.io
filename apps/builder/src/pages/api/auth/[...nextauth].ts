@@ -253,8 +253,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
   }
 
-  await NextAuth(req, res, getAuthOptions({ restricted }))
-  return 
+  return await NextAuth(req, res, getAuthOptions({ restricted }))
 }
 
 const updateLastActivityDate = async (user: User) => {
