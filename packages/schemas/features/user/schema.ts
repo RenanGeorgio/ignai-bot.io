@@ -18,7 +18,7 @@ export const userSchema = z.object({
   graphNavigation: z.nativeEnum(GraphNavigation),
   preferredAppAppearance: z.string().nullable(),
   displayedInAppNotifications: displayedInAppNotificationsSchema.nullable(),
-  jwt: z.string().optional(),
+  jwt: z.string().nullable().optional(),
 }) satisfies z.ZodType<PrismaUser>
 
 export type User = z.infer<typeof userSchema>
