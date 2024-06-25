@@ -8,7 +8,7 @@ export const userSchema = z.object({
   createdAt: z.date(),
   updatedAt: z.date(),
   lastActivityAt: z.date(),
-  jwt: z.string().nullable(),
+  //jwt: z.string().nullable(),
   name: z.string().nullable(),
   email: z.string().nullable(),
   emailVerified: z.date().nullable(),
