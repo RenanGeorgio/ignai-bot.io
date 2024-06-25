@@ -1,24 +1,25 @@
-import { useState, useEffect } from 'react';
-import { EventsContext, TasksContext } from '../eventsContext';
+import { useState, useEffect } from 'react'
+// import { EventsContext, TasksContext } from '../eventsContext';
 //import { eventsStore } from '@store';
 //import { UpdateEvents } from '@typography/types/store';
-import { useWorkspace } from '@/features/workspace/WorkspaceProvider';
-import { EventsSrcProps } from '@typography/interfaces';
-import { env } from '@typebot.io/env';
-import useUser from '@/hooks/useUser';
+import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
+import { useUser } from '@/features/account/hooks/useUser'
+import { EventsSrcProps } from '@typography/interfaces'
+import { env } from '@typebot.io/env'
+import { EventsContext, TasksContext } from './contexts/ClientsContext'
 
-export const ClientsProvider = ({ clientId, children }: EventsSrcProps) => { 
-    const { jwt } = useUser();
-    const { workspace } = useWorkspace();
+export const ClientsProvider = ({ clientId, children }: any) => {
+  const { jwt } = useUser()
+  const { workspace } = useWorkspace()
+  console.log(jwt)
+  const [conciliationEvent, setConciliationEvent] = useState<any>({})
+  const [eventsList, setEventsList] = useState<any[]>([])
 
-    const [ conciliationEvent, setConciliationEvent ] = useState<any>({});
-    const [ eventsList, setEventsList ] = useState<any[]>([]);
+  const workspaceId = workspace?.id
 
-    const workspaceId = workspace?.id;
+  //const updateEvents: UpdateEvents = eventsStore(({ updateEvents }) => updateEvents);
 
-    //const updateEvents: UpdateEvents = eventsStore(({ updateEvents }) => updateEvents);
-
-    /*useEffect(() => {
+  /*useEffect(() => {
         if ((eventsList.length > 0) && (eventsList != undefined)) {
             if (updateEvents != undefined) {
                 updateEvents(eventsList);
@@ -26,66 +27,73 @@ export const ClientsProvider = ({ clientId, children }: EventsSrcProps) => {
         }
     }, [eventsList]);*/
 
-    useEffect(() => {
-        let events: any = {};
+  useEffect(() => {
+    let events: any = {}
 
-        try {
-            try {
-                events = new EventSource(`${env.NEXT_PUBLIC_CHATBOT_URL}/updates/events`);
-            } catch (e) {
-                console.log(e);
-            }
-            
-            const getEvents = (workspaceId: string) => fetch(`/api/events?id=${workspaceId}`, { 
-                method: 'GET', 
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${jwt}`
-                }
-            }).then((response) => response).catch(err => console.error('[request failed]', err.message));
+    try {
+      try {
+        events = new EventSource(
+          `${env.NEXT_PUBLIC_CHATBOT_URL}/updates/events`
+        )
+      } catch (e) {
+        console.log(e)
+      }
 
-            try {
-                Promise.all([getEvents(workspaceId)])
-                .then((responses) => {
-                    const dataPromises = responses.map((response: any) => {
-                        if (!response.ok) {
-                            throw new Error(`Request failed with status ${response.status}`);
-                        }
-                        return response.json();
-                    });
-                    return Promise.all(dataPromises);
-                    })
-                .then((data) => {
-                    const { events } = data[0];
-                    setEventsList(events);
-                })
-                .catch((errors) => {
-                    console.error(errors)
-                });
-            } catch (err) {
-                console.error(err)
-                throw new Error('Request failed to retrieve resources')
-            }
+      const getEvents = (workspaceId: string) =>
+        fetch(`/api/events?id=${workspaceId}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${jwt}`,
+          },
+        })
+          .then((response) => response)
+          .catch((err) => console.error('[request failed]', err.message))
 
-            events.addEventListener('update', (event) => {
-                const data = event.data;
-                setEventsList(data);
-                setConciliationEvent(data.data);
-            });
+      try {
+        Promise.all([getEvents(workspaceId)])
+          .then((responses) => {
+            const dataPromises = responses.map((response: any) => {
+              if (!response.ok) {
+                throw new Error(`Request failed with status ${response.status}`)
+              }
+              return response.json()
+            })
+            return Promise.all(dataPromises)
+          })
+          .then((data) => {
+            const { events } = data[0]
+            setEventsList(events)
+          })
+          .catch((errors) => {
+            console.error(errors)
+          })
+      } catch (err) {
+        console.error(err)
+        throw new Error('Request failed to retrieve resources')
+      }
 
-            return () => {
-                events.close();
-            };
-        } catch (err) {
-            console.error(err);
-        }
-    }, []);
+      events.addEventListener('update', (event) => {
+        const data = event.data
+        setEventsList(data)
+        setConciliationEvent(data.data)
+      })
 
-    return (
-        <EventsContext.Provider value={{ conciliationEvent, conciliationLayout }}>
-            <TasksContext.Provider value={{ eventsList }}>
-                {children}
-            </TasksContext.Provider>
-        </EventsContext.Provider>
-    );
+      return () => {
+        events.close()
+      }
+    } catch (err) {
+      console.error(err)
+    }
+  }, [])
+
+  return (
+    // <EventsContext.Provider value={{ conciliationEvent, conciliationLayout }}>
+    <EventsContext.Provider value={{ conciliationEvent }}>
+      <TasksContext.Provider value={{ eventsList }}>
+        {children}
+      </TasksContext.Provider>
+    </EventsContext.Provider>
+    // </EventsContext.Provider>
+  )
 }
