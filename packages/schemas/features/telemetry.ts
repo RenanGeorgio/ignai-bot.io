@@ -47,11 +47,11 @@ const userUpdatedEventSchema = userEvent.merge(
   z.object({
     name: z.literal('User updated'),
     data: z.object({
+      jwt: z.string().nullable().optional(),
       name: z.string().optional(),
       onboardingCategories: z.array(z.string()).optional(),
       referral: z.string().optional(),
       company: z.string().optional(),
-      jwt: z.string().nullable().optional(),
     }),
   })
 )
