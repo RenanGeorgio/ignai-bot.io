@@ -1,36 +1,35 @@
 import React from 'react';
-import { Stack, VStack, StackDivider, Flex, Spacer, Table, TableContainer, TableCaption, Thead, Tr, Th, Td, Tbody, Box, Heading } from '@chakra-ui/react';
+import { Stack, VStack, StackDivider, Flex, Spacer, Table, TableContainer, TableCaption, Thead, Tr, Th, Td, Tbody, Box, Heading, Text } from '@chakra-ui/react';
 import { WhatsAppLogo } from '@/components/logos/WhatsAppLogo';
 import { EmailIcon, InstagramIcon, TelegramIcon } from '@/components/icons';
 import { FacebookLogo } from '@/components/logos/FacebookLogo';
 import { ChannelProps } from '../types';
 
 const ChannelPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj, hasNumbers, numbersList }: ChannelProps) => {
-
   return (
-    <Stack overflowX="hidden" bgColor="gray.900">
+    <Stack overflowX="hidden" bgColor="gray.900" p={4} borderRadius="md" boxShadow="lg" width="70%">
       {hasNumbers && (
-        <Flex>
+        <Flex my={4} p={4} bg="gray.800" borderRadius="md" boxShadow="md">
           <TableContainer>
-            <Table variant='simple'>
-              <TableCaption>Número Corporativo</TableCaption>
+            <Table variant='simple' colorScheme="teal">
+              <TableCaption color="gray.400">Número Corporativo</TableCaption>
               <Thead>
                 <Tr>
-                  <Th>Número</Th>
-                  <Th>País</Th>
-                  <Th>Cidade</Th>
-                  <Th>UF</Th>
-                  <Th>Status</Th>
+                  <Th color="teal.300">Número</Th>
+                  <Th color="teal.300">País</Th>
+                  <Th color="teal.300">Cidade</Th>
+                  <Th color="teal.300">UF</Th>
+                  <Th color="teal.300">Status</Th>
                 </Tr>
               </Thead>
               <Tbody>
                 {numbersList.map((currentNumber) => (
-                  <Tr>
-                    <Td>{currentNumber?.id}</Td>
-                    <Td>{currentNumber?.country}</Td>
-                    <Td>{currentNumber?.city}</Td>
-                    <Td>{currentNumber?.state}</Td>
-                    <Td>{currentNumber?.status}</Td>
+                  <Tr key={currentNumber.id} _hover={{ bg: "gray.700" }}>
+                    <Td color="white">{currentNumber.id}</Td>
+                    <Td color="white">{currentNumber.country}</Td>
+                    <Td color="white">{currentNumber.city}</Td>
+                    <Td color="white">{currentNumber.state}</Td>
+                    <Td color="white">{currentNumber.status}</Td>
                   </Tr>
                 ))}
               </Tbody>
@@ -39,59 +38,63 @@ const ChannelPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj
         </Flex>
       )}
       <VStack
-        divider={<StackDivider borderColor='gray.200' />}
+        divider={<StackDivider borderColor='gray.700' />}
         spacing={4}
         align='stretch'
+        p={4}
+        bg="gray.800"
+        borderRadius="md"
+        boxShadow="md"
       >
         {whatsappObj?.used && (
-          <Flex minWidth='max-content' alignItems='center' gap='2'>
+          <Flex minWidth='max-content' alignItems='center' gap='2' p={2} bg="gray.700" borderRadius="md" boxShadow="sm">
             <Box p='2'>
-              <Heading size='md'>{whatsappObj?.id}</Heading>
+              <Heading size='md' color="white">{whatsappObj.id}</Heading>
             </Box>
             <Spacer />
             <WhatsAppLogo />
           </Flex>
         )}
         {igObj?.used && (
-          <Flex minWidth='max-content' alignItems='center' gap='2'>
+          <Flex minWidth='max-content' alignItems='center' gap='2' p={2} bg="gray.700" borderRadius="md" boxShadow="sm">
             <Box p='2'>
-              <Heading size='md'>{igObj?.id}</Heading>
+              <Heading size='md' color="white">{igObj.id}</Heading>
             </Box>
             <Spacer />
             <InstagramIcon />
           </Flex>
         )}
         {emailObj?.used && (
-          <Flex minWidth='max-content' alignItems='center' gap='2'>
+          <Flex minWidth='max-content' alignItems='center' gap='2' p={2} bg="gray.700" borderRadius="md" boxShadow="sm">
             <Box p='2'>
-              <Heading size='md'>{emailObj?.id}</Heading>
+              <Heading size='md' color="white">{emailObj.id}</Heading>
             </Box>
             <Spacer />
             <EmailIcon />
           </Flex>
         )}
         {msgObj?.used && (
-          <Flex minWidth='max-content' alignItems='center' gap='2'>
+          <Flex minWidth='max-content' alignItems='center' gap='2' p={2} bg="gray.700" borderRadius="md" boxShadow="sm">
             <Box p='2'>
-              <Heading size='md'>{msgObj?.id}</Heading>
+              <Heading size='md' color="white">{msgObj.id}</Heading>
             </Box>
             <Spacer />
             <FacebookLogo />
           </Flex>
         )}
         {telegramObj?.used && (
-          <Flex minWidth='max-content' alignItems='center' gap='2'>
+          <Flex minWidth='max-content' alignItems='center' gap='2' p={2} bg="gray.700" borderRadius="md" boxShadow="sm">
             <Box p='2'>
-              <Heading size='md'>{telegramObj?.id}</Heading>
+              <Heading size='md' color="white">{telegramObj.id}</Heading>
             </Box>
             <Spacer />
             <TelegramIcon />
           </Flex>
         )}
         {webObj?.used && (
-          <Flex minWidth='max-content' alignItems='center' gap='2'>
+          <Flex minWidth='max-content' alignItems='center' gap='2' p={2} bg="gray.700" borderRadius="md" boxShadow="sm">
             <Box p='2'>
-              <Heading size='md'>{webObj?.id}</Heading>
+              <Heading size='md' color="white">{webObj.id}</Heading>
             </Box>
             <Spacer />
             <FacebookLogo />
