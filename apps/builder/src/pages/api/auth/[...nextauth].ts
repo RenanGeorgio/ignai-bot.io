@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import NextAuth, { Account, AuthOptions, Profile } from 'next-auth';
+import NextAuth, { Account, AuthOptions } from 'next-auth'; //Profile 
 import EmailProvider from 'next-auth/providers/email';
 import GitHubProvider from 'next-auth/providers/github';
 import GitlabProvider from 'next-auth/providers/gitlab';
@@ -23,9 +23,9 @@ import { getNewUserInvitations } from '@/features/auth/helpers/getNewUserInvitat
 import { sendVerificationRequest } from '@/features/auth/helpers/sendVerificationRequest';
 import { env } from '@typebot.io/env';
 
-interface IProfile extends Profile {
-  jwt?: string | null
-}
+//interface IProfile extends Profile {
+//  jwt?: string | null
+//}
 
 const providers: Provider[] = []
 
@@ -192,7 +192,7 @@ export const getAuthOptions = ({
         user: userFromDb,
       }
     },
-    signIn: async ({ account, user, profile }) => {
+    signIn: async ({ account, user }) => {
       if (restricted === 'rate-limited') throw new Error('rate-limited')
         if (!account) return false
       const isNewUser = !('createdAt' in user && isDefined(user.createdAt))
@@ -221,10 +221,10 @@ export const getAuthOptions = ({
         const userGroups = await getUserGroups(account)
         return checkHasGroups(userGroups, requiredGroups)
       }
-      const userFromDb = user as User
+      /*const userFromDb = user as User
       if (profile) {
         await updateJavaWebToken(userFromDb, profile)
-      }
+      }*/
       return true
     },
   },
@@ -277,7 +277,7 @@ const updateLastActivityDate = async (user: User) => {
   }
 }
 
-const updateJavaWebToken = async (user: User, profile: IProfile) => {
+/*const updateJavaWebToken = async (user: User, profile: IProfile) => {
   if (user?.jwt !== profile?.jwt) {
     await prisma.user.updateMany({
       where: { id: user.id },
@@ -293,7 +293,7 @@ const updateJavaWebToken = async (user: User, profile: IProfile) => {
       },
     ])
   }
-}
+}*/
 
 const getUserGroups = async (account: Account): Promise<string[]> => {
   switch (account.provider) {
