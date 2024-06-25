@@ -288,7 +288,7 @@ const updateJavaWebToken = async (user: User, profile: IProfile) => {
         name: 'User updated',
         userId: user.id,
         data: {
-          jwt: profile?.jwt ?? undefined,
+          jwt: profile?.jwt,
         },
       },
     ])
