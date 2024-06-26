@@ -37,7 +37,7 @@ export const useFetchRecipient = (chat: Chat | null, user: User) => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         const response = await api(
-          `api/v1/chat/client/${recipientId}`
+          `chat/client/${recipientId}`
         )
         if (!response.ok) {
           setError(response.statusText)
