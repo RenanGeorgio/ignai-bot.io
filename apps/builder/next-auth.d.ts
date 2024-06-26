@@ -1,8 +1,8 @@
-import NextAuth, { DefaultProfile } from "next-auth"
+import "next-auth"
 
 declare module "next-auth" {
   
   interface Profile {
     jwt?: string
-  } & DefaultProfile
+  }
 }
