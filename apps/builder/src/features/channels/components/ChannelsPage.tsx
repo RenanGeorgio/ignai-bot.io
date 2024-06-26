@@ -15,8 +15,9 @@ const ChannelPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj
         <CustomSideBar />
         <Center flex="1">
           <VStack spacing={6} overflowX="hidden" p={4} width="95%" mx="auto">
-            {hasNumbers && (
-              <Flex my={4} p={4} bg="white" borderRadius="md" boxShadow="md" width="100%">
+            <Flex my={4} p={4} bg="white" borderRadius="md" boxShadow="md" width="100%" border="1px solid red">
+              <Heading size='md' mb={4} color="red.900">Número Corporativo</Heading>
+              <Center p='2' width="70%">
                 <TableContainer>
                   <Table variant='simple' colorScheme="red">
                     <TableCaption color="red.900">Número Corporativo</TableCaption>
@@ -30,96 +31,134 @@ const ChannelPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj
                       </Tr>
                     </Thead>
                     <Tbody>
-                      {numbersList.map((currentNumber) => (
-                        <Tr key={currentNumber.id} _hover={{ bg: "red.100" }}>
-                          <Td color="red.900">{currentNumber.id}</Td>
-                          <Td color="red.900">{currentNumber.country}</Td>
-                          <Td color="red.900">{currentNumber.city}</Td>
-                          <Td color="red.900">{currentNumber.state}</Td>
-                          <Td color="red.900">{currentNumber.status}</Td>
+                      {hasNumbers ? (
+                        numbersList.map((currentNumber) => (
+                          <Tr key={currentNumber.id} _hover={{ bg: "red.100" }}>
+                            <Td color="red.900">{currentNumber.id}</Td>
+                            <Td color="red.900">{currentNumber.country}</Td>
+                            <Td color="red.900">{currentNumber.city}</Td>
+                            <Td color="red.900">{currentNumber.state}</Td>
+                            <Td color="red.900">{currentNumber.status}</Td>
+                          </Tr>
+                        ))
+                      ) : (
+                        <Tr>
+                          <Td colSpan={5} textAlign="center" color="red.900">Nenhum número disponível</Td>
                         </Tr>
-                      ))}
+                      )}
                     </Tbody>
                   </Table>
                 </TableContainer>
-              </Flex>
-            )}
+              </Center>
+            </Flex>
 
-            {whatsappObj?.used && (
-              <Stack spacing={4} p={4} bg="red.100" borderRadius="md" boxShadow="md" width="100%">
-                <Flex minWidth='max-content' alignItems='center' gap='2'>
+            <Stack spacing={4} p={4} bg="white" borderRadius="md" boxShadow="md" width="100%" border="1px solid red">
+              <Heading size='md' color="red.900">WhatsApp</Heading>
+              {whatsappObj?.used ? (
+                <Flex minWidth='max-content' alignItems='center' gap='2' bg="red.100" p='1' borderRadius='15px' marginBottom="10px">
                   <Box p='2'>
-                    <Heading size='md' color="red.900">{whatsappObj.id}</Heading>
+                    <Heading size='md' color="red.600">{whatsappObj.id}</Heading>
                   </Box>
                   <Spacer />
                   <WhatsAppLogo />
                 </Flex>
-              </Stack>
-            )}
+              ) : (
+                <Center p='2' width="100%">
+                  <Heading size='sm' color="red.500">Nenhum dado disponível</Heading>
+                </Center>
+              )}
+            </Stack>
 
-            {igObj?.used && (
-              <Stack spacing={4} p={4} bg="red.100" borderRadius="md" boxShadow="md" width="100%">
-                <Flex minWidth='max-content' alignItems='center' gap='2'>
+            <Stack spacing={4} p={4} bg="white" borderRadius="md" boxShadow="md" width="100%" border="1px solid red">
+              <Heading size='md' color="red.900">Instagram</Heading>
+              {igObj?.used ? (
+                <Flex minWidth='max-content' alignItems='center' gap='2' bg="red.100" p='1' borderRadius='15px' marginBottom="10px">
                   <Box p='2'>
-                    <Heading size='md' color="red.900">{igObj.id}</Heading>
+                    <Heading size='md' color="red.600">{igObj.id}</Heading>
                   </Box>
                   <Spacer />
                   <InstagramIcon />
                 </Flex>
-              </Stack>
-            )}
+              ) : (
+                <Center p='2' width="100%">
+                  <Heading size='sm' color="red.500">Nenhum dado disponível</Heading>
+                </Center>
+              )}
+            </Stack>
 
-            {emailObj?.used && (
-              <Stack spacing={4} p={4} bg="red.100" borderRadius="md" boxShadow="md" width="100%">
-                <Flex minWidth='max-content' alignItems='center' gap='2'>
+            <Stack spacing={4} p={4} bg="white" borderRadius="md" boxShadow="md" width="100%" border="1px solid red">
+              <Heading size='md' color="red.900">Email</Heading>
+              {emailObj?.used ? (
+                <Flex minWidth='max-content' alignItems='center' gap='2' bg="red.100" p='1' borderRadius='15px' marginBottom="10px">
                   <Box p='2'>
-                    <Heading size='md' color="red.900">{emailObj.id}</Heading>
+                    <Heading size='md' color="red.600">{emailObj.id}</Heading>
                   </Box>
                   <Spacer />
                   <EmailIcon />
                 </Flex>
-              </Stack>
-            )}
+              ) : (
+                <Center p='2' width="100%">
+                  <Heading size='sm' color="red.500">Nenhum dado disponível</Heading>
+                </Center>
+              )}
+            </Stack>
 
-            {msgObj?.used && (
-              <Stack spacing={4} p={4} bg="red.100" borderRadius="md" boxShadow="md" width="100%">
-                <Flex minWidth='max-content' alignItems='center' gap='2'>
+            <Stack spacing={4} p={4} bg="white" borderRadius="md" boxShadow="md" width="100%" border="1px solid red">
+              <Heading size='md' color="red.900">Facebook</Heading>
+              {msgObj?.used ? (
+                <Flex minWidth='max-content' alignItems='center' gap='2' bg="red.100" p='1' borderRadius='15px' marginBottom="10px">
                   <Box p='2'>
-                    <Heading size='md' color="red.900">{msgObj.id}</Heading>
+                    <Heading size='md' color="red.600">{msgObj.id}</Heading>
                   </Box>
                   <Spacer />
                   <FacebookLogo />
                 </Flex>
-              </Stack>
-            )}
+              ) : (
+                <Center p='2' width="100%">
+                  <Heading size='sm' color="red.500">Nenhum dado disponível</Heading>
+                </Center>
+              )}
+            </Stack>
 
-            {telegramObj?.used && (
-              <Stack spacing={4} p={4} bg="red.100" borderRadius="md" boxShadow="md" width="100%">
-                <Flex minWidth='max-content' alignItems='center' gap='2'>
+            <Stack spacing={4} p={4} bg="white" borderRadius="md" boxShadow="md" width="100%" border="1px solid red">
+              <Heading size='md' color="red.900">Telegram</Heading>
+              {telegramObj?.used ? (
+                <Flex minWidth='max-content' alignItems='center' gap='2' bg="red.100" p='1' borderRadius='15px' marginBottom="10px">
                   <Box p='2'>
-                    <Heading size='md' color="red.900">{telegramObj.id}</Heading>
+                    <Heading size='md' color="red.600">{telegramObj.id}</Heading>
                   </Box>
                   <Spacer />
                   <TelegramIcon />
                 </Flex>
-              </Stack>
-            )}
+              ) : (
+                <Center p='2' width="100%">
+                  <Heading size='sm' color="red.500">Nenhum dado disponível</Heading>
+                </Center>
+              )}
+            </Stack>
 
-            {webObj?.used && (
-              <Stack spacing={4} p={4} bg="red.100" borderRadius="md" boxShadow="md" width="100%">
-                <Flex minWidth='max-content' alignItems='center' gap='2'>
+            <Stack spacing={4} p={4} bg="white" borderRadius="md" boxShadow="md" width="100%" border="1px solid red">
+              <Heading size='md' color="red.900">Website</Heading>
+              {webObj?.used ? (
+                <Flex minWidth='max-content' alignItems='center' gap='2' bg="red.100" p='1' borderRadius='15px' marginBottom="10px">
                   <Box p='2'>
-                    <Heading size='md' color="red.900">{webObj.id}</Heading>
+                    <Heading size='md' color="red.600">{webObj.id}</Heading>
                   </Box>
                   <Spacer />
                   <FacebookLogo />
                 </Flex>
-              </Stack>
-            )}
+              ) : (
+                <Center p='2' width="100%">
+                  <Heading size='sm' color="red.500">Nenhum dado disponível</Heading>
+                </Center>
+              )}
+            </Stack>
+
           </VStack>
         </Center>
       </Flex>
     </VStack>
   );
 }
+
 export default ChannelPage
