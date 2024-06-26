@@ -58,6 +58,7 @@ model User {
   sessions                    Session[]
   bannedIps                   BannedIp[]
   displayedInAppNotifications Json?
+  jwt                         String?
 }
 
 model ApiToken {
