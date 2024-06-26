@@ -128,7 +128,7 @@ if (
           name: profile.nickname,
           email: profile.email,
           image: profile.picture,
-          jwt: profile?.jwt,
+          //jwt: profile?.jwt,
         } as User
       },
     })
