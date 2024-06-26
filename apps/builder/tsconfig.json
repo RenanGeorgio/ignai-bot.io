@@ -12,6 +12,7 @@
     "next-env.d.ts",
     "tolgee.d.ts",
     "create-theme.d.ts",
+    "next-auth.d.ts",
     "**/*.ts",
     "**/*.tsx"
   ]

@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import NextAuth, { Account, AuthOptions } from 'next-auth'; //Profile 
+import NextAuth, { Account, AuthOptions, Profile } from 'next-auth'; 
 import EmailProvider from 'next-auth/providers/email';
 import GitHubProvider from 'next-auth/providers/github';
 import GitlabProvider from 'next-auth/providers/gitlab';
@@ -22,10 +22,6 @@ import { trackEvents } from '@typebot.io/telemetry/trackEvents';
 import { getNewUserInvitations } from '@/features/auth/helpers/getNewUserInvitations';
 import { sendVerificationRequest } from '@/features/auth/helpers/sendVerificationRequest';
 import { env } from '@typebot.io/env';
-
-//interface IProfile extends Profile {
-//  jwt?: string | null
-//}
 
 const providers: Provider[] = []
 
@@ -128,7 +124,7 @@ if (
           name: profile.nickname,
           email: profile.email,
           image: profile.picture,
-          //jwt: profile?.jwt,
+          jwt: profile?.jwt,
         } as User
       },
     })
@@ -192,7 +188,7 @@ export const getAuthOptions = ({
         user: userFromDb,
       }
     },
-    signIn: async ({ account, user }) => {
+    signIn: async ({ account, user, profile }) => {
       if (restricted === 'rate-limited') throw new Error('rate-limited')
         if (!account) return false
       const isNewUser = !('createdAt' in user && isDefined(user.createdAt))
@@ -221,10 +217,10 @@ export const getAuthOptions = ({
         const userGroups = await getUserGroups(account)
         return checkHasGroups(userGroups, requiredGroups)
       }
-      /*const userFromDb = user as User
+      const userFromDb = user as User
       if (profile) {
         await updateJavaWebToken(userFromDb, profile)
-      }*/
+      }
       return true
     },
   },
@@ -276,7 +272,7 @@ const updateLastActivityDate = async (user: User) => {
   }
 }
 
-/*const updateJavaWebToken = async (user: User, profile: IProfile) => {
+const updateJavaWebToken = async (user: User, profile: Profile) => {
   if (user?.jwt !== profile?.jwt) {
     await prisma.user.updateMany({
       where: { id: user.id },
@@ -292,7 +288,7 @@ const updateLastActivityDate = async (user: User) => {
       },
     ])
   }
-}*/
+}
 
 const getUserGroups = async (account: Account): Promise<string[]> => {
   switch (account.provider) {
