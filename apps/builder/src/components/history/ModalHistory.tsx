@@ -48,8 +48,8 @@ export default function ModalHistory({ close }: ModalHistoryProps) {
               <input className={styles.inputHistory} type="text" />
             </div>
             <div className={styles.buttonContainerHistory}>
-              <Button variant={styles.contained}>Confirmar</Button>
-              <Button variant={styles.contained} disabled>
+              <Button variant={styles.contained} style={{ background: 'rgb(0, 116, 13)', color: '#fff' }}>Confirmar</Button>
+              <Button variant={styles.contained} disabled style={{ background: 'rgb(228, 2, 2)', color: '#fff' }}>
                 Cancelar
               </Button>
             </div>
