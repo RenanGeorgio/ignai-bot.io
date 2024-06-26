@@ -23,9 +23,9 @@ import { getNewUserInvitations } from '@/features/auth/helpers/getNewUserInvitat
 import { sendVerificationRequest } from '@/features/auth/helpers/sendVerificationRequest';
 import { env } from '@typebot.io/env';
 
-interface IProfile extends Profile {
-  jwt?: string | null
-}
+//interface IProfile extends Profile {
+//  jwt?: string | null
+//}
 
 const providers: Provider[] = []
 
@@ -276,7 +276,7 @@ const updateLastActivityDate = async (user: User) => {
   }
 }
 
-const updateJavaWebToken = async (user: User, profile: IProfile) => {
+const updateJavaWebToken = async (user: User, profile: Profile) => {
   if (user?.jwt !== profile?.jwt) {
     await prisma.user.updateMany({
       where: { id: user.id },
