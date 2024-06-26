@@ -3,7 +3,7 @@ import { getAuthOptions } from '@/pages/api/auth/[...nextauth]'
 import * as Sentry from '@sentry/nextjs'
 import { User } from '@typebot.io/prisma'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { getServerSession } from 'next-auth
+import { getServerSession } from 'next-auth'
 import { env } from '@typebot.io/env'
 import { mockedUser } from '@typebot.io/lib/mockedUser'
 
