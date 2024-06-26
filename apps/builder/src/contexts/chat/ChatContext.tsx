@@ -121,7 +121,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
 
     const getClients = async () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const response = await api.get(`api/v1/chat/clients`)
+      const response = await api.get(`chat/clients`)
       if (!response.ok) {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
@@ -161,7 +161,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
     const getUserChats = async () => {
       if (user?.companyId) {
         setIsUserChatsLoading(true)
-        const response = await api.get(`api/v1/chat/${user.companyId}`)
+        const response = await api.get(`chat/${user.companyId}`)
         if (!response.ok) {
           return setUserChatsError('error') // verificar dps
         }
@@ -178,7 +178,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
       setIsMessagesLoading(true)
       setMessageError(null)
       if (currentChat) {
-        const response = await api.get(`api/v1/chat/message/${currentChat._id}`)
+        const response = await api.get(`chat/message/${currentChat._id}`)
         setIsMessagesLoading(false)
         const data: Message[] = await response.json()
         if (!response.ok && 'message' in data) {
@@ -205,7 +205,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
       if (textMessage === '') {
         return
       }
-      const response = await api.post(`api/v1/chat/message`, {
+      const response = await api.post(`chat/message`, {
         json: {
           text: textMessage,
           senderId: sender.companyId,

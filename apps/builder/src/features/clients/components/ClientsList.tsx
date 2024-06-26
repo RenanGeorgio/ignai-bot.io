@@ -5,10 +5,13 @@ import { useWorkspace } from '@/features/workspace/WorkspaceProvider';
 import { deleteLeadsQuery } from '../queries/deleteLeadsQuery';
 import { deleteClientsQuery } from '../queries/deleteClientsQuery';
 import { useMembers } from '@/features/workspace/hooks/useMembers';
+import { useClients } from '../hooks/useClients';
 
 export const ClientsList = () => {
   const { workspace } = useWorkspace();
   const { members, invitations, isLoading, mutate } = useMembers({ workspaceId: workspace?.id });
+
+  const { clients } = useClients()
 
   const handleDeleteMemberClick = (memberId: string) => async () => {
     if (!workspace) {
@@ -53,6 +56,14 @@ export const ClientsList = () => {
           email={invitation.email ?? ''}
           onDeleteClick={handleDeleteInvitationClick(invitation.id)}
           isGuest
+        />
+      ))}
+      {clients?.map((client) => (
+        <ClientsItem
+          key={client._id}
+          email={client.username ?? ''}
+          name={client.name ?? undefined}
+          onDeleteClick={() => {}}
         />
       ))}
       {isLoading && (

@@ -5,7 +5,7 @@ import CustomSideBar from '@/components/SideBar'
 import { DashboardHeader } from '@/features/dashboard/components/DashboardHeader'
 import { ClientsList } from './ClientsList'
 import { useTranslate } from '@tolgee/react'
-import { ClientsProvider } from '../ClientsProvider'
+import { ClientsProvider } from '../contexts/ClientsProvider'
 
 export const ClientsPage = () => {
   const { t } = useTranslate()
@@ -13,7 +13,8 @@ export const ClientsPage = () => {
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    setIsLoading(true)
+    // verificar dps
+    setIsLoading(false)
   }, [])
 
   return (

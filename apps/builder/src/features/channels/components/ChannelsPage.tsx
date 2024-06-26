@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, VStack, StackDivider, Flex, Spacer, Table, TableContainer, TableCaption, Thead, Tr, Th, Td, Tbody, Box, Heading, Center } from '@chakra-ui/react';
+import { Stack, VStack, Flex, Spacer, Table, TableContainer, TableCaption, Thead, Tr, Th, Td, Tbody, Box, Heading, Center } from '@chakra-ui/react';
 import { WhatsAppLogo } from '@/components/logos/WhatsAppLogo';
 import { EmailIcon, InstagramIcon, TelegramIcon } from '@/components/icons';
 import { FacebookLogo } from '@/components/logos/FacebookLogo';
@@ -14,9 +14,9 @@ const ChannelPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj
       <Flex w="100%" px={4}>
         <CustomSideBar />
         <Center flex="1">
-          <Stack overflowX="hidden" bgColor="red.900" p={4} borderRadius="md" boxShadow="lg" width="70%" mx="auto">
+          <VStack spacing={6} overflowX="hidden" p={4} width="95%" mx="auto">
             {hasNumbers && (
-              <Flex my={4} p={4} bg="white" borderRadius="md" boxShadow="md">
+              <Flex my={4} p={4} bg="white" borderRadius="md" boxShadow="md" width="100%">
                 <TableContainer>
                   <Table variant='simple' colorScheme="red">
                     <TableCaption color="red.900">Número Corporativo</TableCaption>
@@ -44,75 +44,82 @@ const ChannelPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj
                 </TableContainer>
               </Flex>
             )}
-            <VStack
-              divider={<StackDivider borderColor='red.200' />}
-              spacing={4}
-              align='stretch'
-              p={4}
-              bg="white"
-              borderRadius="md"
-              boxShadow="md"
-            >
-              {whatsappObj?.used && (
-                <Flex minWidth='max-content' alignItems='center' gap='2' p={2} bg="red.100" borderRadius="md" boxShadow="sm">
+
+            {whatsappObj?.used && (
+              <Stack spacing={4} p={4} bg="red.100" borderRadius="md" boxShadow="md" width="100%">
+                <Flex minWidth='max-content' alignItems='center' gap='2'>
                   <Box p='2'>
                     <Heading size='md' color="red.900">{whatsappObj.id}</Heading>
                   </Box>
                   <Spacer />
                   <WhatsAppLogo />
                 </Flex>
-              )}
-              {igObj?.used && (
-                <Flex minWidth='max-content' alignItems='center' gap='2' p={2} bg="red.100" borderRadius="md" boxShadow="sm">
+              </Stack>
+            )}
+
+            {igObj?.used && (
+              <Stack spacing={4} p={4} bg="red.100" borderRadius="md" boxShadow="md" width="100%">
+                <Flex minWidth='max-content' alignItems='center' gap='2'>
                   <Box p='2'>
                     <Heading size='md' color="red.900">{igObj.id}</Heading>
                   </Box>
                   <Spacer />
                   <InstagramIcon />
                 </Flex>
-              )}
-              {emailObj?.used && (
-                <Flex minWidth='max-content' alignItems='center' gap='2' p={2} bg="red.100" borderRadius="md" boxShadow="sm">
+              </Stack>
+            )}
+
+            {emailObj?.used && (
+              <Stack spacing={4} p={4} bg="red.100" borderRadius="md" boxShadow="md" width="100%">
+                <Flex minWidth='max-content' alignItems='center' gap='2'>
                   <Box p='2'>
                     <Heading size='md' color="red.900">{emailObj.id}</Heading>
                   </Box>
                   <Spacer />
                   <EmailIcon />
                 </Flex>
-              )}
-              {msgObj?.used && (
-                <Flex minWidth='max-content' alignItems='center' gap='2' p={2} bg="red.100" borderRadius="md" boxShadow="sm">
+              </Stack>
+            )}
+
+            {msgObj?.used && (
+              <Stack spacing={4} p={4} bg="red.100" borderRadius="md" boxShadow="md" width="100%">
+                <Flex minWidth='max-content' alignItems='center' gap='2'>
                   <Box p='2'>
                     <Heading size='md' color="red.900">{msgObj.id}</Heading>
                   </Box>
                   <Spacer />
                   <FacebookLogo />
                 </Flex>
-              )}
-              {telegramObj?.used && (
-                <Flex minWidth='max-content' alignItems='center' gap='2' p={2} bg="red.100" borderRadius="md" boxShadow="sm">
+              </Stack>
+            )}
+
+            {telegramObj?.used && (
+              <Stack spacing={4} p={4} bg="red.100" borderRadius="md" boxShadow="md" width="100%">
+                <Flex minWidth='max-content' alignItems='center' gap='2'>
                   <Box p='2'>
                     <Heading size='md' color="red.900">{telegramObj.id}</Heading>
                   </Box>
                   <Spacer />
                   <TelegramIcon />
                 </Flex>
-              )}
-              {webObj?.used && (
-                <Flex minWidth='max-content' alignItems='center' gap='2' p={2} bg="red.100" borderRadius="md" boxShadow="sm">
+              </Stack>
+            )}
+
+            {webObj?.used && (
+              <Stack spacing={4} p={4} bg="red.100" borderRadius="md" boxShadow="md" width="100%">
+                <Flex minWidth='max-content' alignItems='center' gap='2'>
                   <Box p='2'>
                     <Heading size='md' color="red.900">{webObj.id}</Heading>
                   </Box>
                   <Spacer />
                   <FacebookLogo />
                 </Flex>
-              )}
-            </VStack>
-          </Stack>
+              </Stack>
+            )}
+          </VStack>
         </Center>
       </Flex>
     </VStack>
-  )
+  );
 }
-
 export default ChannelPage

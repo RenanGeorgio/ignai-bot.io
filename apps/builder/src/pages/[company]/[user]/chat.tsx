@@ -56,7 +56,7 @@ export const getServerSideProps = async (
   }
 
   const res = await fetch(
-    `${process.env.CHATBOT_SERVER_URL}/api/v1/user/${user.email}`
+    `${process.env.CHATBOT_SERVER_URL}/v1/user/${user.email}`
   )
 
   const chatbotUser = await res.json()
