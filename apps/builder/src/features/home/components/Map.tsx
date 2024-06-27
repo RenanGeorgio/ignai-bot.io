@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import Map, { Popup, Source, Layer, MapLayerMouseEvent, ViewStateChangeEvent } from 'react-map-gl';
-import { ControlPanel } from '@/components/controlPainel';
+import ControlPanel from '@/components/ControlPanel';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { HoverInfo } from '../types';
 
