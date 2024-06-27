@@ -8,7 +8,6 @@ export const userSchema = z.object({
   createdAt: z.date(),
   updatedAt: z.date(),
   lastActivityAt: z.date(),
-  jwt: z.string().nullable(),
   name: z.string().nullable(),
   email: z.string().nullable(),
   emailVerified: z.date().nullable(),
@@ -19,6 +18,7 @@ export const userSchema = z.object({
   graphNavigation: z.nativeEnum(GraphNavigation),
   preferredAppAppearance: z.string().nullable(),
   displayedInAppNotifications: displayedInAppNotificationsSchema.nullable(),
+  jwt: z.string().nullable(),
 }) satisfies z.ZodType<PrismaUser>
 
 export type User = z.infer<typeof userSchema>
