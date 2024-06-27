@@ -37,7 +37,7 @@ export const MapComponent: React.FC = () => {
     const data = response?.body;
     
     if (data && data?.features && data?.features?.length > 0) {
-      const [longitude, latitude] = data?.features[0]?.center;
+      const [longitude, latitude] = data.features[0].center;
       return { longitude, latitude };
     }
     return null;
@@ -47,17 +47,17 @@ export const MapComponent: React.FC = () => {
     const fetchGeocodes = async () => {
       const features = [];
       for (const location of locations) {
-        const coords = await geocodeAddress(location?.address);
+        const coords = await geocodeAddress(location.address);
         if (coords) {
           features.push({
             type: 'Feature' as const,
             geometry: {
               type: 'Point' as const,
-              coordinates: [coords?.longitude, coords?.latitude]
+              coordinates: [coords.longitude, coords.latitude]
             },
             properties: {
-              id: features?.length + 1,
-              geoName: location?.name,
+              id: features.length + 1,
+              geoName: location.name,
               value: [100],
               formattedValue: ["100"],
               maxValueIndex: 0
