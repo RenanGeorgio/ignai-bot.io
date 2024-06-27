@@ -34,7 +34,7 @@ export const MapComponent: React.FC = () => {
       }
     );
 
-    const data = response?.json();
+    const data = await response?.json();
     
     if (data && data?.features && data?.features?.length > 0) {
       const [longitude, latitude] = data.features[0].center;
