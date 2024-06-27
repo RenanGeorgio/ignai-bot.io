@@ -15,10 +15,8 @@ export const MapComponent: React.FC = () => {
     minZoom: 2,
     maxZoom: 14
   });
-  const [geoJson, setGeoJson] = useState({
-    type: 'FeatureCollection' as const,
-    features: [] as any[]
-  });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [geoJson, setGeoJson] = useState({ type: 'FeatureCollection' as const, features: [] as any[]});
 
   const locations = [
     { name: "Shopping Vitória", address: "Av. Américo Buaiz, 200 - Enseada do Suá, Vitória - ES, 29050-902" },
