@@ -122,7 +122,7 @@ if (
       clientId: env.AUTH0_CLIENT_ID,
       clientSecret: env.AUTH0_CLIENT_SECRET,
       issuer: env.AUTH0_ISSUER,
-      profile(profile) {
+      /*profile(profile) {
         return {
           id: profile.sub,
           name: profile.nickname,
@@ -130,7 +130,7 @@ if (
           image: profile.picture,
           jwt: profile?.jwt,
         } as User
-      },
+      },*/
     })
   )
 }
