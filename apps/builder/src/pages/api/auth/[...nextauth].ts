@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import NextAuth, { Account, AuthOptions } from 'next-auth'; // Profile
+import NextAuth, { Account, AuthOptions, Profile } from 'next-auth'; // Profile
 import EmailProvider from 'next-auth/providers/email';
 import GitHubProvider from 'next-auth/providers/github';
 import GitlabProvider from 'next-auth/providers/gitlab';
@@ -277,14 +277,13 @@ const updateLastActivityDate = async (user: User) => {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const updateJavaWebToken = async (user: User, profile: any) => {
+const updateJavaWebToken = async (user: User, profile: Profile) => {
   if (user?.jwt !== profile?.jwt) {
     await prisma.user.updateMany({
       where: { id: user.id },
       data: { jwt: profile?.jwt },
     })
-    await trackEvents([
+    /*await trackEvents([
       {
         name: 'User updated',
         userId: user.id,
@@ -292,7 +291,7 @@ const updateJavaWebToken = async (user: User, profile: any) => {
           jwt: profile?.jwt ?? undefined,
         },
       },
-    ])
+    ])*/
   }
 }
 
