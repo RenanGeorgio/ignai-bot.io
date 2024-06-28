@@ -311,11 +311,15 @@
   width: min-content;
 }
 
+.left-menu .imgTextWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .left-menu .img-2 {
-  height: 24px;
   object-fit: cover;
   position: relative;
-  width: 24px;
 }
 
 .left-menu .namr-time {
