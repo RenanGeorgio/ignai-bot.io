@@ -18,16 +18,21 @@
   grid-area: side;
   display: block;
 }
+
 .content {
   background: #f4f6ff;
   width: 100%;
   grid-area: content;
+  border: 1px rgba(242, 45, 45, 0.373) solid;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 10px;
 }
 
 .wrapper-box {
   width: 100%;
   padding-left: 10px;
   padding-right: 80px;
+  margin-bottom: 20px;
   background-color: rgba(255, 255, 255, 0.8);
 }
 
