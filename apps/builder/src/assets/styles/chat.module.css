@@ -5,6 +5,8 @@
   margin-left: 0%;
   gap: 20px;
   border: 1px rgba(242, 45, 45, 0.373) solid;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
   height: 650px;
   width: 100% !important;
   overflow: hidden;
@@ -31,6 +33,7 @@
   border-radius: 20px;
 }
 
+/* Add borda do topo, esquerda e direita? */
 .headerBoxChat {
   display: inline-flex;
   padding: 5px 20px 5px 10px;
