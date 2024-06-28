@@ -18,12 +18,13 @@
   grid-area: side;
   display: block;
 }
+
 .content {
   background: #f4f6ff;
   width: 100%;
   grid-area: content;
   border: 1px rgba(242, 45, 45, 0.373) solid;
-  border-top-right-radius: 10px;
+  border-top-right-radius: 2px;
   border-bottom-right-radius: 10px;
 }
 

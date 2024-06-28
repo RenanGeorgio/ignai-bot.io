@@ -4,9 +4,8 @@
   flex-direction: column;
   margin-left: 0%;
   gap: 20px;
- /* border: 1px rgba(242, 45, 45, 0.373) solid; */
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
+/*  border-top-right-radius: 2px;
+  border-bottom-right-radius: 10px; */
   height: 650px;
   width: 100% !important;
   overflow: hidden;
