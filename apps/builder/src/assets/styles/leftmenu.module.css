@@ -82,7 +82,7 @@
   flex: 0 0 auto;
   padding: 10px, 16px, 10px, 10px;
   width: 100%;
-  border: #880000 1px solid;
+  border: #ff8b8b 1px solid;
   border-radius: 10px;
   margin-left: -0%;
 }
@@ -159,7 +159,6 @@
   gap: 192px;
   padding: 10px 16px;
   width: 100%;
-  border-top: rgba(242, 45, 45, 0.373) 1px solid;
   border-bottom: rgba(242, 45, 45, 0.373) 1px solid;
 }
 
