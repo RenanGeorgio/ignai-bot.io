@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Stack, VStack, Flex, Spacer, Table, TableContainer, TableCaption, Thead, Tr, Th, Td, Tbody, Box, Heading, Center } from '@chakra-ui/react';
 import { WhatsAppLogo } from '@/components/logos/WhatsAppLogo';
 import { EmailIcon, InstagramIcon, TelegramIcon } from '@/components/icons';
@@ -6,8 +6,32 @@ import { FacebookLogo } from '@/components/logos/FacebookLogo';
 import { ChannelProps } from '../types';
 import { DashboardHeader } from '@/features/dashboard/components/DashboardHeader';
 import CustomSideBar from '@/components/SideBar';
+import { api } from '@/services/api';
+import { WhatsAppTemplate } from './types/whatsapp.types';
+
+
+
 
 const ChannelPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj, hasNumbers, numbersList }: ChannelProps) => {
+  const [templateData, setTemplateData] = useState<WhatsAppTemplate | null>(null)
+  const [errorMsg, setErrorMsg] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+
+  const createModel = async () => {
+    if(!templateData) return;
+    setIsLoading(true)
+    const res = await api.post('whatsapp/template', {
+      json: templateData
+    })
+    if(!res.ok){
+      setErrorMsg('Erro ao criar modelo')
+    }
+    const data = await res.json()
+    setIsLoading(false)
+  }
+
+  // precisa criar um modal para criar o modelo seguindo a interface do WhatsappTemplate
+
   return (
     <VStack spacing={4} align="stretch">
       <DashboardHeader />
