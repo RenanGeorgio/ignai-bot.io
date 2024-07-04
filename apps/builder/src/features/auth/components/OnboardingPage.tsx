@@ -1,136 +1,113 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useRouter } from 'next/router';
-import confetti from 'canvas-confetti';
-import { Button, Flex, HStack, StackProps, VStack, chakra, useColorModeValue } from '@chakra-ui/react';
-import { Standard } from '@typebot.io/nextjs';
-import { ChevronLastIcon } from '@/components/icons';
-import { useUser } from '@/features/account/hooks/useUser';
-import { useTranslate } from '@tolgee/react';
-import { env } from '@typebot.io/env';
-
-type OnboardingRepliesProps = {
-  name?: string
-  company?: string
-  onboardingCategories?: string[]
-  referral?: string
-}
-
-type AnswerProps = {
-  message: string
-  blockId: string
-}
+import { ChevronLastIcon } from '@/components/icons'
+import {
+  Button,
+  Flex,
+  HStack,
+  StackProps,
+  VStack,
+  chakra,
+  useColorModeValue,
+} from '@chakra-ui/react'
+import { Standard } from '@typebot.io/nextjs'
+import { useRouter } from 'next/router'
+import { useEffect, useRef, useState } from 'react'
+import confetti from 'canvas-confetti'
+import { useUser } from '@/features/account/hooks/useUser'
+import { useTranslate } from '@tolgee/react'
+import { env } from '@typebot.io/env'
 
 const totalSteps = 5
 
 export const OnboardingPage = () => {
-  const { t } = useTranslate();
-  const { replace, query } = useRouter();
+  const { t } = useTranslate()
+  const { replace, query } = useRouter()
+  const confettiCanvaContainer = useRef<HTMLCanvasElement | null>(null)
+  const confettiCanon = useRef<confetti.CreateTypes>()
+  const { user, updateUser } = useUser()
+  const [currentStep, setCurrentStep] = useState<number>(user?.name ? 2 : 1)
+  const [onboardingReplies, setOnboardingReplies] = useState<{
+    name?: string
+    company?: string
+    onboardingCategories?: string[]
+    referral?: string
+  }>({})
 
-  const confettiCanvaContainer = useRef<HTMLCanvasElement | null>(null);
-  const confettiCanon = useRef<confetti.CreateTypes>();
-
-  const { user, updateUser } = useUser();
-
-  const [currentStep, setCurrentStep] = useState<number>(user?.name ? 2 : 1);
-  const [onboardingReplies, setOnboardingReplies] = useState<OnboardingRepliesProps>({});
-
-  const isNewUser = user && new Date(user.createdAt as unknown as string).toDateString() === new Date().toDateString()
+  const isNewUser =
+    user &&
+    new Date(user.createdAt as unknown as string).toDateString() ===
+      new Date().toDateString()
 
   useEffect(() => {
-    initConfettis();
-  });
+    initConfettis()
+  })
 
   useEffect(() => {
-    if (!user?.createdAt) {
-      return
-    }
-
-    if (isNewUser === false || !env.NEXT_PUBLIC_ONBOARDING_TYPEBOT_ID) {
+    if (!user?.createdAt) return
+    if (isNewUser === false || !env.NEXT_PUBLIC_ONBOARDING_TYPEBOT_ID)
       replace({ pathname: '/typebots', query })
-    }
-  }, [isNewUser, query, replace, user?.createdAt]);
+  }, [isNewUser, query, replace, user?.createdAt])
 
   const initConfettis = () => {
-    if (!confettiCanvaContainer.current || confettiCanon.current) {
-      return
-    }
-
+    if (!confettiCanvaContainer.current || confettiCanon.current) return
     confettiCanon.current = confetti.create(confettiCanvaContainer.current, {
       resize: true,
       useWorker: true,
-    });
+    })
   }
 
-  const setOnboardingAnswer = async (answer: AnswerProps) => {
+  const setOnboardingAnswer = async (answer: {
+    message: string
+    blockId: string
+  }) => {
     const isName = answer.blockId === 'cl126820m000g2e6dfleq78bt'
     const isCompany = answer.blockId === 'cl126jioz000v2e6dwrk1f2cb'
     const isCategories = answer.blockId === 'cl126lb8v00142e6duv5qe08l'
     const isOtherCategory = answer.blockId === 'cl126pv7n001o2e6dajltc4qz'
     const isReferral = answer.blockId === 'phcb0s1e9qgp0f8l2amcu7xr'
     const isOtherReferral = answer.blockId === 'saw904bfzgspmt0l24achtiy'
-
-    if (isName) {
-      setOnboardingReplies((prev) => ({ ...prev, name: answer.message }));
-    }
-
+    if (isName)
+      setOnboardingReplies((prev) => ({ ...prev, name: answer.message }))
     if (isCategories) {
-      const onboardingCategories = answer.message.split(', ');
-
+      const onboardingCategories = answer.message.split(', ')
       setOnboardingReplies((prev) => ({
         ...prev,
         onboardingCategories,
-      }));
+      }))
     }
-
-    if (isOtherCategory) {
+    if (isOtherCategory)
       setOnboardingReplies((prev) => ({
         ...prev,
         onboardingCategories: prev.onboardingCategories
           ? [...prev.onboardingCategories, answer.message]
           : [answer.message],
-      }));
-    }
-
+      }))
     if (isCompany) {
-      setOnboardingReplies((prev) => ({ ...prev, company: answer.message }));
-
-      if (confettiCanon.current) {
-        shootConfettis(confettiCanon.current);
-      }
+      setOnboardingReplies((prev) => ({ ...prev, company: answer.message }))
+      if (confettiCanon.current) shootConfettis(confettiCanon.current)
     }
-
-    if (isReferral) {
-      setOnboardingReplies((prev) => ({ ...prev, referral: answer.message }));
-    }
-
-    if (isOtherReferral) {
-      setOnboardingReplies((prev) => ({ ...prev, referral: answer.message }));
-    }
-
-    setCurrentStep((prev) => prev + 1);
+    if (isReferral)
+      setOnboardingReplies((prev) => ({ ...prev, referral: answer.message }))
+    if (isOtherReferral)
+      setOnboardingReplies((prev) => ({ ...prev, referral: answer.message }))
+    setCurrentStep((prev) => prev + 1)
   }
 
   const skipOnboarding = () => {
-    updateUser(onboardingReplies);
-
+    updateUser(onboardingReplies)
     replace({ pathname: '/typebots', query })
   }
 
   const updateUserAndProceedToTypebotCreation = () => {
-    updateUser(onboardingReplies);
-
+    updateUser(onboardingReplies)
     setTimeout(() => {
       replace({
         pathname: '/typebots',
         query: { ...query, isFirstBot: true },
       })
-    }, 2000);
+    }, 2000)
   }
 
-  if (!isNewUser) {
-    return null
-  }
-
+  if (!isNewUser) return null
   return (
     <VStack h="100vh" flexDir="column" justifyContent="center" spacing="10">
       <Button
@@ -165,13 +142,15 @@ export const OnboardingPage = () => {
         pointerEvents="none"
       />
     </VStack>
-  );
+  )
 }
 
-const Dots = ({ currentStep, ...props }: { currentStep: number } & StackProps) => {
-  const highlightedBgColor = useColorModeValue('gray.500', 'gray.100');
-  const baseBgColor = useColorModeValue('gray.200', 'gray.700');
-
+const Dots = ({
+  currentStep,
+  ...props
+}: { currentStep: number } & StackProps) => {
+  const highlightedBgColor = useColorModeValue('gray.500', 'gray.100')
+  const baseBgColor = useColorModeValue('gray.200', 'gray.700')
   return (
     <HStack spacing="10" {...props}>
       {Array.from({ length: totalSteps }).map((_, index) => (
@@ -184,12 +163,11 @@ const Dots = ({ currentStep, ...props }: { currentStep: number } & StackProps) =
         />
       ))}
     </HStack>
-  );
+  )
 }
 
 const shootConfettis = (confettiCanon: confetti.CreateTypes) => {
   const count = 200
-
   const defaults = {
     origin: { y: 0.7 },
   }

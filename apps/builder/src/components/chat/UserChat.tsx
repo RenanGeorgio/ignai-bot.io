@@ -13,10 +13,9 @@ import styles from '@/assets/styles/leftmenu.module.css'
 import { Chat, OnlineUser } from '@/contexts/chat/types'
 import { useFetchRecipient } from '@/hooks/useFetchRecipient'
 import useUser from '@/hooks/useUser'
-import { Spinner } from '@chakra-ui/react'
 import Image from 'next/image'
 import { ChatStatus } from '@/contexts/chat/enums'
-
+import { Spinner } from '@chakra-ui/react'
 
 interface UserChatProps {
   chat: Chat

@@ -4,6 +4,7 @@
   flex-direction: column;
   margin-left: 0%;
   gap: 20px;
+  border: 1px rgba(242, 45, 45, 0.373) solid;
   height: 650px;
   width: 100% !important;
   overflow: hidden;
