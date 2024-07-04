@@ -1,5 +1,5 @@
 'use client'
-import Cookies from 'js-cookie'
+//import Cookies from 'js-cookie'
 import ky from 'ky'
 
 export const baseUrl = process.env.NEXT_PUBLIC_CHATBOT_URL + "/v1"
