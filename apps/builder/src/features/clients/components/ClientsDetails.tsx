@@ -57,23 +57,23 @@ const ClientsDetails = ({ client }: { client: Client | null}) => {
           <Text color="red.900">Endereço</Text>
           <HStack spacing="10" width="100%">
             <Text color="red.600" fontSize="md">
-              <Text color="red.900">Rua:</Text> {address.street ?? 'Não informado'}
+              <Text color="red.900">Rua:</Text> {address?.street ?? 'Não informado'}
             </Text>
             <Spacer />
             <Text color="red.600" fontSize="md">
-              <Text color="red.900">Número:</Text> {address.number ?? 'Não informado'}
+              <Text color="red.900">Número:</Text> {address?.number ?? 'Não informado'}
             </Text>
           </HStack>  
           <Text color="red.600" fontSize="md">
-            <Text color="red.900">Bairro:</Text> {address.neighborhood ?? 'Não informado'}
+            <Text color="red.900">Bairro:</Text> {address?.neighborhood ?? 'Não informado'}
           </Text>
           <HStack spacing="10" width="100%">
             <Text color="red.600" fontSize="md">
-              <Text color="red.900">Cidade:</Text> {address.city ?? 'Não informado'}
+              <Text color="red.900">Cidade:</Text> {address?.city ?? 'Não informado'}
             </Text>
             <Spacer />
             <Text color="red.600" fontSize="md">
-              <Text color="red.900">Estado:</Text> {address.state ?? 'Não informado'}
+              <Text color="red.900">Estado:</Text> {address?.state ?? 'Não informado'}
             </Text>
           </HStack>
         </Stack>
