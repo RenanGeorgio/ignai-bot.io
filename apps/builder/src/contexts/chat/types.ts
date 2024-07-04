@@ -1,4 +1,4 @@
-import { Platforms } from "./enums"
+import { ChatStatus, Platforms } from "./enums"
 
 export interface Message {
   _id: string
@@ -29,12 +29,14 @@ export interface ChatClient {
 export type Chat = {
   _id: string
   members: string[]
-  messages: Message[]
+  // messages: Message[]
   origin: {
     platform: Platforms
     chatId?: string
   }
-  timestamps?: string
+  status: ChatStatus
+  createdAt: string
+  updatedAt: string
   __v?: number
 }
 

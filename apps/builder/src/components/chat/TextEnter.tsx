@@ -12,11 +12,13 @@ interface TextEnterProps {
   onUploadFilePhoto: (file: File) => void
   value: string 
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
+  disabled: boolean
 }
 
 export default function TextEnter({
   onSendMessage,
   onUploadFilePhoto,
+  disabled
 }: TextEnterProps) {
   const [textMessage, setTextMessage] = useState<string>('')
 
@@ -34,6 +36,13 @@ export default function TextEnter({
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setTextMessage(e.currentTarget.value)
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault()
+      onSendMessage(textMessage, setTextMessage)
+    }
   }
 
   const handlePhotoIconClick = () => {
@@ -60,12 +69,14 @@ export default function TextEnter({
           <div className={styles['txtwrapp']}>
             <textarea
               onChange={handleChange}
+              onKeyDown={handleKeyDown}
               cols={50}
               rows={2}
               wrap="ward"
               className={styles['txt']}
               placeholder="Informe sua mensagem"
               value={textMessage}
+              disabled={disabled}
             />
           </div>
           <div className={styles['btncontainer']}>
@@ -79,6 +90,7 @@ export default function TextEnter({
                 onChange={handleFileUploadPhoto}
                 id="file-input" 
                 style={{ display: 'none' }}
+                disabled={true}
               />
               <label htmlFor="file-input">
                 <IconButton
@@ -93,9 +105,10 @@ export default function TextEnter({
             <div className={styles['btntxt']}>
               <button
                 onClick={() => {
-                  onSendMessage(textMessage, setTextMessage)
+                  onSendMessage(textMessage.trim(), setTextMessage)
                 }}
                 className={styles['btntxt']}
+                disabled={disabled}
               >
                 Enviar
               </button>

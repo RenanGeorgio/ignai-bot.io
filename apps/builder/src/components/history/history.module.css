@@ -80,6 +80,8 @@
 .textTitle {
   font-size: 18px;
   font-weight: 600;
+  font-family: var(--light-basic-typography-h5-heading-font-family);
+  font-style: var(--light-basic-typography-h5-heading-font-style);
 }
 
 .btnClose button {
@@ -88,8 +90,4 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid rgba(0, 0, 0, 0.075);
-  border-width: 2px;
-  border-radius: 4px;
-  background-color: #4b465c29;
 }

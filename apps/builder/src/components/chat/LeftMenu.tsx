@@ -26,12 +26,12 @@ export const LeftMenu: React.FC<LeftMenuProps> = ({
       <header className={styles['header-left']}>
         <img
           className={styles['icon-instance-node']}
-          src="https://c.animaapp.com/5uY2Jqwr/img/avatar-14@2x.png"
+          src="https://i.pravatar.cc/150?img=3"
           alt="Avatar-14"
         />
         <input
           className={styles.instance}
-          placeholder="Search for contact..."
+          placeholder="Pesquisar contato..."
         />
       </header>
 
@@ -50,7 +50,9 @@ export const LeftMenu: React.FC<LeftMenuProps> = ({
             </span>
           </button>
         </div>
-        {children}
+        <div className={styles['div-content-clients']}>
+          {children}
+        </div>
       </div>
 
       <div className={styles['div-3']}>
@@ -68,14 +70,16 @@ export const LeftMenu: React.FC<LeftMenuProps> = ({
                 width={'50px'}
               />
               <div className={styles['text-2']}>
-                <img
-                  className="img-2"
-                  alt="World wide web PNG"
-                  src="https://c.animaapp.com/5uY2Jqwr/img/world-wide-web-png-pic-1-1@2x.png"
-                  height={'30px'}
-                  width={'30px'}
-                />
-                <div className={styles['text-wrapper-10']}>Lead 04432</div>
+                <div className={styles['imgTextWrapper']}>
+                  <img
+                    className="img-2"
+                    alt="World wide web PNG"
+                    src="https://c.animaapp.com/5uY2Jqwr/img/world-wide-web-png-pic-1-1@2x.png"
+                    height={'24px'}
+                    width={'24px'}
+                  />
+                  <div className={styles['text-wrapper-10']}>Lead 04432</div>
+                </div>
                 <div className={styles['text-wrapper-9']}>
                   Pedido de catálogo
                 </div>
@@ -92,8 +96,10 @@ export const LeftMenu: React.FC<LeftMenuProps> = ({
                 width={'50px'}
               />
               <div className={styles['text-2']}>
-                <TelegramIcon />
-                <div className={styles['text-wrapper-10']}>Lead 04433</div>
+                <div className={styles['imgTextWrapper']}>
+                  <TelegramIcon />
+                  <div className={styles['text-wrapper-10']}>Lead 04433</div>
+                </div>
                 <div className={styles['text-wrapper-9']}>Orçamento</div>
               </div>
             </div>
