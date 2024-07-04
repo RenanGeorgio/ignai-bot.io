@@ -26,7 +26,7 @@ const ClientsDetails = ({ client }: { client: Client | null}) => {
     >
       <VStack spacing="4" align="stretch" flex="1" alignItems="flex-start">
         <HStack spacing="4">
-          <Avatar name={client.name} src={client.image} size="md" />
+          <Avatar name={client.name} src={client?.image} size="md" />
           <VStack align="left" spacing="1">
             {client.name && (
               <Text fontSize="xl">

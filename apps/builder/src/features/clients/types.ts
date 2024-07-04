@@ -7,4 +7,6 @@ export interface Client {
   address?: string
   status?: string
   isGuest?: boolean
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  image?: any
 }
