@@ -19,6 +19,8 @@ type Props = {
   email: string
   isGuest?: boolean
   onDeleteClick: () => void
+  onClick?: () => void
+  isSelected?: boolean
 }
 
 export const ClientsItem = ({
@@ -26,7 +28,9 @@ export const ClientsItem = ({
   name,
   image,
   isGuest = false,
-  onDeleteClick
+  onDeleteClick,
+  onClick,
+  isSelected = false,
 }: Props) => {
   const { t } = useTranslate()
 
@@ -34,9 +38,13 @@ export const ClientsItem = ({
     <Menu placement="bottom-end" isLazy>
       <MenuButton
         _hover={{
-          bg: useColorModeValue('gray.100', 'gray.700'),
+          bg: useColorModeValue('gray.100', 'red.700'),
         }}
+        bg={isSelected ? "rgba(255, 235, 235, 0.8)" : "rgba(255, 250, 250, 0.6)" }
+        color=""
+        boxShadow="md"
         borderRadius="md"
+        onClick={onClick}
       >
         <ClientIdentityContent
           email={email}
