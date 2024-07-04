@@ -3,28 +3,27 @@ import { HStack, SkeletonCircle, SkeletonText, Stack } from '@chakra-ui/react';
 import { ClientsItem } from './ClientsItem';
 import { useWorkspace } from '@/features/workspace/WorkspaceProvider';
 import { deleteLeadsQuery } from '../queries/deleteLeadsQuery';
-import { deleteClientsQuery } from '../queries/deleteClientsQuery';
 import { useMembers } from '@/features/workspace/hooks/useMembers';
 import { useClients } from '../hooks/useClients';
+import { Client } from '../types';
 
-export const ClientsList = () => {
+/*
+interface Client {
+  _id: string
+  username: string
+  name?:string
+}
+*/
+
+interface ClientsListProps {
+  onClientClick: (client: Client) => void
+  selectedClient: Client | null
+}
+
+export const ClientsList: React.FC<ClientsListProps> = ({ onClientClick, selectedClient }) => {
   const { workspace } = useWorkspace();
-  const { members, invitations, isLoading, mutate } = useMembers({ workspaceId: workspace?.id });
-
-  const { clients } = useClients()
-
-  const handleDeleteMemberClick = (memberId: string) => async () => {
-    if (!workspace) {
-      return
-    }
-
-    await deleteClientsQuery(workspace.id, memberId);
-
-    mutate({
-      members: members.filter((m) => m.userId !== memberId),
-      invitations,
-    });
-  }
+  const { isLoading } = useMembers({ workspaceId: workspace?.id });
+  const { clients } = useClients();
 
   const handleDeleteInvitationClick = (id: string) => async () => {
     if (!workspace) {
@@ -32,38 +31,18 @@ export const ClientsList = () => {
     }
 
     await deleteLeadsQuery({ workspaceId: workspace.id, id });
-    
-    mutate({
-      invitations: invitations.filter((i) => i.id !== id),
-      members,
-    });
   }
 
   return (
     <Stack w="full" spacing={3}>
-      {members.map((member) => (
-        <ClientsItem
-          key={member.userId}
-          email={member.email ?? ''}
-          image={member.image ?? undefined}
-          name={member.name ?? undefined}
-          onDeleteClick={handleDeleteMemberClick(member.userId)}
-        />
-      ))}
-      {invitations.map((invitation) => (
-        <ClientsItem
-          key={invitation.email}
-          email={invitation.email ?? ''}
-          onDeleteClick={handleDeleteInvitationClick(invitation.id)}
-          isGuest
-        />
-      ))}
       {clients?.map((client) => (
         <ClientsItem
           key={client._id}
-          email={client.username ?? ''}
-          name={client.name ?? undefined}
-          onDeleteClick={() => {}}
+          email={client?.username ?? ''}
+          name={client?.name ?? undefined}
+          onDeleteClick={handleDeleteInvitationClick(client._id)}
+          onClick={() => onClientClick(client)}
+          isSelected={selectedClient?._id === client._id}
         />
       ))}
       {isLoading && (
