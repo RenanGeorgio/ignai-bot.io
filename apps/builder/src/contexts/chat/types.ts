@@ -22,8 +22,8 @@ export interface ChatClient {
   name: string
   lastName?: string
   username: string
-  createdAt: string
-  updatedAt: string
+  createdAt?: string
+  updatedAt?: string
 }
 
 export type Chat = {

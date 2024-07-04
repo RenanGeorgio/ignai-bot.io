@@ -2,7 +2,7 @@ export interface Client {
   _id: string
   username: string
   name?: string
-  email: string
+  email?: string
   phone?: string
   address?: {
     street?: string
