@@ -40,7 +40,6 @@ export const ClientsList: React.FC<ClientsListProps> = ({ onClientClick, selecte
           key={client._id}
           email={client?.username ?? ''}
           name={client?.name ?? undefined}
-          onDeleteClick={}
           onClick={() => onClientClick(client)}
           isSelected={selectedClient?._id === client._id}
         />
