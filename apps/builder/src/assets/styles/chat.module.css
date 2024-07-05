@@ -4,7 +4,6 @@
   flex-direction: column;
   margin-left: 0%;
   gap: 20px;
-  border: 1px rgb(151, 0, 0) solid;
   height: 650px;
   width: 100% !important;
   overflow: hidden;
@@ -23,13 +22,12 @@
 }
 
 .chat::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background-color: rgb(249, 158, 158); 
 }
 
 .chat::-webkit-scrollbar-thumb {
-  background-color: #d3d3d3;
-  border-radius: 10px;
-  border: 3px solid #f1f1f1; 
+  background-color: rgb(249, 158, 158);
+  border-radius: 20px;
 }
 
 .headerBoxChat {
@@ -37,9 +35,9 @@
   padding: 5px 20px 5px 10px;
   align-items: center;
   gap: 1px;
-  width: 97%;
+  width: 100%;
   height: 2.9rem;
-  border: 1px rgb(151, 0, 0) solid;
+  border-bottom: 1px rgba(242, 45, 45, 0.373) solid;
   background-color: #ffffff;
   justify-content: space-between;
 }
@@ -49,7 +47,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 2px;
+  gap: 0px;
   background-color: #ffffffc2;
   width: auto;
   height: 80%;
@@ -57,9 +55,9 @@
 }
 
 .rightContent {
-  display: inline-flex;
+  display: flex;
   justify-content: space-between;
-  gap: 35px;
+  gap: 20px;
   align-items: center;
 }
 
@@ -74,6 +72,7 @@
 .initial-info {
   display: flex;
   align-items: center;
+  flex-wrap: nowrap;
 }
 
 .name-time {
@@ -117,10 +116,7 @@
   padding: 5px;
   border-radius: 10px;
   margin-left: 25px;
-}
-
-.name-work div {
-  color: #fff;
+  flex-shrink: 0;
 }
 
 .img-2 {
@@ -493,9 +489,9 @@
 
 .txt {
   flex: 1 1 0;
-  color: rgb(0, 0, 0);
+  color: rgb(81, 81, 81);
   font-size: 15px;
-  font-family: Public Sans;
+  font-family: var(--light-basic-typography-paragraph-font-family);
   font-weight: 400;
   word-wrap: break-word;
   width: 100%;
@@ -510,7 +506,9 @@
 }
 
 .txt::placeholder {
-  color: #000000; 
+  color: rgb(81, 81, 81);
+  font-size: 15px;
+  font-family: var(--light-basic-typography-paragraph-font-family);
 }
 
 .txt:focus,
@@ -542,6 +540,7 @@ input.txt:focus {
   padding: 3px;
   width: 30px;
   height: 30px;
+  margin-top: 10px;
   border: rgba(255, 255, 255, 0.5) 1px solid;
   cursor: pointer;
 }
@@ -555,7 +554,77 @@ input.txt:focus {
   cursor: pointer;
   height: 2.3rem;
   width: 4rem;
-  margin-top: 5px;
   border-radius: 3px;
   border: none;
+}
+
+@media (max-width: 1280px) and (min-width: 1080px){
+  .name-work {
+    margin-left: 0px;
+  }
+
+  .chat-icon {
+    margin-left: -25px;
+  }
+
+  .rightContainer {
+    margin: 0px;
+    position: absolute;
+    height: 25px;
+    right: 82px;
+  }
+
+  .rightContent {
+    gap: 2px;
+  }
+}
+
+@media (max-width: 1080px) and (min-width: 768px) {
+  .name-time {
+    margin-left: -10px;
+  }
+
+  .name-work {
+    margin-left: 0;
+  }
+
+  .rightContainer {
+    margin: 1px;
+  }
+
+  .rightContent {
+    gap: 2px;
+  }
+
+  .wrapperTextEnter{
+    padding: 8px;
+  }
+
+  .txtwrapp {
+    flex-grow: 1;
+  }
+
+  .btncontainer {
+    gap: 0px;
+    margin-left: -50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .wrapperTextEnter {
+    padding: 6px;
+  }
+
+  .txtwrapp {
+    flex-grow: 1;
+  }
+
+  .btncontainer {
+    gap: 1px;
+    margin-left: -20px;
+  }
+
+  .btntxt button {
+    padding: 8px 12px;
+  }
 }
