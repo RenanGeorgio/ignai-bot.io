@@ -19,6 +19,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   // nao é necessario alterar o formato desses dados no backend, basta colocar o tratamento aqui, para o formato do ChannelProps
   // const result = res.json();
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const session = await getServerSession(
     context.req,
     context.res,
