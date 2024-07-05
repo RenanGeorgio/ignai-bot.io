@@ -1,5 +1,5 @@
 import * as React from 'react';
-import '@/assets/styles/map.css';
+import './ControlPanel.module.css';
 
 function ControlPanel() {
   return (
