@@ -4,11 +4,11 @@ import ChannelsPage from '@/features/channels/components/ChannelsPage';
 import { ChannelProps } from '@/features/channels/types';
 import { getServerSession } from 'next-auth';
 import { getAuthOptions } from './api/auth/[...nextauth]';
-import { User } from '@typebot.io/schemas';
-import { formatServiceList } from '@/helpers/formatServiceList';
+//import { User } from '@typebot.io/schemas';
+//import { formatServiceList } from '@/helpers/formatServiceList';
 
 export default function Page(props: ChannelProps): InferGetServerSidePropsType<typeof getServerSideProps> {
-  // ChannelsPage ja é trabalho para o matheus
+
   return <ChannelsPage {...props} />
 }
 
@@ -24,19 +24,8 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
     context.res,
     getAuthOptions({})
   )
-  if (!session?.user) {
-    return {
-      redirect: {
-        permanent: false,
-        destination:
-          context.locale !== context.defaultLocale
-            ? `/${context.locale}/signin`
-            : '/signin',
-      },
-    }
-  }
 
-  const user = session.user as User
+  /*const user = session.user as User
 
   const res = await fetch(
     `${process.env.CHATBOT_SERVER_URL}/v1/bot/services/${user.email}`
@@ -44,13 +33,10 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 
   const data = await res.json()
 
-  const props = formatServiceList(data)
+  const props = formatServiceList(data)*/
   
   return {
     props: {
-      ...props,
-      hasNumbers: null,
-      numbersList: null,
     },
   } 
 }
