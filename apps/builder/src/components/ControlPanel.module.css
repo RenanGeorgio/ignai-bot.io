@@ -1,0 +1,31 @@
+.App {
+  text-align: center;
+}
+
+/* Mapa */
+.container-map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/* Modal */
+.control-panel { 
+  position: relative;
+  margin-left: auto;
+  top: 20px;
+  font-size: 15px;
+  right: 20px;
+  background-color: #5b5959;
+  color: #fff;
+  width: 200px;
+  height: 135px;
+  border-radius: 10px;
+  border: 1px solid white;
+} 
+
+.control-panel h3{
+  text-decoration: underline;
+}
