@@ -2,7 +2,7 @@ import React from 'react';
 import { HStack, SkeletonCircle, SkeletonText, Stack } from '@chakra-ui/react';
 import { ClientsItem } from './ClientsItem';
 import { useWorkspace } from '@/features/workspace/WorkspaceProvider';
-//import { deleteLeadsQuery } from '../queries/deleteLeadsQuery';
+import { deleteLeadsQuery } from '../queries/deleteLeadsQuery';
 import { useMembers } from '@/features/workspace/hooks/useMembers';
 import { useClients } from '../hooks/useClients';
 import { Client } from '../types';
@@ -25,13 +25,13 @@ export const ClientsList: React.FC<ClientsListProps> = ({ onClientClick, selecte
   const { isLoading } = useMembers({ workspaceId: workspace?.id });
   const { clients } = useClients();
 
-  /*const handleDeleteInvitationClick = (id: string) => async () => {
+  const handleDeleteInvitationClick = (id: string) => async () => {
     if (!workspace) {
       return
     }
 
     await deleteLeadsQuery({ workspaceId: workspace.id, id });
-  }*/
+  }
 
   return (
     <Stack w="full" spacing={3}>
@@ -40,7 +40,7 @@ export const ClientsList: React.FC<ClientsListProps> = ({ onClientClick, selecte
           key={client._id}
           email={client?.username ?? ''}
           name={client?.name ?? undefined}
-          onDeleteClick={() => onClientClick(client)}
+          onDeleteClick={handleDeleteInvitationClick(client._id)}
           onClick={() => onClientClick(client)}
           isSelected={selectedClient?._id === client._id}
         />
