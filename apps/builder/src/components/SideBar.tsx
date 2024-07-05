@@ -13,7 +13,7 @@ import {
   VStack,
   Tooltip
 } from '@chakra-ui/react';
-import { ChatIcon, ChevronLeftIcon, ChevronRightIcon, FolderIcon, ToolIcon } from './icons';
+import { ChatIcon, ChevronLeftIcon, ChevronRightIcon, FolderIcon, ToolIcon, UserIcon } from './icons';
 import { useUser } from '@/features/account/hooks/useUser';
 
 type CustomHTMLDivElement = Omit<HTMLDivElement, "removeEventListener" | "addEventListener">;
@@ -74,6 +74,13 @@ const SidebarContent = ({ tab, navSize, ...props }: ContentProps & IconProps) =>
       return (
         <Flex alignItems="center" justify="center">
           <ToolIcon {...props}/>
+          <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
+        </Flex>
+      )
+    case 'Dashboard':
+      return (
+        <Flex alignItems="center" justify="center">
+          <UserIcon {...props}/>
           <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
         </Flex>
       )
@@ -205,6 +212,9 @@ const CustomSideBar = () => {
           alignItems="flex-start"
           as="nav"
         >
+          <Tooltip hasArrow label="Dashboard">
+            <NavItem router={router} path={"/home"} navSize={navSize} title="Dashboard" description="Dashboard - Pagina de entrada." />
+          </Tooltip>
           <Tooltip hasArrow label="Builder">
             <NavItem router={router} path={`/${company}/home`} navSize={navSize} title="Home" description="Pagina inicial da aplicação." />
           </Tooltip>
