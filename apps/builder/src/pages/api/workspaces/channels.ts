@@ -25,11 +25,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         }
       ).json();  
 
-      return res.status(200).send(result.body);
+      if (result) {
+        return res.status(200).send(result.body);
+      } else {
+        return res.status(403);
+      }
     }
   } catch (err) {
-    console.error(err);
-
     throw new TRPCError({
       code: 'INTERNAL_SERVER_ERROR',
       message: 'Could reach server',
