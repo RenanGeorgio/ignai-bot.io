@@ -23,10 +23,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             'Content-Type': 'application/json',
           }
         }
-      ).json();  
+      );  
 
       if (result) {
-        return res.status(200).send(result.body);
+        const body =  await result.json();
+        return res.status(200).send(body);
       } else {
         return res.status(403);
       }
