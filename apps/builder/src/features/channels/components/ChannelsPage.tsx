@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Stack, VStack, Flex, Spacer, Table, TableContainer, TableCaption, Thead, Tr, Th, Td, Tbody, Box, Heading, Center } from '@chakra-ui/react';
+import { Stack, VStack, Flex, Spacer, Table, TableContainer, TableCaption, Thead, Tr, Th, Td, Tbody, Box, Heading, Center, Button, useDisclosure } from '@chakra-ui/react';
 import { WhatsAppLogo } from '@/components/logos/WhatsAppLogo';
 import { EmailIcon, InstagramIcon, TelegramIcon } from '@/components/icons';
 import { FacebookLogo } from '@/components/logos/FacebookLogo';
@@ -8,7 +8,7 @@ import { DashboardHeader } from '@/features/dashboard/components/DashboardHeader
 import CustomSideBar from '@/components/SideBar';
 import { api } from '@/services/api';
 import { WhatsAppTemplate } from './types/whatsapp.types';
-
+import CreateTemplateModal from './CreateTemplateModal';
 
 
 
@@ -16,21 +16,7 @@ const ChannelPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj
   const [templateData, setTemplateData] = useState<WhatsAppTemplate | null>(null)
   const [errorMsg, setErrorMsg] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-
-  const createModel = async () => {
-    if(!templateData) return;
-    setIsLoading(true)
-    const res = await api.post('whatsapp/template', {
-      json: templateData
-    })
-    if(!res.ok){
-      setErrorMsg('Erro ao criar modelo')
-    }
-    const data = await res.json()
-    setIsLoading(false)
-  }
-
-  // precisa criar um modal para criar o modelo seguindo a interface do WhatsappTemplate
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <VStack spacing={4} align="stretch">
@@ -75,7 +61,11 @@ const ChannelPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj
                 </TableContainer>
               </Center>
             </Flex>
-
+            <Stack spacing={4} p={4} bg="white" borderRadius="md" boxShadow="md" width="100%" border="1px solid red">
+              <Heading size='md' color="red.900">WhatsApp Template</Heading>
+              <Button colorScheme="red" onClick={onOpen} w="250px" alignSelf="center">Criar Template</Button>
+              <CreateTemplateModal isOpen={isOpen} onClose={onClose} />
+            </Stack>
             <Stack spacing={4} p={4} bg="white" borderRadius="md" boxShadow="md" width="100%" border="1px solid red">
               <Heading size='md' color="red.900">WhatsApp</Heading>
               {whatsappObj?.used ? (
