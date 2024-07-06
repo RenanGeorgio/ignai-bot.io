@@ -15,7 +15,7 @@ import { useFetchRecipient } from '@/hooks/useFetchRecipient'
 import useUser from '@/hooks/useUser'
 import { Spinner } from '@chakra-ui/react'
 import Image from 'next/image'
-
+import { ChatStatus } from '@/contexts/chat/enums'
 
 interface UserChatProps {
   chat: Chat
@@ -29,20 +29,20 @@ export const UserChat: React.FC<UserChatProps> = ({ chat }) => {
 
   const { onlineUsers } = useChat()
 
-  if(recipientUser === null && !error) {
+  if (recipientUser === null && !error) {
     return <Spinner style={{ marginLeft: 5}}/>
   }
   
-  if(error){
+  if (error) {
     return;
   }
 
   const isOnline = onlineUsers?.some(
-    (onlineUser: OnlineUser) => onlineUser.userId === recipientUser?._id
-  )
+    (onlineUser: OnlineUser) =>
+      onlineUser.userId === recipientUser?._id &&
+      chat.status === ChatStatus.ACTIVE
+  );
 
-  console.log('recipientUser', recipientUser)
-  console.log('isOnline', isOnline)
   const origin = chat?.origin.platform
 
   const getChatIcon = () => {
@@ -86,7 +86,7 @@ export const UserChat: React.FC<UserChatProps> = ({ chat }) => {
         <div className={isOnline ? styles.online : styles.offline}></div>
       </div>
       <div className={styles.messageDetails}>
-        <div className={styles.companyName}>Fazenda Minas Pro</div>
+        {/* <div className={styles.companyName}>Fazenda Minas Pro</div> */}
         {/* <div className="time">1 Minute</div> */}
       </div>
       <div className={styles.messageLogo}>{getChatIcon()}</div>

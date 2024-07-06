@@ -1,15 +1,15 @@
 .left-menu {
   align-items: flex-start;
   border: 1px rgba(242, 45, 45, 0.373) solid;
-  border-radius: 3px 0px 0px 6px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 10px;
   border-right-width: 1px;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
-  width: auto;
+  width: 380px;
   height: auto;
   margin-left: 20%;
-  height: auto;
 }
 
 .left-menu .header-left {
@@ -21,7 +21,6 @@
   width: 100%;
   margin-bottom: 20px;
   background-color: #ffffff;
-  border-bottom: 1px rgba(242, 45, 45, 0.373) solid;
   justify-content: space-around;
   height: 23px;
 }
@@ -37,12 +36,13 @@
 .left-menu .instance {
   border-radius: 20px !important;
   flex-grow: 1 0 !important;
-  width: 80% !important;
+  width: 70% !important;
   height: 25px !important;
   color: #000;
   background-color: #fff;
   padding: 2px;
   margin-top: 15px;
+  margin-right: 70px;
   border: rgb(228, 2, 2) 1px solid;
 }
 
@@ -69,9 +69,10 @@
   gap: 4px;
   padding: 10px -5px 0px 3px;
   position: relative;
-  width: 100%;
+  width: 80%;
   height: 300px;
-  overflow-y: hidden !important;
+  border-bottom: 1px rgba(242, 45, 45, 0.373) solid;
+  overflow-y: auto !important;
   overflow-x: hidden !important;
 }
 
@@ -82,7 +83,8 @@
   flex: 0 0 auto;
   padding: 10px, 16px, 10px, 10px;
   width: 100%;
-  border: #c4c2c2 1px solid;
+  border: #ff8b8b 1px solid;
+  border-radius: 10px;
   margin-left: -0%;
 }
 
@@ -105,7 +107,7 @@
   color: rgb(0, 0, 0);
   padding: 10px;
   border: none;
-  border-radius: none;
+  border-radius: 10px;
   cursor: pointer;
   align-items: center;
   width: 100%;
@@ -123,7 +125,7 @@
   color: white;
   padding: 10px;
   border: none;
-  border-radius: 0px;
+  border-radius: 10px;
   cursor: pointer;
   align-items: center;
   width: 100%;
@@ -166,6 +168,8 @@
   overflow-x: hidden;
   width: 100%;
   height: 100%;
+  margin-left: 7px;
+  margin-top: 5px;
   padding: 0px 0px 30px 0px;
 }
 
@@ -181,6 +185,32 @@
 }
 
 .div-content::-webkit-scrollbar-thumb {
+  background-color: rgb(249, 158, 158);
+  border-radius: 20px;
+}
+
+.div-content-clients {
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+  margin-left: 0px;
+  margin-top: 5px;
+  padding: 0px 0px 30px 0px;
+}
+
+.div-content-clients::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 20px;
+}
+
+.div-contnet-clients::-webkit-scrollbar-track {
+  background: rgb(192, 192, 192);
+  width: 8px;
+  border-radius: 20px;
+}
+
+.div-content-clients::-webkit-scrollbar-thumb {
   background-color: rgb(249, 158, 158);
   border-radius: 20px;
 }
@@ -213,7 +243,9 @@
   display: flex;
   align-items: center;
   align-self: stretch;
-  border: 0.5px solid rgba(72, 72, 72, 0.081);
+  border: 0.5px solid rgba(255, 0, 0, 0.081);
+  border-radius: 20px;
+  box-shadow: 0 1px 2px rgba(255, 0, 0, 0.27);
   flex: 0 0 auto;
   gap: 12px;
   margin-bottom: 10px;
@@ -280,11 +312,15 @@
   width: min-content;
 }
 
+.left-menu .imgTextWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .left-menu .img-2 {
-  height: 24px;
   object-fit: cover;
   position: relative;
-  width: 24px;
 }
 
 .left-menu .namr-time {
@@ -471,13 +507,16 @@
 
 .messageBubble {
   background-color: rgb(255, 255, 255);
+  border: 1px solid rgba(208, 208, 208, 0.5);
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 5px;
+  width: 100%;
   margin: 5px;
   color: #000;
   display: flex;
   align-items: center;
   position: relative;
+  cursor: pointer;
 }
 
 .avatarWithName {
@@ -497,6 +536,7 @@
 .name {
   color: #000000;
   font-size: 15px;
+  top: 20px;
 }
 
 .companyName {
@@ -507,8 +547,8 @@
   padding: 3px 8px;
   border-radius: 10px;
   position: absolute;
-  right: 5px;
-  top: 3px;
+  right: 74px;
+  top: 7px;
 }
 
 .time {
@@ -527,8 +567,8 @@
 
 .messageLogo {
   position: absolute;
-  top: -0px;
-  left: 50px;
+  top: 5px;
+  left: 75px;
   width: 22px;
 }
 
@@ -563,4 +603,20 @@
 .custom-placeholder::placeholder {
   color: black;
   margin-left: 10px;
+}
+
+@media (max-width: 768px) {
+  .left-menu {
+    width: auto;
+  }
+
+  .left-menu .instance {
+    width: 90px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .left-menu {
+    width: auto;
+  }
 }

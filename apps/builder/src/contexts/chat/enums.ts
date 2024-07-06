@@ -5,3 +5,11 @@ export enum Platforms {
   WEB = 'web',
   WHATSAPP = 'whatsapp',
 }
+
+
+export enum ChatStatus {
+  ACTIVE = "active",
+  FINISHED = "finished",
+  ARCHIVED = "archived",
+  // DELETED = "deleted",
+}
