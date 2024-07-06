@@ -13,7 +13,7 @@ export default function Page(props: ChannelProps) {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const getServerSideProps: GetServerSideProps<ChannelProps> = async (context: GetServerSidePropsContext) => { 
+export const getServerSideProps: GetServerSideProps<any> = async (context: GetServerSidePropsContext) => { 
   // Buscar informacoes sobre os services que o cliente possui e seus identificadores
   // const res = await fetch('/api/workspaces/channels');
   // nao é necessario alterar o formato desses dados no backend, basta colocar o tratamento aqui, para o formato do ChannelProps
@@ -24,10 +24,6 @@ export const getServerSideProps: GetServerSideProps<ChannelProps> = async (conte
     context.res,
     getAuthOptions({})
   );
-
-  if (!session) {
-    return null
-  }
 
   const user = session?.user as User
   const res = await fetch(`${env.CHATBOT_SERVER_URL}/v1/bot/services/${user.email}`);
