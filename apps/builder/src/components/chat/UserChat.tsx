@@ -29,11 +29,11 @@ export const UserChat: React.FC<UserChatProps> = ({ chat }) => {
 
   const { onlineUsers } = useChat()
 
-  if(recipientUser === null && !error) {
+  if (recipientUser === null && !error) {
     return <Spinner style={{ marginLeft: 5}}/>
   }
   
-  if(error){
+  if (error) {
     return;
   }
 
@@ -67,7 +67,7 @@ export const UserChat: React.FC<UserChatProps> = ({ chat }) => {
         return <WhatsAppIcon />
     }
   }
-  console.log(recipientUser)
+
   return (
     <div className={styles.messageBubble}>
       <div className={styles.avatarWithName}>
