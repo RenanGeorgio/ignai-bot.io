@@ -13,7 +13,7 @@ export default function Page(props: ChannelProps) {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => { 
+export const getServerSideProps: GetServerSideProps<ChannelProps> = async (context: GetServerSidePropsContext) => { 
   // Buscar informacoes sobre os services que o cliente possui e seus identificadores
   // const res = await fetch('/api/workspaces/channels');
   // nao é necessario alterar o formato desses dados no backend, basta colocar o tratamento aqui, para o formato do ChannelProps
