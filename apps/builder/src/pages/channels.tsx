@@ -12,7 +12,7 @@ export default function Page(props: ChannelProps) {
   return <ChannelsPage {...props} />
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars @typescript-eslint/no-explicit-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getServerSideProps: GetServerSideProps<any> = async (context: GetServerSidePropsContext) => { 
   // Buscar informacoes sobre os services que o cliente possui e seus identificadores
   // const res = await fetch('/api/workspaces/channels');
