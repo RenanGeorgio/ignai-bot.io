@@ -1,5 +1,5 @@
 import { GetServerSidePropsContext } from 'next';
-import type { InferGetServerSidePropsType, GetServerSideProps } from 'next';
+import type { GetServerSideProps } from 'next';
 import ChannelsPage from '@/features/channels/components/ChannelsPage';
 import { ChannelProps } from '@/features/channels/types';
 import { getServerSession } from 'next-auth';
@@ -8,7 +8,7 @@ import { User } from '@typebot.io/schemas';
 import { formatServiceList } from '@/helpers/formatServiceList';
 import { env } from '@typebot.io/env';
 
-export default function Page(props: ChannelProps): InferGetServerSidePropsType<typeof getServerSideProps> {
+export default function Page(props: ChannelProps) {
   return <ChannelsPage {...props} />
 }
 
