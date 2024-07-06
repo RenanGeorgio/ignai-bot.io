@@ -13,9 +13,9 @@ import styles from '@/assets/styles/leftmenu.module.css'
 import { Chat, OnlineUser } from '@/contexts/chat/types'
 import { useFetchRecipient } from '@/hooks/useFetchRecipient'
 import useUser from '@/hooks/useUser'
+import Image from 'next/image'
 import { ChatStatus } from '@/contexts/chat/enums'
 import { Spinner } from '@chakra-ui/react'
-
 
 interface UserChatProps {
   chat: Chat
@@ -25,14 +25,18 @@ interface UserChatProps {
 export const UserChat: React.FC<UserChatProps> = ({ chat }) => {
   // export const UserChat: React.FC<UserChatProps> = ({ chat, user }) => {
   const { user } = useUser();
-  const { recipientUser } = useFetchRecipient(chat, user)
+  const { recipientUser, error } = useFetchRecipient(chat, user)
 
   const { onlineUsers } = useChat()
 
-  if(recipientUser === null) {
-    return <Spinner />
+  if(recipientUser === null && !error) {
+    return <Spinner style={{ marginLeft: 5}}/>
   }
   
+  if(error){
+    return;
+  }
+
   const isOnline = onlineUsers?.some(
     (onlineUser: OnlineUser) =>
       onlineUser.userId === recipientUser?._id &&
@@ -63,19 +67,21 @@ export const UserChat: React.FC<UserChatProps> = ({ chat }) => {
         return <WhatsAppIcon />
     }
   }
-
+  console.log(recipientUser)
   return (
     <div className={styles.messageBubble}>
       <div className={styles.avatarWithName}>
         <div className={styles.imageName}>
-          <img
-            src={'/images/blank_avatar.jpg'}
+          <Image
+            src={'https://i.pravatar.cc/150?img=3'}
             alt="Avatar"
             className={styles['avatar-client']}
+            width={50}
+            height={50}
           />
           <div
             className={styles['name']}
-          >{`${recipientUser?.name} ${recipientUser?.lastName}`}</div>
+          >{`${recipientUser?.name} ${recipientUser?.lastName ?? ""}`}</div>
         </div>
         <div className={isOnline ? styles.online : styles.offline}></div>
       </div>

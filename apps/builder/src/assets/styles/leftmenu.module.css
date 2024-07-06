@@ -71,6 +71,7 @@
   position: relative;
   width: 80%;
   height: 300px;
+  border-bottom: 1px rgba(242, 45, 45, 0.373) solid;
   overflow-y: auto !important;
   overflow-x: hidden !important;
 }

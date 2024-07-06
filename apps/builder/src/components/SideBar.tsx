@@ -13,7 +13,7 @@ import {
   VStack,
   Tooltip
 } from '@chakra-ui/react';
-import { ChatIcon, ChevronLeftIcon, ChevronRightIcon, FolderIcon, ToolIcon, UserIcon } from './icons';
+import { ChatIcon, ChevronLeftIcon, ChevronRightIcon, FolderIcon, PhoneIcon, ToolIcon, UserIcon } from './icons';
 import { useUser } from '@/features/account/hooks/useUser';
 
 type CustomHTMLDivElement = Omit<HTMLDivElement, "removeEventListener" | "addEventListener">;
@@ -77,6 +77,13 @@ const SidebarContent = ({ tab, navSize, ...props }: ContentProps & IconProps) =>
           <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
         </Flex>
       )
+    case 'Channels':
+      return (
+        <Flex alignItems="center" justify="center">
+          <PhoneIcon {...props}/>
+          <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
+        </Flex>
+       )
     case 'Dashboard':
       return (
         <Flex alignItems="center" justify="center">
@@ -215,14 +222,17 @@ const CustomSideBar = () => {
           <Tooltip hasArrow label="Dashboard">
             <NavItem router={router} path={"/home"} navSize={navSize} title="Dashboard" description="Dashboard - Pagina de entrada." />
           </Tooltip>
-          <Tooltip hasArrow label="Builder">
+          <Tooltip hasArrow label="Home">
             <NavItem router={router} path={`/${company}/home`} navSize={navSize} title="Home" description="Pagina inicial da aplicação." />
           </Tooltip>
-          <Tooltip hasArrow label="Builder">
+          <Tooltip hasArrow label="Chat">
             <NavItem router={router} path={`/${company}/${user?.id}/chat`} navSize={navSize} title="Chat" description="Conteudo de chat disponivel." />
           </Tooltip>
           <Tooltip hasArrow label="Builder">
             <NavItem router={router} path={"/typebots"} navSize={navSize} title="Builder" description="Construtor de Bot" />
+          </Tooltip>
+          <Tooltip hasArrow label="Channels">
+            <NavItem router={router} path={"/channels"} navSize={navSize} title="Channels" description="Canais de comunicação no Workspace" />
           </Tooltip>
         </Flex>
       </VStack>
