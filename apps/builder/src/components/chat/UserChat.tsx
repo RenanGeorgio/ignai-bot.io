@@ -17,7 +17,6 @@ import { Spinner } from '@chakra-ui/react'
 import Image from 'next/image'
 import { ChatStatus } from '@/contexts/chat/enums'
 
-
 interface UserChatProps {
   chat: Chat
   // user: User
@@ -30,11 +29,11 @@ export const UserChat: React.FC<UserChatProps> = ({ chat }) => {
 
   const { onlineUsers } = useChat()
 
-  if(recipientUser === null && !error) {
+  if (recipientUser === null && !error) {
     return <Spinner style={{ marginLeft: 5}}/>
   }
   
-  if(error){
+  if (error) {
     return;
   }
 

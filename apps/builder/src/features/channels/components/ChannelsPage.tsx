@@ -9,13 +9,10 @@ import CustomSideBar from '@/components/SideBar';
 import { api } from '@/services/api';
 import { WhatsAppTemplate } from './types/whatsapp.types';
 
-
-
-
 const ChannelPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj, hasNumbers, numbersList }: ChannelProps) => {
-  const [templateData, setTemplateData] = useState<WhatsAppTemplate | null>(null)
-  const [errorMsg, setErrorMsg] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
+  const [templateData, setTemplateData] = useState<WhatsAppTemplate | null>(null);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const createModel = async () => {
     if(!templateData) return;
@@ -31,7 +28,6 @@ const ChannelPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj
   }
 
   // precisa criar um modal para criar o modelo seguindo a interface do WhatsappTemplate
-
   return (
     <VStack spacing={4} align="stretch">
       <DashboardHeader />

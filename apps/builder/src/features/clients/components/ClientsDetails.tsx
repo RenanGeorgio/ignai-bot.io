@@ -1,5 +1,5 @@
-import React from 'react'
-import { Box, Text, Avatar, HStack, Tag, Center, Stack, Divider, VStack, Spacer } from '@chakra-ui/react'
+import React from 'react';
+import { Box, Text, Avatar, HStack, Tag, Center, Stack, Divider, VStack, Spacer } from '@chakra-ui/react';
 import { Client } from '../types';
 
 const ClientsDetails = ({ client }: { client: Client | null}) => {
@@ -8,7 +8,7 @@ const ClientsDetails = ({ client }: { client: Client | null}) => {
       <Center>
         <Text marginTop="250px">Selecione um cliente para ver os detalhes</Text>
       </Center>
-    )
+    );
   }
 
   // verifica se o cliente possui endereço
@@ -26,7 +26,7 @@ const ClientsDetails = ({ client }: { client: Client | null}) => {
     >
       <VStack spacing="4" align="stretch" flex="1" alignItems="flex-start">
         <HStack spacing="4">
-          <Avatar name={client.name} src={client.image} size="md" />
+          <Avatar name={client.name} src={client?.image} size="md" />
           <VStack align="left" spacing="1">
             {client.name && (
               <Text fontSize="xl">
@@ -57,29 +57,29 @@ const ClientsDetails = ({ client }: { client: Client | null}) => {
           <Text color="red.900">Endereço</Text>
           <HStack spacing="10" width="100%">
             <Text color="red.600" fontSize="md">
-              <Text color="red.900">Rua:</Text> {address.street ?? 'Não informado'}
+              <Text color="red.900">Rua:</Text> {address?.street ?? 'Não informado'}
             </Text>
             <Spacer />
             <Text color="red.600" fontSize="md">
-              <Text color="red.900">Número:</Text> {address.number ?? 'Não informado'}
+              <Text color="red.900">Número:</Text> {address?.number ?? 'Não informado'}
             </Text>
           </HStack>  
           <Text color="red.600" fontSize="md">
-            <Text color="red.900">Bairro:</Text> {address.neighborhood ?? 'Não informado'}
+            <Text color="red.900">Bairro:</Text> {address?.neighborhood ?? 'Não informado'}
           </Text>
           <HStack spacing="10" width="100%">
             <Text color="red.600" fontSize="md">
-              <Text color="red.900">Cidade:</Text> {address.city ?? 'Não informado'}
+              <Text color="red.900">Cidade:</Text> {address?.city ?? 'Não informado'}
             </Text>
             <Spacer />
             <Text color="red.600" fontSize="md">
-              <Text color="red.900">Estado:</Text> {address.state ?? 'Não informado'}
+              <Text color="red.900">Estado:</Text> {address?.state ?? 'Não informado'}
             </Text>
           </HStack>
         </Stack>
       </VStack>
     </Box>
-  )
+  );
 }
 
 export default ClientsDetails;
