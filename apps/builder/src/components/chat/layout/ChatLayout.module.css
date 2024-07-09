@@ -26,6 +26,8 @@
   border: 1px rgba(242, 45, 45, 0.373) solid;
   border-top-right-radius: 2px;
   border-bottom-right-radius: 10px;
+  height: "90vh";
+  overflow-y: "auto";
 }
 
 .wrapper-box {
