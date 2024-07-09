@@ -47,9 +47,9 @@ const Chat: React.FC = () => {
   }
 
   return (
-    <VStack>
+    <VStack height="100vh" overflowY="auto">
       <DashboardHeader />
-      <Flex w="100%" h="100%">
+      <Flex w="100%">
         <CustomSideBar />
         <Center flex="1">
           <div style={{ overflowY: 'auto' }} className={styles['page-content']}>

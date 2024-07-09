@@ -9,12 +9,12 @@ import CustomSideBar from '@/components/SideBar';
 
 const ChannelPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj, hasNumbers, numbersList }: ChannelProps) => {
   return (
-    <VStack spacing={4} align="stretch" overflow="hidden">
+    <VStack height="100vh" overflowY="auto" spacing={4} align="stretch">
       <DashboardHeader />
       <Flex w="100%" px={4}>
         <CustomSideBar />
         <Center flex="1">
-          <VStack spacing={6} overflowY="auto" p={4} width="95%" mx="auto">
+          <Box spacing={6} overflowY="auto" p={4} width="95%" mx="auto">
             <Flex my={4} p={4} bg="white" borderRadius="md" boxShadow="md" width="100%" border="1px solid red">
               <Heading size='md' mb={4} color="red.900">Número Corporativo</Heading>
               <Center p='2' width="70%">
@@ -153,7 +153,7 @@ const ChannelPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj
                 </Center>
               )}
             </Stack>
-          </VStack>
+          </Box>
         </Center>
       </Flex>
     </VStack>
