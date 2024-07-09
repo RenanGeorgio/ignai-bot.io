@@ -188,7 +188,8 @@ const CustomSideBar = () => {
       marginTop="0.5vh"
       boxShadow="0 4px 12px 0 rgba(0, 0, 0, 0.05)"
       backgroundColor="rgba(255, 217, 217, 0.8)"
-      color="#000"
+      {/* color="#000" */}
+      color="#fff"
       borderRadius={navSize == "small" ? "15px" : "30px"}
       w={navSize == "small" ? "56px" : "150px"} 
       flexDir="column"
