@@ -181,9 +181,9 @@ const CustomSideBar = () => {
 
   return (
     <Flex
-      pos="sticky"
+      pos="fixed"
       left="2"
-      h="90vh"
+      h="85vh"
       marginTop="0.5vh"
       boxShadow="0 4px 12px 0 rgba(0, 0, 0, 0.05)"
       backgroundColor="rgba(255, 217, 217, 0.8)"

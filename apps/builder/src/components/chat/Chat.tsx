@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Flex, VStack } from '@chakra-ui/react';
+import { Flex, VStack, Center } from '@chakra-ui/react';
 import { ThemeProvider } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 import { DashboardHeader } from '@/features/dashboard/components/DashboardHeader';
@@ -51,62 +51,64 @@ const Chat: React.FC = () => {
       <DashboardHeader />
       <Flex w="100%">
         <CustomSideBar />
-        <div style={{ overflow: 'hidden' }} className={styles['page-content']}>
-          <div className={styles['button-container']}>
-            <button
-              className={
-                activePage === 'Atendimento'
-                  ? styles.redButtonChat
-                  : styles.grayButtonChat
-              }
-              onClick={() => handleButtonClick('Atendimento')}
-            >
-              Atendimento
-            </button>
-            <button
-              className={
-                activePage === 'Histórico'
-                  ? styles.redButtonChat
-                  : styles.grayButtonChat
-              }
-              onClick={() => handleButtonClick('Histórico')}
-            >
-              Histórico
-            </button>
-            <button
-              className={
-                activePage === 'Painel'
-                  ? styles.redButtonChat
-                  : styles.grayButtonChat
-              }
-              onClick={() => handleButtonClick('Painel')}
-            >
-              Painel
-            </button>
+        <Center flex="1" height="100%" overflowY="auto" ml="100px">
+          <div style={{ overflow: 'hidden' }} className={styles['page-content']}>
+            <div className={styles['button-container']}>
+              <button
+                className={
+                  activePage === 'Atendimento'
+                    ? styles.redButtonChat
+                    : styles.grayButtonChat
+                }
+                onClick={() => handleButtonClick('Atendimento')}
+              >
+                Atendimento
+              </button>
+              <button
+                className={
+                  activePage === 'Histórico'
+                    ? styles.redButtonChat
+                    : styles.grayButtonChat
+                }
+                onClick={() => handleButtonClick('Histórico')}
+              >
+                Histórico
+              </button>
+              <button
+                className={
+                  activePage === 'Painel'
+                    ? styles.redButtonChat
+                    : styles.grayButtonChat
+                }
+                onClick={() => handleButtonClick('Painel')}
+              >
+                Painel
+              </button>
+            </div>
+            <div>
+              {activePage === 'Atendimento' && (
+                <div>
+                  <ChatLayout />
+                </div>
+              )}
+              {activePage === 'Histórico' && (
+                <>
+                  <ThemeProvider theme={{ ['MuiTheme']: MuiTheme }}>
+                    <History />
+                  </ThemeProvider>
+                </>
+              )}
+              {activePage === 'Painel' && (
+                <div className={styles['container-graphs-chat']}>
+                  <GraphChat data={{ datasets: [], labels: [] }} />
+                  <GraphTicket data={[]} />
+                  <GraphThemes month={''} />
+                  <GraphTicketYou data={[]} />
+                </div>
+              )}
+            </div>
           </div>
-          <div>
-            {activePage === 'Atendimento' && (
-              <div>
-                <ChatLayout />
-              </div>
-            )}
-            {activePage === 'Histórico' && (
-              <>
-                <ThemeProvider theme={{ ['MuiTheme']: MuiTheme }}>
-                  <History />
-                </ThemeProvider>
-              </>
-            )}
-            {activePage === 'Painel' && (
-              <div className={styles['container-graphs-chat']}>
-                <GraphChat data={{ datasets: [], labels: [] }} />
-                <GraphTicket data={[]} />
-                <GraphThemes month={''} />
-                <GraphTicketYou data={[]} />
-              </div>
-            )}
-          </div>
-        </div>
+        </Center>
       </Flex>
     </VStack>
   );
