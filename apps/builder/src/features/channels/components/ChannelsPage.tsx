@@ -153,7 +153,6 @@ const ChannelPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj
                 </Center>
               )}
             </Stack>
-
           </VStack>
         </Center>
       </Flex>
