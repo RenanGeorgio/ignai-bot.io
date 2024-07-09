@@ -45,3 +45,18 @@ export enum ButtonType {
   CONTACT = "CONTACT",
   QUICK_REPLY = "QUICK_REPLY",
 }
+
+export enum TemplateCreationStatus {
+  PENDING = "PENDING",
+  APPROVED = "APPROVED",
+  REJECTED = "REJECTED",
+}
+
+export interface TemplateResponseData {
+  message: {
+    templateId: string;
+    name: string;
+    category: TemplateCategory;
+    status: TemplateCreationStatus 
+  }
+}

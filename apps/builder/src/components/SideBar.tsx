@@ -139,7 +139,7 @@ const NavHoverBox = ({ title, description }: HoverProps) => {
 const NavItem = ({ title, path, description, active, navSize, router }: NavItemProps) => {
   return (
     <Flex
-      mt={12} 
+      mt={6} 
       flexDir="column"
       w="100%"
       alignItems={navSize == "small" ? "center" : "flex-start"} 
@@ -154,6 +154,7 @@ const NavItem = ({ title, path, description, active, navSize, router }: NavItemP
             w={navSize == "large" ? "100%" : "35%"}
             p={3}
             borderRadius={8}
+            boxShadow="0 3px 5px -1px rgb(0 0 0 / 0.05)"
             backgroundColor="rgba(255, 217, 217, 0.8)"
             _hover={{ textDecor: 'none', backgroundColor: "rgba(255, 0, 0, 0.9)", color: "#fff", '& svg': { color: '#fff' } }}
             onClick={() => router.push(path)}
@@ -189,7 +190,8 @@ const CustomSideBar = () => {
     <Flex
       pos="sticky"
       left="2"
-      h="95vh"
+      h="85vh"
+      maxH="95vh"
       marginTop="0.5vh"
       boxShadow="0 4px 12px 0 rgba(0, 0, 0, 0.05)"
       backgroundColor="rgba(255, 217, 217, 0.8)"
@@ -202,7 +204,7 @@ const CustomSideBar = () => {
       <VStack 
         w="100%"
         alignItems="center"
-        spacing='24px'
+        spacing={0}
       >
         <IconButton
           background="none"
@@ -220,7 +222,6 @@ const CustomSideBar = () => {
           }}
         />
         <Flex
-          p="5%"
           flexDir="column"
           w="100%"
           alignItems="flex-start"
