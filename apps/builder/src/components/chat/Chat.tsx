@@ -92,7 +92,7 @@ const Chat: React.FC = () => {
                 </div>
               )}
               {activePage === 'Histórico' && (
-                <div style={{ width: "70vh", height: "90vh", overflowY: "auto", overflowX: "auto" }}>
+                <div style={{ width: "70%", height: "90vh", overflowY: "auto", overflowX: "auto" }}>
                   <ThemeProvider theme={{ ['MuiTheme']: MuiTheme }}>
                     <History />
                   </ThemeProvider>
