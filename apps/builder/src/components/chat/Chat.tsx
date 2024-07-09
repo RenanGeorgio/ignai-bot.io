@@ -47,12 +47,12 @@ const Chat: React.FC = () => {
   }
 
   return (
-    <VStack height="100vh" overflowY="auto">
+    <VStack>
       <DashboardHeader />
       <Flex w="100%">
         <CustomSideBar />
         <Center flex="1">
-          <div style={{ overflowY: 'auto' }} className={styles['page-content']}>
+          <div className={styles['page-content']}>
             <div className={styles['button-container']}>
               <button
                 className={
@@ -87,19 +87,19 @@ const Chat: React.FC = () => {
             </div>
             <div>
               {activePage === 'Atendimento' && (
-                <div>
+                <div style={{ height: "100vh", overflowY: "auto" }}>
                   <ChatLayout />
                 </div>
               )}
               {activePage === 'Histórico' && (
-                <>
+                <div style={{ height: "100vh", overflowY: "auto" }}>
                   <ThemeProvider theme={{ ['MuiTheme']: MuiTheme }}>
                     <History />
                   </ThemeProvider>
-                </>
+                </div>
               )}
               {activePage === 'Painel' && (
-                <div className={styles['container-graphs-chat']}>
+                <div style={{ height: "100vh", overflowY: "auto" }} className={styles['container-graphs-chat']}>
                   <GraphChat data={{ datasets: [], labels: [] }} />
                   <GraphTicket data={[]} />
                   <GraphThemes month={''} />
