@@ -181,7 +181,7 @@ const CustomSideBar = () => {
 
   return (
     <Flex
-      pos="fixed"
+      pos="sticky"
       left="2"
       h="85vh"
       marginTop="0.5vh"

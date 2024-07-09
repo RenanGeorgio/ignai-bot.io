@@ -51,7 +51,7 @@ const Chat: React.FC = () => {
       <DashboardHeader />
       <Flex w="100%">
         <CustomSideBar />
-        <Center flex="1" height="100%" overflowY="auto" ml="100px">
+        <Center flex="1" height="100%" overflowY="auto">
           <div style={{ overflow: 'hidden' }} className={styles['page-content']}>
             <div className={styles['button-container']}>
               <button
