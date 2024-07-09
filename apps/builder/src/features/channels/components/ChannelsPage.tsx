@@ -11,10 +11,10 @@ const ChannelPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj
   return (
     <VStack spacing={4} align="stretch" height="100vh" overflow="hidden">
       <DashboardHeader />
-      <Flex w="100%" px={4} height="100%">
+      <Flex w="100%" px={4}>
         <CustomSideBar />
         <Center flex="1" height="100%" overflowY="auto">
-          <VStack spacing={6} overflowX="hidden" p={4} width="95%" mx="auto">
+          <VStack spacing={6} p={4} width="95%" mx="auto">
             <Flex my={4} p={4} bg="white" borderRadius="md" boxShadow="md" width="100%" border="1px solid red">
               <Heading size='md' mb={4} color="red.900">Número Corporativo</Heading>
               <Center p='2' width="70%">
