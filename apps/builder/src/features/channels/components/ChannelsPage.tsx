@@ -14,7 +14,7 @@ const ChannelPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj
       <Flex w="100%" px={4}>
         <CustomSideBar />
         <Center flex="1">
-          <Box spacing={6} overflowY="auto" p={4} width="95%" mx="auto">
+          <Box overflowY="auto" p={4} width="95%" mx="auto">
             <Flex my={4} p={4} bg="white" borderRadius="md" boxShadow="md" width="100%" border="1px solid red">
               <Heading size='md' mb={4} color="red.900">Número Corporativo</Heading>
               <Center p='2' width="70%">
