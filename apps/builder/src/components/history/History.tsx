@@ -114,7 +114,7 @@ export default function HistoryComponent() {
         maxWidth: '94%',
         paddingTop: 2,
         paddingBottom: 24,
-        paddingLeft: '15%',
+        paddingLeft: '7%',
         paddingRight: '2%',
         flexDirection: 'column',
         justifyContent: 'center',
