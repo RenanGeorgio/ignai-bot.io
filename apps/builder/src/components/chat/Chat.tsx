@@ -92,11 +92,11 @@ const Chat: React.FC = () => {
                 </div>
               )}
               {activePage === 'Histórico' && (
-                <>
+                <div style={{ width: "85%"}}>
                   <ThemeProvider theme={{ ['MuiTheme']: MuiTheme }}>
                     <History />
                   </ThemeProvider>
-                </>
+                </div>
               )}
               {activePage === 'Painel' && (
                 <div style={{ height: "80vh", overflowY: "auto" }} className={styles['container-graphs-chat']}>
