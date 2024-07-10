@@ -110,7 +110,7 @@ export default function HistoryComponent() {
   return (
     <div
       style={{
-        width: '93',
+        width: '90%',
         paddingTop: 2,
         paddingBottom: 24,
         paddingLeft: '0%',
@@ -130,9 +130,9 @@ export default function HistoryComponent() {
           justifyContent: 'end',
           alignItems: 'flex-start',
           display: 'flex',
-          width: '95%',
+          width: '90%',
           marginBottom: '20px',
-          maxWidth: '95%'
+          maxWidth: '90%'
         }}
       >
         <div
@@ -172,7 +172,8 @@ export default function HistoryComponent() {
           alignItems: 'center',
           gap: 24,
           display: 'flex',
-          width: '98%',
+          width: '90%',
+          maxWidth: '90%',
           padding: '5px 0px 1px 10px',
           backgroundColor: 'white'
         }}
@@ -186,7 +187,7 @@ export default function HistoryComponent() {
             alignItems: 'flex-start',
             display: 'flex',
             width: '100px',
-            maxWidth: '95%'
+            maxWidth: '90%'
           }}
         >
           <div
@@ -303,7 +304,8 @@ export default function HistoryComponent() {
           justifyContent: 'flex-start',
           alignItems: 'flex-start',
           display: 'inline-flex',
-          width: '100%',
+          width: '90%',
+          maxWidth: '90%',
           marginBottom: '-5px',
           backgroundColor: 'white',
           borderTop: '1px rgb(228, 2, 2) solid',
@@ -335,7 +337,8 @@ export default function HistoryComponent() {
           alignItems: 'center',
           gap: 16,
           display: 'flex',
-          width: '100%',
+          width: '90%',
+          maxWidth: '90%',
           borderTop: '1px rgb(228, 2, 2) solid',
           borderLeft: '1px rgb(228, 2, 2) solid',
           borderRight: '1px rgb(228, 2, 2) solid',
@@ -423,8 +426,8 @@ export default function HistoryComponent() {
       <div 
         style={{ 
           height: 370,
-          width: '95%', 
-          maxWidth: '95%',
+          width: '90%', 
+          maxWidth: '90%',
           backgroundColor: 'white', 
           border: '1px solid rgb(228, 2, 2)', 
           borderRadius: '5px', 
