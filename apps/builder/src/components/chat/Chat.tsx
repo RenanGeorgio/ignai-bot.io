@@ -87,7 +87,7 @@ const Chat: React.FC = () => {
             </div>
             <div>
               {activePage === 'Atendimento' && (
-                <div style={{ width: '100%', overflowX: 'hidden', boxSizing: 'border-box' }}>
+                <div>
                   <ChatLayout />
                 </div>
               )}
