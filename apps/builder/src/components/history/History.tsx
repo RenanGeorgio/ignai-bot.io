@@ -110,17 +110,17 @@ export default function HistoryComponent() {
   return (
     <div
       style={{
-        width: '90%',
+        width: '93',
         paddingTop: 2,
         paddingBottom: 24,
-        paddingLeft: '5%',
-        paddingRight: '5%',
-        margin: 'auto',
+        paddingLeft: '0%',
+        paddingRight: '0%',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'flex-start',
         gap: 1,
         display: 'inline-flex',
+        overflowX: 'hidden'
       }}
     >
       <div
@@ -131,7 +131,8 @@ export default function HistoryComponent() {
           alignItems: 'flex-start',
           display: 'flex',
           width: '100%',
-          marginBottom: '20px'
+          marginBottom: '20px',
+          maxWidth: '100%'
         }}
       >
         <div
@@ -185,6 +186,7 @@ export default function HistoryComponent() {
             alignItems: 'flex-start',
             display: 'flex',
             width: '100px',
+            maxWidth: '100%'
           }}
         >
           <div
@@ -422,6 +424,7 @@ export default function HistoryComponent() {
         style={{ 
           height: 370,
           width: '100%', 
+          maxWidth: '100%',
           backgroundColor: 'white', 
           border: '1px solid rgb(228, 2, 2)', 
           borderRadius: '5px', 
