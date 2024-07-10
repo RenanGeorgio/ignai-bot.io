@@ -110,11 +110,11 @@ export default function HistoryComponent() {
   return (
     <div
       style={{
-        width: '92%',
+        width: '93%',
         paddingTop: 2,
         paddingBottom: 24,
         paddingLeft: '10%',
-        paddingRight: '5%',
+        paddingRight: '10px',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'flex-start',
