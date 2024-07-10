@@ -110,7 +110,7 @@ export default function HistoryComponent() {
   return (
     <div
       style={{
-        width: '100%',
+        width: '90%',
         paddingTop: 2,
         paddingBottom: 24,
         paddingLeft: '5%',
@@ -120,8 +120,6 @@ export default function HistoryComponent() {
         alignItems: 'flex-start',
         gap: 1,
         display: 'inline-flex',
-        overflowX: 'hidden',
-        boxSizing: 'border-box'
       }}
     >
       <div
