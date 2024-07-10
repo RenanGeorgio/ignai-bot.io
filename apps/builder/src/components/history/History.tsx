@@ -110,7 +110,7 @@ export default function HistoryComponent() {
   return (
     <div
       style={{
-        width: '80%',
+        width: '92%',
         paddingTop: 2,
         paddingBottom: 24,
         paddingLeft: 90,

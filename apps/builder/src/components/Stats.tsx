@@ -50,7 +50,7 @@ const StatsCard = (props: StatsCardProps) => {
 
 const Statistics = () => {
   return (
-    <Box maxW="7xl" mx={'auto'} pt={5} px={{ base: 2, sm: 12, md: 17 }}>
+    <Box maxW="7xl" mx={'auto'} pt={5} px={{ base: 2, sm: 12, md: 17 }} overflowY="auto" h="95">
       <chakra.h1
         textAlign={'center'}
         fontSize={'4xl'}
