@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Flex, VStack, Center } from '@chakra-ui/react';
-import { createTheme } from '@mui/material/styles';
+/* import { ThemeProvider } from '@mui/material';
+import { createTheme } from '@mui/material/styles'; 
+import { colors } from '@/lib/theme'; */
 import { DashboardHeader } from '@/features/dashboard/components/DashboardHeader';
 import History from '@/components/chat/layout/HistoryLayout';
 import GraphChat from '@/components/graph/GraphChat';
@@ -8,12 +10,12 @@ import GraphTicket from '@/components/graph/GraphTicket';
 import GraphTicketYou from '@/components/graph/GraphTicketYou';
 import GraphThemes from '@/components/graph/GraphThemes';
 import CustomSideBar from '@/components/SideBar';
-import { colors } from '@/lib/theme';
 
 import type {} from '@mui/x-data-grid/themeAugmentation';
 import styles from '@/assets/styles/forms.module.css';
 import ChatLayout from './layout/ChatLayout';
 
+/*
 const MuiTheme = createTheme({
   palette: {
     mode: 'light',
@@ -37,6 +39,7 @@ const MuiTheme = createTheme({
     }
   }
 });
+*/ 
 
 const Chat: React.FC = () => {
   const [activePage, setActivePage] = useState('Atendimento');
