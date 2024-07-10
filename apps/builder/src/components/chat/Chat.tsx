@@ -49,9 +49,9 @@ const Chat: React.FC = () => {
   return (
     <VStack>
       <DashboardHeader />
-      <Flex w="100%" maxW="100%">
+      <Flex w="100%" maxW="100%" overflowX="hidden">
         <CustomSideBar />
-        <Center flex="1">
+        <Center flex="1" maxW="90%">
           <div className={styles['page-content']}>
             <div className={styles['button-container']}>
               <button
