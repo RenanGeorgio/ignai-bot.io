@@ -130,9 +130,9 @@ export default function HistoryComponent() {
           justifyContent: 'end',
           alignItems: 'flex-start',
           display: 'flex',
-          width: '100%',
+          width: '95%',
           marginBottom: '20px',
-          maxWidth: '100%'
+          maxWidth: '95%'
         }}
       >
         <div
@@ -186,7 +186,7 @@ export default function HistoryComponent() {
             alignItems: 'flex-start',
             display: 'flex',
             width: '100px',
-            maxWidth: '100%'
+            maxWidth: '95%'
           }}
         >
           <div
@@ -423,8 +423,8 @@ export default function HistoryComponent() {
       <div 
         style={{ 
           height: 370,
-          width: '100%', 
-          maxWidth: '100%',
+          width: '95%', 
+          maxWidth: '95%',
           backgroundColor: 'white', 
           border: '1px solid rgb(228, 2, 2)', 
           borderRadius: '5px', 
