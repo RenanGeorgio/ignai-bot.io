@@ -92,14 +92,14 @@ const Chat: React.FC = () => {
                 </div>
               )}
               {activePage === 'Histórico' && (
-                <div style={{ height: "90vh", overflowY: "auto" }}>
+                <div>
                   <ThemeProvider theme={{ ['MuiTheme']: MuiTheme }}>
                     <History />
                   </ThemeProvider>
                 </div>
               )}
               {activePage === 'Painel' && (
-                <div style={{ height: "80vh", overflowY: "auto" }} className={styles['container-graphs-chat']}>
+                <div className={styles['container-graphs-chat']}>
                   <GraphChat data={{ datasets: [], labels: [] }} />
                   <GraphTicket data={[]} />
                   <GraphThemes month={''} />
