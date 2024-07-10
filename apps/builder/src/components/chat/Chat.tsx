@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Flex, VStack, Center } from '@chakra-ui/react';
-/* import { ThemeProvider } from '@mui/material';
-import { createTheme } from '@mui/material/styles'; 
-import { colors } from '@/lib/theme'; */
+import { ThemeProvider } from '@mui/material';
+import { createTheme } from '@mui/material/styles';
 import { DashboardHeader } from '@/features/dashboard/components/DashboardHeader';
 import History from '@/components/chat/layout/HistoryLayout';
 import GraphChat from '@/components/graph/GraphChat';
@@ -10,12 +9,12 @@ import GraphTicket from '@/components/graph/GraphTicket';
 import GraphTicketYou from '@/components/graph/GraphTicketYou';
 import GraphThemes from '@/components/graph/GraphThemes';
 import CustomSideBar from '@/components/SideBar';
+import { colors } from '@/lib/theme';
 
 import type {} from '@mui/x-data-grid/themeAugmentation';
 import styles from '@/assets/styles/forms.module.css';
 import ChatLayout from './layout/ChatLayout';
 
-/*
 const MuiTheme = createTheme({
   palette: {
     mode: 'light',
@@ -39,7 +38,6 @@ const MuiTheme = createTheme({
     }
   }
 });
-*/ 
 
 const Chat: React.FC = () => {
   const [activePage, setActivePage] = useState('Atendimento');
@@ -51,7 +49,7 @@ const Chat: React.FC = () => {
   return (
     <VStack>
       <DashboardHeader />
-      <Flex w="100%">
+      <Flex w="95%">
         <CustomSideBar />
         <Center flex="1">
           <div className={styles['page-content']}>
@@ -95,7 +93,9 @@ const Chat: React.FC = () => {
               )}
               {activePage === 'Histórico' && (
                 <div>
-                  <History />
+                  <ThemeProvider theme={{ ['MuiTheme']: MuiTheme }}>
+                    <History />
+                  </ThemeProvider>
                 </div>
               )}
               {activePage === 'Painel' && (
