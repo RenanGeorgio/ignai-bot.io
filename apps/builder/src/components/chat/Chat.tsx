@@ -49,7 +49,7 @@ const Chat: React.FC = () => {
   return (
     <VStack>
       <DashboardHeader />
-      <Flex w="95%">
+      <Flex w="100%" maxH="100%">
         <CustomSideBar />
         <Center flex="1">
           <div className={styles['page-content']}>
