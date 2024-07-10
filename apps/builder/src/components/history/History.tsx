@@ -114,13 +114,13 @@ export default function HistoryComponent() {
         paddingTop: 2,
         paddingBottom: 24,
         paddingLeft: '15%',
-        paddingRight: '15%',
+        paddingRight: '-50%',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'flex-start',
         gap: 1,
         display: 'inline-flex',
-        overflowX: 'hidden',
+        overflowX: 'auto',
       }}
     >
       <div
