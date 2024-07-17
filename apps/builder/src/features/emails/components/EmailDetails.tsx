@@ -7,7 +7,7 @@ interface EmailDetailsProps {
   onBack: () => void;
 }
 
-const EmailDetails: React.FC<EmailDetailsProps> = ({ email, onBack }) => {
+const EmailDetails: React.FC<EmailDetailsProps> = ({ email, onBack }: EmailDetailsProps) => {
   return (
     <Box p={4} maxW="container.lg" mx="auto" flex="1">
       <Flex 
