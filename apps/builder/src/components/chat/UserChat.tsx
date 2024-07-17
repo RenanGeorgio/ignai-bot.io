@@ -1,21 +1,15 @@
-import React from 'react'
-import useChat from '@/hooks/useChat'
+import React from 'react';
+import { Spinner } from '@chakra-ui/react';
+import Image from 'next/image';
+import useChat from '@/hooks/useChat';
 // import { useFetchRecipient } from '@/hooks/useFetchRecipient'
-import {
-  FaceBookIcon,
-  InstagramIcon,
-  TelegramIcon,
-  WhatsAppIcon,
-} from '@/components/icons'
-// import avatar from '../../assets/images/avatar.png'
-import web from '@/assets/images/web.svg'
-import styles from '@/assets/styles/leftmenu.module.css'
-import { Chat, OnlineUser } from '@/contexts/chat/types'
-import { useFetchRecipient } from '@/hooks/useFetchRecipient'
-import useUser from '@/hooks/useUser'
-import Image from 'next/image'
-import { ChatStatus } from '@/contexts/chat/enums'
-import { Spinner } from '@chakra-ui/react'
+import { FaceBookIcon, InstagramIcon, TelegramIcon, WhatsAppIcon } from '@/components/icons';
+import { useFetchRecipient } from '@/hooks/useFetchRecipient';
+import useUser from '@/hooks/useUser';
+import { ChatStatus } from '@/contexts/chat/enums';
+import { Chat, OnlineUser } from '@/contexts/chat/types';
+import web from '@/assets/images/web.svg';
+import styles from '@/assets/styles/leftmenu.module.css';
 
 interface UserChatProps {
   chat: Chat
