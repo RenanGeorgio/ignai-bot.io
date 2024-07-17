@@ -1,19 +1,22 @@
 import React from 'react';
-import { Stack, VStack, Flex, Spacer, Table, TableContainer, TableCaption, Thead, Tr, Th, Td, Tbody, Box, Heading, Center } from '@chakra-ui/react';
+import { Stack, VStack, Flex, Spacer, Table, TableContainer, TableCaption, Thead, Tr, Th, Td, Tbody, Box, Heading, Center, Button, useDisclosure } from '@chakra-ui/react';
 import { WhatsAppLogo } from '@/components/logos/WhatsAppLogo';
 import { EmailIcon, InstagramIcon, TelegramIcon } from '@/components/icons';
 import { FacebookLogo } from '@/components/logos/FacebookLogo';
 import { ChannelProps } from '../types';
 import { DashboardHeader } from '@/features/dashboard/components/DashboardHeader';
 import CustomSideBar from '@/components/SideBar';
+import CreateTemplateModal from './CreateTemplateModal';
 
 const ChannelPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj, hasNumbers, numbersList }: ChannelProps) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <VStack spacing={4} align="stretch">
       <DashboardHeader />
       <Flex w="100%" px={4}>
         <CustomSideBar />
-        <Center flex="1">
+        <Center flex="1" overflowX="auto">
           <VStack spacing={6} overflowX="hidden" p={4} width="95%" mx="auto">
             <Flex my={4} p={4} bg="white" borderRadius="md" boxShadow="md" width="100%" border="1px solid red">
               <Heading size='md' mb={4} color="red.900">Número Corporativo</Heading>
@@ -51,7 +54,11 @@ const ChannelPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj
                 </TableContainer>
               </Center>
             </Flex>
-
+            <Stack spacing={4} p={4} bg="white" borderRadius="md" boxShadow="md" width="100%" border="1px solid red">
+              <Heading size='md' color="red.900">WhatsApp Template</Heading>
+              <Button colorScheme="red" onClick={onOpen} w="250px" alignSelf="center">Criar Template</Button>
+              <CreateTemplateModal isOpen={isOpen} onClose={onClose} />
+            </Stack>
             <Stack spacing={4} p={4} bg="white" borderRadius="md" boxShadow="md" width="100%" border="1px solid red">
               <Heading size='md' color="red.900">WhatsApp</Heading>
               {whatsappObj?.used ? (
