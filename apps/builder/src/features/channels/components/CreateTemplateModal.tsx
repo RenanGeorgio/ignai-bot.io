@@ -24,7 +24,7 @@ import {
   ButtonType,
   TemplateResponseData,
   TemplateCreationStatus,
-} from './types/whatsapp.types';
+} from '../types';
 
 interface Props {
   isOpen: boolean
