@@ -3,7 +3,6 @@ import { HStack, SkeletonCircle, SkeletonText, Stack } from '@chakra-ui/react';
 import { ClientsItem } from './ClientsItem';
 import { useWorkspace } from '@/features/workspace/WorkspaceProvider';
 import { deleteLeadsQuery } from '../queries/deleteLeadsQuery';
-import { deleteClientsQuery } from '../queries/deleteClientsQuery';
 import { useMembers } from '@/features/workspace/hooks/useMembers';
 import { useClients } from '../hooks/useClients';
 import { Client } from '../types';

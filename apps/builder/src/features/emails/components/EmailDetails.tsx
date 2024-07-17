@@ -1,14 +1,5 @@
 import React from 'react';
-import {
-  Box,
-  Flex,
-  Avatar,
-  Text,
-  Divider,
-  VStack,
-  HStack,
-  Stack,
-} from '@chakra-ui/react';
+import { Box, Flex, Avatar, Text, VStack, HStack, Stack } from '@chakra-ui/react';
 import { Email } from '../types'
 
 interface EmailDetailsProps {
@@ -130,6 +121,6 @@ const EmailDetails: React.FC<EmailDetailsProps> = ({ email, onBack }) => {
       </VStack>
     </Box>
   );
-};
+}
 
 export default EmailDetails;

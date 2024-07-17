@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Stack, VStack, Flex, Spacer, Table, TableContainer, TableCaption, Thead, Tr, Th, Td, Tbody, Box, Heading, Center, Button, useDisclosure } from '@chakra-ui/react';
 import { WhatsAppLogo } from '@/components/logos/WhatsAppLogo';
 import { EmailIcon, InstagramIcon, TelegramIcon } from '@/components/icons';
@@ -6,17 +6,10 @@ import { FacebookLogo } from '@/components/logos/FacebookLogo';
 import { ChannelProps } from '../types';
 import { DashboardHeader } from '@/features/dashboard/components/DashboardHeader';
 import CustomSideBar from '@/components/SideBar';
-import { api } from '@/services/api';
-import { WhatsAppTemplate } from './types/whatsapp.types';
 import CreateTemplateModal from './CreateTemplateModal';
 
-
-
 const ChannelPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj, hasNumbers, numbersList }: ChannelProps) => {
-  const [templateData, setTemplateData] = useState<WhatsAppTemplate | null>(null)
-  const [errorMsg, setErrorMsg] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <VStack spacing={4} align="stretch">
