@@ -6,7 +6,7 @@ interface SidebarProps {
   onSentEmailsClick: () => void; 
 }
 
-const SidebarEmail: React.FC<SidebarProps> = ({ onComposeClick, onSentEmailsClick }) => {
+const SidebarEmail: React.FC<SidebarProps> = ({ onComposeClick, onSentEmailsClick }: SidebarProps) => {
   return (
     <Box
       w="250px"
@@ -48,6 +48,6 @@ const SidebarEmail: React.FC<SidebarProps> = ({ onComposeClick, onSentEmailsClic
       </VStack>
     </Box>
   );
-};
+}
 
-export default SidebarEmail;
+export default SidebarEmail

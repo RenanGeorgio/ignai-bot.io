@@ -1,10 +1,10 @@
 import React from 'react';
 import { Box, Flex, Avatar, Text, VStack, HStack, Stack } from '@chakra-ui/react';
-import { Email } from '../types'
+import { Email } from '../types';
 
 interface EmailDetailsProps {
-  email: Email;
-  onBack: () => void;
+  email: Email
+  onBack: () => void
 }
 
 const EmailDetails: React.FC<EmailDetailsProps> = ({ email, onBack }: EmailDetailsProps) => {
@@ -32,7 +32,7 @@ const EmailDetails: React.FC<EmailDetailsProps> = ({ email, onBack }: EmailDetai
         > 
           voltar
         </Text>
-        <Text fontSize="md" fontWeight="bold">{email.subject}</Text>
+        <Text fontSize="md" fontWeight="bold">{email?.subject}</Text>
       </Flex>
       <VStack 
         height="600px" 
@@ -46,8 +46,8 @@ const EmailDetails: React.FC<EmailDetailsProps> = ({ email, onBack }: EmailDetai
           <HStack boxShadow="0 10px 10px -10px rgba(0, 0, 0, 0.2)">
             <Flex mb={4} alignItems="center">
               <Avatar 
-                name={email.sender} 
-                src={email.avatar}
+                name={email?.sender} 
+                src={email?.avatar}
                 mr={4} 
                 width="40px" 
                 borderRadius="20px"
@@ -55,32 +55,32 @@ const EmailDetails: React.FC<EmailDetailsProps> = ({ email, onBack }: EmailDetai
               />
               <Box>
                 <Text fontWeight="bold" align="left" marginBottom="0px">
-                  {email.sender}
+                  {email?.sender}
                 </Text>
                 <Text marginTop="0px" color="#686868">
-                  {email.from}
+                  {email?.from}
                 </Text>
               </Box>
             </Flex>
-            <Text marginLeft="auto" marginRight="20px">{email.time}</Text>
+            <Text marginLeft="auto" marginRight="20px">{email?.time}</Text>
           </HStack>
           <VStack align="left" borderBottom="1px solid #bababa" height="100px">
             <Flex mb={4} alignItems="left">
               <Text fontWeight="bold" mb={2} marginLeft="10px">De:</Text>
               <Box marginLeft="10px">
-                <Text color="#686868">{email.from}</Text>
+                <Text color="#686868">{email?.from}</Text>
               </Box>
             </Flex>
             <Flex mb={4} alignItems="left" marginTop="-25px">
               <Text fontWeight="bold" mb={2} marginLeft="10px">Para:</Text>
               <Box marginLeft="10px">
-                <Text mb={4} color="#686868">{email.to}</Text>
+                <Text mb={4} color="#686868">{email?.to}</Text>
               </Box>
             </Flex>
             <Flex mb={4} alignItems="left" marginTop="-35px">
               <Text fontWeight="bold" mb={2} marginLeft="10px">Assunto:</Text>
               <Box marginLeft="10px">
-                <Text mb={4}>{email.subject}</Text>
+                <Text mb={4}>{email?.subject}</Text>
               </Box>
             </Flex>
           </VStack>
@@ -111,7 +111,7 @@ const EmailDetails: React.FC<EmailDetailsProps> = ({ email, onBack }: EmailDetai
               overflowWrap="break-word"
               textAlign="justify"
             >
-              {email.content || 'Conteúdo do email não disponível.'}
+              {email?.content || 'Conteúdo do email não disponível.'}
             </Text>
           </Box>
           <HStack borderTop="1px solid #bababa">
@@ -123,4 +123,4 @@ const EmailDetails: React.FC<EmailDetailsProps> = ({ email, onBack }: EmailDetai
   );
 }
 
-export default EmailDetails;
+export default EmailDetails

@@ -16,14 +16,14 @@ import {
 import Sidebar from './SidebarEmail';
 import ComposeEmailModal from './ComposeEmailModal';
 import EmailDetails from './EmailDetails';
-import { Email } from '../types'
 import { DashboardHeader } from '@/features/dashboard/components/DashboardHeader';
 import CustomSideBar from '@/components/SideBar';
+import { Email } from '../types';
 
 export const EmailPage: React.FC = () => {
-  const [isComposeModalOpen, setComposeModalOpen] = useState(false);
+  const [isComposeModalOpen, setComposeModalOpen] = useState<boolean>(false);
   const [selectedEmail, setSelectedEmail] = useState<Email | null>(null);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState<string>('');
   const [checkedEmails, setCheckedEmails] = useState<Set<number>>(new Set());
 
   const handleOpenComposeModal = () => {
@@ -53,11 +53,13 @@ export const EmailPage: React.FC = () => {
   const handleCheckboxChange = (emailId: number) => {
     setCheckedEmails((prevCheckedEmails) => {
       const updatedCheckedEmails = new Set(prevCheckedEmails);
+
       if (updatedCheckedEmails.has(emailId)) {
         updatedCheckedEmails.delete(emailId);
       } else {
         updatedCheckedEmails.add(emailId);
       }
+
       return updatedCheckedEmails;
     });
   };
@@ -199,4 +201,4 @@ export const EmailPage: React.FC = () => {
       </Flex>
     </VStack>
   );
-};
+}
