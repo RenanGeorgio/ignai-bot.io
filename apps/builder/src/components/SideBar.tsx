@@ -13,7 +13,7 @@ import {
   VStack,
   Tooltip
 } from '@chakra-ui/react';
-import { ChatIcon, ChevronLeftIcon, ChevronRightIcon, FolderIcon, PhoneIcon, ToolIcon, UserIcon } from './icons';
+import { ChatIcon, ChevronLeftIcon, ChevronRightIcon, FolderIcon, PhoneIcon, ToolIcon, UserIcon, EmailIcon } from './icons';
 import { useUser } from '@/features/account/hooks/useUser';
 
 type CustomHTMLDivElement = Omit<HTMLDivElement, "removeEventListener" | "addEventListener">;
@@ -81,6 +81,13 @@ const SidebarContent = ({ tab, navSize, ...props }: ContentProps & IconProps) =>
       return (
         <Flex alignItems="center" justify="center">
           <PhoneIcon {...props}/>
+          <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
+        </Flex>
+      )
+    case 'Emails': 
+      return (
+        <Flex alignItems="center" justify="center">
+          <EmailIcon {...props}/>
           <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
         </Flex>
        )
@@ -233,6 +240,9 @@ const CustomSideBar = () => {
           </Tooltip>
           <Tooltip hasArrow label="Channels">
             <NavItem router={router} path={"/channels"} navSize={navSize} title="Channels" description="Canais de comunicação no Workspace" />
+          </Tooltip>
+          <Tooltip hasArrow label="Emails">
+            <NavItem router={router} path={"/emails"} navSize={navSize} title="Emails" description="Lista dos emails enviados" />
           </Tooltip>
         </Flex>
       </VStack>

@@ -1,5 +1,5 @@
-import React from 'react'
-import { Box, Text, Avatar, HStack, Tag, Center, Stack, Divider, VStack, Spacer } from '@chakra-ui/react'
+import React from 'react';
+import { Box, Text, Avatar, HStack, Tag, Center, Stack, Divider, VStack, Spacer } from '@chakra-ui/react';
 import { Client } from '../types';
 
 const ClientsDetails = ({ client }: { client: Client | null}) => {
@@ -8,7 +8,7 @@ const ClientsDetails = ({ client }: { client: Client | null}) => {
       <Center>
         <Text marginTop="250px">Selecione um cliente para ver os detalhes</Text>
       </Center>
-    )
+    );
   }
 
   // verifica se o cliente possui endereço
@@ -79,7 +79,7 @@ const ClientsDetails = ({ client }: { client: Client | null}) => {
         </Stack>
       </VStack>
     </Box>
-  )
+  );
 }
 
 export default ClientsDetails;
