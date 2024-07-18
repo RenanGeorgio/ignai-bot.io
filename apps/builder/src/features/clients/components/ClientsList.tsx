@@ -20,7 +20,7 @@ interface ClientsListProps {
   selectedClient: Client | null
 }
 
-export const ClientsList: React.FC<ClientsListProps> = ({ onClientClick, selectedClient }: ClientsListProps) => {
+export const ClientsList: React.FC<ClientsListProps> = ({ onClientClick, selectedClient }) => {
   const { workspace } = useWorkspace();
   const { isLoading } = useMembers({ workspaceId: workspace?.id });
   const { clients } = useClients();
