@@ -4,25 +4,26 @@ import Image from 'next/image';
 import useChat from '@/hooks/useChat';
 // import { useFetchRecipient } from '@/hooks/useFetchRecipient'
 import { FaceBookIcon, InstagramIcon, TelegramIcon, WhatsAppIcon } from '@/components/icons';
-import web from '@/assets/images/web.svg';
-import { Chat, OnlineUser, User } from '@/contexts/chat/types';
 import { useFetchRecipient } from '@/hooks/useFetchRecipient';
 import useUser from '@/hooks/useUser';
 import { ChatStatus } from '@/contexts/chat/enums';
+import { Chat, OnlineUser } from '@/contexts/chat/types';
+import web from '@/assets/images/web.svg';
 import styles from '@/assets/styles/leftmenu.module.css';
 
 interface UserChatProps {
   chat: Chat
-  user?: User
+  // user: User
 }
 
-export const UserChat: React.FC<UserChatProps> = ({ chat }: UserChatProps) => {
+export const UserChat: React.FC<UserChatProps> = ({ chat }) => {
   // export const UserChat: React.FC<UserChatProps> = ({ chat, user }) => {
   const { user } = useUser();
-  const { recipientUser, error } = useFetchRecipient(chat, user);
-  const { onlineUsers } = useChat();
+  const { recipientUser, error } = useFetchRecipient(chat, user)
 
-  if ((recipientUser == null) && !error) {
+  const { onlineUsers } = useChat()
+
+  if (recipientUser === null && !error) {
     return <Spinner style={{ marginLeft: 5}}/>
   }
   
@@ -60,7 +61,7 @@ export const UserChat: React.FC<UserChatProps> = ({ chat }: UserChatProps) => {
         return <WhatsAppIcon />
     }
   }
-  
+
   return (
     <div className={styles.messageBubble}>
       <div className={styles.avatarWithName}>
@@ -84,5 +85,5 @@ export const UserChat: React.FC<UserChatProps> = ({ chat }: UserChatProps) => {
       </div>
       <div className={styles.messageLogo}>{getChatIcon()}</div>
     </div>
-  );
+  )
 }
