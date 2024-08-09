@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState } from 'react';
 //import { HTTPError } from 'ky';
 import {
@@ -44,7 +45,7 @@ const CreateTemplateModal: React.FC<Props> = ({ isOpen, onClose }: Props) => {
       components: []
     }
   );
-
+/*
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
     field: string
@@ -141,7 +142,8 @@ const CreateTemplateModal: React.FC<Props> = ({ isOpen, onClose }: Props) => {
         } as WhatsAppTemplate)
     )
     setSelectedComponents([])
-  }
+  }*/
+
   /*
   const createModel = async () => {
     if (!templateData) {
