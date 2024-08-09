@@ -8,7 +8,7 @@ import { DashboardHeader } from '@/features/dashboard/components/DashboardHeader
 import CustomSideBar from '@/components/SideBar';
 import CreateTemplateModal from './CreateTemplateModal';
 
-export const ChannelsPage: React.FC = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj, hasNumbers, numbersList }: ChannelProps) => {
+export const ChannelsPage: React.FC<ChannelProps> = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj, hasNumbers, numbersList }: ChannelProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
