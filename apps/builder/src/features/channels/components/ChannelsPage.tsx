@@ -75,7 +75,6 @@ const ChannelPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj
                 </Center>
               )}
             </Stack>
-
             <Stack spacing={4} p={4} bg="white" borderRadius="md" boxShadow="md" width="100%" border="1px solid red">
               <Heading size='md' color="red.900">Instagram</Heading>
               {igObj?.used ? (
@@ -92,7 +91,6 @@ const ChannelPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj
                 </Center>
               )}
             </Stack>
-
             <Stack spacing={4} p={4} bg="white" borderRadius="md" boxShadow="md" width="100%" border="1px solid red">
               <Heading size='md' color="red.900">Email</Heading>
               {emailObj?.used ? (
@@ -109,7 +107,6 @@ const ChannelPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj
                 </Center>
               )}
             </Stack>
-
             <Stack spacing={4} p={4} bg="white" borderRadius="md" boxShadow="md" width="100%" border="1px solid red">
               <Heading size='md' color="red.900">Facebook</Heading>
               {msgObj?.used ? (
@@ -126,7 +123,6 @@ const ChannelPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj
                 </Center>
               )}
             </Stack>
-
             <Stack spacing={4} p={4} bg="white" borderRadius="md" boxShadow="md" width="100%" border="1px solid red">
               <Heading size='md' color="red.900">Telegram</Heading>
               {telegramObj?.used ? (
@@ -143,7 +139,6 @@ const ChannelPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj
                 </Center>
               )}
             </Stack>
-
             <Stack spacing={4} p={4} bg="white" borderRadius="md" boxShadow="md" width="100%" border="1px solid red">
               <Heading size='md' color="red.900">Website</Heading>
               {webObj?.used ? (
