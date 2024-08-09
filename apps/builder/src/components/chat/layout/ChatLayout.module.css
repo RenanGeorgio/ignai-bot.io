@@ -26,6 +26,8 @@
   border: 1px rgba(242, 45, 45, 0.373) solid;
   border-top-right-radius: 2px;
   border-bottom-right-radius: 10px;
+  height: "90vh";
+  overflow-y: "auto";
 }
 
 .wrapper-box {
@@ -34,6 +36,7 @@
   padding-right: 80px;
   margin-bottom: 20px;
   background-color: rgba(255, 255, 255, 0.8);
+  overflow-y: "auto"; 
 }
 
 .heading-2 {
