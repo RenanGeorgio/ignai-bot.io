@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext } from 'next';
 import type { GetServerSideProps } from 'next';
-import ChannelsPage from '@/features/channels/components/ChannelsPage';
+import { ChannelsPage } from '@/features/channels/components/ChannelsPage';
 import { ChannelProps } from '@/features/channels/types';
 import { getServerSession } from 'next-auth';
 import { getAuthOptions } from './api/auth/[...nextauth]';
