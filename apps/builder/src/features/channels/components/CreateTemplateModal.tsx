@@ -17,78 +17,14 @@ import {
   ModalFooter,
 } from '@chakra-ui/react';
 import { api } from '@/services/api';
-/*import {
+import {
   WhatsAppTemplate,
   TemplateCategory,
   ComponentType,
   ButtonType,
   TemplateResponseData,
   TemplateCreationStatus,
-} from './types/whatsapp.types';*/
-
-interface WhatsAppTemplate {
-  name: string;
-  category: TemplateCategory;
-  components: Component[];
-}
-
-interface Component {
-  type: ComponentType;
-  format?: string; // TEXT, IMAGE, VIDEO, AUDIO, DOCUMENT, LOCATION, CONTACT, BUTTONS
-  text?: string;
-  example?: Example;
-  buttons?: Button[];
-}
-
-interface Button {
-  type: ButtonType; // URL, POSTBACK, CALL, DIAL, LOCATION, CONTACT
-  text: string;
-  buttons?: Button[];
-}
-
-interface Example {
-  header_text?: string[];
-  body_text?: string[][];
-}
-
-enum TemplateCategory {
-  AUTHENTICATION = "AUTHENTICATION",
-  MARKETING = "MARKETING",
-  UTILITY = "UTILITY",
-}
-
-enum ComponentType {
-  HEADER = "HEADER",
-  BODY = "BODY",
-  FOOTER = "FOOTER",
-  BUTTON = "BUTTONS",
-}
-
-enum ButtonType {
-  URL = "URL",
-  POSTBACK = "POSTBACK",
-  CALL = "CALL",
-  DIAL = "DIAL",
-  LOCATION = "LOCATION",
-  CONTACT = "CONTACT",
-  QUICK_REPLY = "QUICK_REPLY",
-}
-
-enum TemplateCreationStatus {
-  PENDING = "PENDING",
-  APPROVED = "APPROVED",
-  REJECTED = "REJECTED",
-}
-
-interface TemplateResponseData {
-  message: {
-    templateId: string;
-    name: string;
-    category: TemplateCategory;
-    status: TemplateCreationStatus 
-  }
-}
-
+} from '../types';
 
 interface Props {
   isOpen: boolean
