@@ -268,7 +268,8 @@ const CreateTemplateModal: React.FC<Props> = ({ isOpen, onClose }: Props) => {
                   <option value={ComponentType.BUTTON}>Button</option>
                 </Select>
                 {component.type === ComponentType.BUTTON ? (
-                  (component.buttons || []).map((buttonIndex) => (
+                  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                  (component.buttons || []).map((button, buttonIndex) => (
                     <Box key={buttonIndex} mt={2}>
                       <Select
                         placeholder="Selecionar tipo de botão"
