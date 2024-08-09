@@ -2,8 +2,11 @@ import React from 'react';
 //import { HTTPError } from 'ky';
 import {
   Modal,
+  ModalOverlay,
+  ModalContent,
 } from '@chakra-ui/react';
 //import { api } from '@/services/api';
+
 
 interface Props {
   isOpen: boolean
@@ -156,6 +159,9 @@ const CreateTemplateModal: React.FC<Props> = ({ isOpen, onClose }: Props) => {
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
+      <ModalOverlay />
+      <ModalContent maxH="80vh">
+      </ModalContent>
     </Modal>
   )
 }
