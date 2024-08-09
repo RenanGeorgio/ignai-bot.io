@@ -1,30 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 //import { HTTPError } from 'ky';
 import {
-  Input,
-  Select,
-  Checkbox,
-  Box,
-  Button,
-  FormLabel,
-  FormControl,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalCloseButton,
-  ModalFooter,
 } from '@chakra-ui/react';
 //import { api } from '@/services/api';
-import {
-  WhatsAppTemplate,
-  TemplateCategory,
-  ComponentType,
-  ButtonType,
-  //TemplateResponseData,
-  //TemplateCreationStatus,
-} from '../types';
 
 interface Props {
   isOpen: boolean
@@ -32,19 +11,6 @@ interface Props {
 }
 
 const CreateTemplateModal: React.FC<Props> = ({ isOpen, onClose }: Props) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [errorMsg, setErrorMsg] = useState<string>('');
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [selectedComponents, setSelectedComponents] = useState<number[]>([])
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [templateData, setTemplateData] = useState<WhatsAppTemplate>(
-    {
-      name: '',
-      category: TemplateCategory.MARKETING,
-      components: []
-    }
-  );
 /*
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
@@ -188,172 +154,8 @@ const CreateTemplateModal: React.FC<Props> = ({ isOpen, onClose }: Props) => {
     }
   }*/
 
-    const handleTest = () => {
-
-    }
-
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <ModalOverlay />
-      <ModalContent maxH="80vh">
-        <ModalHeader>Criar Template do WhatsApp</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody
-          overflowY="auto"
-          maxH="60vh"
-          css={{
-            '&::-webkit-scrollbar': {
-              width: '5px',
-            },
-            '&::-webkit-scrollbar-thumb': {
-              background: 'rgb(255, 101, 101)',
-              borderRadius: '5px',
-            },
-            '&::-webkit-scrollbar-thumb:hover': {
-              background: 'darkred',
-            },
-          }}
-        >
-          <FormControl>
-            <FormLabel>Nome:</FormLabel>
-            <Input
-              placeholder="Nome do template"
-              onChange={handleTest}
-              required
-            />
-          </FormControl>
-          <FormControl mt={4}>
-            <FormLabel>Categoria:</FormLabel>
-            <Select
-              placeholder="Selecionar categoria"
-              onChange={handleTest}
-              required
-            >
-              <option value={TemplateCategory.AUTHENTICATION}>
-                Authentication
-              </option>
-              <option value={TemplateCategory.MARKETING}>Marketing</option>
-              <option value={TemplateCategory.UTILITY}>Utility</option>
-            </Select>
-          </FormControl>
-          <FormControl mt={4}>
-            <FormLabel>Componentes:</FormLabel>
-            {templateData.components.map((component, index) => (
-              <Box key={index} mt={4} position="relative">
-                <Checkbox
-                  isChecked={selectedComponents.includes(index)}
-                  onChange={(e) => {
-                    if (e.target.checked) {
-                      setSelectedComponents((prev) => [...prev, index])
-                    } else {
-                      setSelectedComponents((prev) =>
-                        prev.filter((item) => item !== index)
-                      )
-                    }
-                  }}
-                  position="absolute"
-                  left="0px"
-                  top="5px"
-                />
-                <Select
-                  placeholder="Selecionar tipo de componente"
-                  onChange={handleTest}
-                  ml="30px"
-                  w="370px"
-                  required
-                >
-                  <option value={ComponentType.HEADER}>Header</option>
-                  <option value={ComponentType.BODY}>Body</option>
-                  <option value={ComponentType.FOOTER}>Footer</option>
-                  <option value={ComponentType.BUTTON}>Button</option>
-                </Select>
-                {component.type === ComponentType.BUTTON ? (
-                  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                  (component.buttons || []).map((button, buttonIndex) => (
-                    <Box key={buttonIndex} mt={2}>
-                      <Select
-                        placeholder="Selecionar tipo de botão"
-                        onChange={handleTest}
-                        ml="30px"
-                        w="370px"
-                        required
-                      >
-                        <option value={ButtonType.URL}>URL</option>
-                        <option value={ButtonType.POSTBACK}>Postback</option>
-                        <option value={ButtonType.CALL}>Call</option>
-                        <option value={ButtonType.DIAL}>Dial</option>
-                        <option value={ButtonType.LOCATION}>Location</option>
-                        <option value={ButtonType.CONTACT}>Contact</option>
-                        <option value={ButtonType.QUICK_REPLY}>
-                          Quick Reply
-                        </option>
-                      </Select>
-                      <Input
-                        mt={2}
-                        placeholder="Texto do botão"
-                        onChange={handleTest}
-                        ml="30px"
-                        w="370px"
-                        required
-                      />
-                    </Box>
-                  ))
-                ) : (
-                  <Input
-                    mt={2}
-                    placeholder="Texto"
-                    onChange={handleTest}
-                    ml="30px"
-                    w="370px"
-                    required
-                  />
-                )}
-              </Box>
-            ))}
-            <Button
-              mt={4}
-              size="xs"
-              onClick={handleTest}
-              border="1px solid gray"
-            >
-              Adicionar componente
-            </Button>
-            <Button
-              size="xs"
-              color="red"
-              border="1px solid gray"
-              position="absolute"
-              left="165px"
-              bottom="0"
-              onClick={handleTest}
-              disabled={selectedComponents.length === 0}
-              style={{
-                display: templateData.components.length > 0 ? 'block' : 'none',
-              }}
-            >
-              Remover componente
-            </Button>
-          </FormControl>
-        </ModalBody>
-        {errorMsg && (
-          <Box p={4} bg="red.100" color="red.600" textAlign="center">
-            {errorMsg}
-          </Box>
-        )}
-        <ModalFooter>
-          <Button
-            colorScheme="red"
-            mr={3}
-            onClick={handleTest}
-            isLoading={isLoading}
-          >
-            Criar
-          </Button>
-          <Button variant="ghost" onClick={onClose}>
-            Fechar
-          </Button>
-        </ModalFooter>
-      </ModalContent>
     </Modal>
   )
 }
