@@ -6,7 +6,7 @@ import { FacebookLogo } from '@/components/logos/FacebookLogo';
 import { ChannelProps } from '../types';
 import { DashboardHeader } from '@/features/dashboard/components/DashboardHeader';
 import CustomSideBar from '@/components/SideBar';
-import CreateTemplateModal from './CreateTemplateModal';
+import CreateTemplateModal from '@/components/CreateTemplateModal';
 
 export const ChannelsPage: React.FC<ChannelProps> = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj, hasNumbers, numbersList }: ChannelProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
