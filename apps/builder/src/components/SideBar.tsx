@@ -13,7 +13,7 @@ import {
   VStack,
   Tooltip
 } from '@chakra-ui/react';
-import { ChatIcon, ChevronLeftIcon, ChevronRightIcon, FolderIcon, PhoneIcon, ToolIcon, UserIcon } from './icons';
+import { ChatIcon, ChevronLeftIcon, ChevronRightIcon, FolderIcon, PhoneIcon, ToolIcon, UserIcon, EmailIcon } from './icons';
 import { useUser } from '@/features/account/hooks/useUser';
 
 type CustomHTMLDivElement = Omit<HTMLDivElement, "removeEventListener" | "addEventListener">;
@@ -83,6 +83,13 @@ const SidebarContent = ({ tab, navSize, ...props }: ContentProps & IconProps) =>
           <PhoneIcon {...props}/>
           <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
         </Flex>
+      )
+    case 'Emails': 
+      return (
+        <Flex alignItems="center" justify="center">
+          <EmailIcon {...props}/>
+          <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{tab}</Text>
+        </Flex>
        )
     case 'Dashboard':
       return (
@@ -132,7 +139,7 @@ const NavHoverBox = ({ title, description }: HoverProps) => {
 const NavItem = ({ title, path, description, active, navSize, router }: NavItemProps) => {
   return (
     <Flex
-      mt={12} 
+      mt={6} 
       flexDir="column"
       w="100%"
       alignItems={navSize == "small" ? "center" : "flex-start"} 
@@ -147,6 +154,7 @@ const NavItem = ({ title, path, description, active, navSize, router }: NavItemP
             w={navSize == "large" ? "100%" : "35%"}
             p={3}
             borderRadius={8}
+            boxShadow="0 3px 5px -1px rgb(0 0 0 / 0.05)"
             backgroundColor="rgba(255, 217, 217, 0.8)"
             _hover={{ textDecor: 'none', backgroundColor: "rgba(255, 0, 0, 0.9)", color: "#fff", '& svg': { color: '#fff' } }}
             onClick={() => router.push(path)}
@@ -182,7 +190,7 @@ const CustomSideBar = () => {
     <Flex
       pos="sticky"
       left="2"
-      h="95vh"
+      h="85vh"
       marginTop="0.5vh"
       boxShadow="0 4px 12px 0 rgba(0, 0, 0, 0.05)"
       backgroundColor="rgba(255, 217, 217, 0.8)"
@@ -195,7 +203,7 @@ const CustomSideBar = () => {
       <VStack 
         w="100%"
         alignItems="center"
-        spacing='24px'
+        spacing={0}
       >
         <IconButton
           background="none"
@@ -213,7 +221,6 @@ const CustomSideBar = () => {
           }}
         />
         <Flex
-          p="5%"
           flexDir="column"
           w="100%"
           alignItems="flex-start"
@@ -233,6 +240,9 @@ const CustomSideBar = () => {
           </Tooltip>
           <Tooltip hasArrow label="Channels">
             <NavItem router={router} path={"/channels"} navSize={navSize} title="Channels" description="Canais de comunicação no Workspace" />
+          </Tooltip>
+          <Tooltip hasArrow label="Emails">
+            <NavItem router={router} path={"/emails"} navSize={navSize} title="Emails" description="Lista dos emails enviados" />
           </Tooltip>
         </Flex>
       </VStack>
