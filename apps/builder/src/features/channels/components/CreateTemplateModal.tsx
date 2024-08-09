@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useState } from 'react';
 //import { HTTPError } from 'ky';
 import {
@@ -38,6 +37,7 @@ const CreateTemplateModal: React.FC<Props> = ({ isOpen, onClose }: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [selectedComponents, setSelectedComponents] = useState<number[]>([])
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [templateData, setTemplateData] = useState<WhatsAppTemplate>(
     {
       name: '',
@@ -188,6 +188,10 @@ const CreateTemplateModal: React.FC<Props> = ({ isOpen, onClose }: Props) => {
     }
   }*/
 
+    const handleTest = () => {
+
+    }
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -214,7 +218,7 @@ const CreateTemplateModal: React.FC<Props> = ({ isOpen, onClose }: Props) => {
             <FormLabel>Nome:</FormLabel>
             <Input
               placeholder="Nome do template"
-              onChange={(e) => handleInputChange(e, 'name')}
+              onChange={handleTest}
               required
             />
           </FormControl>
@@ -222,7 +226,7 @@ const CreateTemplateModal: React.FC<Props> = ({ isOpen, onClose }: Props) => {
             <FormLabel>Categoria:</FormLabel>
             <Select
               placeholder="Selecionar categoria"
-              onChange={(e) => handleInputChange(e, 'category')}
+              onChange={handleTest}
               required
             >
               <option value={TemplateCategory.AUTHENTICATION}>
@@ -253,7 +257,7 @@ const CreateTemplateModal: React.FC<Props> = ({ isOpen, onClose }: Props) => {
                 />
                 <Select
                   placeholder="Selecionar tipo de componente"
-                  onChange={(e) => handleComponentChange(e, index, 'type')}
+                  onChange={handleTest}
                   ml="30px"
                   w="370px"
                   required
@@ -264,13 +268,11 @@ const CreateTemplateModal: React.FC<Props> = ({ isOpen, onClose }: Props) => {
                   <option value={ComponentType.BUTTON}>Button</option>
                 </Select>
                 {component.type === ComponentType.BUTTON ? (
-                  (component.buttons || []).map((button, buttonIndex) => (
+                  (component.buttons || []).map((buttonIndex) => (
                     <Box key={buttonIndex} mt={2}>
                       <Select
                         placeholder="Selecionar tipo de botão"
-                        onChange={(e) =>
-                          handleButtonChange(e, index, buttonIndex, 'type')
-                        }
+                        onChange={handleTest}
                         ml="30px"
                         w="370px"
                         required
@@ -288,9 +290,7 @@ const CreateTemplateModal: React.FC<Props> = ({ isOpen, onClose }: Props) => {
                       <Input
                         mt={2}
                         placeholder="Texto do botão"
-                        onChange={(e) =>
-                          handleButtonChange(e, index, buttonIndex, 'text')
-                        }
+                        onChange={handleTest}
                         ml="30px"
                         w="370px"
                         required
@@ -301,7 +301,7 @@ const CreateTemplateModal: React.FC<Props> = ({ isOpen, onClose }: Props) => {
                   <Input
                     mt={2}
                     placeholder="Texto"
-                    onChange={(e) => handleComponentChange(e, index, 'text')}
+                    onChange={handleTest}
                     ml="30px"
                     w="370px"
                     required
@@ -312,7 +312,7 @@ const CreateTemplateModal: React.FC<Props> = ({ isOpen, onClose }: Props) => {
             <Button
               mt={4}
               size="xs"
-              onClick={addComponent}
+              onClick={handleTest}
               border="1px solid gray"
             >
               Adicionar componente
@@ -324,7 +324,7 @@ const CreateTemplateModal: React.FC<Props> = ({ isOpen, onClose }: Props) => {
               position="absolute"
               left="165px"
               bottom="0"
-              onClick={removeComponent}
+              onClick={handleTest}
               disabled={selectedComponents.length === 0}
               style={{
                 display: templateData.components.length > 0 ? 'block' : 'none',
@@ -343,7 +343,7 @@ const CreateTemplateModal: React.FC<Props> = ({ isOpen, onClose }: Props) => {
           <Button
             colorScheme="red"
             mr={3}
-            onClick={removeComponent}
+            onClick={handleTest}
             isLoading={isLoading}
           >
             Criar
