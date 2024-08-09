@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, VStack, Flex, Spacer, Table, TableContainer, TableCaption, Thead, Tr, Th, Td, Tbody, Box, Heading, Center } from '@chakra-ui/react';
+import { Stack, VStack, Flex, Spacer, Table, TableContainer, TableCaption, Thead, Tr, Th, Td, Tbody, Box, Heading, Center, Button, useDisclosure } from '@chakra-ui/react';
 import { WhatsAppLogo } from '@/components/logos/WhatsAppLogo';
 import { EmailIcon, InstagramIcon, TelegramIcon } from '@/components/icons';
 import { FacebookLogo } from '@/components/logos/FacebookLogo';
@@ -8,13 +8,15 @@ import CustomSideBar from '@/components/SideBar';
 import { ChannelProps } from '../types';
 
 const ChannelPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj, hasNumbers, numbersList }: ChannelProps) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <VStack spacing={4} align="stretch">
       <DashboardHeader />
       <Flex w="100%" px={4}>
         <CustomSideBar />
         <Center flex="1">
-          <VStack spacing={6} overflowX="hidden" p={4} width="95%" mx="auto">
+          <VStack spacing={6} height="85vh" overflowY="auto" p={4} width="95%" mx="auto">
             <Flex my={4} p={4} bg="white" borderRadius="md" boxShadow="md" width="100%" border="1px solid red">
               <Heading size='md' mb={4} color="red.900">Número Corporativo</Heading>
               <Center p='2' width="70%">
@@ -51,7 +53,10 @@ const ChannelPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj
                 </TableContainer>
               </Center>
             </Flex>
-
+            <Stack spacing={4} p={4} bg="white" borderRadius="md" boxShadow="md" width="100%" border="1px solid red">
+              <Heading size='md' color="red.900">WhatsApp Template</Heading>
+              <Button colorScheme="red" onClick={onOpen} w="250px" alignSelf="center">Criar Template</Button>
+            </Stack>
             <Stack spacing={4} p={4} bg="white" borderRadius="md" boxShadow="md" width="100%" border="1px solid red">
               <Heading size='md' color="red.900">WhatsApp</Heading>
               {whatsappObj?.used ? (
@@ -153,7 +158,6 @@ const ChannelPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj
                 </Center>
               )}
             </Stack>
-
           </VStack>
         </Center>
       </Flex>
