@@ -8,7 +8,7 @@ import CustomSideBar from '@/components/SideBar';
 import { ChannelProps } from '../types';
 
 const ChannelPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj, hasNumbers, numbersList }: ChannelProps) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { onOpen } = useDisclosure();
 
   return (
     <VStack spacing={4} align="stretch">
