@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { HTTPError } from 'ky';
+//import { HTTPError } from 'ky';
 import {
   Input,
   Select,
@@ -16,14 +16,14 @@ import {
   ModalCloseButton,
   ModalFooter,
 } from '@chakra-ui/react';
-import { api } from '@/services/api';
+//import { api } from '@/services/api';
 import {
   WhatsAppTemplate,
   TemplateCategory,
   ComponentType,
   ButtonType,
-  TemplateResponseData,
-  TemplateCreationStatus,
+  //TemplateResponseData,
+  //TemplateCreationStatus,
 } from './types/whatsapp.types';
 
 interface Props {
@@ -32,7 +32,9 @@ interface Props {
 }
 
 const CreateTemplateModal: React.FC<Props> = ({ isOpen, onClose }: Props) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [errorMsg, setErrorMsg] = useState<string>('');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [selectedComponents, setSelectedComponents] = useState<number[]>([])
   const [templateData, setTemplateData] = useState<WhatsAppTemplate>(
@@ -140,7 +142,7 @@ const CreateTemplateModal: React.FC<Props> = ({ isOpen, onClose }: Props) => {
     )
     setSelectedComponents([])
   }
-
+  /*
   const createModel = async () => {
     if (!templateData) {
       return
@@ -182,7 +184,7 @@ const CreateTemplateModal: React.FC<Props> = ({ isOpen, onClose }: Props) => {
 
       setIsLoading(false);
     }
-  }
+  }*/
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -339,7 +341,7 @@ const CreateTemplateModal: React.FC<Props> = ({ isOpen, onClose }: Props) => {
           <Button
             colorScheme="red"
             mr={3}
-            onClick={createModel}
+            onClick={removeComponent}
             isLoading={isLoading}
           >
             Criar
