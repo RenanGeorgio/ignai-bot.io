@@ -46,10 +46,10 @@
   justify-content: flex-start;
   gap: 5px; 
   font-size: 18px;
-  margin-bottom: 26px;
-  margin-top: 26px;
+  margin-bottom: 15px;
+  margin-top: 5px;
   margin-left: 6%;
-  width: 742px;
+  width: 85%;
 }
 
 .gray-button {
