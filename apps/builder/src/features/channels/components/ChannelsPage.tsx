@@ -8,7 +8,7 @@ import { DashboardHeader } from '@/features/dashboard/components/DashboardHeader
 import CustomSideBar from '@/components/SideBar';
 import CreateTemplateModal from './CreateTemplateModal';
 
-const ChannelPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj, hasNumbers, numbersList }: ChannelProps) => {
+export const ChannelsPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj, hasNumbers, numbersList }: ChannelProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -167,5 +167,3 @@ const ChannelPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj
     </VStack>
   );
 }
-
-export default ChannelPage
