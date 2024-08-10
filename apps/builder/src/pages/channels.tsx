@@ -1,15 +1,51 @@
 import { GetServerSidePropsContext } from 'next';
 import type { GetServerSideProps } from 'next';
-import ChannelsPage from '@/features/channels/components/ChannelsPage';
-import { ChannelProps } from '@/features/channels/types';
+import { ChannelsPage } from '@/features/channels/components/ChannelsPage';
 import { getServerSession } from 'next-auth';
 import { getAuthOptions } from './api/auth/[...nextauth]';
 import { User } from '@typebot.io/schemas';
 import { formatServiceList } from '@/helpers/formatServiceList';
 import { env } from '@typebot.io/env';
 
-export default function Page(props: ChannelProps) {
-  return <ChannelsPage {...props} />
+type Obj = {
+  used: boolean
+  id: string
+}
+
+type Numbers = {
+  id: string
+  country?: string
+  city?: string
+  state?: string
+  status: number
+}
+
+interface Props {
+  webObj?: Obj 
+  whatsappObj?: Obj 
+  igObj?: Obj 
+  telegramObj?: Obj 
+  emailObj?: Obj 
+  msgObj?: Obj 
+  hasNumbers: boolean 
+  numbersList: Numbers[]
+}
+
+export default function Page(props: Props) {
+  const { webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj, hasNumbers, numbersList } = props;
+
+  return (
+    <ChannelsPage
+      webObj={webObj}
+      whatsappObj={whatsappObj}
+      igObj={igObj}
+      telegramObj={telegramObj}
+      emailObj={emailObj}
+      msgObj={msgObj}
+      hasNumbers={hasNumbers}
+      numbersList={numbersList}
+    />
+  );
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -35,7 +71,7 @@ export const getServerSideProps: GetServerSideProps<any> = async (context: GetSe
     props: {
       ...props,
       hasNumbers: null,
-      numbersList: null,
-    },
+      numbersList: null
+    }
   } 
 }
