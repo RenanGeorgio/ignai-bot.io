@@ -214,7 +214,7 @@ export const getAuthOptions = ({
       }
       const userFromDb = user as User
       if (profile) {
-        await updateJavaWebToken(userFromDb, profile)
+        await updateJavaWebToken(userFromDb)
       }
       return true
     },
@@ -268,18 +268,18 @@ const updateLastActivityDate = async (user: User) => {
   }
 }
 
-const updateJavaWebToken = async (user: User, profile: any) => {
-  if (user.jwt !== profile.jwt) {
+const updateJavaWebToken = async (user: User) => {
+  if (user.jwt !== user.jwt) {
     await prisma.user.updateMany({
       where: { id: user.id },
-      data: { jwt: profile.jwt },
+      data: { jwt: user.jwt },
     })
     await trackEvents([
       {
         name: 'User updated',
         userId: user.id,
         data: {
-          jwt: profile.jwt ?? undefined,
+          jwt: user.jwt ?? undefined,
         },
       },
     ])
