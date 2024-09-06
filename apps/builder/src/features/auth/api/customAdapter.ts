@@ -57,6 +57,7 @@ export function customAdapter(p: PrismaClient): Adapter {
                   },
                 },
           onboardingCategories: [],
+          jwt: null,
         },
         include: {
           workspaces: { select: { workspaceId: true } },

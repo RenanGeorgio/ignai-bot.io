@@ -63,6 +63,7 @@ export const setupUsers = async () => {
       name: 'John Doe',
       graphNavigation: GraphNavigation.TRACKPAD,
       onboardingCategories: [],
+      jwt: null,
       apiTokens: {
         createMany: {
           data: [
@@ -92,6 +93,7 @@ export const setupUsers = async () => {
       email: 'other-user@email.com',
       name: 'James Doe',
       onboardingCategories: [],
+      jwt: null,
     },
   })
   return prisma.memberInWorkspace.createMany({
