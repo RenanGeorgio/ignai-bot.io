@@ -1,4 +1,4 @@
-import NextAuth, { Account, AuthOptions, Profile } from 'next-auth'
+import NextAuth, { Account, AuthOptions } from 'next-auth'
 import EmailProvider from 'next-auth/providers/email'
 import GitHubProvider from 'next-auth/providers/github'
 import GitlabProvider from 'next-auth/providers/gitlab'
