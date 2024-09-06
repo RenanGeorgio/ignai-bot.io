@@ -112,16 +112,7 @@ if (
     Auth0Provider({
       clientId: env.AUTH0_CLIENT_ID,
       clientSecret: env.AUTH0_CLIENT_SECRET,
-      issuer: env.AUTH0_ISSUER,
-      profile(profile) {
-        return {
-          id: profile.sub,
-          name: profile.nickname,
-          email: profile.email,
-          image: profile.picture,
-          jwt: profile.jwt,
-        } as User
-      },
+      issuer: env.AUTH0_ISSUER
     })
   )
 }
