@@ -1,4 +1,3 @@
-// eslint-disable @typescript-eslint/no-explicit-any
 import prisma from '@typebot.io/lib/prisma'
 import { authenticatedProcedure } from '@/helpers/server/trpc'
 import { TRPCError } from '@trpc/server'
@@ -61,13 +60,14 @@ export const fetchSelectItems = authenticatedProcedure
       const blockDef = forgedBlocks[integrationId]
 
       const fetcher = getFetchers(blockDef).find(
-        (fetcher: { id: string }) => fetcher.id === fetcherId
+        (fetcher) => fetcher.id === fetcherId
       )
 
       if (!fetcher) return { items: [] }
 
       return {
         items: await fetcher.fetch({
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           credentials: credentialsData as any,
           options,
         }),
