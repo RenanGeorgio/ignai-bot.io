@@ -32,15 +32,15 @@ export const fetchSelectItems = authenticatedProcedure
           },
           credentials: options.credentialsId
             ? {
-              where: {
-                id: options.credentialsId,
-              },
-              select: {
-                id: true,
-                data: true,
-                iv: true,
-              },
-            }
+                where: {
+                  id: options.credentialsId,
+                },
+                select: {
+                  id: true,
+                  data: true,
+                  iv: true,
+                },
+              }
             : undefined,
         },
       })
