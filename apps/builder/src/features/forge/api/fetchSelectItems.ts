@@ -1,3 +1,4 @@
+// eslint-disable @typescript-eslint/no-explicit-any
 import prisma from '@typebot.io/lib/prisma'
 import { authenticatedProcedure } from '@/helpers/server/trpc'
 import { TRPCError } from '@trpc/server'
@@ -6,6 +7,7 @@ import { isReadWorkspaceFobidden } from '@/features/workspace/helpers/isReadWork
 import { forgedBlocks } from '@typebot.io/forge-repository/definitions'
 import { forgedBlockIds } from '@typebot.io/forge-repository/constants'
 import { decrypt } from '@typebot.io/lib/api/encryption/decrypt'
+import { getFetchers } from '../helpers/getFetchers'
 
 export const fetchSelectItems = authenticatedProcedure
   .input(
@@ -31,15 +33,15 @@ export const fetchSelectItems = authenticatedProcedure
           },
           credentials: options.credentialsId
             ? {
-                where: {
-                  id: options.credentialsId,
-                },
-                select: {
-                  id: true,
-                  data: true,
-                  iv: true,
-                },
-              }
+              where: {
+                id: options.credentialsId,
+              },
+              select: {
+                id: true,
+                data: true,
+                iv: true,
+              },
+            }
             : undefined,
         },
       })
@@ -58,16 +60,14 @@ export const fetchSelectItems = authenticatedProcedure
 
       const blockDef = forgedBlocks[integrationId]
 
-      const fetchers = (blockDef?.fetchers ?? []).concat(
-        blockDef?.actions.flatMap((action) => action.fetchers ?? []) ?? []
+      const fetcher = getFetchers(blockDef).find(
+        (fetcher: { id: string }) => fetcher.id === fetcherId
       )
-      const fetcher = fetchers.find((fetcher) => fetcher.id === fetcherId)
 
       if (!fetcher) return { items: [] }
 
       return {
         items: await fetcher.fetch({
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           credentials: credentialsData as any,
           options,
         }),
