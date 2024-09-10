@@ -61,16 +61,16 @@ const CreateTemplateModal: React.FC<Props> = ({ isOpen, onClose }: Props) => {
     index: number,
     field: string
   ) => {
-    const value = e.target.value
-    const updatedComponents = [...templateData.components]
+    const value = e.target.value;
+    const updatedComponents = [...templateData.components];
     updatedComponents[index] = {
       ...updatedComponents[index],
       [field]: value,
-    }
+    };
 
     if (field === 'type' && value === ComponentType.BUTTON) {
       updatedComponents[index].buttons = [
-        { type: ButtonType.QUICK_REPLY, text: '' },
+        { type: ButtonType.QUICK_REPLY, text: '' }
       ]
     }
 
@@ -93,15 +93,15 @@ const CreateTemplateModal: React.FC<Props> = ({ isOpen, onClose }: Props) => {
     buttonIndex: number,
     field: string
   ) => {
-    const value = e.target.value
-    const updatedComponents = [...templateData.components]
+    const value = e.target.value;
+    const updatedComponents = [...templateData.components];
     const updatedButtons = [
-      ...(updatedComponents[componentIndex].buttons || []),
-    ]
+      ...(updatedComponents[componentIndex].buttons || [])
+    ];
     updatedButtons[buttonIndex] = {
       ...updatedButtons[buttonIndex],
       [field]: value,
-    }
+    };
     updatedComponents[componentIndex].buttons = updatedButtons
 
     setTemplateData(
@@ -150,7 +150,7 @@ const CreateTemplateModal: React.FC<Props> = ({ isOpen, onClose }: Props) => {
     setIsLoading(true);
     try {
       const res = await api.post('whatsapp/template', {
-        json: templateData,
+        json: templateData
       });
 
       if (!res.ok) {
@@ -176,8 +176,7 @@ const CreateTemplateModal: React.FC<Props> = ({ isOpen, onClose }: Props) => {
         if (e?.error_user_msg) {
           console.log('errorMsg', e.error_user_msg);
           setErrorMsg(e.error_user_msg);
-        }
-        else if (e.message) {
+        } else if (e.message) {
           setErrorMsg(e.message);
         }
       }

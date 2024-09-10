@@ -8,7 +8,7 @@ import CustomSideBar from '@/components/SideBar';
 //import CreateTemplateModal from './CreateTemplateModal';
 import { ChannelProps } from '../types';
 
-export const ChannelsPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj, hasNumbers, numbersList }: ChannelProps) => {
+export const ChannelsPage: React.FC<ChannelProps> = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj, hasNumbers, numbersList }: ChannelProps) => {
   //const { isOpen, onOpen, onClose } = useDisclosure();
   const { onOpen } = useDisclosure();
 
@@ -17,8 +17,8 @@ export const ChannelsPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj
       <DashboardHeader />
       <Flex w="100%" px={4}>
         <CustomSideBar />
-        <Center flex="1" overflowX="auto">
-          <VStack spacing={6} overflowX="hidden" p={4} width="95%" mx="auto">
+        <Center flex="1">
+          <VStack spacing={6} height="85vh" overflowY="auto" p={4} width="95%" mx="auto">
             <Flex my={4} p={4} bg="white" borderRadius="md" boxShadow="md" width="100%" border="1px solid red">
               <Heading size='md' mb={4} color="red.900">Número Corporativo</Heading>
               <Center p='2' width="70%">
@@ -76,7 +76,6 @@ export const ChannelsPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj
                 </Center>
               )}
             </Stack>
-
             <Stack spacing={4} p={4} bg="white" borderRadius="md" boxShadow="md" width="100%" border="1px solid red">
               <Heading size='md' color="red.900">Instagram</Heading>
               {igObj?.used ? (
@@ -93,7 +92,6 @@ export const ChannelsPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj
                 </Center>
               )}
             </Stack>
-
             <Stack spacing={4} p={4} bg="white" borderRadius="md" boxShadow="md" width="100%" border="1px solid red">
               <Heading size='md' color="red.900">Email</Heading>
               {emailObj?.used ? (
@@ -110,7 +108,6 @@ export const ChannelsPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj
                 </Center>
               )}
             </Stack>
-
             <Stack spacing={4} p={4} bg="white" borderRadius="md" boxShadow="md" width="100%" border="1px solid red">
               <Heading size='md' color="red.900">Facebook</Heading>
               {msgObj?.used ? (
@@ -127,7 +124,6 @@ export const ChannelsPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj
                 </Center>
               )}
             </Stack>
-
             <Stack spacing={4} p={4} bg="white" borderRadius="md" boxShadow="md" width="100%" border="1px solid red">
               <Heading size='md' color="red.900">Telegram</Heading>
               {telegramObj?.used ? (
@@ -144,7 +140,6 @@ export const ChannelsPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj
                 </Center>
               )}
             </Stack>
-
             <Stack spacing={4} p={4} bg="white" borderRadius="md" boxShadow="md" width="100%" border="1px solid red">
               <Heading size='md' color="red.900">Website</Heading>
               {webObj?.used ? (
@@ -161,7 +156,6 @@ export const ChannelsPage = ({ webObj, whatsappObj, igObj, telegramObj, emailObj
                 </Center>
               )}
             </Stack>
-
           </VStack>
         </Center>
       </Flex>

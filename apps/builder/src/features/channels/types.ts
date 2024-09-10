@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 type Obj = {
   used: boolean
   id: string
@@ -20,6 +22,7 @@ export type ChannelProps = {
   msgObj?: Obj 
   hasNumbers: boolean 
   numbersList: Numbers[]
+  children?: ReactNode
 }
 
 export interface WhatsAppTemplate {
