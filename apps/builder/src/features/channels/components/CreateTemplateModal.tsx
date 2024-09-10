@@ -32,29 +32,28 @@ interface Props {
 }
 
 const CreateTemplateModal: React.FC<Props> = ({ isOpen, onClose }: Props) => {
+  const [templateData, setTemplateData] = useState<WhatsAppTemplate>({
+    name: '',
+    category: TemplateCategory.MARKETING,
+    components: [],
+  });
   const [errorMsg, setErrorMsg] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [selectedComponents, setSelectedComponents] = useState<number[]>([])
-  const [templateData, setTemplateData] = useState<WhatsAppTemplate>(
-    {
-      name: '',
-      category: TemplateCategory.MARKETING,
-      components: []
-    }
-  );
+  const [selectedComponents, setSelectedComponents] = useState<number[]>([]);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
     field: string
   ) => {
-    const value = e.target.value
+    const value = e.target.value;
+
     setTemplateData(
       (prev) =>
         ({
           ...prev,
           [field]: value,
         } as WhatsAppTemplate)
-    )
+    );
   }
 
   const handleComponentChange = (
@@ -85,7 +84,7 @@ const CreateTemplateModal: React.FC<Props> = ({ isOpen, onClose }: Props) => {
           ...prev,
           components: updatedComponents,
         } as WhatsAppTemplate)
-    )
+    );
   }
 
   const handleButtonChange = (
@@ -101,9 +100,10 @@ const CreateTemplateModal: React.FC<Props> = ({ isOpen, onClose }: Props) => {
     ];
     updatedButtons[buttonIndex] = {
       ...updatedButtons[buttonIndex],
-      [field]: value
+      [field]: value,
     };
-    updatedComponents[componentIndex].buttons = updatedButtons;
+    updatedComponents[componentIndex].buttons = updatedButtons
+
     setTemplateData(
       (prev) =>
         ({
@@ -122,23 +122,24 @@ const CreateTemplateModal: React.FC<Props> = ({ isOpen, onClose }: Props) => {
             ...prev.components,
             { type: ComponentType.HEADER },
           ],
-        } as WhatsAppTemplate
-      )
-    )
+        } as WhatsAppTemplate)
+    );
   }
 
   const removeComponent = () => {
     const updatedComponents = templateData.components.filter(
       (_, index) => !selectedComponents.includes(index)
-    )
+    );
+
     setTemplateData(
       (prev) =>
         ({
           ...prev,
           components: updatedComponents,
         } as WhatsAppTemplate)
-    )
-    setSelectedComponents([])
+    );
+
+    setSelectedComponents([]);
   }
 
   const createModel = async () => {
@@ -350,7 +351,7 @@ const CreateTemplateModal: React.FC<Props> = ({ isOpen, onClose }: Props) => {
         </ModalFooter>
       </ModalContent>
     </Modal>
-  )
+  );
 }
 
 export default CreateTemplateModal

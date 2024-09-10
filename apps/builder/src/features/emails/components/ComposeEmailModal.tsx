@@ -18,10 +18,10 @@ interface ComposeEmailModalProps {
   onClose: () => void;
 }
 
-const ComposeEmailModal: React.FC<ComposeEmailModalProps> = ({ isOpen, onClose }) => {
-  const [to, setTo] = useState('');
-  const [subject, setSubject] = useState('');
-  const [message, setMessage] = useState('');
+const ComposeEmailModal: React.FC<ComposeEmailModalProps> = ({ isOpen, onClose }: ComposeEmailModalProps) => {
+  const [to, setTo] = useState<string>('');
+  const [subject, setSubject] = useState<string>('');
+  const [message, setMessage] = useState<string>('');
 
   const handleSend = () => {
     console.log('Enviar email:', { to, subject, message });
@@ -130,6 +130,6 @@ const ComposeEmailModal: React.FC<ComposeEmailModalProps> = ({ isOpen, onClose }
       </ModalContent>
     </Modal>
   );
-};
+}
 
-export default ComposeEmailModal;
+export default ComposeEmailModal
