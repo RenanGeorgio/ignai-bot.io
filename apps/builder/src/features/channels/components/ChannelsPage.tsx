@@ -9,8 +9,8 @@ import CustomSideBar from '@/components/SideBar';
 import { ChannelProps } from '../types';
 r
 export const ChannelsPage: React.FC<ChannelProps> = ({ webObj, whatsappObj, igObj, telegramObj, emailObj, msgObj, hasNumbers, numbersList }: ChannelProps) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  // const { onOpen } = useDisclosure();
+  //const { isOpen, onOpen, onClose } = useDisclosure();
+  const { onOpen } = useDisclosure();
 
   return (
     <VStack spacing={4} align="stretch">
