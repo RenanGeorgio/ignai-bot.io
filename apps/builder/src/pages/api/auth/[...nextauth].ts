@@ -1,4 +1,4 @@
-import NextAuth, { Account, AuthOptions } from 'next-auth'
+import NextAuth, { Account, AuthOptions, Profile } from 'next-auth'
 import EmailProvider from 'next-auth/providers/email'
 import GitHubProvider from 'next-auth/providers/github'
 import GitlabProvider from 'next-auth/providers/gitlab'
@@ -22,6 +22,10 @@ import { env } from '@typebot.io/env'
 import * as Sentry from '@sentry/nextjs'
 import { getIp } from '@typebot.io/lib/getIp'
 import { trackEvents } from '@typebot.io/telemetry/trackEvents'
+
+interface IProfile extends Profile {
+ jwt?: string | null
+}
 
 const providers: Provider[] = []
 
@@ -112,7 +116,16 @@ if (
     Auth0Provider({
       clientId: env.AUTH0_CLIENT_ID,
       clientSecret: env.AUTH0_CLIENT_SECRET,
-      issuer: env.AUTH0_ISSUER
+      issuer: env.AUTH0_ISSUER,
+      profile(profile) {
+        return {
+          id: profile.sub,
+          name: profile.nickname,
+          email: profile.email,
+          image: profile.picture,
+          jwt: profile?.jwt,
+        } as User
+      }
     })
   )
 }
@@ -174,7 +187,7 @@ export const getAuthOptions = ({
         user: userFromDb,
       }
     },
-    signIn: async ({ account, user }) => {
+    signIn: async ({ account, user, profile }) => {
       if (restricted === 'rate-limited') throw new Error('rate-limited')
       if (!account) return false
       const isNewUser = !('createdAt' in user && isDefined(user.createdAt))
@@ -204,6 +217,10 @@ export const getAuthOptions = ({
         const userGroups = await getUserGroups(account)
         return checkHasGroups(userGroups, requiredGroups)
       }
+      const userFromDb = user as User
+      if (profile) {
+        await updateJavaWebToken(userFromDb, profile)
+      }
       return true
     },
   },
@@ -231,8 +248,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       if (!success) restricted = 'rate-limited'
     }
   }
-
-  return await NextAuth(req, res, getAuthOptions({ restricted }))
+  await NextAuth(req, res, getAuthOptions({ restricted }))
+  return 
 }
 
 const updateLastActivityDate = async (user: User) => {
@@ -293,5 +310,23 @@ const getRequiredGroups = (provider: string): string[] => {
 
 const checkHasGroups = (userGroups: string[], requiredGroups: string[]) =>
   userGroups?.some((userGroup) => requiredGroups?.includes(userGroup))
+
+const updateJavaWebToken = async (user: User, profile: IProfile) => {
+  if (user?.jwt !== profile?.jwt) {
+    await prisma.user.updateMany({
+      where: { id: user.id },
+      data: { jwt: profile?.jwt },
+    })
+    await trackEvents([
+      {
+        name: 'User updated',
+        userId: user.id,
+        data: {
+          jwt: profile?.jwt ?? undefined,
+        },
+      },
+    ])
+  }
+}
 
 export default handler
