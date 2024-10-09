@@ -48,7 +48,9 @@ const EmailCustomizer = () => {
   ]
 
   const handleChange = (e: any) => {
-    const { name, value } = e.?target
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const { name, value } = e.target;
 
     setEmailSettings((prev: Templates) => {
       if (prev?.email && (name in (prev?.email?.properties as unknown as EmailTemplate['properties']))) {
