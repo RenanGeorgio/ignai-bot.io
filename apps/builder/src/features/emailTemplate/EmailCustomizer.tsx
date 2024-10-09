@@ -47,15 +47,11 @@ const EmailCustomizer = () => {
     'Courier New',
   ]
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
+  const handleChange = (e: any) => {
+    const { name, value } = e.?target
 
-    setEmailSettings((prev) => {
-      if (
-        prev.email &&
-        name in
-          (prev.email.properties as unknown as EmailTemplate['properties'])
-      ) {
+    setEmailSettings((prev: Templates) => {
+      if (prev?.email && (name in (prev?.email?.properties as unknown as EmailTemplate['properties']))) {
         return {
           ...prev,
           email: {
@@ -67,16 +63,18 @@ const EmailCustomizer = () => {
           },
         }
       }
-      return prev
+      
+      return prev;
     })
   }
 
-  const handleSave = (e) => {
-    e.preventDefault()
+  const handleSave = (e: any) => {
+    e.preventDefault();
+    
     createEmailTemplate({
       ...emailSettings,
       companyId: '65bbe0359f84da3af601f373',
-    })
+    });
   }
 
   return (
@@ -94,7 +92,6 @@ const EmailCustomizer = () => {
               width="full"
             />
           </FormControl>
-
           <FormControl>
             <FormLabel>Categoria</FormLabel>
             <Select
@@ -119,7 +116,6 @@ const EmailCustomizer = () => {
               width="full"
             />
           </FormControl>
-
           <FormControl>
             <FormLabel>Cor do texto</FormLabel>
             <Input
@@ -130,7 +126,6 @@ const EmailCustomizer = () => {
               width="full"
             />
           </FormControl>
-
           <FormControl>
             <FormLabel>Cor da borda</FormLabel>
             <Input
@@ -142,7 +137,6 @@ const EmailCustomizer = () => {
             />
           </FormControl>
         </HStack>
-
         <HStack w="100%">
           <FormControl>
             <FormLabel>Tamanho da fonte</FormLabel>
@@ -158,7 +152,6 @@ const EmailCustomizer = () => {
               width="full"
             />
           </FormControl>
-
           <FormControl>
             <FormLabel>Alinhamento do texto</FormLabel>
             <Select
@@ -172,7 +165,6 @@ const EmailCustomizer = () => {
             </Select>
           </FormControl>
         </HStack>
-
         <FormControl>
           <FormLabel>Título</FormLabel>
           <Input
@@ -183,7 +175,6 @@ const EmailCustomizer = () => {
             width="full"
           />
         </FormControl>
-
         <FormControl>
           <FormLabel>Conteúdo</FormLabel>
           <Textarea
@@ -194,7 +185,6 @@ const EmailCustomizer = () => {
             width="full"
           />
         </FormControl>
-
         <FormControl>
           <FormLabel>Fonte</FormLabel>
           <Select
@@ -209,7 +199,6 @@ const EmailCustomizer = () => {
             ))}
           </Select>
         </FormControl>
-
         <HStack w="100%">
           <FormControl>
             <FormLabel>Margem (px)</FormLabel>
@@ -225,7 +214,6 @@ const EmailCustomizer = () => {
               width="full"
             />
           </FormControl>
-
           <FormControl>
             <FormLabel>Padding (px)</FormLabel>
             <Input
@@ -241,7 +229,6 @@ const EmailCustomizer = () => {
             />
           </FormControl>
         </HStack>
-
         <FormControl>
           <FormLabel>URL da imagem</FormLabel>
           <Input
@@ -252,14 +239,11 @@ const EmailCustomizer = () => {
             width="full"
           />
         </FormControl>
-
         <Spacer />
-
         <Button colorScheme="blue" onClick={handleSave}>
           Salvar Configurações
         </Button>
       </VStack>
-
       <Box
         bg={emailSettings.email?.properties.backgroundColor}
         color={emailSettings.email?.properties.textColor}
@@ -287,11 +271,9 @@ const EmailCustomizer = () => {
             />
           </Box>
         )}
-
         <Heading as="h1" size="lg" mb={4}>
           {emailSettings.email?.properties.title}
         </Heading>
-
         <Box>
           {emailSettings.email?.properties.content
             .split('\n')
@@ -304,7 +286,7 @@ const EmailCustomizer = () => {
         </Box>
       </Box>
     </Flex>
-  )
+  );
 }
 
-export default EmailCustomizer
+export default EmailCustomizer;
