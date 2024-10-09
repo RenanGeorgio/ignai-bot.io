@@ -47,6 +47,7 @@ const EmailCustomizer = () => {
     'Courier New',
   ]
 
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   const handleChange = (e: any) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -70,6 +71,7 @@ const EmailCustomizer = () => {
     })
   }
 
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   const handleSave = (e: any) => {
     e.preventDefault();
     
