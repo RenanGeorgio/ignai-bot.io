@@ -23,12 +23,6 @@ import { TolgeeProvider, useTolgeeSSR } from '@tolgee/react'
 import { tolgee } from '@/lib/tolgee'
 import { Toaster } from '@/components/Toaster'
 
-import {
-  ThemeProvider as MaterialThemeProvider,
-  createTheme as muiCreateTheme,
-  THEME_ID,
-} from '@mui/material/styles'
-
 const { ToastContainer, toast } = createStandaloneToast(customTheme);
 
 const App = ({ Component, pageProps }: AppProps) => {
@@ -62,13 +56,10 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   const typebotId = router.query.typebotId?.toString();
 
-  const materialTheme = muiCreateTheme();
-
   return (
     <TolgeeProvider tolgee={ssrTolgee}>
       <ToastContainer />
         <ChakraProvider theme={customTheme} resetCSS>
-        <MaterialThemeProvider theme={{ [THEME_ID]: materialTheme }}>
           <Toaster />
           <SessionProvider session={pageProps.session}>
             <UserProvider>
@@ -82,7 +73,6 @@ const App = ({ Component, pageProps }: AppProps) => {
               </TypebotProvider>
             </UserProvider>
           </SessionProvider>
-        </MaterialThemeProvider>
       </ChakraProvider>
     </TolgeeProvider>
   );
