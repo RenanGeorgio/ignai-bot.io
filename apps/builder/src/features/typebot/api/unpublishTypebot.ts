@@ -6,6 +6,9 @@ import ky from 'ky'
 import { isWriteTypebotForbidden } from '../helpers/isWriteTypebotForbidden'
 import { env } from '@typebot.io/env'
 
+const mockToken =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWJiZTAzNTlmODRkYTNhZjYwMWYzNzMiLCJpYXQiOjE1MTYyMzkwMjJ9.EmsGYpuePCzpnBohrABY-9nIL8EY0EkDjA6gjVczuqs'
+
 export const unpublishTypebot = authenticatedProcedure
   .meta({
     openapi: {
@@ -65,9 +68,9 @@ export const unpublishTypebot = authenticatedProcedure
     }
 
     await ky.delete(
-      `${env.CHATBOT_SERVER_URL}/typebot/${existingTypebot.id}`,
+      `${env.CHATBOT_SERVER_URL}/v1/typebot/${existingTypebot.id}`,
       {
-        headers: { Authorization: `Bearer ${env.VERCEL_TOKEN}` }
+        headers: { Authorization: `Bearer ${mockToken}` }
       }
     );
 

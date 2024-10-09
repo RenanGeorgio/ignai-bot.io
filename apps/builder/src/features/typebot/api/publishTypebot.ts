@@ -1,7 +1,14 @@
 import prisma from '@typebot.io/lib/prisma'
 import { authenticatedProcedure } from '@/helpers/server/trpc'
 import { TRPCError } from '@trpc/server'
-import { edgeSchema, settingsSchema, themeSchema, variableSchema, parseGroups, startEventSchema } from '@typebot.io/schemas'
+import {
+  edgeSchema,
+  settingsSchema,
+  themeSchema,
+  variableSchema,
+  parseGroups,
+  startEventSchema,
+} from '@typebot.io/schemas'
 import { z } from 'zod'
 import ky from 'ky'
 import { isWriteTypebotForbidden } from '../helpers/isWriteTypebotForbidden'
@@ -11,7 +18,11 @@ import { computeRiskLevel } from '@typebot.io/radar'
 import { env } from '@typebot.io/env'
 import { trackEvents } from '@typebot.io/telemetry/trackEvents'
 import { parseTypebotPublishEvents } from '@/features/telemetry/helpers/parseTypebotPublishEvents'
- 
+import { User } from '@/contexts/chat/types'
+
+const mockToken =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWJiZTAzNTlmODRkYTNhZjYwMWYzNzMiLCJpYXQiOjE1MTYyMzkwMjJ9.EmsGYpuePCzpnBohrABY-9nIL8EY0EkDjA6gjVczuqs'
+
 export const publishTypebot = authenticatedProcedure
   .meta({
     openapi: {
@@ -61,7 +72,10 @@ export const publishTypebot = authenticatedProcedure
       },
     })
 
-    if (!existingTypebot?.id || (await isWriteTypebotForbidden(existingTypebot, user))) {
+    if (
+      !existingTypebot?.id ||
+      (await isWriteTypebotForbidden(existingTypebot, user))
+    ) {
       throw new TRPCError({ code: 'NOT_FOUND', message: 'Typebot not found' })
     }
 
@@ -78,12 +92,18 @@ export const publishTypebot = authenticatedProcedure
       })
     }
 
-    const typebotWasVerified = existingTypebot.riskLevel === -1 || existingTypebot.workspace.isVerified
+    const typebotWasVerified =
+      existingTypebot.riskLevel === -1 || existingTypebot.workspace.isVerified
 
-    if (!typebotWasVerified && existingTypebot.riskLevel && existingTypebot.riskLevel > 80) {
+    if (
+      !typebotWasVerified &&
+      existingTypebot.riskLevel &&
+      existingTypebot.riskLevel > 80
+    ) {
       throw new TRPCError({
         code: 'FORBIDDEN',
-        message: 'Radar detected a potential malicious typebot. This bot is being manually reviewed by Fraud Prevention team.',
+        message:
+          'Radar detected a potential malicious typebot. This bot is being manually reviewed by Fraud Prevention team.',
       })
     }
 
@@ -91,8 +111,7 @@ export const publishTypebot = authenticatedProcedure
       ? 0
       : computeRiskLevel(existingTypebot, {
           debug: env.NODE_ENV === 'development',
-        }
-    )
+        })
 
     if (riskLevel > 0 && riskLevel !== existingTypebot.riskLevel) {
       if (env.MESSAGE_WEBHOOK_URL && riskLevel !== 100 && riskLevel > 60) {
@@ -178,16 +197,30 @@ export const publishTypebot = authenticatedProcedure
       })
     }
 
-    await ky.post(
-      `${env.CHATBOT_SERVER_URL}/typebot`,
-      {
+    const chatbotUser: User = await ky
+      .get(`${env.CHATBOT_SERVER_URL}/v1/user/${user.email}`, {
         headers: {
-          authorization: `Bearer ${env.VERCEL_TOKEN}`, // TO-DO: TROCAR PELO METODO DE PERM CORRETO
+          authorization: `Bearer ${mockToken}`,
           'Content-Type': 'application/json',
         },
-        json: JSON.stringify(existingTypebot)
-      }
-    ).json(); 
+      })
+      .json()
+
+    if (chatbotUser) {
+      await ky
+        .post(`${env.CHATBOT_SERVER_URL}/v1/typebot`, {
+          headers: {
+            authorization: `Bearer ${mockToken}`, // TO-DO: TROCAR PELO METODO DE PERM CORRETO
+            'Content-Type': 'application/json',
+          },
+          json: {
+            typebotId,
+            workspaceId: existingTypebot.workspaceId,
+            companyId: chatbotUser.companyId,
+          },
+        })
+        .json()
+    }
 
     await trackEvents([
       ...publishEvents,
@@ -204,5 +237,4 @@ export const publishTypebot = authenticatedProcedure
     ])
 
     return { message: 'success' }
-  }
-)
+  })
