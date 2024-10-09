@@ -165,7 +165,6 @@ const NavHoverBox = ({ title, description }: HoverProps) => {
 const NavItem = ({
   title,
   path,
-  description,
   active,
   navSize,
   router,
