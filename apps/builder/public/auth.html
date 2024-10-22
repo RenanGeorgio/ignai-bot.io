@@ -26,12 +26,6 @@
     <!-- Load the JS SDK asynchronously DEV 
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk/debug.js"></script>
     -->
-
-    <!--
-    <div id="spinner" class="spinner" style="display: none;">
-      Carregando...
-    </div>
-    -->
     
     <script>
       // whatsapp + ig + face
@@ -41,6 +35,7 @@
       // whatsapp
       // face
       // ig
+      let userInput
       let spinner;
       let content;
       let valueType;
@@ -125,7 +120,7 @@
             }
             break;
           case 'type002':
-            appId = '';
+            appId = '909625074182796'; // TO-DO: talvez seja necessario alterar
             whatsappEnabled = true;
             configObj = {
               config_id: currentConfig,
@@ -194,10 +189,13 @@
       }
 
       function sendToken(auth) {
+        var keyValue = getInputValue();
         var xhr = new XMLHttpRequest();
 
         try {
-          xhr.open("POST", "https://chatbot.ignai.com.br/save-code", true);
+          var url = `https://chatbot.ignai.com.br/save-code?companyId=${encodeURIComponent(keyValue)}`;
+
+          xhr.open("POST", url, true);
           xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
           xhr.send(JSON.stringify(auth));
         } catch (err) {
@@ -223,15 +221,22 @@
         }
       }
     
+      function getInputValue() {
+        userInput = document.getElementById('userInput').value;
+        console.log(userInput);
+        return userInput;
+      }
+
+      //document.getElementById("fbLoginButton").addEventListener('click', function() {
+      //  var userName = getInputValue();
+      //});
+
       document.addEventListener('DOMContentLoaded', function() {
         spinner = document.getElementById('spinner');
         content = document.getElementById('content');
 
         spinner.style.display = 'block';
 
-        //var searchParams = new URLSearchParams(window.location.search);
-        //var valueApp = searchParams.get("app");
-        //valueType = searchParams.get("type");
         var valueApp = getCookie("app");
         valueType = getCookie("type");
 
@@ -302,6 +307,11 @@
       </div>
 
       <div id="content"></div>
+
+      <div class="form-group">
+        <label for="userInput">Key:</label>
+        <input type="text" class="form-control" id="userInput" placeholder="Digite a Chave">
+      </div>
 
       <fb:login-button  
         id="fbLoginButton"
