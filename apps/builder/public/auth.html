@@ -21,7 +21,6 @@
   </head>
   <body>
     <div id="fb-root"></div>
-    <!-- Load the JS SDK asynchronously PRODUCTION -->
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js"></script>
     <!-- Load the JS SDK asynchronously DEV 
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk/debug.js"></script>
@@ -226,10 +225,6 @@
         console.log(userInput);
         return userInput;
       }
-
-      //document.getElementById("fbLoginButton").addEventListener('click', function() {
-      //  var userName = getInputValue();
-      //});
 
       document.addEventListener('DOMContentLoaded', function() {
         spinner = document.getElementById('spinner');
